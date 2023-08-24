@@ -32,8 +32,18 @@
     <actions>
         <action id="StartStopTrackingAction"
                 class="StartStopTrackingAction"
-                text="Behavior Tracking">
+                text="Behavior Tracking"
+                icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action class="TakeNoteAction"
+                id="TakeNoteAction"
+                text="Take Notes"
+                icon="AllIcons.Actions.Edit">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="StartStopTrackingAction"/>
+        </action>
+        <action id="ConfigAction" class="ConfigAction" text="Options" description="Configurate tracking options">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="TakeNoteAction"/>
         </action>
     </actions>
 </idea-plugin>

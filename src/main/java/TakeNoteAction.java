@@ -22,7 +22,5 @@ public class TakeNoteAction extends AnAction {
         Project project = e.getProject();
         NoteDialog noteDialog = new NoteDialog(project);
         noteDialog.show();
-
-
     }
 }

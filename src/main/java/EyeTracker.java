@@ -21,93 +21,87 @@ import java.io.IOException;
 import java.net.Socket;
 
 
-// this class is responsible for detecting the eye gaze points and writing them to an xml file
 public class EyeTracker implements Disposable {
 
     PsiDocumentManager psiDocumentManager;
     Editor editor;
-    Document eyeTrackerDetection = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-    Element rootElement = eyeTrackerDetection.createElement("eye_tracker_detector");
-    Element environment = eyeTrackerDetection.createElement("environment");
-    Element gazes = eyeTrackerDetection.createElement("gazes");
-    Element scrolls = eyeTrackerDetection.createElement("scrolls");
-    boolean isDetecting = false;
+    Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+    Element root = eyeTracking.createElement("eye_tracking");
+    Element gazes = eyeTracking.createElement("gazes");
+
+    boolean isTracking = false;
     double screenWidth, screenHeight;
     String projectPath = "", filePath = "";
     PsiElement lastElement = null;
-    int lastVerticalScrollOffset = 0;
-    int lastHorizontalScrollOffset = 0;
 
     public EyeTracker() throws ParserConfigurationException {
 
-        eyeTrackerDetection.appendChild(rootElement);
-        // environment
-        rootElement.appendChild(environment);
-        Dimension size = new Dimension(1536, 864);
-//        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        eyeTracking.appendChild(root);
+        root.appendChild(gazes);
+
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         screenWidth = size.getWidth();
         screenHeight = size.getHeight();
-        environment.setAttribute("screen_width", String.valueOf(size.getWidth()));
-        environment.setAttribute("screen_height", String.valueOf(size.getHeight()));
-        environment.setAttribute("plugin_type", "IntelliJ");
 
-        // gazes & scrolls
-        rootElement.appendChild(gazes);
-        rootElement.appendChild(scrolls);
+        ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
+            @Override
+            public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
+                psiDocumentManager = PsiDocumentManager.getInstance(source.getProject());
+                editor = source.getSelectedTextEditor();
+                filePath = file.getPath();
+            }
 
-        // track editor changes (file opened or selection changed)
-        ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(
-                FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
-
-                    @Override
-                    public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                        psiDocumentManager = PsiDocumentManager.getInstance(source.getProject());
-                        editor = source.getSelectedTextEditor();
-                        filePath = file.getPath();
-                    }
-
-                    @Override
-                    public void selectionChanged(@NotNull FileEditorManagerEvent event) {
-                        editor = event.getManager().getSelectedTextEditor() != null
-                                ? event.getManager().getSelectedTextEditor() : editor;
-                        if (event.getNewFile() != null) {
-                            filePath = event.getNewFile().getPath();
-                        }
-                    }
-                });
+            @Override
+            public void selectionChanged(@NotNull FileEditorManagerEvent event) {
+                editor = event.getManager().getSelectedTextEditor() != null ? event.getManager().getSelectedTextEditor() : editor;
+                if (event.getNewFile() != null) {
+                    filePath = event.getNewFile().getPath();
+                }
+            }
+        });
 
     }
 
-    public void startDetection() throws IOException {
-        isDetecting = true;
-        environment.setAttribute("project_path", projectPath);
-        environment.setAttribute("project_name", projectPath.substring(
-                projectPath.lastIndexOf('/') + 1));
-        detect();
+    public void startTracking() throws IOException {
+        isTracking = true;
+        track();
     }
 
-    public void stopDetection() throws TransformerException {
-        isDetecting = false;
-        XMLWriter.writeToXML(eyeTrackerDetection, projectPath +
-                "/eyeTracker_" + System.currentTimeMillis() + ".xml");
+    public void stopTracking() throws TransformerException {
+        isTracking = false;
+        XMLWriter.writeToXML(eyeTracking, projectPath + "/eyeTracker_" + System.currentTimeMillis() + ".xml");
     }
 
-    public void detect() {
+    public void track() {
         try {
-            // connect to the eye tracker python server and collect the gaze points and other information
             Socket soc = new Socket("localhost", 12345);
             DataInputStream in = new DataInputStream(soc.getInputStream());
             String msg = in.readUTF();
-            while (isDetecting && !msg.equals("End") && editor != null) {
-                int eyeX = (int) (Double.parseDouble(msg.split(", ")[0]) * screenWidth);
-                int eyeY = (int) (Double.parseDouble(msg.split(", ")[1]) * screenHeight);
-                String timestamp = msg.split(", ")[2];
-                String gazeValidity = msg.split(", ")[3];
-                String pupilValidity = msg.split(", ")[4];
-                String leftPupilDiameter = msg.split(", ")[5];
-                String rightPupilDiameter = msg.split(", ")[6];
 
-                // convert x, y coordinates to relevant logical positions
+            while (isTracking && !msg.equals("End") && editor != null) {
+                Element gaze = getRawGazeElement(msg);
+                gazes.appendChild(gaze);
+
+                String leftInfo = msg.split("; ")[1];
+                String leftGazePointX = leftInfo.split(", ")[0];
+                String leftGazePointY = leftInfo.split(", ")[1];
+
+                String rightInfo = msg.split("; ")[2];
+                String rightGazePointX = rightInfo.split(", ")[0];
+                String rightGazePointY = rightInfo.split(", ")[1];
+
+                if (leftGazePointX.equals("nan") || leftGazePointY.equals("nan") || rightGazePointX.equals("nan") || rightGazePointY.equals("nan")) {
+                    gaze.setAttribute("remark", "Fail");
+                    msg = in.readUTF();
+                    continue;
+                }
+                int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
+                int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+
+                // TODO: Simulate Mouse Positions
+                // int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+                // int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+
                 int editorX, editorY, width, height;
                 try {
                     editorX = editor.getContentComponent().getLocationOnScreen().x;
@@ -115,64 +109,36 @@ public class EyeTracker implements Disposable {
                     width = editor.getContentComponent().getWidth();
                     height = editor.getContentComponent().getHeight();
                 } catch (IllegalComponentStateException e) {
+                    gaze.setAttribute("remark", "Fail");
                     msg = in.readUTF();
                     continue;
                 }
                 int relativeX = eyeX - editorX;
                 int relativeY = eyeY - editorY;
-                if (relativeX < 0 || relativeY < 0 || relativeX > width || relativeY > height
-                        || !filePath.endsWith(".java")) {
+                if (relativeX < 0 || relativeY < 0 || relativeX > width || relativeY > height || !filePath.endsWith(".java")) {
+                    gaze.setAttribute("remark", "Fail");
                     msg = in.readUTF();
                     continue;
                 }
                 Point relativePoint = new Point(relativeX, relativeY);
 
-                // use one new thread to process the conversion and write the gaze point to the xml file
                 EventQueue.invokeLater(new Thread(() -> {
                     PsiFile psiFile = psiDocumentManager.getPsiFile(editor.getDocument());
-                    Element gaze = eyeTrackerDetection.createElement("gaze");
-                    gazes.appendChild(gaze);
                     LogicalPosition logicalPosition = editor.xyToLogicalPosition(relativePoint);
                     if (psiFile != null) {
                         int offset = editor.logicalPositionToOffset(logicalPosition);
                         PsiElement psiElement = psiFile.findElementAt(offset);
                         if (filePath.endsWith(".java")) {
-                            Element sourceCodeEntity = extractSourceCodeEntity(psiElement);
-                            gaze.appendChild(sourceCodeEntity);
+                            Element aSTStructure = getASTStructureElement(psiElement);
+                            aSTStructure.setAttribute("x", String.valueOf(eyeX));
+                            aSTStructure.setAttribute("y", String.valueOf(eyeY));
+                            aSTStructure.setAttribute("line", String.valueOf(logicalPosition.line));
+                            aSTStructure.setAttribute("column", String.valueOf(logicalPosition.column));
+                            aSTStructure.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
+                            gaze.appendChild(aSTStructure);
                         }
                         lastElement = psiElement;
-                    }
-                    gaze.setAttribute("timestamp", timestamp);
-                    gaze.setAttribute("x", String.valueOf(eyeX));
-                    gaze.setAttribute("y", String.valueOf(eyeY));
-                    gaze.setAttribute("line", String.valueOf(logicalPosition.line));
-                    gaze.setAttribute("column", String.valueOf(logicalPosition.column));
-                    gaze.setAttribute("path", getPath(filePath));
-                    gaze.setAttribute("gaze_validity", gazeValidity);
-                    gaze.setAttribute("pupil_validity", pupilValidity);
-                    gaze.setAttribute("left_pupil_diameter", leftPupilDiameter);
-                    gaze.setAttribute("right_pupil_diameter", rightPupilDiameter);
-
-                    // detect scrolling
-                    int verticalScrollOffset = editor.getScrollingModel().getVerticalScrollOffset();
-                    int horizontalScrollOffset = editor.getScrollingModel().getHorizontalScrollOffset();
-                    if (verticalScrollOffset != lastVerticalScrollOffset) {
-                        Element scroll = eyeTrackerDetection.createElement("scroll");
-                        scrolls.appendChild(scroll);
-                        scroll.setAttribute("timestamp", timestamp);
-                        scroll.setAttribute("path", getPath(filePath));
-                        scroll.setAttribute("type", "vertical");
-                        scroll.setAttribute("offset", String.valueOf(verticalScrollOffset));
-                        lastVerticalScrollOffset = verticalScrollOffset;
-                    }
-                    if (horizontalScrollOffset != lastHorizontalScrollOffset) {
-                        Element scroll = eyeTrackerDetection.createElement("scroll");
-                        scrolls.appendChild(scroll);
-                        scroll.setAttribute("timestamp", timestamp);
-                        scroll.setAttribute("path", getPath(filePath));
-                        scroll.setAttribute("type", "horizontal");
-                        scroll.setAttribute("offset", String.valueOf(horizontalScrollOffset));
-                        lastHorizontalScrollOffset = horizontalScrollOffset;
+                        System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
                     }
                 }));
                 msg = in.readUTF();
@@ -191,40 +157,67 @@ public class EyeTracker implements Disposable {
     public void dispose() {
     }
 
-    public String getPath(String originPath) {
-        String path;
-        if (originPath.substring(0, projectPath.length()).equals(projectPath)) {
-            path = originPath.substring(projectPath.length());
-        } else {
-            path = originPath;
-        }
-        return path;
+    public Element getRawGazeElement(String message) {
+        String timestamp = message.split("; ")[0];
+
+        String leftInfo = message.split("; ")[1];
+        String leftGazePointX = leftInfo.split(", ")[0];
+        String leftGazePointY = leftInfo.split(", ")[1];
+        String leftGazeValidity = leftInfo.split(", ")[2];
+        String leftPupilDiameter = leftInfo.split(", ")[3];
+        String leftPupilValidity = leftInfo.split(", ")[4];
+
+        String rightInfo = message.split("; ")[2];
+        String rightGazePointX = rightInfo.split(", ")[0];
+        String rightGazePointY = rightInfo.split(", ")[1];
+        String rightGazeValidity = rightInfo.split(", ")[2];
+        String rightPupilDiameter = rightInfo.split(", ")[3];
+        String rightPupilValidity = rightInfo.split(", ")[4];
+
+        Element rawGaze = eyeTracking.createElement("gaze");
+        Element leftEye = eyeTracking.createElement("left_eye");
+        Element rightEye = eyeTracking.createElement("right_eye");
+
+        rawGaze.appendChild(leftEye);
+        rawGaze.appendChild(rightEye);
+
+        rawGaze.setAttribute("timestamp", timestamp);
+
+        leftEye.setAttribute("gaze_point_x", leftGazePointX);
+        leftEye.setAttribute("gaze_point_y", leftGazePointY);
+        leftEye.setAttribute("gaze_validity", leftGazeValidity);
+        leftEye.setAttribute("pupil_diameter", leftPupilDiameter);
+        leftEye.setAttribute("pupil_validity", leftPupilValidity);
+
+        rightEye.setAttribute("gaze_point_x", rightGazePointX);
+        rightEye.setAttribute("gaze_point_y", rightGazePointY);
+        rightEye.setAttribute("gaze_validity", rightGazeValidity);
+        rightEye.setAttribute("pupil_diameter", rightPupilDiameter);
+        rightEye.setAttribute("pupil_validity", rightPupilValidity);
+
+        return rawGaze;
     }
 
-    public Element extractSourceCodeEntity(PsiElement psiElement) {
-        String token = "", astType = "";
-        Element sourceCodeEntity = eyeTrackerDetection.createElement("source_code_entity");
+    public Element getASTStructureElement(PsiElement psiElement) {
+        String token = "", type = "";
+        Element aSTStructure = eyeTracking.createElement("ast_structure");
         if (psiElement != null && psiElement.getTextLength() > 0) {
             token = psiElement.getText();
-            astType = psiElement.getNode().getElementType().toString();
+            type = psiElement.getNode().getElementType().toString();
         }
-        sourceCodeEntity.setAttribute("token", token);
-        sourceCodeEntity.setAttribute("ast_type", astType);
+        aSTStructure.setAttribute("token", token);
+        aSTStructure.setAttribute("type", type);
         if (psiElement != null && psiElement.equals(lastElement)) {
-            sourceCodeEntity.setAttribute("info", "same");
-            return sourceCodeEntity;
+            aSTStructure.setAttribute("remark", "Same (Last Successful AST)");
+            return aSTStructure;
         }
         PsiElement parent = psiElement;
         while (parent != null) {
             if (parent instanceof PsiFile) {
                 break;
             }
-            if (parent instanceof PsiMethod) {
-                parent = parent.getParent();
-                continue;
-            }
-            Element level = eyeTrackerDetection.createElement("level");
-            sourceCodeEntity.appendChild(level);
+            Element level = eyeTracking.createElement("level");
+            aSTStructure.appendChild(level);
             level.setAttribute("tag", String.valueOf(parent));
             LogicalPosition startLogicalPosition = editor.offsetToLogicalPosition(parent.getTextRange().getStartOffset());
             LogicalPosition endLogicalPosition = editor.offsetToLogicalPosition(parent.getTextRange().getEndOffset());
@@ -232,6 +225,6 @@ public class EyeTracker implements Disposable {
             level.setAttribute("end", endLogicalPosition.line + ":" + endLogicalPosition.column);
             parent = parent.getParent();
         }
-        return sourceCodeEntity;
+        return aSTStructure;
     }
 }

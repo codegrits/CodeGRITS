@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
-public final class IDETracker implements @NotNull Disposable {
+public final class IDETracker implements Disposable {
     boolean isTracking = false;
     Document iDETracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     Element root = iDETracking.createElement("ide_tracking");
@@ -187,7 +187,8 @@ public final class IDETracker implements @NotNull Disposable {
         environment.setAttribute("project_path", projectPath);
         environment.setAttribute("project_name", projectPath.substring(
                 projectPath.lastIndexOf('/') + 1));
-        editorEventMulticaster.addDocumentListener(documentListener, ApplicationManager.getApplication());
+        editorEventMulticaster.addDocumentListener(documentListener, () -> {
+        });
 
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         for (VirtualFile file : fileEditorManager.getOpenFiles()) {

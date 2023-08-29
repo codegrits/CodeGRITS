@@ -24,21 +24,20 @@ public class ConfigDialog extends DialogWrapper {
     private static List<JTextField> noteAreas = new ArrayList<>();
 
 
-
     public ConfigDialog(Project project) {
         super(true); // use current window as parent
         init();
         setTitle("Config");
         //load config from file
-        if(new File("config.dat").exists()){
+        if (new File("config.dat").exists()) {
             loadConfig();
             System.out.println("Config loaded");
         }
 
     }
 
-    private void loadConfig(){
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("config.dat"))) {
+    private void loadConfig() {
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("config.dat"))) {
             Config config = (Config) objectInputStream.readObject();
             //parse checkbox
             List<Boolean> selected = config.getCheckBoxes();
@@ -47,18 +46,20 @@ public class ConfigDialog extends DialogWrapper {
             for (int i = 0; i < selected.size(); i++) {
                 checkBoxes.get(i).setSelected(selected.get(i));
             }
-//            for (int i = 0; i < notes.size(); i++) {
-//                addNoteArea();
-//                noteAreas.get(i).setText(notes.get(i));
-//            }
+            //reset note area
+            noteAreas = new ArrayList<>();
+            for (int i = 0; i < notes.size(); i++) {
+                addNoteArea();
+                noteAreas.get(i).setText(notes.get(i));
+            }
             slider.setValue(freq);
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void saveConfig(){
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("config.dat"))) {
+    private void saveConfig() {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("config.dat"))) {
             //parse checkbox
             List<Boolean> selected = getSelectedCheckboxes();
             List<String> notes = getCurrentNotes();
@@ -75,9 +76,32 @@ public class ConfigDialog extends DialogWrapper {
     protected void doOKAction() {
         //save config to file
         saveConfig();
+        //TODO: reflect changes to action group
+        updateActionGroup();
         super.doOKAction();
     }
 
+    private void updateActionGroup() {
+        //update action group
+        ActionManager actionManager = ActionManager.getInstance();
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
+        List<String> notes = getCurrentNotes();
+        System.out.println(notes);
+        //reset action group
+        AnAction[] actions = actionGroup.getChildActionsOrStubs();
+        for (AnAction child : actions) {
+            actionGroup.remove(child);
+            String childId = ActionManager.getInstance().getId(child);
+            ActionManager.getInstance().unregisterAction(childId);
+        }
+        //add new actions
+        for (String note : notes) {
+            TakeNoteAction newNote = new TakeNoteAction();
+            newNote.setDescription(note);
+            actionManager.registerAction("actions.TakeNoteAction" + note, newNote);
+            actionGroup.add(newNote);
+        }
+    }
 
 
     @Override
@@ -111,27 +135,28 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea();
         });
         panel.add(addNote);
-
-        JButton confirmNote = new JButton("Confirm");
-        confirmNote.addActionListener(e -> {
-            //update action group
-            ActionManager actionManager = ActionManager.getInstance();
-            DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
-            List<String> notes = getCurrentNotes();
-            //clear everything in group
-            actionGroup.removeAll();
-            for (int i = 0; i < notes.size(); i++) {
-                TakeNoteAction newNote = new TakeNoteAction();
-                newNote.setDescription(notes.get(i));
-                actionManager.registerAction("actions.TakeNoteAction" + i, newNote);
-                actionGroup.add(newNote);
-            }
-
-        });
-        panel.add(confirmNote);
+//
+//        JButton confirmNote = new JButton("Confirm");
+//        confirmNote.addActionListener(e -> {
+//            //update action group
+//            ActionManager actionManager = ActionManager.getInstance();
+//            DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
+//            List<String> notes = getCurrentNotes();
+//            //clear everything in group
+//            actionGroup.removeAll();
+//            for (int i = 0; i < notes.size(); i++) {
+//                TakeNoteAction newNote = new TakeNoteAction();
+//                newNote.setDescription(notes.get(i));
+//                actionManager.registerAction("actions.TakeNoteAction" + i, newNote);
+//                actionGroup.add(newNote);
+//            }
+//
+//        });
+//        panel.add(confirmNote);
         return panel;
     }
-    private void addNoteArea(){
+
+    private void addNoteArea() {
         JPanel notePanel = new JPanel();
         JTextField textField = new JTextField();
         JButton minusButton = new JButton("-");
@@ -150,25 +175,25 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     //some util methods
-    public static List<String> getCurrentNotes(){
+    public static List<String> getCurrentNotes() {
         List<String> selected = new ArrayList<>();
-        for(JTextField textField : noteAreas){
+        for (JTextField textField : noteAreas) {
             selected.add(textField.getText());
         }
         return selected;
     }
+
     public List<Boolean> getSelectedCheckboxes() {
         List<Boolean> selected = new ArrayList<>();
         for (JCheckBox checkBox : checkBoxes) {
             if (checkBox.isSelected()) {
                 selected.add(true);
-            }else{
+            } else {
                 selected.add(false);
             }
         }
         return selected;
     }
-
 
 
 }

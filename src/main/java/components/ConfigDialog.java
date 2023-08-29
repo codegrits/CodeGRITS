@@ -135,24 +135,6 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea();
         });
         panel.add(addNote);
-//
-//        JButton confirmNote = new JButton("Confirm");
-//        confirmNote.addActionListener(e -> {
-//            //update action group
-//            ActionManager actionManager = ActionManager.getInstance();
-//            DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
-//            List<String> notes = getCurrentNotes();
-//            //clear everything in group
-//            actionGroup.removeAll();
-//            for (int i = 0; i < notes.size(); i++) {
-//                TakeNoteAction newNote = new TakeNoteAction();
-//                newNote.setDescription(notes.get(i));
-//                actionManager.registerAction("actions.TakeNoteAction" + i, newNote);
-//                actionGroup.add(newNote);
-//            }
-//
-//        });
-//        panel.add(confirmNote);
         return panel;
     }
 

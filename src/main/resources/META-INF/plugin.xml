@@ -39,14 +39,15 @@
         <action id="actions.ConfigAction" class="actions.ConfigAction" text="Options" description="Configurate tracking options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="StartStopTrackingAction"/>
         </action>
+        <action class="actions.TakeNoteAction"
+                id="actions.TakeNoteAction"
+                icon="AllIcons.Actions.Edit">
+        </action>
         <group id="TakeNoteActionGroup" class="TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <action class="actions.TakeNoteAction"
-                    id="actions.TakeNoteAction"
-                    icon="AllIcons.Actions.Edit">
-            </action>
+
         </group>
-        <action id="actions.FindEyeTrackerAction" class="actions.FindEyeTrackerAction" text="Find" description="Find">
+        <action id="actions.FindEyeTrackerAction" class="actions.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>

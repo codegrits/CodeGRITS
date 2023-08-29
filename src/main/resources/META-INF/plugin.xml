@@ -36,16 +36,18 @@
                 icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="ConfigAction" class="ConfigAction" text="Options" description="Configurate tracking options">
+        <action id="actions.ConfigAction" class="actions.ConfigAction" text="Options" description="Configurate tracking options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="StartStopTrackingAction"/>
         </action>
         <group id="TakeNoteActionGroup" class="TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <action class="TakeNoteAction"
-                    id="TakeNoteAction"
-                    text="Take Notes"
+            <action class="actions.TakeNoteAction"
+                    id="actions.TakeNoteAction"
                     icon="AllIcons.Actions.Edit">
             </action>
         </group>
+        <action id="actions.FindEyeTrackerAction" class="actions.FindEyeTrackerAction" text="Find" description="Find">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

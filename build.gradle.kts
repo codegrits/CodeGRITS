@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    //jcodec
-    implementation("org.jcodec:jcodec:0.2.3")
+
+
 }
 
 // Configure Gradle IntelliJ Plugin

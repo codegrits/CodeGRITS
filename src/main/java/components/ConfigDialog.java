@@ -32,7 +32,7 @@ public class ConfigDialog extends DialogWrapper {
         init();
         setTitle("Config");
         //load config from file
-        if (new File("config.dat").exists()) {
+        if (new File("config.json").exists()) {
             loadConfig();
             System.out.println("Config loaded");
         }
@@ -40,39 +40,40 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     private void loadConfig() {
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("config.dat"))) {
-            Config config = (Config) objectInputStream.readObject();
-            //parse checkbox
-            List<Boolean> selected = config.getCheckBoxes();
-            List<String> notes = config.getNotes();
-            Integer freq = config.getFreq();
-            for (int i = 0; i < selected.size(); i++) {
-                checkBoxes.get(i).setSelected(selected.get(i));
-            }
-            //reset note area
-            noteAreas = new ArrayList<>();
-            for (int i = 0; i < notes.size(); i++) {
-                addNoteArea();
-                noteAreas.get(i).setText(notes.get(i));
-            }
-            slider.setValue(freq);
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        Config config = new Config();
+        config.loadFromJson();
+        //parse checkbox
+        List<Boolean> selected = config.getCheckBoxes();
+        List<String> notes = config.getNotes();
+        Integer freq = config.getFreq();
+        for (int i = 0; i < selected.size(); i++) {
+            checkBoxes.get(i).setSelected(selected.get(i));
         }
+        //reset note area
+        noteAreas = new ArrayList<>();
+        for (int i = 0; i < notes.size(); i++) {
+            addNoteArea();
+            noteAreas.get(i).setText(notes.get(i));
+        }
+        slider.setValue(freq);
+        selectedFilePathTextArea.setText(config.getPythonInterpreter());
     }
 
     private void saveConfig() {
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("config.dat"))) {
-            //parse checkbox
-            List<Boolean> selected = getSelectedCheckboxes();
-            List<String> notes = getCurrentNotes();
-            Config config = new Config(selected, notes, slider.getValue());
-            objectOutputStream.writeObject(config);
-            objectOutputStream.flush();
-            System.out.println("Config saved");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        //save config to file
+        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), slider.getValue(), getPythonInterpreter());
+        config.saveAsJson();
+//        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("config.dat"))) {
+//            //parse checkbox
+//            List<Boolean> selected = getSelectedCheckboxes();
+//            List<String> notes = getCurrentNotes();
+//            Config config = new Config(selected, notes, slider.getValue());
+//            objectOutputStream.writeObject(config);
+//            objectOutputStream.flush();
+//            System.out.println("Config saved");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     @Override
@@ -141,8 +142,9 @@ public class ConfigDialog extends DialogWrapper {
 
         //file selection
         JButton selectFile = new JButton("Select file");
-        selectedFilePathTextArea = new JTextArea(3, 30);
+        selectedFilePathTextArea = new JTextArea(1, 30);
         selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
+        selectedFilePathTextArea.setText("");
 
 //        selectedFilePathTextArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
 //        selectedFilePathTextArea.setLayout(new BorderLayout());

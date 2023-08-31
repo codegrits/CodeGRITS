@@ -1,5 +1,6 @@
 package actions;
 
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -14,5 +15,10 @@ public class ConfigAction extends AnAction {
         Project project = e.getProject();
         configDialog = new ConfigDialog(project);
         configDialog.show();
+    }
+
+    public static void disableConfig(){
+       ActionManager manager = ActionManager.getInstance();
+       manager.getAction("Config").getTemplatePresentation().setEnabled(false);
     }
 }

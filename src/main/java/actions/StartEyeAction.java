@@ -58,6 +58,7 @@ public class StartEyeAction extends AnAction {
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true); // Redirect error stream to output stream
         p = pb.start();
+        ConfigAction.disableConfig(); // disable config while tracking
 
         outputThread = new Thread(() -> {
             try (InputStream inputStream = p.getInputStream();

@@ -48,7 +48,11 @@
 
         </group>
         <action id="actions.FindEyeTrackerAction" class="actions.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="actions.StartEyeAction" class="actions.StartEyeAction" text="start" description="start">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
+
     </actions>
 </idea-plugin>

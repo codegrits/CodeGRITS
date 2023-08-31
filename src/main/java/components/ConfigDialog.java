@@ -10,6 +10,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import entity.Config;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,8 @@ public class ConfigDialog extends DialogWrapper {
 
     private JPanel panel = new JPanel();
     private static List<JTextField> noteAreas = new ArrayList<>();
+
+    private static JTextArea selectedFilePathTextArea;
 
 
     public ConfigDialog(Project project) {
@@ -135,6 +138,28 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea();
         });
         panel.add(addNote);
+
+        //file selection
+        JButton selectFile = new JButton("Select file");
+        selectedFilePathTextArea = new JTextArea(3, 30);
+        selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
+
+//        selectedFilePathTextArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
+//        selectedFilePathTextArea.setLayout(new BorderLayout());
+//        selectedFilePathTextArea.add(selectFile, BorderLayout.WEST); // Place button on the left
+
+        selectFile.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int result = fileChooser.showOpenDialog(panel);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String path = selectedFile.getAbsolutePath();
+                selectedFilePathTextArea.setText(path);
+            }
+        });
+        panel.add(selectFile);
+        panel.add(selectedFilePathTextArea);
         return panel;
     }
 
@@ -175,6 +200,10 @@ public class ConfigDialog extends DialogWrapper {
             }
         }
         return selected;
+    }
+
+    public static String getPythonInterpreter() {
+        return selectedFilePathTextArea.getText() == null ? "python" : selectedFilePathTextArea.getText();
     }
 
 

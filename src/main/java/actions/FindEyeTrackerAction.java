@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import static components.ConfigDialog.getPythonInterpreter;
+
 public class FindEyeTrackerAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -20,7 +22,11 @@ public class FindEyeTrackerAction extends AnAction {
     }
 
     private void callPythonScript() throws IOException, InterruptedException {
-        String pythonInterpreter = "python";
+
+        String pythonInterpreter = getPythonInterpreter();
+        if(!pythonInterpreter.endsWith("python.exe")){
+            pythonInterpreter = "python"; //default
+        }
 
         // May have path issues, so write code directly here
         String pythonScript = """

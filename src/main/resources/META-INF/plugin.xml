@@ -54,5 +54,9 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
 
+        <action id="actions.ScreenRecorderAction" class="actions.ScreenRecorderAction" text="record"
+                description="record">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

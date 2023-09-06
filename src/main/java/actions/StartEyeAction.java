@@ -14,6 +14,16 @@ public class StartEyeAction extends AnAction {
     private boolean isTracking = false;
     private Process p;
     private Thread outputThread;
+//    private static Consumer<String> outputHandler;
+
+@Override
+    public void update(@NotNull AnActionEvent e) {
+        if(isTracking){
+            e.getPresentation().setText("Stop Eye Tracking");
+        }else{
+            e.getPresentation().setText("Start Eye Tracking");
+        }
+    }
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -26,7 +36,7 @@ public class StartEyeAction extends AnAction {
         }
     }
 
-    private void callPythonScript() throws IOException, InterruptedException {
+    protected void callPythonScript() throws IOException, InterruptedException {
         String pythonInterpreter = "python";
         String pythonScript;
         if(!isTracking){
@@ -46,11 +56,6 @@ public class StartEyeAction extends AnAction {
 
         }else{
             isTracking = false;
-            pythonScript = """
-                my_eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)
-                print('Unsubscribed from gaze data')
-                """
-                    ;
             p.destroy();
             return;
         }
@@ -65,9 +70,15 @@ public class StartEyeAction extends AnAction {
                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                  BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
+
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    System.out.println(line);
+//                    if(OutputHandler.getOutputHandler() != null){
+//                        OutputHandler.handleOutput(line);
+//                    }
+//                    if(outputHandler != null){
+//                        outputHandler.accept(line);
+//                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -78,5 +89,14 @@ public class StartEyeAction extends AnAction {
 
 
     }
+//
+//    public static void addOutputHandler(Consumer<String> handler) {
+//        outputHandler = handler;
+//    }
+
+//    public void outputHandler(String line){
+//        System.out.println(line);
+//    }
+
 
 }

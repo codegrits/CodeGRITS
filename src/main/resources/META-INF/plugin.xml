@@ -36,7 +36,7 @@
                 icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="actions.ConfigAction" class="actions.ConfigAction" text="Options" description="Configurate tracking options">
+        <action id="actions.ConfigAction" class="actions.ConfigAction" text="Options" description="Configure tracking options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="StartStopTrackingAction"/>
         </action>
         <action class="actions.TakeNoteAction"

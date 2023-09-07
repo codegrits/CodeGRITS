@@ -1,5 +1,6 @@
 package components;
 
+import actions.ScreenRecorderAction;
 import actions.TakeNoteAction;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -80,9 +81,40 @@ public class ConfigDialog extends DialogWrapper {
     protected void doOKAction() {
         //save config to file
         saveConfig();
-        //TODO: reflect changes to action group
         updateActionGroup();
+        updateActions();
         super.doOKAction();
+    }
+
+    private void updateActions(){
+        List<Boolean> checkBoxes = getSelectedCheckboxes();
+        for (int i = 0; i < checkBoxes.size(); i++) {
+            if(checkBoxes.get(i)){
+                //enable action
+                if(i == 0){
+                    //eye tracking
+                }else if(i == 1){
+                    //mouse tracking
+                }else if(i == 2){
+                    //screen recording
+                    ScreenRecorderAction.setEnabled(true);
+
+                }
+            }else{
+
+                //disable action
+                if (i == 0) {
+                    //eye tracking
+                } else if (i == 1) {
+                    //mouse tracking
+                } else if (i == 2) {
+                    //screen recording
+                    ScreenRecorderAction.setEnabled(false);
+
+
+                }
+            }
+        }
     }
 
     private void updateActionGroup() {
@@ -145,10 +177,6 @@ public class ConfigDialog extends DialogWrapper {
         selectedFilePathTextArea = new JTextArea(1, 30);
         selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
         selectedFilePathTextArea.setText("");
-
-//        selectedFilePathTextArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Add padding
-//        selectedFilePathTextArea.setLayout(new BorderLayout());
-//        selectedFilePathTextArea.add(selectFile, BorderLayout.WEST); // Place button on the left
 
         selectFile.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();

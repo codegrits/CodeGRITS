@@ -10,6 +10,13 @@ import org.jetbrains.annotations.NotNull;
 public class ConfigAction extends AnAction {
     private ConfigDialog configDialog;
 
+    private static boolean isEnabled = true;
+
+    @Override
+    public void update(@NotNull AnActionEvent e) {
+        e.getPresentation().setEnabled(isEnabled);
+    }
+
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
@@ -17,8 +24,7 @@ public class ConfigAction extends AnAction {
         configDialog.show();
     }
 
-    public static void disableConfig(){
-       ActionManager manager = ActionManager.getInstance();
-       manager.getAction("Config").getTemplatePresentation().setEnabled(false);
+    public static void setIsEnabled(boolean isEnabled) {
+        ConfigAction.isEnabled = isEnabled;
     }
 }

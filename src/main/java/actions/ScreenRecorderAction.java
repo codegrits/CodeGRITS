@@ -1,5 +1,6 @@
 package actions;
 
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
@@ -14,6 +15,13 @@ import java.io.IOException;
 public class ScreenRecorderAction extends AnAction {
 
     private Thread recordingThread;
+
+    private static boolean isEnabled = false;
+
+    @Override
+    public void update(@NotNull AnActionEvent e) {
+        e.getPresentation().setEnabled(isEnabled);
+    }
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -59,4 +67,9 @@ public class ScreenRecorderAction extends AnAction {
         }
         awtEncoder.finish();
     }
+
+    public static void setEnabled(boolean isEnabled) {
+        ScreenRecorderAction.isEnabled = isEnabled;
+    }
+
 }

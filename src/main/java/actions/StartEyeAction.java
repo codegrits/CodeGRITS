@@ -57,13 +57,14 @@ public class StartEyeAction extends AnAction {
         }else{
             isTracking = false;
             p.destroy();
+            ConfigAction.setIsEnabled(true);
             return;
         }
 
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true); // Redirect error stream to output stream
         p = pb.start();
-        ConfigAction.disableConfig(); // disable config while tracking
+        ConfigAction.setIsEnabled(false);
 
         outputThread = new Thread(() -> {
             try (InputStream inputStream = p.getInputStream();

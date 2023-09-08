@@ -2,12 +2,16 @@ package components;
 
 import actions.ScreenRecorderAction;
 import actions.TakeNoteAction;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.TextBrowseFolderListener;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import entity.Config;
 
 import javax.swing.*;
@@ -64,17 +68,6 @@ public class ConfigDialog extends DialogWrapper {
         //save config to file
         Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), slider.getValue(), getPythonInterpreter());
         config.saveAsJson();
-//        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("config.dat"))) {
-//            //parse checkbox
-//            List<Boolean> selected = getSelectedCheckboxes();
-//            List<String> notes = getCurrentNotes();
-//            Config config = new Config(selected, notes, slider.getValue());
-//            objectOutputStream.writeObject(config);
-//            objectOutputStream.flush();
-//            System.out.println("Config saved");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     @Override
@@ -142,24 +135,61 @@ public class ConfigDialog extends DialogWrapper {
 
     @Override
     protected JComponent createCenterPanel() {
+//        FlowLayout flowLayout = new FlowLayout();
+        //top to bottom
+//        flowLayout.setAlignment(FlowLayout.LEFT);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        //add checkbox component
+        JPanel checkBoxPanel = new JPanel();
+        JLabel functionalities = new JLabel("Functionalities");
+
+
+        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
+        checkBoxPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        checkBoxPanel.add(functionalities);
+        functionalities.setPreferredSize(new Dimension(100, 20));
+//        panel.add(functionalities);
 
         checkBoxes = new ArrayList<>();
         JCheckBox eyeTracking = new JCheckBox("Eye tracking");
         checkBoxes.add(eyeTracking);
-        panel.add(eyeTracking);
+        checkBoxPanel.add(eyeTracking);
 
         JCheckBox mouseTracking = new JCheckBox("Mouse tracking");
         checkBoxes.add(mouseTracking);
-        panel.add(mouseTracking);
+        checkBoxPanel.add(mouseTracking);
 
         JCheckBox screenRecording = new JCheckBox("Screen recording");
         checkBoxes.add(screenRecording);
-        panel.add(screenRecording);
+        checkBoxPanel.add(screenRecording);
 
-        panel.add(new JLabel("Eye tracking sensitivity:"));
-        slider.setEnabled(false); //initially disabled
-        panel.add(slider);
+        panel.add(checkBoxPanel);
+
+        JPanel settingsPanel = new JPanel();
+        settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.Y_AXIS));
+        settingsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        settingsPanel.add(new JLabel("Settings"));
+
+
+        selectedFilePathTextArea = new JTextArea(1, 30);
+        selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
+        selectedFilePathTextArea.setText("");
+
+        // Add folder icon to the selectedFilePathTextArea
+
+
+
+        TextFieldWithBrowseButton textFieldWithBrowseButton = new TextFieldWithBrowseButton();
+        textFieldWithBrowseButton.setText("Select file");
+        textFieldWithBrowseButton.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
+        settingsPanel.add(textFieldWithBrowseButton);
+
+
+        panel.add(settingsPanel);
+
+
 
         eyeTracking.addChangeListener(e -> {
             slider.setEnabled(eyeTracking.isSelected());
@@ -170,26 +200,11 @@ public class ConfigDialog extends DialogWrapper {
         addNote.addActionListener(e -> {
             addNoteArea();
         });
-        panel.add(addNote);
+//        panel.add(addNote);
 
-        //file selection
-        JButton selectFile = new JButton("Select file");
-        selectedFilePathTextArea = new JTextArea(1, 30);
-        selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
-        selectedFilePathTextArea.setText("");
 
-        selectFile.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int result = fileChooser.showOpenDialog(panel);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                String path = selectedFile.getAbsolutePath();
-                selectedFilePathTextArea.setText(path);
-            }
-        });
-        panel.add(selectFile);
-        panel.add(selectedFilePathTextArea);
+//        panel.add(selectFile);
+//        panel.add(selectedFilePathTextArea);
         return panel;
     }
 

@@ -9,6 +9,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -24,18 +25,22 @@ import java.util.List;
 public class ConfigDialog extends DialogWrapper {
 
     private List<JCheckBox> checkBoxes;
-    private JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
 
     private JPanel panel = new JPanel();
     private static List<JTextField> noteAreas = new ArrayList<>();
 
-    private static JTextArea selectedFilePathTextArea;
+    private static TextFieldWithBrowseButton pythonInterpreterTextField;
+    private static TextFieldWithBrowseButton dataOutputTextField;
+
+    private JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30,40,60});
+    private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"webcam", "eye tracker"});
 
 
     public ConfigDialog(Project project) {
         super(true); // use current window as parent
         init();
         setTitle("Config");
+//        setSize(500, 500);
         //load config from file
         if (new File("config.json").exists()) {
             loadConfig();
@@ -60,13 +65,14 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea();
             noteAreas.get(i).setText(notes.get(i));
         }
-        slider.setValue(freq);
-        selectedFilePathTextArea.setText(config.getPythonInterpreter());
+        //TODO: set freq
+        freqCombo.setSelectedIndex(freq / 15 - 2);
+        pythonInterpreterTextField.setText(config.getPythonInterpreter());
     }
 
     private void saveConfig() {
         //save config to file
-        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), slider.getValue(), getPythonInterpreter());
+        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(), getPythonInterpreter());
         config.saveAsJson();
     }
 
@@ -94,7 +100,6 @@ public class ConfigDialog extends DialogWrapper {
 
                 }
             }else{
-
                 //disable action
                 if (i == 0) {
                     //eye tracking
@@ -103,7 +108,6 @@ public class ConfigDialog extends DialogWrapper {
                 } else if (i == 2) {
                     //screen recording
                     ScreenRecorderAction.setEnabled(false);
-
 
                 }
             }
@@ -135,15 +139,14 @@ public class ConfigDialog extends DialogWrapper {
 
     @Override
     protected JComponent createCenterPanel() {
-//        FlowLayout flowLayout = new FlowLayout();
-        //top to bottom
-//        flowLayout.setAlignment(FlowLayout.LEFT);
+
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        panel.setAlignmentX(Component.);
 
         //add checkbox component
         JPanel checkBoxPanel = new JPanel();
         JLabel functionalities = new JLabel("Functionalities");
+
 
 
         checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
@@ -167,51 +170,73 @@ public class ConfigDialog extends DialogWrapper {
 
         panel.add(checkBoxPanel);
 
-        JPanel settingsPanel = new JPanel();
-        settingsPanel.setLayout(new BoxLayout(settingsPanel, BoxLayout.Y_AXIS));
-        settingsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        settingsPanel.add(new JLabel("Settings"));
+        //add settings component
 
+        JLabel settings = new JLabel("Settings");
+        settings.setHorizontalTextPosition(JLabel.LEFT);
+        panel.add(settings);
 
-        selectedFilePathTextArea = new JTextArea(1, 30);
-        selectedFilePathTextArea.setEditable(false); // Prevent editing of the text area
-        selectedFilePathTextArea.setText("");
+        JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
+        pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
+        panel.add(pythonInterpreterLabel);
 
-        // Add folder icon to the selectedFilePathTextArea
+        pythonInterpreterTextField = new TextFieldWithBrowseButton();
+        pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pythonInterpreterTextField.setText("Select Python Interpreter");
+        pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
 
+        panel.add(pythonInterpreterTextField);
 
+        JLabel dataOutputLabel = new JLabel("Data Output Path");
+        dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
+        panel.add(dataOutputLabel);
 
-        TextFieldWithBrowseButton textFieldWithBrowseButton = new TextFieldWithBrowseButton();
-        textFieldWithBrowseButton.setText("Select file");
-        textFieldWithBrowseButton.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
-        settingsPanel.add(textFieldWithBrowseButton);
+        dataOutputTextField = new TextFieldWithBrowseButton();
+        dataOutputTextField.setText("Select Data Output Folder");
+        dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
 
-
-        panel.add(settingsPanel);
-
-
-
+        panel.add(dataOutputTextField);
+        JLabel freqLabel = new JLabel("Frequency");
+        JLabel deviceLabel = new JLabel("Device");
+        deviceLabel.setHorizontalTextPosition(JLabel.LEFT);
+        freqLabel.setHorizontalTextPosition(JLabel.LEFT);
+        freqCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        deviceCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel.add(freqLabel);
+        panel.add(freqCombo);
+        panel.add(deviceLabel);
+        panel.add(deviceCombo);
         eyeTracking.addChangeListener(e -> {
-            slider.setEnabled(eyeTracking.isSelected());
+            freqCombo.setEnabled(eyeTracking.isSelected());
         });
 
         //add note component
-        JButton addNote = new JButton("+");
+        JPanel noteAreaPanel = new JPanel();
+        JLabel notes = new JLabel("Notes");
+        notes.setHorizontalTextPosition(JLabel.LEFT);
+        JButton addNote = new JButton("Add Preset");
+        addNote.setAlignmentX(Component.LEFT_ALIGNMENT);
+        noteAreaPanel.add(notes);
+        noteAreaPanel.add(addNote);
+        noteAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         addNote.addActionListener(e -> {
             addNoteArea();
         });
-//        panel.add(addNote);
+        panel.add(noteAreaPanel);
 
 
-//        panel.add(selectFile);
-//        panel.add(selectedFilePathTextArea);
         return panel;
     }
 
     private void addNoteArea() {
         JPanel notePanel = new JPanel();
         JTextField textField = new JTextField();
-        JButton minusButton = new JButton("-");
+        JButton minusButton = new JButton();
+        minusButton.setIcon(AllIcons.General.Remove);
+        notePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        minusButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        textField.setAlignmentX(Component.LEFT_ALIGNMENT);
         minusButton.addActionListener(e -> {
             panel.remove(notePanel);
             noteAreas.remove(textField);
@@ -248,7 +273,7 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     public static String getPythonInterpreter() {
-        return selectedFilePathTextArea.getText() == null ? "python" : selectedFilePathTextArea.getText();
+        return pythonInterpreterTextField.getText().equals("Select Python Interpreter") ? "python" : pythonInterpreterTextField.getText();
     }
 
 

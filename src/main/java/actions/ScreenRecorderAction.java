@@ -15,7 +15,6 @@ import java.io.IOException;
 public class ScreenRecorderAction extends AnAction {
 
     private Thread recordingThread;
-
     private static boolean isEnabled = false;
 
     @Override

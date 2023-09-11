@@ -1,5 +1,6 @@
 package components;
 
+import actions.OutputHandler;
 import actions.ScreenRecorderAction;
 import actions.TakeNoteAction;
 import com.intellij.icons.AllIcons;
@@ -13,9 +14,12 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.ui.JBColor;
+import com.intellij.util.ui.JBUI;
 import entity.Config;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -40,6 +44,8 @@ public class ConfigDialog extends DialogWrapper {
         super(true); // use current window as parent
         init();
         setTitle("Config");
+        setSize(500, 500);
+        setAutoAdjustable(true);
 //        setSize(500, 500);
         //load config from file
         if (new File("config.json").exists()) {
@@ -140,6 +146,10 @@ public class ConfigDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
 
+        Font headingFont = new Font("Arial", Font.PLAIN, 16);
+        Insets headingMargin = JBUI.insets(5); // Adjust the values as needed
+        Insets contentMargin = JBUI.insets(5, 20); // Adjust the values as needed
+
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 //        panel.setAlignmentX(Component.);
 
@@ -147,12 +157,13 @@ public class ConfigDialog extends DialogWrapper {
         JPanel checkBoxPanel = new JPanel();
         JLabel functionalities = new JLabel("Functionalities");
 
+        functionalities.setBorder(new EmptyBorder(headingMargin));
 
 
         checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
         checkBoxPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         checkBoxPanel.add(functionalities);
-        functionalities.setPreferredSize(new Dimension(100, 20));
+        functionalities.setFont(headingFont);
 //        panel.add(functionalities);
 
         checkBoxes = new ArrayList<>();
@@ -168,58 +179,120 @@ public class ConfigDialog extends DialogWrapper {
         checkBoxes.add(screenRecording);
         checkBoxPanel.add(screenRecording);
 
+//        checkBoxPanel.setBorder(new EmptyBorder(contentMargin));
+        eyeTracking.setBorder(new EmptyBorder(contentMargin));
+        mouseTracking.setBorder(new EmptyBorder(contentMargin));
+        screenRecording.setBorder(new EmptyBorder(contentMargin));
         panel.add(checkBoxPanel);
 
         //add settings component
 
         JLabel settings = new JLabel("Settings");
+        settings.setBorder(new EmptyBorder(headingMargin));
+        settings.setFont(headingFont);
         settings.setHorizontalTextPosition(JLabel.LEFT);
         panel.add(settings);
 
+        JPanel checkPythonPanel = new JPanel();
         JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
+        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5,20,0,5)));
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
-        panel.add(pythonInterpreterLabel);
+//        panel.add(pythonInterpreterLabel);
+        JButton checkPython = new JButton("Check Availability");
+
+        checkPython.addActionListener(e -> {
+            try {
+                OutputHandler outputHandler = new OutputHandler();
+                outputHandler.checkTracker();
+            } catch (IOException | InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        checkPythonPanel.setLayout(new BoxLayout(checkPythonPanel, BoxLayout.X_AXIS));
+        checkPythonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        checkPythonPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        checkPythonPanel.add(pythonInterpreterLabel);
+        checkPythonPanel.add(checkPython);
+        panel.add(checkPythonPanel);
 
         pythonInterpreterTextField = new TextFieldWithBrowseButton();
+        pythonInterpreterTextField.setEditable(false);
+        pythonInterpreterTextField.setMaximumSize(new Dimension(500, 40));
+        pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
         pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         pythonInterpreterTextField.setText("Select Python Interpreter");
+
         pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
 
         panel.add(pythonInterpreterTextField);
 
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
+        dataOutputLabel.setBorder(new EmptyBorder(JBUI.insets(0,20,0,0)));
+//        dataOutputLabel.setBorder(new EmptyBorder(headingMargin));
         panel.add(dataOutputLabel);
 
         dataOutputTextField = new TextFieldWithBrowseButton();
+        dataOutputTextField.setEditable(false);
+        dataOutputTextField.setBorder(new EmptyBorder(contentMargin));
+        dataOutputTextField.setMaximumSize(new Dimension(500, 40));
         dataOutputTextField.setText("Select Data Output Folder");
         dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
 
         panel.add(dataOutputTextField);
+
+
+        JPanel freqPanel = new JPanel();
+        freqPanel.setLayout(new BoxLayout(freqPanel, BoxLayout.Y_AXIS));
+        freqPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
         JLabel freqLabel = new JLabel("Frequency");
         JLabel deviceLabel = new JLabel("Device");
+
         deviceLabel.setHorizontalTextPosition(JLabel.LEFT);
         freqLabel.setHorizontalTextPosition(JLabel.LEFT);
         freqCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
         deviceCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panel.add(freqLabel);
-        panel.add(freqCombo);
-        panel.add(deviceLabel);
-        panel.add(deviceCombo);
+
+        freqCombo.setPreferredSize(new Dimension(221, 30));
+        deviceCombo.setPreferredSize(new Dimension(221, 30));
+
+        freqPanel.add(freqLabel);
+        freqPanel.add(freqCombo);
+
+        JPanel devicePanel = new JPanel();
+        devicePanel.setLayout(new BoxLayout(devicePanel, BoxLayout.Y_AXIS));
+        devicePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        devicePanel.add(deviceLabel);
+        devicePanel.add(deviceCombo);
+        JPanel comboPanel = new JPanel();
+        comboPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        comboPanel.add(freqPanel);
+        comboPanel.add(devicePanel);
+        comboPanel.setMaximumSize(new Dimension(500, 65));
+        comboPanel.setMinimumSize(new Dimension(500, 65));
+        panel.add(comboPanel);
         eyeTracking.addChangeListener(e -> {
             freqCombo.setEnabled(eyeTracking.isSelected());
         });
 
         //add note component
         JPanel noteAreaPanel = new JPanel();
+
         JLabel notes = new JLabel("Notes");
+        notes.setFont(headingFont);
+        notes.setBorder(new EmptyBorder(headingMargin));
         notes.setHorizontalTextPosition(JLabel.LEFT);
         JButton addNote = new JButton("Add Preset");
         addNote.setAlignmentX(Component.LEFT_ALIGNMENT);
+        noteAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        noteAreaPanel.setLayout(new BoxLayout(noteAreaPanel, BoxLayout.X_AXIS));
         noteAreaPanel.add(notes);
         noteAreaPanel.add(addNote);
-        noteAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        noteAreaPanel.setBorder(new EmptyBorder(contentMargin));
+
         addNote.addActionListener(e -> {
             addNoteArea();
         });
@@ -233,6 +306,8 @@ public class ConfigDialog extends DialogWrapper {
         JPanel notePanel = new JPanel();
         JTextField textField = new JTextField();
         JButton minusButton = new JButton();
+        textField.setColumns(20);
+        minusButton.setMaximumSize(new Dimension(1, 1));
         minusButton.setIcon(AllIcons.General.Remove);
         notePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         minusButton.setAlignmentX(Component.LEFT_ALIGNMENT);

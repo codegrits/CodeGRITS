@@ -1,3 +1,5 @@
+package tracker;
+
 public class RelativePathGetter {
     public static String getRelativePath(String absolutePath, String projectPath) {
         if (absolutePath.length() > projectPath.length() && absolutePath.startsWith(projectPath)) {

@@ -1,4 +1,4 @@
-package actions;
+package action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -16,11 +16,11 @@ public class StartEyeAction extends AnAction {
     private Thread outputThread;
 //    private static Consumer<String> outputHandler;
 
-@Override
+    @Override
     public void update(@NotNull AnActionEvent e) {
-        if(isTracking){
+        if (isTracking) {
             e.getPresentation().setText("Stop Eye Tracking");
-        }else{
+        } else {
             e.getPresentation().setText("Start Eye Tracking");
         }
     }
@@ -29,9 +29,7 @@ public class StartEyeAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         try {
             callPythonScript();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        } catch (InterruptedException ex) {
+        } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -39,22 +37,22 @@ public class StartEyeAction extends AnAction {
     protected void callPythonScript() throws IOException, InterruptedException {
         String pythonInterpreter = "python";
         String pythonScript;
-        if(!isTracking){
+        if (!isTracking) {
             isTracking = true;
             pythonScript = """
-                import tobii_research as tr
-                import time
-                found_eyetrackers = tr.find_all_eyetrackers()
-                my_eyetracker = found_eyetrackers[0]
-                def gaze_data_callback(gaze_data):
-                    print(gaze_data)
-                my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
-                print('Subscribed to gaze data')
-                time.sleep(100)
-                """
-                    ;
+                    import tobii_research as tr
+                    import time
+                    found_eyetrackers = tr.find_all_eyetrackers()
+                    my_eyetracker = found_eyetrackers[0]
+                    def gaze_data_callback(gaze_data):
+                        print(gaze_data)
+                    my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
+                    print('Subscribed to gaze data')
+                    time.sleep(100)
+                    """
+            ;
 
-        }else{
+        } else {
             isTracking = false;
             p.destroy();
             ConfigAction.setIsEnabled(true);
@@ -90,7 +88,7 @@ public class StartEyeAction extends AnAction {
 
 
     }
-//
+
 //    public static void addOutputHandler(Consumer<String> handler) {
 //        outputHandler = handler;
 //    }

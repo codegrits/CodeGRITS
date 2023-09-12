@@ -1,4 +1,4 @@
-package actions;
+package action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static components.ConfigDialog.getPythonInterpreter;
+import static component.ConfigDialog.getPythonInterpreter;
 
 public class FindEyeTrackerAction extends AnAction {
     @Override

@@ -1,10 +1,9 @@
-package components;
+package component;
 
-import actions.OutputHandler;
-import actions.ScreenRecorderAction;
-import actions.TakeNoteAction;
+import action.OutputHandler;
+import action.ScreenRecorderAction;
+import action.TakeNoteAction;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
@@ -14,7 +13,6 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.ui.JBColor;
 import com.intellij.util.ui.JBUI;
 import entity.Config;
 
@@ -30,14 +28,14 @@ public class ConfigDialog extends DialogWrapper {
 
     private List<JCheckBox> checkBoxes;
 
-    private JPanel panel = new JPanel();
+    private final JPanel panel = new JPanel();
     private static List<JTextField> noteAreas = new ArrayList<>();
 
     private static TextFieldWithBrowseButton pythonInterpreterTextField;
     private static TextFieldWithBrowseButton dataOutputTextField;
 
-    private JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30,40,60});
-    private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"webcam", "eye tracker"});
+    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30,40,60});
+    private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"webcam", "eye tracker"});
 
 
     public ConfigDialog(Project project) {

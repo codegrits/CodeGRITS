@@ -1,7 +1,11 @@
+package action;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import org.jetbrains.annotations.NotNull;
+import tracker.EyeTracker;
+import tracker.IDETracker;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -13,7 +17,6 @@ public class StartStopTrackingAction extends AnAction {
     boolean isTracking = false;
     IDETracker iDETracker;
     EyeTracker eyeTracker;
-    MouseTracker mouseTracker;
     Thread eyeTrackerThread;
 
     @Override
@@ -43,11 +46,8 @@ public class StartStopTrackingAction extends AnAction {
                 });
                 eyeTrackerThread.start();
 
-                mouseTracker = new MouseTracker();
-                mouseTracker.startTracking();
             } else {
                 isTracking = false;
-                mouseTracker.stopTracking();
                 eyeTracker.stopTracking();
                 eyeTrackerThread.join();
                 iDETracker.stopTracking();

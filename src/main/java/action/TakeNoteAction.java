@@ -1,16 +1,10 @@
-package actions;
+package action;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.ui.components.JBTextArea;
-import components.NoteDialog;
-import org.jdesktop.swingx.JXTextArea;
+import component.NoteDialog;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public class TakeNoteAction extends AnAction {
 

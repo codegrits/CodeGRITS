@@ -1,3 +1,5 @@
+package tracker;
+
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -24,7 +26,7 @@ import java.net.Socket;
 public class EyeTracker implements Disposable {
 
     PsiDocumentManager psiDocumentManager;
-    Editor editor;
+    public Editor editor;
     Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     Element root = eyeTracking.createElement("eye_tracking");
     Element gazes = eyeTracking.createElement("gazes");

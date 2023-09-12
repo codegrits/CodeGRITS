@@ -1,10 +1,9 @@
-package actions;
+package action;
 
-import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import components.ConfigDialog;
+import component.ConfigDialog;
 import org.jetbrains.annotations.NotNull;
 
 public class ConfigAction extends AnAction {

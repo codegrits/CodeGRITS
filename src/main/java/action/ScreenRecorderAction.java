@@ -1,6 +1,5 @@
-package actions;
+package action;
 
-import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
@@ -33,9 +32,7 @@ public class ScreenRecorderAction extends AnAction {
                     System.out.println("Recording screen");
                     recordScreen();
                     System.out.println("Finished recording screen");
-                } catch (AWTException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
+                } catch (AWTException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             });

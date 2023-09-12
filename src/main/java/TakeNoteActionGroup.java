@@ -1,12 +1,12 @@
-import actions.TakeNoteAction;
+import action.TakeNoteAction;
 import com.intellij.openapi.actionSystem.*;
-import components.ConfigDialog;
+import component.ConfigDialog;
 
 import java.util.List;
 
 public class TakeNoteActionGroup extends DefaultActionGroup {
 
-    public void refreshNote(){
+    public void refreshNote() {
         //get note from config dialog
         List<String> notes = ConfigDialog.getCurrentNotes();
         for (int i = 0; i < notes.size(); i++) {
@@ -14,5 +14,4 @@ public class TakeNoteActionGroup extends DefaultActionGroup {
             this.add(newNote);
         }
     }
-
 }

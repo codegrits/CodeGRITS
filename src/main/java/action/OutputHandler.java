@@ -1,4 +1,4 @@
-package actions;
+package action;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class OutputHandler {
     private Thread outputThread;
 
     public void addOutputHandler(Consumer<String> outputHandler) {
-       this.outputHandler = outputHandler;
+        this.outputHandler = outputHandler;
     }
 
     protected void handleOutput(String line) {
@@ -33,8 +33,7 @@ public class OutputHandler {
                     print('No eye tracker found')
                 else:
                     print('Found eye tracker')
-                """
-                ;
+                """;
 
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true); // Redirect error stream to output stream

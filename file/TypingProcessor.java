@@ -1,3 +1,5 @@
+package tracker;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,8 +24,8 @@ public class TypingProcessor {
     public void processTyping() {
         StringBuilder str = new StringBuilder();
         String timestamp = "", path = "", line = "", column = "", duration = "";
-        Element behaviors = (Element) document.getElementsByTagName("behaviors").item(0);
-        Element processedBehaviors = document.createElement("behaviors");
+        Element behaviors = (Element) document.getElementsByTagName("typings").item(0);
+        Element processedBehaviors = document.createElement("typings");
         document.getElementsByTagName("ide_tracking").item(0).appendChild(processedBehaviors);
         NodeList behaviorsChildren = behaviors.getChildNodes();
         for (int i = 0; i < behaviorsChildren.getLength(); i++) {
@@ -74,8 +76,8 @@ public class TypingProcessor {
     // post-process editor typing action in the dom document that combine subsequent editor typing events
     // e.g., 3 subsequent "EditorBackspace" or "EditorEnter" records in one file will be combined as one record with count = 3
     public void processEditorAction() {
-        Element behaviors = (Element) document.getElementsByTagName("behaviors").item(0);
-        Element processedBehaviors = document.createElement("behaviors");
+        Element behaviors = (Element) document.getElementsByTagName("actions").item(0);
+        Element processedBehaviors = document.createElement("actions");
         document.getElementsByTagName("ide_tracking").item(0).appendChild(processedBehaviors);
         NodeList behaviorsChildren = behaviors.getChildNodes();
         Element lastElement = null;

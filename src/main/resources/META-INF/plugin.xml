@@ -32,7 +32,30 @@
     <actions>
         <action id="StartStopTrackingAction"
                 class="StartStopTrackingAction"
-                text="Behavior Tracking">
+                text="Behavior Tracking"
+                icon="AllIcons.Actions.ToggleVisibility">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="actions.ConfigAction" class="actions.ConfigAction" text="Options" description="Configure tracking options">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="StartStopTrackingAction"/>
+        </action>
+        <action class="actions.TakeNoteAction"
+                id="actions.TakeNoteAction"
+                icon="AllIcons.Actions.Edit">
+        </action>
+        <group id="TakeNoteActionGroup" class="TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+
+        </group>
+        <action id="actions.FindEyeTrackerAction" class="actions.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="actions.StartEyeAction" class="actions.StartEyeAction" text="start" description="start">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+
+        <action id="actions.ScreenRecorderAction" class="actions.ScreenRecorderAction" text="record"
+                description="record">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

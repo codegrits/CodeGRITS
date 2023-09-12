@@ -1,5 +1,6 @@
 package tracker;
 
+import action.ConfigAction;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -18,9 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.net.Socket;
+import java.io.*;
 
 
 public class EyeTracker implements Disposable {
@@ -35,6 +34,56 @@ public class EyeTracker implements Disposable {
     double screenWidth, screenHeight;
     String projectPath = "", filePath = "";
     PsiElement lastElement = null;
+
+    Process pythonProcess;
+    Thread pythonOutputThread;
+    String pythonInterpreter = "D:\\ProgramData\\Anaconda3\\python.exe";
+    String pythonScriptTobii = """
+            import tobii_research as tr
+            import time
+            import sys
+            import math
+                        
+                        
+            def gaze_data_callback(gaze_data):
+                message = f'{round(time.time() * 1000)}; ' \\
+                          f'{gaze_data["left_gaze_point_on_display_area"][0]}, ' \\
+                          f'{gaze_data["left_gaze_point_on_display_area"][1]}, ' \\
+                          f'{gaze_data["left_gaze_point_validity"]}, ' \\
+                          f'{gaze_data["left_pupil_diameter"]}, ' \\
+                          f'{gaze_data["left_pupil_validity"]}; ' \\
+                          f'{gaze_data["right_gaze_point_on_display_area"][0]}, ' \\
+                          f'{gaze_data["right_gaze_point_on_display_area"][1]}, ' \\
+                          f'{gaze_data["right_gaze_point_validity"]}, ' \\
+                          f'{gaze_data["right_pupil_diameter"]}, ' \\
+                          f'{gaze_data["right_pupil_validity"]}'
+                print(message)
+                sys.stdout.flush()
+                        
+                        
+            found_eyetrackers = tr.find_all_eyetrackers()
+            my_eyetracker = found_eyetrackers[0]
+            my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
+            time.sleep(math.inf)
+            """;
+
+    String pythonScriptMouse = """
+            import pyautogui
+            from screeninfo import get_monitors
+            import time
+            import sys
+                        
+            width, height = get_monitors()[0].width, get_monitors()[0].height
+            start_time = time.time()
+                        
+            while time.time() - start_time <= 100000:
+                message = f'{round(time.time() * 1000)}; ' \\
+                          f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0; ' \\
+                          f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0'
+                print(message)
+                sys.stdout.flush()
+                time.sleep(0.001)
+            """;
 
     public EyeTracker() throws ParserConfigurationException {
 
@@ -71,81 +120,100 @@ public class EyeTracker implements Disposable {
 
     public void stopTracking() throws TransformerException {
         isTracking = false;
+        pythonOutputThread.interrupt();
+        pythonProcess.destroy();
+        System.out.println("Python Process Stopped");
         XMLWriter.writeToXML(eyeTracking, projectPath + "/eyeTracker_" + System.currentTimeMillis() + ".xml");
+    }
+
+    public void processRawData(String message) {
+        if (editor == null || !isTracking) {
+            return;
+        }
+        Element gaze = getRawGazeElement(message);
+        gazes.appendChild(gaze);
+
+        String leftInfo = message.split("; ")[1];
+        String leftGazePointX = leftInfo.split(", ")[0];
+        String leftGazePointY = leftInfo.split(", ")[1];
+
+        String rightInfo = message.split("; ")[2];
+        String rightGazePointX = rightInfo.split(", ")[0];
+        String rightGazePointY = rightInfo.split(", ")[1];
+
+        if (leftGazePointX.equals("nan") || leftGazePointY.equals("nan") || rightGazePointX.equals("nan") || rightGazePointY.equals("nan")) {
+            gaze.setAttribute("remark", "Fail");
+            return;
+        }
+        int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
+        int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+
+        // TODO: Simulate Mouse Positions
+        // int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+        // int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+
+        int editorX, editorY, width, height;
+        try {
+            editorX = editor.getContentComponent().getLocationOnScreen().x;
+            editorY = editor.getContentComponent().getLocationOnScreen().y;
+            width = editor.getContentComponent().getWidth();
+            height = editor.getContentComponent().getHeight();
+        } catch (IllegalComponentStateException e) {
+            gaze.setAttribute("remark", "Fail");
+            return;
+        }
+        int relativeX = eyeX - editorX;
+        int relativeY = eyeY - editorY;
+        if (relativeX < 0 || relativeY < 0 || relativeX > width || relativeY > height || !filePath.endsWith(".java")) {
+            gaze.setAttribute("remark", "Fail");
+            return;
+        }
+        Point relativePoint = new Point(relativeX, relativeY);
+
+        EventQueue.invokeLater(new Thread(() -> {
+            PsiFile psiFile = psiDocumentManager.getPsiFile(editor.getDocument());
+            LogicalPosition logicalPosition = editor.xyToLogicalPosition(relativePoint);
+            if (psiFile != null) {
+                int offset = editor.logicalPositionToOffset(logicalPosition);
+                PsiElement psiElement = psiFile.findElementAt(offset);
+                if (filePath.endsWith(".java")) {
+                    Element aSTStructure = getASTStructureElement(psiElement);
+                    aSTStructure.setAttribute("x", String.valueOf(eyeX));
+                    aSTStructure.setAttribute("y", String.valueOf(eyeY));
+                    aSTStructure.setAttribute("line", String.valueOf(logicalPosition.line));
+                    aSTStructure.setAttribute("column", String.valueOf(logicalPosition.column));
+                    aSTStructure.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
+                    gaze.appendChild(aSTStructure);
+                }
+                lastElement = psiElement;
+                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+            }
+        }));
     }
 
     public void track() {
         try {
-            Socket soc = new Socket("localhost", 12345);
-            DataInputStream in = new DataInputStream(soc.getInputStream());
-            String msg = in.readUTF();
 
-            while (isTracking && !msg.equals("End") && editor != null) {
-                Element gaze = getRawGazeElement(msg);
-                gazes.appendChild(gaze);
+            ProcessBuilder processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptMouse);
+            processBuilder.redirectErrorStream(true);
+            pythonProcess = processBuilder.start();
 
-                String leftInfo = msg.split("; ")[1];
-                String leftGazePointX = leftInfo.split(", ")[0];
-                String leftGazePointY = leftInfo.split(", ")[1];
+            System.out.println("Python Process Started");
 
-                String rightInfo = msg.split("; ")[2];
-                String rightGazePointX = rightInfo.split(", ")[0];
-                String rightGazePointY = rightInfo.split(", ")[1];
-
-                if (leftGazePointX.equals("nan") || leftGazePointY.equals("nan") || rightGazePointX.equals("nan") || rightGazePointY.equals("nan")) {
-                    gaze.setAttribute("remark", "Fail");
-                    msg = in.readUTF();
-                    continue;
-                }
-                int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
-                int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
-
-                // TODO: Simulate Mouse Positions
-                // int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-                // int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-
-                int editorX, editorY, width, height;
-                try {
-                    editorX = editor.getContentComponent().getLocationOnScreen().x;
-                    editorY = editor.getContentComponent().getLocationOnScreen().y;
-                    width = editor.getContentComponent().getWidth();
-                    height = editor.getContentComponent().getHeight();
-                } catch (IllegalComponentStateException e) {
-                    gaze.setAttribute("remark", "Fail");
-                    msg = in.readUTF();
-                    continue;
-                }
-                int relativeX = eyeX - editorX;
-                int relativeY = eyeY - editorY;
-                if (relativeX < 0 || relativeY < 0 || relativeX > width || relativeY > height || !filePath.endsWith(".java")) {
-                    gaze.setAttribute("remark", "Fail");
-                    msg = in.readUTF();
-                    continue;
-                }
-                Point relativePoint = new Point(relativeX, relativeY);
-
-                EventQueue.invokeLater(new Thread(() -> {
-                    PsiFile psiFile = psiDocumentManager.getPsiFile(editor.getDocument());
-                    LogicalPosition logicalPosition = editor.xyToLogicalPosition(relativePoint);
-                    if (psiFile != null) {
-                        int offset = editor.logicalPositionToOffset(logicalPosition);
-                        PsiElement psiElement = psiFile.findElementAt(offset);
-                        if (filePath.endsWith(".java")) {
-                            Element aSTStructure = getASTStructureElement(psiElement);
-                            aSTStructure.setAttribute("x", String.valueOf(eyeX));
-                            aSTStructure.setAttribute("y", String.valueOf(eyeY));
-                            aSTStructure.setAttribute("line", String.valueOf(logicalPosition.line));
-                            aSTStructure.setAttribute("column", String.valueOf(logicalPosition.column));
-                            aSTStructure.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
-                            gaze.appendChild(aSTStructure);
-                        }
-                        lastElement = psiElement;
-                        System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+            pythonOutputThread = new Thread(() -> {
+                try (InputStream inputStream = pythonProcess.getInputStream();
+                     InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        processRawData(line);
                     }
-                }));
-                msg = in.readUTF();
-            }
-            soc.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            pythonOutputThread.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -24,8 +24,8 @@ public class FindEyeTrackerAction extends AnAction {
     private void callPythonScript() throws IOException, InterruptedException {
 
         String pythonInterpreter = getPythonInterpreter();
-        if(!pythonInterpreter.endsWith("python.exe")){
-            pythonInterpreter = "python"; //default
+        if (!pythonInterpreter.endsWith("python.exe")) {
+            pythonInterpreter = "python";
         }
 
         // May have path issues, so write code directly here
@@ -36,8 +36,7 @@ public class FindEyeTrackerAction extends AnAction {
                     print('No eye tracker found')
                 else:
                     print('Found eye tracker')
-                """
-                ;
+                """;
 
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true); // Redirect error stream to output stream

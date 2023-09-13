@@ -17,7 +17,6 @@ public class StartStopTrackingAction extends AnAction {
     boolean isTracking = false;
     IDETracker iDETracker;
     EyeTracker eyeTracker;
-    Thread eyeTrackerThread;
 
     @Override
     public void update(@NotNull AnActionEvent e) {
@@ -36,23 +35,13 @@ public class StartStopTrackingAction extends AnAction {
 
                 eyeTracker = (eyeTracker == null) ? new EyeTracker() : eyeTracker;
                 eyeTracker.setProjectPath(e.getProject() != null ? e.getProject().getBasePath() : "");
-                eyeTracker.editor = e.getData(CommonDataKeys.EDITOR);
-                eyeTrackerThread = new Thread(() -> {
-                    try {
-                        eyeTracker.startTracking();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                });
-                eyeTrackerThread.start();
-
+                eyeTracker.startTracking(e.getProject());
             } else {
                 isTracking = false;
                 eyeTracker.stopTracking();
-                eyeTrackerThread.join();
                 iDETracker.stopTracking();
             }
-        } catch (ParserConfigurationException | TransformerException | InterruptedException ex) {
+        } catch (ParserConfigurationException | TransformerException | IOException ex) {
             throw new RuntimeException(ex);
         }
     }

@@ -349,5 +349,4 @@ public class ConfigDialog extends DialogWrapper {
         return pythonInterpreterTextField.getText().equals("Select Python Interpreter") ? "python" : pythonInterpreterTextField.getText();
     }
 
-
 }

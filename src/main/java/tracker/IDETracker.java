@@ -43,18 +43,24 @@ public final class IDETracker implements Disposable {
     Element typings = iDETracking.createElement("typings");
     Element files = iDETracking.createElement("files");
     Element mouses = iDETracking.createElement("mouses");
+    Element carets = iDETracking.createElement("carets");
+    Element selections = iDETracking.createElement("selections");
+    Element visibleAreas = iDETracking.createElement("visible_areas");
     String projectPath = "";
 
     DocumentListener documentListener = new DocumentListener() {
         @Override
         public void documentChanged(@NotNull DocumentEvent event) {
+            Editor currentEditor = EditorFactory.getInstance().getEditors(event.getDocument())[0];
+            if (currentEditor.getEditorKind() == EditorKind.CONSOLE && event.getDocument().getText().length() > 0) {
+                logFile("unknown", String.valueOf(System.currentTimeMillis()),
+                        "contentChanged | CONSOLE", event.getDocument().getText());
+                return;
+            }
             VirtualFile changedFile = FileDocumentManager.getInstance().getFile(event.getDocument());
             if (changedFile != null) {
                 changedFilepath = changedFile.getPath();
                 changedFileText = event.getDocument().getText();
-            } else {
-                logFile("unknown", String.valueOf(System.currentTimeMillis()),
-                        "contentChanged | Console (Possible)", event.getNewFragment().toString());
             }
         }
     };
@@ -77,18 +83,6 @@ public final class IDETracker implements Disposable {
             Element mouseElement = getMouseElement(e, "mouseReleased");
             mouses.appendChild(mouseElement);
         }
-
-        @Override
-        public void mouseEntered(@NotNull EditorMouseEvent e) {
-            Element mouseElement = getMouseElement(e, "mouseEntered");
-            mouses.appendChild(mouseElement);
-        }
-
-        @Override
-        public void mouseExited(@NotNull EditorMouseEvent e) {
-            Element mouseElement = getMouseElement(e, "mouseExited");
-            mouses.appendChild(mouseElement);
-        }
     };
 
     EditorMouseMotionListener editorMouseMotionListener = new EditorMouseMotionListener() {
@@ -105,8 +99,58 @@ public final class IDETracker implements Disposable {
         }
     };
 
-    EditorEventMulticaster editorEventMulticaster = EditorFactory.getInstance().getEventMulticaster();
+    CaretListener caretListener = new CaretListener() {
+        @Override
+        public void caretPositionChanged(@NotNull CaretEvent e) {
+            Element caretElement = iDETracking.createElement("caret");
+            carets.appendChild(caretElement);
+            caretElement.setAttribute("id", "caretPositionChanged");
+            caretElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
+            VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(e.getEditor().getDocument());
+            caretElement.setAttribute("path", virtualFile != null ?
+                    RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
+            caretElement.setAttribute("line", String.valueOf(e.getNewPosition().line));
+            caretElement.setAttribute("column", String.valueOf(e.getNewPosition().column));
+        }
+    };
 
+    SelectionListener selectionListener = new SelectionListener() {
+        @Override
+        public void selectionChanged(@NotNull SelectionEvent e) {
+            Element selectionElement = iDETracking.createElement("selection");
+            selections.appendChild(selectionElement);
+            selectionElement.setAttribute("id", "selectionChanged");
+            selectionElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
+            VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(e.getEditor().getDocument());
+            selectionElement.setAttribute("path", virtualFile != null ?
+                    RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
+            LogicalPosition startLogicalPos = e.getEditor().offsetToLogicalPosition(e.getNewRange().getStartOffset());
+            LogicalPosition endLogicalPos = e.getEditor().offsetToLogicalPosition(e.getNewRange().getEndOffset());
+            selectionElement.setAttribute("start_position", startLogicalPos.line + ":" +
+                    startLogicalPos.column);
+            selectionElement.setAttribute("end_position", endLogicalPos.line + ":" +
+                    endLogicalPos.column);
+            selectionElement.setAttribute("selected_text", e.getEditor().getSelectionModel().getSelectedText());
+        }
+    };
+
+    VisibleAreaListener visibleAreaListener = e -> {
+        if (e.getEditor().getEditorKind() == EditorKind.MAIN_EDITOR) {
+            VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(e.getEditor().getDocument());
+            Element visibleAreaElement = iDETracking.createElement("visible_area");
+            visibleAreas.appendChild(visibleAreaElement);
+            visibleAreaElement.setAttribute("id", "visibleAreaChanged");
+            visibleAreaElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
+            visibleAreaElement.setAttribute("path", virtualFile != null ?
+                    RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
+            visibleAreaElement.setAttribute("x", String.valueOf(e.getEditor().getScrollingModel().getHorizontalScrollOffset()));
+            visibleAreaElement.setAttribute("y", String.valueOf(e.getEditor().getScrollingModel().getVerticalScrollOffset()));
+            visibleAreaElement.setAttribute("width", String.valueOf(e.getEditor().getScrollingModel().getVisibleArea().width));
+            visibleAreaElement.setAttribute("height", String.valueOf(e.getEditor().getScrollingModel().getVisibleArea().height));
+        }
+    };
+
+    EditorEventMulticaster editorEventMulticaster = EditorFactory.getInstance().getEventMulticaster();
     Timer timer = new Timer();
     String changedFilepath = "";
     String changedFileText = "";
@@ -114,7 +158,8 @@ public final class IDETracker implements Disposable {
         @Override
         public void run() {
             if (changedFilepath.length() > 0) {
-                logFile(changedFilepath, String.valueOf(System.currentTimeMillis()), "contentChanged", changedFileText);
+                logFile(changedFilepath, String.valueOf(System.currentTimeMillis()),
+                        "contentChanged | MAIN_EDITOR", changedFileText);
                 changedFilepath = "";
             }
         }
@@ -135,6 +180,9 @@ public final class IDETracker implements Disposable {
         root.appendChild(typings);
         root.appendChild(files);
         root.appendChild(mouses);
+        root.appendChild(carets);
+        root.appendChild(selections);
+        root.appendChild(visibleAreas);
 
         ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(
                 AnActionListener.TOPIC, new AnActionListener() {
@@ -246,6 +294,12 @@ public final class IDETracker implements Disposable {
         });
         editorEventMulticaster.addEditorMouseMotionListener(editorMouseMotionListener, () -> {
         });
+        editorEventMulticaster.addCaretListener(caretListener, () -> {
+        });
+        editorEventMulticaster.addSelectionListener(selectionListener, () -> {
+        });
+        editorEventMulticaster.addVisibleAreaListener(visibleAreaListener, () -> {
+        });
 
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         for (VirtualFile file : fileEditorManager.getOpenFiles()) {
@@ -260,6 +314,9 @@ public final class IDETracker implements Disposable {
         editorEventMulticaster.removeDocumentListener(documentListener);
         editorEventMulticaster.removeEditorMouseListener(editorMouseListener);
         editorEventMulticaster.removeEditorMouseMotionListener(editorMouseMotionListener);
+        editorEventMulticaster.removeCaretListener(caretListener);
+        editorEventMulticaster.removeSelectionListener(selectionListener);
+        editorEventMulticaster.removeVisibleAreaListener(visibleAreaListener);
     }
 
     @Override
@@ -304,6 +361,9 @@ public final class IDETracker implements Disposable {
         Element mouseElement = iDETracking.createElement("mouse");
         mouseElement.setAttribute("id", id);
         mouseElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
+        VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(e.getEditor().getDocument());
+        mouseElement.setAttribute("path", virtualFile != null ?
+                RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
         MouseEvent mouseEvent = e.getMouseEvent();
         mouseElement.setAttribute("x", String.valueOf(mouseEvent.getXOnScreen()));
         mouseElement.setAttribute("y", String.valueOf(mouseEvent.getYOnScreen()));

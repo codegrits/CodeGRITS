@@ -4,10 +4,15 @@ import action.ConfigAction;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.LogicalPosition;
+import com.intellij.openapi.editor.event.EditorEventMulticaster;
+import com.intellij.openapi.editor.event.VisibleAreaEvent;
+import com.intellij.openapi.editor.event.VisibleAreaListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 //import com.jetbrains.python.psi.*;
@@ -34,7 +39,7 @@ public class EyeTracker implements Disposable {
     double screenWidth, screenHeight;
     String projectPath = "", filePath = "";
     PsiElement lastElement = null;
-
+    Rectangle visibleArea = null;
     Process pythonProcess;
     Thread pythonOutputThread;
     String pythonInterpreter = "D:\\ProgramData\\Anaconda3\\python.exe";
@@ -82,7 +87,7 @@ public class EyeTracker implements Disposable {
                           f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0'
                 print(message)
                 sys.stdout.flush()
-                time.sleep(0.001)
+                time.sleep(0.01)
             """;
 
     public EyeTracker() throws ParserConfigurationException {
@@ -97,24 +102,41 @@ public class EyeTracker implements Disposable {
         ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
             @Override
             public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-                psiDocumentManager = PsiDocumentManager.getInstance(source.getProject());
                 editor = source.getSelectedTextEditor();
+                if (editor != null) {
+                    editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                }
                 filePath = file.getPath();
+                visibleArea = editor.getScrollingModel().getVisibleArea();
             }
 
             @Override
             public void selectionChanged(@NotNull FileEditorManagerEvent event) {
                 editor = event.getManager().getSelectedTextEditor() != null ? event.getManager().getSelectedTextEditor() : editor;
                 if (event.getNewFile() != null) {
+                    if (editor != null) {
+                        editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                    }
                     filePath = event.getNewFile().getPath();
+                    visibleArea = editor.getScrollingModel().getVisibleArea();
                 }
             }
         });
 
     }
 
-    public void startTracking() throws IOException {
+    VisibleAreaListener visibleAreaListener = e -> visibleArea = e.getNewRectangle();
+
+
+    public void startTracking(Project project) throws IOException {
         isTracking = true;
+        psiDocumentManager = PsiDocumentManager.getInstance(project);
+        editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
+        if (editor != null) {
+            editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+        }
+        filePath = FileEditorManager.getInstance(project).getSelectedFiles()[0].getPath();
+        visibleArea = editor.getScrollingModel().getVisibleArea();
         track();
     }
 
@@ -127,9 +149,6 @@ public class EyeTracker implements Disposable {
     }
 
     public void processRawData(String message) {
-        if (editor == null || !isTracking) {
-            return;
-        }
         Element gaze = getRawGazeElement(message);
         gazes.appendChild(gaze);
 
@@ -145,29 +164,31 @@ public class EyeTracker implements Disposable {
             gaze.setAttribute("remark", "Fail");
             return;
         }
+
+        if (editor == null || !isTracking) {
+            gaze.setAttribute("remark", "Fail");
+            return;
+        }
+
         int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
         int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
 
-        // TODO: Simulate Mouse Positions
-        // int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-        // int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-
-        int editorX, editorY, width, height;
+        int editorX, editorY;
         try {
             editorX = editor.getContentComponent().getLocationOnScreen().x;
             editorY = editor.getContentComponent().getLocationOnScreen().y;
-            width = editor.getContentComponent().getWidth();
-            height = editor.getContentComponent().getHeight();
         } catch (IllegalComponentStateException e) {
             gaze.setAttribute("remark", "Fail");
             return;
         }
         int relativeX = eyeX - editorX;
         int relativeY = eyeY - editorY;
-        if (relativeX < 0 || relativeY < 0 || relativeX > width || relativeY > height || !filePath.endsWith(".java")) {
+        if ((relativeX - visibleArea.x) < 0 || (relativeY - visibleArea.y) < 0
+                || (relativeX - visibleArea.x) > visibleArea.width || (relativeY - visibleArea.y) > visibleArea.height) {
             gaze.setAttribute("remark", "Fail");
             return;
         }
+
         Point relativePoint = new Point(relativeX, relativeY);
 
         EventQueue.invokeLater(new Thread(() -> {
@@ -176,24 +197,25 @@ public class EyeTracker implements Disposable {
             if (psiFile != null) {
                 int offset = editor.logicalPositionToOffset(logicalPosition);
                 PsiElement psiElement = psiFile.findElementAt(offset);
+                Element location = eyeTracking.createElement("location");
+                location.setAttribute("x", String.valueOf(eyeX));
+                location.setAttribute("y", String.valueOf(eyeY));
+                location.setAttribute("line", String.valueOf(logicalPosition.line));
+                location.setAttribute("column", String.valueOf(logicalPosition.column));
+                location.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
+                gaze.appendChild(location);
                 if (filePath.endsWith(".java")) {
                     Element aSTStructure = getASTStructureElement(psiElement);
-                    aSTStructure.setAttribute("x", String.valueOf(eyeX));
-                    aSTStructure.setAttribute("y", String.valueOf(eyeY));
-                    aSTStructure.setAttribute("line", String.valueOf(logicalPosition.line));
-                    aSTStructure.setAttribute("column", String.valueOf(logicalPosition.column));
-                    aSTStructure.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
                     gaze.appendChild(aSTStructure);
                 }
                 lastElement = psiElement;
-                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+//                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
             }
         }));
     }
 
     public void track() {
         try {
-
             ProcessBuilder processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptMouse);
             processBuilder.redirectErrorStream(true);
             pythonProcess = processBuilder.start();

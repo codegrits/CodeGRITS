@@ -54,8 +54,8 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
 
-        <action id="action.ScreenRecorderAction" class="action.ScreenRecorderAction" text="record"
-                description="record">
+        <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"
+                description="Record Screen">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

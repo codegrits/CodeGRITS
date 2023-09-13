@@ -1,7 +1,7 @@
 package component;
 
 import action.OutputHandler;
-import action.ScreenRecorderAction;
+import action.RecordScreenAction;
 import action.TakeNoteAction;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -100,7 +100,7 @@ public class ConfigDialog extends DialogWrapper {
                     //mouse tracking
                 }else if(i == 2){
                     //screen recording
-                    ScreenRecorderAction.setEnabled(true);
+                    RecordScreenAction.setEnabled(true);
 
                 }
             }else{
@@ -111,7 +111,7 @@ public class ConfigDialog extends DialogWrapper {
                     //mouse tracking
                 } else if (i == 2) {
                     //screen recording
-                    ScreenRecorderAction.setEnabled(false);
+                    RecordScreenAction.setEnabled(false);
 
                 }
             }
@@ -135,7 +135,7 @@ public class ConfigDialog extends DialogWrapper {
         for (String note : notes) {
             TakeNoteAction newNote = new TakeNoteAction();
             newNote.setDescription(note);
-            actionManager.registerAction("actions.TakeNoteAction" + note, newNote);
+            actionManager.registerAction("action.TakeNoteAction." + note, newNote);
             actionGroup.add(newNote);
         }
     }

@@ -36,7 +36,7 @@
                 icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="action.ConfigAction" class="action.ConfigAction" text="Options" description="Configure tracking options">
+        <action id="action.ConfigAction" class="action.ConfigAction" text="Configuration" description="Configure Tracking Options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="action.StartStopTrackingAction"/>
         </action>
         <action class="action.TakeNoteAction"
@@ -50,12 +50,9 @@
         <action id="action.FindEyeTrackerAction" class="action.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="action.StartEyeAction" class="action.StartEyeAction" text="start" description="start">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-        </action>
 
         <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"
-                description="Record Screen">
+                description="RecordScreen">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="action.ResumeActionTest" class="action.ResumeActionTest" text="ResumeActionTest"

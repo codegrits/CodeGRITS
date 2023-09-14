@@ -7,7 +7,6 @@ import component.ConfigDialog;
 import org.jetbrains.annotations.NotNull;
 
 public class ConfigAction extends AnAction {
-    private ConfigDialog configDialog;
 
     private static boolean isEnabled = true;
 
@@ -19,7 +18,7 @@ public class ConfigAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
-        configDialog = new ConfigDialog(project);
+        ConfigDialog configDialog = new ConfigDialog(project);
         configDialog.show();
     }
 

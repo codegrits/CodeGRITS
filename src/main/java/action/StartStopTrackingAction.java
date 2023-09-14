@@ -3,6 +3,7 @@ package action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import entity.Config;
 import org.jetbrains.annotations.NotNull;
 import tracker.EyeTracker;
 import tracker.IDETracker;
@@ -18,6 +19,8 @@ public class StartStopTrackingAction extends AnAction {
     IDETracker iDETracker;
     EyeTracker eyeTracker;
 
+    Config config = new Config();
+
     @Override
     public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setText(isTracking ? "Stop Tracking" : "Start Tracking");
@@ -25,6 +28,8 @@ public class StartStopTrackingAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
+        config.loadFromJson();
+        // set trackers' configs
         try {
             if (!isTracking) {
                 isTracking = true;

@@ -34,7 +34,7 @@ public class ConfigDialog extends DialogWrapper {
     private static TextFieldWithBrowseButton pythonInterpreterTextField;
     private static TextFieldWithBrowseButton dataOutputTextField;
 
-    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30,40,60});
+    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 40, 60});
     private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"webcam", "eye tracker"});
 
 
@@ -44,7 +44,6 @@ public class ConfigDialog extends DialogWrapper {
         setTitle("Config");
         setSize(500, 500);
         setAutoAdjustable(true);
-//        setSize(500, 500);
         //load config from file
         if (new File("config.json").exists()) {
             loadConfig();
@@ -69,7 +68,6 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea();
             noteAreas.get(i).setText(notes.get(i));
         }
-        //TODO: set freq
         freqCombo.setSelectedIndex(freq / 15 - 2);
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
     }
@@ -85,37 +83,7 @@ public class ConfigDialog extends DialogWrapper {
         //save config to file
         saveConfig();
         updateActionGroup();
-        updateActions();
         super.doOKAction();
-    }
-
-    private void updateActions(){
-        List<Boolean> checkBoxes = getSelectedCheckboxes();
-        for (int i = 0; i < checkBoxes.size(); i++) {
-            if(checkBoxes.get(i)){
-                //enable action
-                if(i == 0){
-                    //eye tracking
-                }else if(i == 1){
-                    //mouse tracking
-                }else if(i == 2){
-                    //screen recording
-                    RecordScreenAction.setEnabled(true);
-
-                }
-            }else{
-                //disable action
-                if (i == 0) {
-                    //eye tracking
-                } else if (i == 1) {
-                    //mouse tracking
-                } else if (i == 2) {
-                    //screen recording
-                    RecordScreenAction.setEnabled(false);
-
-                }
-            }
-        }
     }
 
     private void updateActionGroup() {
@@ -193,7 +161,7 @@ public class ConfigDialog extends DialogWrapper {
 
         JPanel checkPythonPanel = new JPanel();
         JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
-        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5,20,0,5)));
+        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 5)));
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
 //        panel.add(pythonInterpreterLabel);
         JButton checkPython = new JButton("Check Availability");
@@ -226,7 +194,7 @@ public class ConfigDialog extends DialogWrapper {
 
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
-        dataOutputLabel.setBorder(new EmptyBorder(JBUI.insets(0,20,0,0)));
+        dataOutputLabel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 0, 0)));
 //        dataOutputLabel.setBorder(new EmptyBorder(headingMargin));
         panel.add(dataOutputLabel);
 

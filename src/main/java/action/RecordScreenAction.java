@@ -10,7 +10,7 @@ public class RecordScreenAction extends AnAction {
 
     static boolean isEnabled = true;
     boolean isRecording = false;
-    ScreenRecorder screenRecorder = new ScreenRecorder();
+    ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
     @Override
     public void update(@NotNull AnActionEvent e) {

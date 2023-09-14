@@ -58,5 +58,21 @@
                 description="Record Screen">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+        <action id="action.ResumeActionTest" class="action.ResumeActionTest" text="ResumeActionTest"
+                description="ResumeActionTest">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="action.StopActionTest" class="action.StopActionTest" text="StopActionTest"
+                description="StopActionTest">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="action.PauseActionTest" class="action.PauseActionTest" text="PauseActionTest"
+                description="PauseActionTest">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="action.StartActionTest" class="action.StartActionTest" text="StartActionTest"
+                description="StartActionTest">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

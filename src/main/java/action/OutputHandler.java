@@ -24,7 +24,7 @@ public class OutputHandler {
     }
 
 
-    public void checkTracker() throws IOException, InterruptedException {
+    public boolean checkTracker() throws IOException, InterruptedException {
         String pythonInterpreter = "python";
         String pythonScript = """
                 import tobii_research as tr
@@ -45,14 +45,11 @@ public class OutputHandler {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
 
         // Read the output and print it to the console
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
+        String line = reader.readLine();
+        System.out.println(line);
+        p.waitFor();
+        return line.equals("Found eye tracker");
 
-        // Get the process output (optional)
-        int exitCode = p.waitFor();
-        System.out.println("Python script exited with code: " + exitCode);
     }
 
     public void startTracking() throws IOException {

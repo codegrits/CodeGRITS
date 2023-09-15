@@ -13,12 +13,18 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
+import com.intellij.openapi.ui.popup.JBPopupListener;
+import com.intellij.openapi.ui.popup.LightweightWindowEvent;
 import com.intellij.util.ui.JBUI;
 import entity.Config;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -165,11 +171,19 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
 //        panel.add(pythonInterpreterLabel);
         JButton checkPython = new JButton("Check Availability");
+        JBPopupFactory factory = JBPopupFactory.getInstance();
+
 
         checkPython.addActionListener(e -> {
             try {
                 OutputHandler outputHandler = new OutputHandler();
-                outputHandler.checkTracker();
+                checkPython.setText("Checking...");
+                boolean avail = outputHandler.checkTracker();
+                if (avail) {
+                    checkPython.setText("Available");
+                } else {
+                    checkPython.setText("Unavailable");
+                }
             } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
             }

@@ -6,12 +6,14 @@ import java.util.List;
 
 public class TakeNoteActionGroup extends DefaultActionGroup {
 
-    public void refreshNote() {
-        //get note from config dialog
-        List<String> notes = ConfigDialog.getCurrentNotes();
-        for (int i = 0; i < notes.size(); i++) {
-            AnAction newNote = new TakeNoteAction();
-            this.add(newNote);
-        }
+    private static boolean isEnabled = true;
+
+    @Override
+    public void update(AnActionEvent e) {
+        e.getPresentation().setEnabled(isEnabled);
+    }
+
+    public static void setIsEnabled(boolean isEnabled) {
+        TakeNoteActionGroup.isEnabled = isEnabled;
     }
 }

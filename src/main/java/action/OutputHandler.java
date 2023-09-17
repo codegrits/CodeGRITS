@@ -24,34 +24,6 @@ public class OutputHandler {
     }
 
 
-    public boolean checkTracker() throws IOException, InterruptedException {
-        String pythonInterpreter = "python";
-        String pythonScript = """
-                import tobii_research as tr
-                found_eyetrackers = tr.find_all_eyetrackers()
-                if found_eyetrackers == ():
-                    print('No eye tracker found')
-                else:
-                    print('Found eye tracker')
-                """;
-
-        ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
-        pb.redirectErrorStream(true); // Redirect error stream to output stream
-        p = pb.start();
-        // Get the process's standard output stream
-        InputStream stdout = p.getInputStream();
-
-        // Create a reader to read the output stream
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
-
-        // Read the output and print it to the console
-        String line = reader.readLine();
-        System.out.println(line);
-        p.waitFor();
-        return line.equals("Found eye tracker");
-
-    }
-
     public void startTracking() throws IOException {
         System.out.println("Starting tracking");
         String pythonInterpreter = "python";

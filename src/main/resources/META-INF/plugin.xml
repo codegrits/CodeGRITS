@@ -39,17 +39,9 @@
         <action id="action.ConfigAction" class="action.ConfigAction" text="Configuration" description="Configure Tracking Options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="action.StartStopTrackingAction"/>
         </action>
-        <action class="action.TakeNoteAction"
-                id="action.TakeNoteAction"
-                icon="AllIcons.Actions.Edit">
-        </action>
         <group id="TakeNoteActionGroup" class="TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-
         </group>
-        <action id="action.FindEyeTrackerAction" class="action.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
 
         <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"
                 description="RecordScreen">

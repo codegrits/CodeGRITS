@@ -51,8 +51,9 @@ public final class IDETracker implements Disposable {
     DocumentListener documentListener = new DocumentListener() {
         @Override
         public void documentChanged(@NotNull DocumentEvent event) {
+            if (event.getDocument().getText().length() == 0) return;
             Editor currentEditor = EditorFactory.getInstance().getEditors(event.getDocument())[0];
-            if (currentEditor.getEditorKind() == EditorKind.CONSOLE && event.getDocument().getText().length() > 0) {
+            if (currentEditor != null && currentEditor.getEditorKind() == EditorKind.CONSOLE) {
                 logFile("unknown", String.valueOf(System.currentTimeMillis()),
                         "contentChanged | CONSOLE", event.getDocument().getText());
                 return;

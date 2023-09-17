@@ -42,7 +42,7 @@ public class EyeTracker implements Disposable {
     Rectangle visibleArea = null;
     Process pythonProcess;
     Thread pythonOutputThread;
-    String pythonInterpreter = "D:\\ProgramData\\Anaconda3\\python.exe";
+    String pythonInterpreter = "";
     String pythonScriptTobii = """
             import tobii_research as tr
             import time
@@ -318,5 +318,9 @@ public class EyeTracker implements Disposable {
             parent = parent.getParent();
         }
         return aSTStructure;
+    }
+
+    public void setPythonInterpreter(String pythonInterpreter) {
+        this.pythonInterpreter = pythonInterpreter;
     }
 }

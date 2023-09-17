@@ -1,4 +1,4 @@
-package tracker;
+package trackers;
 
 import org.jcodec.api.awt.AWTSequenceEncoder;
 

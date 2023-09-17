@@ -1,8 +1,7 @@
 package component;
 
-import action.OutputHandler;
-import action.RecordScreenAction;
-import action.TakeNoteAction;
+import actions.TakeNoteAction;
+import utils.AvailabilityChecker;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -13,18 +12,12 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.TextBrowseFolderListener;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.ui.popup.JBPopupListener;
-import com.intellij.openapi.ui.popup.LightweightWindowEvent;
 import com.intellij.util.ui.JBUI;
 import entity.Config;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,53 +33,52 @@ public class ConfigDialog extends DialogWrapper {
     private static TextFieldWithBrowseButton pythonInterpreterTextField;
     private static TextFieldWithBrowseButton dataOutputTextField;
 
-    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 40, 60});
-    private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"webcam", "eye tracker"});
-
+    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 60, 120});
+    private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse", "Tobii Pro"});
 
     public ConfigDialog(Project project) {
-        super(true); // use current window as parent
+        super(true);
         init();
-        setTitle("Config");
+        setTitle("Configuration");
         setSize(500, 500);
         setAutoAdjustable(true);
-        //load config from file
+        setResizable(false);
         if (new File("config.json").exists()) {
             loadConfig();
-            System.out.println("Config loaded");
         }
-
+        addNoteArea(true);
     }
 
     private void loadConfig() {
         Config config = new Config();
         config.loadFromJson();
-        //parse checkbox
+
         List<Boolean> selected = config.getCheckBoxes();
         List<String> notes = config.getNotes();
-        Integer freq = config.getFreq();
+        Integer freq = config.getSampleFreq();
         for (int i = 0; i < selected.size(); i++) {
             checkBoxes.get(i).setSelected(selected.get(i));
         }
-        //reset note area
+
         noteAreas = new ArrayList<>();
         for (int i = 0; i < notes.size(); i++) {
-            addNoteArea();
+            addNoteArea(false);
             noteAreas.get(i).setText(notes.get(i));
         }
-        freqCombo.setSelectedIndex(freq / 15 - 2);
+        freqCombo.setSelectedItem(freq);
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
+        dataOutputTextField.setText(config.getDataOutputPath());
+        deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
     }
 
     private void saveConfig() {
-        //save config to file
-        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(), getPythonInterpreter());
+        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(),
+                getPythonInterpreter(), getDataOutputPath(), deviceCombo.getSelectedIndex());
         config.saveAsJson();
     }
 
     @Override
     protected void doOKAction() {
-        //save config to file
         saveConfig();
         updateActionGroup();
         super.doOKAction();
@@ -95,9 +87,8 @@ public class ConfigDialog extends DialogWrapper {
     private void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
-        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("action.TakeNoteActionGroup");
         List<String> notes = getCurrentNotes();
-        System.out.println(notes);
         //reset action group
         AnAction[] actions = actionGroup.getChildActionsOrStubs();
         for (AnAction child : actions) {
@@ -109,7 +100,7 @@ public class ConfigDialog extends DialogWrapper {
         for (String note : notes) {
             TakeNoteAction newNote = new TakeNoteAction();
             newNote.setDescription(note);
-            actionManager.registerAction("action.TakeNoteAction." + note, newNote);
+            actionManager.registerAction("CodeVision.TakeNoteAction.[" + note + "]", newNote);
             actionGroup.add(newNote);
         }
     }
@@ -119,70 +110,59 @@ public class ConfigDialog extends DialogWrapper {
     protected JComponent createCenterPanel() {
 
         Font headingFont = new Font("Arial", Font.PLAIN, 16);
-        Insets headingMargin = JBUI.insets(5); // Adjust the values as needed
-        Insets contentMargin = JBUI.insets(5, 20); // Adjust the values as needed
+        Insets headingMargin = JBUI.insets(5);
+        Insets contentMargin = JBUI.insets(5, 20);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-//        panel.setAlignmentX(Component.);
 
-        //add checkbox component
-        JPanel checkBoxPanel = new JPanel();
         JLabel functionalities = new JLabel("Functionalities");
-
         functionalities.setBorder(new EmptyBorder(headingMargin));
-
-
-        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.Y_AXIS));
-        checkBoxPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        checkBoxPanel.add(functionalities);
         functionalities.setFont(headingFont);
-//        panel.add(functionalities);
+        panel.add(functionalities);
+
+        JPanel checkBoxPanel = new JPanel();
+        checkBoxPanel.setLayout(new BoxLayout(checkBoxPanel, BoxLayout.X_AXIS));
+        checkBoxPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        checkBoxPanel.setMaximumSize(new Dimension(500, 40));
 
         checkBoxes = new ArrayList<>();
-        JCheckBox eyeTracking = new JCheckBox("Eye tracking");
+        JCheckBox iDETracking = new JCheckBox("IDE Tracking");
+        checkBoxes.add(iDETracking);
+        checkBoxPanel.add(iDETracking);
+        iDETracking.setSelected(true);
+        iDETracking.setEnabled(false);
+
+        JCheckBox eyeTracking = new JCheckBox("Eye Tracking");
         checkBoxes.add(eyeTracking);
         checkBoxPanel.add(eyeTracking);
 
-        JCheckBox mouseTracking = new JCheckBox("Mouse tracking");
-        checkBoxes.add(mouseTracking);
-        checkBoxPanel.add(mouseTracking);
-
-        JCheckBox screenRecording = new JCheckBox("Screen recording");
+        JCheckBox screenRecording = new JCheckBox("Screen Recording");
         checkBoxes.add(screenRecording);
         checkBoxPanel.add(screenRecording);
 
-//        checkBoxPanel.setBorder(new EmptyBorder(contentMargin));
+        iDETracking.setBorder(new EmptyBorder(contentMargin));
         eyeTracking.setBorder(new EmptyBorder(contentMargin));
-        mouseTracking.setBorder(new EmptyBorder(contentMargin));
         screenRecording.setBorder(new EmptyBorder(contentMargin));
+
         panel.add(checkBoxPanel);
 
-        //add settings component
-
-        JLabel settings = new JLabel("Settings");
-        settings.setBorder(new EmptyBorder(headingMargin));
-        settings.setFont(headingFont);
-        settings.setHorizontalTextPosition(JLabel.LEFT);
-        panel.add(settings);
+        JLabel availabilities = new JLabel("Availabilities");
+        availabilities.setBorder(new EmptyBorder(headingMargin));
+        availabilities.setFont(headingFont);
+        panel.add(availabilities);
 
         JPanel checkPythonPanel = new JPanel();
-        JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
-        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 5)));
-        pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
-//        panel.add(pythonInterpreterLabel);
-        JButton checkPython = new JButton("Check Availability");
-        JBPopupFactory factory = JBPopupFactory.getInstance();
-
+        JButton checkPython = new JButton("Check Python Environment");
+        JLabel checkPythonResult = new JLabel();
+        checkPythonResult.setBorder(new EmptyBorder(JBUI.insetsLeft(5)));
 
         checkPython.addActionListener(e -> {
             try {
-                OutputHandler outputHandler = new OutputHandler();
-                checkPython.setText("Checking...");
-                boolean avail = outputHandler.checkTracker();
+                boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
                 if (avail) {
-                    checkPython.setText("Available");
+                    checkPythonResult.setIcon(AllIcons.General.InspectionsOK);
                 } else {
-                    checkPython.setText("Unavailable");
+                    checkPythonResult.setIcon(AllIcons.RunConfigurations.TestFailed);
                 }
             } catch (IOException | InterruptedException ex) {
                 throw new RuntimeException(ex);
@@ -191,9 +171,44 @@ public class ConfigDialog extends DialogWrapper {
         checkPythonPanel.setLayout(new BoxLayout(checkPythonPanel, BoxLayout.X_AXIS));
         checkPythonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         checkPythonPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-        checkPythonPanel.add(pythonInterpreterLabel);
         checkPythonPanel.add(checkPython);
+        checkPythonPanel.add(checkPythonResult);
+        checkPythonPanel.setBorder(new EmptyBorder(contentMargin));
         panel.add(checkPythonPanel);
+
+        JPanel checkEyeTrackerPanel = new JPanel();
+        JButton checkEyeTracker = new JButton("Check Eye Tracker");
+        JLabel checkEyeTrackerResult = new JLabel();
+        checkEyeTrackerResult.setBorder(new EmptyBorder(JBUI.insetsLeft(5)));
+
+        checkEyeTracker.addActionListener(e -> {
+            try {
+                boolean avail = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
+                if (avail) {
+                    checkEyeTrackerResult.setIcon(AllIcons.General.InspectionsOK);
+                } else {
+                    checkEyeTrackerResult.setIcon(AllIcons.RunConfigurations.TestFailed);
+                }
+            } catch (IOException | InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        checkEyeTrackerPanel.setLayout(new BoxLayout(checkEyeTrackerPanel, BoxLayout.X_AXIS));
+        checkEyeTrackerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        checkEyeTrackerPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        checkEyeTrackerPanel.add(checkEyeTracker);
+        checkEyeTrackerPanel.add(checkEyeTrackerResult);
+        checkEyeTrackerPanel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 5, 20)));
+        panel.add(checkEyeTrackerPanel);
+
+        JLabel settings = new JLabel("Settings");
+        settings.setBorder(new EmptyBorder(headingMargin));
+        settings.setFont(headingFont);
+        panel.add(settings);
+
+        JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
+        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 5)));
+        pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
 
         pythonInterpreterTextField = new TextFieldWithBrowseButton();
         pythonInterpreterTextField.setEditable(false);
@@ -201,15 +216,13 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
         pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         pythonInterpreterTextField.setText("Select Python Interpreter");
-
         pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
 
         panel.add(pythonInterpreterTextField);
 
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
-        dataOutputLabel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 0, 0)));
-//        dataOutputLabel.setBorder(new EmptyBorder(headingMargin));
+        dataOutputLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
         panel.add(dataOutputLabel);
 
         dataOutputTextField = new TextFieldWithBrowseButton();
@@ -222,91 +235,97 @@ public class ConfigDialog extends DialogWrapper {
 
         panel.add(dataOutputTextField);
 
-
         JPanel freqPanel = new JPanel();
         freqPanel.setLayout(new BoxLayout(freqPanel, BoxLayout.Y_AXIS));
         freqPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-
-        JLabel freqLabel = new JLabel("Frequency");
-        JLabel deviceLabel = new JLabel("Device");
-
-        deviceLabel.setHorizontalTextPosition(JLabel.LEFT);
+        JLabel freqLabel = new JLabel("Sample Frequency");
         freqLabel.setHorizontalTextPosition(JLabel.LEFT);
+        freqLabel.setBorder(new EmptyBorder(JBUI.insetsBottom(5)));
         freqCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        deviceCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        freqCombo.setPreferredSize(new Dimension(221, 30));
-        deviceCombo.setPreferredSize(new Dimension(221, 30));
-
+        freqCombo.setMaximumSize(new Dimension(230, 40));
         freqPanel.add(freqLabel);
         freqPanel.add(freqCombo);
 
         JPanel devicePanel = new JPanel();
         devicePanel.setLayout(new BoxLayout(devicePanel, BoxLayout.Y_AXIS));
         devicePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel deviceLabel = new JLabel("Eye Tracker Device");
+        deviceLabel.setHorizontalTextPosition(JLabel.LEFT);
+        deviceLabel.setBorder(new EmptyBorder(JBUI.insetsBottom(5)));
+        deviceCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        deviceCombo.setMaximumSize(new Dimension(230, 40));
         devicePanel.add(deviceLabel);
         devicePanel.add(deviceCombo);
+
         JPanel comboPanel = new JPanel();
         comboPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        comboPanel.setLayout(new BoxLayout(comboPanel, BoxLayout.X_AXIS));
         comboPanel.add(freqPanel);
         comboPanel.add(devicePanel);
-        comboPanel.setMaximumSize(new Dimension(500, 65));
-        comboPanel.setMinimumSize(new Dimension(500, 65));
+        comboPanel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 5, 20)));
         panel.add(comboPanel);
+
         eyeTracking.addChangeListener(e -> {
             freqCombo.setEnabled(eyeTracking.isSelected());
         });
 
-        //add note component
         JPanel noteAreaPanel = new JPanel();
-
-        JLabel notes = new JLabel("Notes");
+        JLabel notes = new JLabel("Pre-set Notes");
         notes.setFont(headingFont);
         notes.setBorder(new EmptyBorder(headingMargin));
         notes.setHorizontalTextPosition(JLabel.LEFT);
-        JButton addNote = new JButton("Add Preset");
-        addNote.setAlignmentX(Component.LEFT_ALIGNMENT);
         noteAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         noteAreaPanel.setLayout(new BoxLayout(noteAreaPanel, BoxLayout.X_AXIS));
         noteAreaPanel.add(notes);
-        noteAreaPanel.add(addNote);
-//        noteAreaPanel.setBorder(new EmptyBorder(contentMargin));
-
-        addNote.addActionListener(e -> {
-            addNoteArea();
-        });
         panel.add(noteAreaPanel);
-
-
         return panel;
     }
 
-    private void addNoteArea() {
+    private void addNoteArea(boolean isEmpty) {
         JPanel notePanel = new JPanel();
         JTextField textField = new JTextField();
-        JButton minusButton = new JButton();
         textField.setColumns(20);
-        minusButton.setMaximumSize(new Dimension(1, 1));
-        minusButton.setIcon(AllIcons.General.Remove);
         notePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        minusButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        minusButton.addActionListener(e -> {
-            panel.remove(notePanel);
-            noteAreas.remove(textField);
-            panel.revalidate();
-            panel.repaint();
-        });
-        noteAreas.add(textField);
+        textField.setMaximumSize(new Dimension(500, 40));
+        JButton button = new JButton();
+        button.setSize(40, 40);
+        button.setAlignmentX(Component.LEFT_ALIGNMENT);
         notePanel.add(textField);
-        notePanel.add(minusButton);
+        notePanel.add(button);
+        if (isEmpty) {
+            button.setIcon(AllIcons.General.Add);
+            button.addActionListener(e -> {
+                if (button.getIcon() == AllIcons.General.Remove) {
+                    panel.remove(notePanel);
+                    noteAreas.remove(textField);
+                    panel.revalidate();
+                    panel.repaint();
+                } else {
+                    if (textField.getText().equals("")) {
+                        return;
+                    }
+                    noteAreas.add(textField);
+                    addNoteArea(true);
+                    button.setIcon(AllIcons.General.Remove);
+                }
+            });
+        } else {
+            noteAreas.add(textField);
+            button.setIcon(AllIcons.General.Remove);
+            button.addActionListener(e -> {
+                panel.remove(notePanel);
+                noteAreas.remove(textField);
+                panel.revalidate();
+                panel.repaint();
+            });
+        }
         panel.add(notePanel);
-        panel.revalidate();
-        panel.repaint();
+        notePanel.setLayout(new BoxLayout(notePanel, BoxLayout.X_AXIS));
+        notePanel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 20)));
+        notePanel.setMaximumSize(new Dimension(500, 40));
     }
 
-    //some util methods
     public static List<String> getCurrentNotes() {
         List<String> selected = new ArrayList<>();
         for (JTextField textField : noteAreas) {
@@ -328,7 +347,13 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     public static String getPythonInterpreter() {
-        return pythonInterpreterTextField.getText().equals("Select Python Interpreter") ? "python" : pythonInterpreterTextField.getText();
+        return pythonInterpreterTextField.getText().equals("Select Python Interpreter")
+                ? "python" : pythonInterpreterTextField.getText();
+    }
+
+    public static String getDataOutputPath() {
+        return dataOutputTextField.getText().equals("Select Data Output Folder")
+                ? "Select Data Output Folder" : dataOutputTextField.getText();
     }
 
 }

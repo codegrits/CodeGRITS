@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,26 +14,32 @@ import java.util.List;
 public class Config implements Serializable {
     private List<Boolean> checkBoxes;
     private List<String> notes;
-    private Integer freq;
+    private Integer sampleFreq;
     private String pythonInterpreter;
+    private String dataOutputPath;
+    private Integer eyeTrackerDevice;
 
-    public Config(List<Boolean> checkBoxes, List<String> notes, Integer freq, String pythonInterpreter) {
+    public Config(List<Boolean> checkBoxes, List<String> notes, Integer sampleFreq, String pythonInterpreter, String dataOutputPath, Integer eyeTrackerDevice) {
         this.checkBoxes = checkBoxes;
         this.notes = notes;
-        this.freq = freq;
+        this.sampleFreq = sampleFreq;
         this.pythonInterpreter = pythonInterpreter;
+        this.dataOutputPath = dataOutputPath;
+        this.eyeTrackerDevice = eyeTrackerDevice;
     }
 
     public Config() {
     }
 
-    public void saveAsJson(){
+    public void saveAsJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("pythonInterpreter", pythonInterpreter);
-        jsonObject.addProperty("freq", freq);
+        jsonObject.addProperty("sampleFreq", sampleFreq);
         jsonObject.addProperty("notes", notes.toString());
         jsonObject.addProperty("checkBoxes", checkBoxes.toString());
-        //write to json file
+        jsonObject.addProperty("dataOutputPath", dataOutputPath);
+        jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
+
         try (FileWriter fileWriter = new FileWriter("config.json")) {
             fileWriter.write(jsonObject.toString());
         } catch (Exception e) {
@@ -40,16 +47,19 @@ public class Config implements Serializable {
         }
     }
 
-    public void loadFromJson(){
-        //read from json file
+    public void loadFromJson() {
         try (FileReader fileReader = new FileReader("config.json")) {
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             pythonInterpreter = jsonObject.get("pythonInterpreter").getAsString();
-            freq = jsonObject.get("freq").getAsInt();
-            notes = gson.fromJson(jsonObject.get("notes").getAsString(), List.class);
-            checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), List.class);
+            sampleFreq = jsonObject.get("sampleFreq").getAsInt();
+            dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
+            eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
+            notes = gson.fromJson(jsonObject.get("notes").getAsString(), new TypeToken<List<String>>() {
+            }.getType());
+            checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {
+            }.getType());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -60,8 +70,8 @@ public class Config implements Serializable {
         return pythonInterpreter;
     }
 
-    public Integer getFreq() {
-        return freq;
+    public Integer getSampleFreq() {
+        return sampleFreq;
     }
 
     public List<Boolean> getCheckBoxes() {
@@ -70,6 +80,25 @@ public class Config implements Serializable {
 
     public List<String> getNotes() {
         return notes;
+    }
+
+    public String getDataOutputPath() {
+        return dataOutputPath;
+    }
+
+    public Integer getEyeTrackerDevice() {
+        return eyeTrackerDevice;
+    }
+
+    public String toString() {
+        return "Config{" +
+                "checkBoxes=" + checkBoxes +
+                ", notes=" + notes +
+                ", sampleFreq=" + sampleFreq +
+                ", pythonInterpreter='" + pythonInterpreter + '\'' +
+                ", dataOutputPath='" + dataOutputPath + '\'' +
+                ", eyeTrackerDevice=" + eyeTrackerDevice +
+                '}';
     }
 
 }

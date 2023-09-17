@@ -1,30 +1,29 @@
-package action;
+package actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
-import component.NoteDialog;
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 
 public class TakeNoteAction extends AnAction {
 
-    private String description = "Take Note";
-
+    private String description;
 
     @Override
-    public void update (@NotNull AnActionEvent e) {
+    public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setText(description);
     }
+
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
-        NoteDialog noteDialog = new NoteDialog(project);
-        noteDialog.show();
+        JOptionPane.showMessageDialog(null, "Successfully Take Note \"" + description + "\"!");
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
+
     @Override
     public @NotNull String getTemplateText() {
         return description;

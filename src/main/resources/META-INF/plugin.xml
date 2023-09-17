@@ -49,9 +49,9 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
-        <action id="actions.RecordScreenAction" class="actions.RecordScreenAction" text="Record Screen"
-                description="RecordScreen">
-            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.ConfigAction"/>
-        </action>
+<!--        <action id="actions.RecordScreenAction" class="actions.RecordScreenAction" text="Record Screen"-->
+<!--                description="RecordScreen">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.ConfigAction"/>-->
+<!--        </action>-->
     </actions>
 </idea-plugin>

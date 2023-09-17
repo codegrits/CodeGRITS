@@ -6,6 +6,7 @@ import entity.Config;
 import org.jetbrains.annotations.NotNull;
 import trackers.EyeTracker;
 import trackers.IDETracker;
+import trackers.ScreenRecorder;
 import utils.AvailabilityChecker;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class StartStopTrackingAction extends AnAction {
     private static boolean isTracking = false;
     private static IDETracker iDETracker;
     private static EyeTracker eyeTracker;
+
+    private ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
     Config config = new Config();
 
@@ -66,11 +69,20 @@ public class StartStopTrackingAction extends AnAction {
                     eyeTracker.setPythonScriptMouse();
                     eyeTracker.startTracking(e.getProject());
                 }
+                if (config.getCheckBoxes().get(2)) {
+                    screenRecorder.setDataOutputPath(realDataOutputPath);
+                    screenRecorder.startRecording();
+
+                }
+
             } else {
                 isTracking = false;
                 iDETracker.stopTracking();
                 if (config.getCheckBoxes().get(1) && eyeTracker != null) {
                     eyeTracker.stopTracking();
+                }
+                if (config.getCheckBoxes().get(2)) {
+                    screenRecorder.stopRecording();
                 }
                 eyeTracker = null;
             }

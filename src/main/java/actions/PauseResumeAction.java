@@ -3,8 +3,12 @@ package actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
+import trackers.ScreenRecorder;
+
+import java.io.IOException;
 
 public class PauseResumeAction extends AnAction {
+    private ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
     @Override
     public void update(@NotNull AnActionEvent e) {
@@ -25,8 +29,15 @@ public class PauseResumeAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (StartStopTrackingAction.isPaused()) {
             StartStopTrackingAction.resumeTracking();
+            screenRecorder.resumeRecording();
+
         } else {
             StartStopTrackingAction.pauseTracking();
+            try {
+                screenRecorder.pauseRecording();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 }

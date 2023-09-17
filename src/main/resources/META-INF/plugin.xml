@@ -47,18 +47,14 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
 
         </group>
-        <action id="action.FindEyeTrackerAction" class="action.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
+<!--        <action id="action.FindEyeTrackerAction" class="action.FindEyeTrackerAction" text="Check Eye Tracker" description="Check eye tracker">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
+<!--        </action>-->
 
-        <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"
-                description="RecordScreen">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-        <action id="action.ResumeActionTest" class="action.ResumeActionTest" text="ResumeActionTest"
-                description="ResumeActionTest">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
+<!--        <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"-->
+<!--                description="RecordScreen">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
+<!--        </action>-->
         <action id="action.StopActionTest" class="action.StopActionTest" text="StopActionTest"
                 description="StopActionTest">
             <add-to-group group-id="ToolsMenu" anchor="first"/>

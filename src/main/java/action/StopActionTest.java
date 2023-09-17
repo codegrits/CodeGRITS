@@ -5,6 +5,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 import tracker.ScreenRecorder;
 
+import java.io.IOException;
+
 public class StopActionTest extends AnAction {
     ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
     @Override
@@ -14,6 +16,10 @@ public class StopActionTest extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        screenRecorder.stopRecording();
+        try {
+            screenRecorder.stopRecording();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

@@ -87,7 +87,7 @@ public class ConfigDialog extends DialogWrapper {
     private void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
-        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("action.TakeNoteActionGroup");
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("actions.TakeNoteActionGroup");
         List<String> notes = getCurrentNotes();
         //reset action group
         AnAction[] actions = actionGroup.getChildActionsOrStubs();

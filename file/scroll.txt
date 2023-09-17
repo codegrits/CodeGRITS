@@ -9,7 +9,7 @@
                         Element scroll = eyeTrackerDetection.createElement("scroll");
                         scrolls.appendChild(scroll);
                         scroll.setAttribute("timestamp", timestamp);
-                        scroll.setAttribute("path", tracker.RelativePathGetter.getRelativePath(filePath, projectPath));
+                        scroll.setAttribute("path", utils.RelativePathGetter.getRelativePath(filePath, projectPath));
                         scroll.setAttribute("type", "vertical");
                         scroll.setAttribute("offset", String.valueOf(verticalScrollOffset));
                         lastVerticalScrollOffset = verticalScrollOffset;
@@ -18,7 +18,7 @@
                         Element scroll = eyeTrackerDetection.createElement("scroll");
                         scrolls.appendChild(scroll);
                         scroll.setAttribute("timestamp", timestamp);
-                        scroll.setAttribute("path", tracker.RelativePathGetter.getRelativePath(filePath, projectPath));
+                        scroll.setAttribute("path", utils.RelativePathGetter.getRelativePath(filePath, projectPath));
                         scroll.setAttribute("type", "horizontal");
                         scroll.setAttribute("offset", String.valueOf(horizontalScrollOffset));
                         lastHorizontalScrollOffset = horizontalScrollOffset;

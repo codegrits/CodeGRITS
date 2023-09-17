@@ -15,7 +15,7 @@ numpy 1.23.5
 
 ## Usage
 
-**Step 1.** Use eye tracker manager to perform calibration.
+**Step 1.** Use eye trackers manager to perform calibration.
 
 **Step 2.** Run python scripts in `python` folder.
 

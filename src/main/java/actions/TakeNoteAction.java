@@ -1,4 +1,4 @@
-package action;
+package actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -17,11 +17,7 @@ public class TakeNoteAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        JOptionPane optionPane = new JOptionPane(null, JOptionPane.INFORMATION_MESSAGE);
-        optionPane.setMessage("Successfully Take Note \"" + description + "\"!");
-        JDialog dialog = optionPane.createDialog("Message");
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Successfully Take Note \"" + description + "\"!");
     }
 
     public void setDescription(String description) {

@@ -1,7 +1,7 @@
 package component;
 
-import action.TakeNoteAction;
-import action.CheckAvailable;
+import actions.TakeNoteAction;
+import utils.AvailabilityChecker;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -65,12 +65,15 @@ public class ConfigDialog extends DialogWrapper {
             addNoteArea(false);
             noteAreas.get(i).setText(notes.get(i));
         }
-        freqCombo.setSelectedIndex(freq / 15 - 2);
+        freqCombo.setSelectedItem(freq);
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
+        dataOutputTextField.setText(config.getDataOutputPath());
+        deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
     }
 
     private void saveConfig() {
-        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(), getPythonInterpreter());
+        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(),
+                getPythonInterpreter(), getDataOutputPath(), deviceCombo.getSelectedIndex());
         config.saveAsJson();
     }
 
@@ -84,7 +87,7 @@ public class ConfigDialog extends DialogWrapper {
     private void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
-        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("TakeNoteActionGroup");
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("action.TakeNoteActionGroup");
         List<String> notes = getCurrentNotes();
         //reset action group
         AnAction[] actions = actionGroup.getChildActionsOrStubs();
@@ -97,7 +100,7 @@ public class ConfigDialog extends DialogWrapper {
         for (String note : notes) {
             TakeNoteAction newNote = new TakeNoteAction();
             newNote.setDescription(note);
-            actionManager.registerAction("action.TakeNoteAction.[" + note + "]", newNote);
+            actionManager.registerAction("CodeVision.TakeNoteAction.[" + note + "]", newNote);
             actionGroup.add(newNote);
         }
     }
@@ -155,7 +158,7 @@ public class ConfigDialog extends DialogWrapper {
 
         checkPython.addActionListener(e -> {
             try {
-                boolean avail = CheckAvailable.checkPythonEnvironment(getPythonInterpreter());
+                boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
                 if (avail) {
                     checkPythonResult.setIcon(AllIcons.General.InspectionsOK);
                 } else {
@@ -180,7 +183,7 @@ public class ConfigDialog extends DialogWrapper {
 
         checkEyeTracker.addActionListener(e -> {
             try {
-                boolean avail = CheckAvailable.checkEyeTracker(getPythonInterpreter());
+                boolean avail = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                 if (avail) {
                     checkEyeTrackerResult.setIcon(AllIcons.General.InspectionsOK);
                 } else {
@@ -346,6 +349,11 @@ public class ConfigDialog extends DialogWrapper {
     public static String getPythonInterpreter() {
         return pythonInterpreterTextField.getText().equals("Select Python Interpreter")
                 ? "python" : pythonInterpreterTextField.getText();
+    }
+
+    public static String getDataOutputPath() {
+        return dataOutputTextField.getText().equals("Select Data Output Folder")
+                ? "Select Data Output Folder" : dataOutputTextField.getText();
     }
 
 }

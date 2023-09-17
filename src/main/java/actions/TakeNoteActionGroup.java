@@ -1,8 +1,6 @@
-import action.TakeNoteAction;
-import com.intellij.openapi.actionSystem.*;
-import component.ConfigDialog;
+package actions;
 
-import java.util.List;
+import com.intellij.openapi.actionSystem.*;
 
 public class TakeNoteActionGroup extends DefaultActionGroup {
 

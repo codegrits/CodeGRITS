@@ -30,38 +30,28 @@
     </extensions>
 
     <actions>
-        <action id="action.StartStopTrackingAction"
-                class="action.StartStopTrackingAction"
-                text="Behavior Tracking"
+        <action id="CodeVision.StartStopTrackingAction"
+                class="actions.StartStopTrackingAction"
+                text="Start Tracking"
                 icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="action.ConfigAction" class="action.ConfigAction" text="Configuration" description="Configure Tracking Options">
-            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="action.StartStopTrackingAction"/>
+        <action id="CodeVision.PauseResumeAction"
+                class="actions.PauseResumeAction"
+                text="Pause Tracking">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.StartStopTrackingAction"/>
         </action>
-        <group id="TakeNoteActionGroup" class="TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
+        <action id="CodeVision.ConfigAction" class="actions.ConfigAction" text="Config Tracking"
+                description="Configure tracking options">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.PauseResumeAction"/>
+        </action>
+        <group id="actions.TakeNoteActionGroup" class="actions.TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
 
-        <action id="action.RecordScreenAction" class="action.RecordScreenAction" text="Record Screen"
+        <action id="actions.RecordScreenAction" class="actions.RecordScreenAction" text="Record Screen"
                 description="RecordScreen">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-        <action id="action.ResumeActionTest" class="action.ResumeActionTest" text="ResumeActionTest"
-                description="ResumeActionTest">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-        <action id="action.StopActionTest" class="action.StopActionTest" text="StopActionTest"
-                description="StopActionTest">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-        <action id="action.PauseActionTest" class="action.PauseActionTest" text="PauseActionTest"
-                description="PauseActionTest">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-        <action id="action.StartActionTest" class="action.StartActionTest" text="StartActionTest"
-                description="StartActionTest">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.ConfigAction"/>
         </action>
     </actions>
 </idea-plugin>

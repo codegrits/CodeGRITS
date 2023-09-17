@@ -19,11 +19,13 @@ public class Config implements Serializable {
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
 
-    public Config(List<Boolean> checkBoxes, List<String> notes, Integer sampleFreq, String pythonInterpreter) {
+    public Config(List<Boolean> checkBoxes, List<String> notes, Integer sampleFreq, String pythonInterpreter, String dataOutputPath, Integer eyeTrackerDevice) {
         this.checkBoxes = checkBoxes;
         this.notes = notes;
         this.sampleFreq = sampleFreq;
         this.pythonInterpreter = pythonInterpreter;
+        this.dataOutputPath = dataOutputPath;
+        this.eyeTrackerDevice = eyeTrackerDevice;
     }
 
     public Config() {
@@ -35,7 +37,9 @@ public class Config implements Serializable {
         jsonObject.addProperty("sampleFreq", sampleFreq);
         jsonObject.addProperty("notes", notes.toString());
         jsonObject.addProperty("checkBoxes", checkBoxes.toString());
-        //write to json file
+        jsonObject.addProperty("dataOutputPath", dataOutputPath);
+        jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
+
         try (FileWriter fileWriter = new FileWriter("config.json")) {
             fileWriter.write(jsonObject.toString());
         } catch (Exception e) {
@@ -44,17 +48,19 @@ public class Config implements Serializable {
     }
 
     public void loadFromJson() {
-        //read from json file
         try (FileReader fileReader = new FileReader("config.json")) {
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             pythonInterpreter = jsonObject.get("pythonInterpreter").getAsString();
             sampleFreq = jsonObject.get("sampleFreq").getAsInt();
+            dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
+            eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
             notes = gson.fromJson(jsonObject.get("notes").getAsString(), new TypeToken<List<String>>() {
             }.getType());
             checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {
             }.getType());
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -74,6 +80,25 @@ public class Config implements Serializable {
 
     public List<String> getNotes() {
         return notes;
+    }
+
+    public String getDataOutputPath() {
+        return dataOutputPath;
+    }
+
+    public Integer getEyeTrackerDevice() {
+        return eyeTrackerDevice;
+    }
+
+    public String toString() {
+        return "Config{" +
+                "checkBoxes=" + checkBoxes +
+                ", notes=" + notes +
+                ", sampleFreq=" + sampleFreq +
+                ", pythonInterpreter='" + pythonInterpreter + '\'' +
+                ", dataOutputPath='" + dataOutputPath + '\'' +
+                ", eyeTrackerDevice=" + eyeTrackerDevice +
+                '}';
     }
 
 }

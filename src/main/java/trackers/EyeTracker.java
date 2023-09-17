@@ -1,13 +1,9 @@
-package tracker;
+package trackers;
 
-import action.ConfigAction;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.LogicalPosition;
-import com.intellij.openapi.editor.event.EditorEventMulticaster;
-import com.intellij.openapi.editor.event.VisibleAreaEvent;
 import com.intellij.openapi.editor.event.VisibleAreaListener;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
@@ -19,6 +15,8 @@ import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import utils.RelativePathGetter;
+import utils.XMLWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,7 +26,8 @@ import java.io.*;
 
 
 public class EyeTracker implements Disposable {
-
+    String dataOutputPath = "";
+    int sampleFrequency;
     PsiDocumentManager psiDocumentManager;
     public Editor editor;
     Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -43,52 +42,9 @@ public class EyeTracker implements Disposable {
     Process pythonProcess;
     Thread pythonOutputThread;
     String pythonInterpreter = "";
-    String pythonScriptTobii = """
-            import tobii_research as tr
-            import time
-            import sys
-            import math
-                        
-                        
-            def gaze_data_callback(gaze_data):
-                message = f'{round(time.time() * 1000)}; ' \\
-                          f'{gaze_data["left_gaze_point_on_display_area"][0]}, ' \\
-                          f'{gaze_data["left_gaze_point_on_display_area"][1]}, ' \\
-                          f'{gaze_data["left_gaze_point_validity"]}, ' \\
-                          f'{gaze_data["left_pupil_diameter"]}, ' \\
-                          f'{gaze_data["left_pupil_validity"]}; ' \\
-                          f'{gaze_data["right_gaze_point_on_display_area"][0]}, ' \\
-                          f'{gaze_data["right_gaze_point_on_display_area"][1]}, ' \\
-                          f'{gaze_data["right_gaze_point_validity"]}, ' \\
-                          f'{gaze_data["right_pupil_diameter"]}, ' \\
-                          f'{gaze_data["right_pupil_validity"]}'
-                print(message)
-                sys.stdout.flush()
-                        
-                        
-            found_eyetrackers = tr.find_all_eyetrackers()
-            my_eyetracker = found_eyetrackers[0]
-            my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
-            time.sleep(math.inf)
-            """;
-
-    String pythonScriptMouse = """
-            import pyautogui
-            from screeninfo import get_monitors
-            import time
-            import sys
-                        
-            width, height = get_monitors()[0].width, get_monitors()[0].height
-            start_time = time.time()
-                        
-            while time.time() - start_time <= 100000:
-                message = f'{round(time.time() * 1000)}; ' \\
-                          f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0; ' \\
-                          f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0'
-                print(message)
-                sys.stdout.flush()
-                time.sleep(0.01)
-            """;
+    String pythonScriptTobii;
+    String pythonScriptMouse;
+    int deviceIndex = 0;
 
     public EyeTracker() throws ParserConfigurationException {
 
@@ -129,7 +85,7 @@ public class EyeTracker implements Disposable {
 
 
     public void startTracking(Project project) throws IOException {
-        isTracking = true;
+        isTracking = false;
         psiDocumentManager = PsiDocumentManager.getInstance(project);
         editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
         if (editor != null) {
@@ -144,11 +100,19 @@ public class EyeTracker implements Disposable {
         isTracking = false;
         pythonOutputThread.interrupt();
         pythonProcess.destroy();
-        System.out.println("Python Process Stopped");
-        XMLWriter.writeToXML(eyeTracking, projectPath + "/eyeTracker_" + System.currentTimeMillis() + ".xml");
+        XMLWriter.writeToXML(eyeTracking, dataOutputPath + "/eye_tracking.xml");
+    }
+
+    public void pauseTracking() {
+        isTracking = false;
+    }
+
+    public void resumeTracking() {
+        isTracking = true;
     }
 
     public void processRawData(String message) {
+        if (!isTracking) return;
         Element gaze = getRawGazeElement(message);
         gazes.appendChild(gaze);
 
@@ -216,11 +180,14 @@ public class EyeTracker implements Disposable {
 
     public void track() {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptMouse);
+            ProcessBuilder processBuilder;
+            if (deviceIndex == 0) {
+                processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptMouse);
+            } else {
+                processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptTobii);
+            }
             processBuilder.redirectErrorStream(true);
             pythonProcess = processBuilder.start();
-
-            System.out.println("Python Process Started");
 
             pythonOutputThread = new Thread(() -> {
                 try (InputStream inputStream = pythonProcess.getInputStream();
@@ -322,5 +289,73 @@ public class EyeTracker implements Disposable {
 
     public void setPythonInterpreter(String pythonInterpreter) {
         this.pythonInterpreter = pythonInterpreter;
+    }
+
+    public void setDataOutputPath(String dataOutputPath) {
+        this.dataOutputPath = dataOutputPath;
+    }
+
+    public void setSampleFrequency(int sampleFrequency) {
+        this.sampleFrequency = sampleFrequency;
+    }
+
+    public void setPythonScriptTobii() {
+        pythonScriptTobii = "freq = " + sampleFrequency + "\n" + """
+                import tobii_research as tr
+                import time
+                import sys
+                import math
+                            
+                            
+                def gaze_data_callback(gaze_data):
+                    message = f'{round(time.time() * 1000)}; ' \\
+                              f'{gaze_data["left_gaze_point_on_display_area"][0]}, ' \\
+                              f'{gaze_data["left_gaze_point_on_display_area"][1]}, ' \\
+                              f'{gaze_data["left_gaze_point_validity"]}, ' \\
+                              f'{gaze_data["left_pupil_diameter"]}, ' \\
+                              f'{gaze_data["left_pupil_validity"]}; ' \\
+                              f'{gaze_data["right_gaze_point_on_display_area"][0]}, ' \\
+                              f'{gaze_data["right_gaze_point_on_display_area"][1]}, ' \\
+                              f'{gaze_data["right_gaze_point_validity"]}, ' \\
+                              f'{gaze_data["right_pupil_diameter"]}, ' \\
+                              f'{gaze_data["right_pupil_validity"]}'
+                    print(message)
+                    sys.stdout.flush()
+                            
+                            
+                found_eyetrackers = tr.find_all_eyetrackers()
+                my_eyetracker = found_eyetrackers[0]
+                my_eyetracker.set_gaze_output_frequency(freq)
+                my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
+                time.sleep(math.inf)
+                """;
+    }
+
+    public void setPythonScriptMouse() {
+        pythonScriptMouse = "freq = " + sampleFrequency + "\n" + """
+                import pyautogui
+                from screeninfo import get_monitors
+                import time
+                import sys
+                import math
+                            
+                width, height = get_monitors()[0].width, get_monitors()[0].height
+                start_time = time.time()
+                last_time = start_time
+                            
+                while time.time() - start_time <= math.inf:
+                    current_time = time.time()
+                    if current_time - last_time > 1 / freq:
+                        message = f'{round(current_time * 1000)}; ' \\
+                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0; ' \\
+                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0'
+                        print(message)
+                        last_time = current_time
+                        sys.stdout.flush()
+                """;
+    }
+
+    public void setDeviceIndex(int deviceIndex) {
+        this.deviceIndex = deviceIndex;
     }
 }

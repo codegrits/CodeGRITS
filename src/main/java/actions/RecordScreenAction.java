@@ -1,9 +1,9 @@
-package action;
+package actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
-import tracker.ScreenRecorder;
+import trackers.ScreenRecorder;
 
 
 public class RecordScreenAction extends AnAction {

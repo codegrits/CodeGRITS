@@ -37,7 +37,7 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="CodeVision.PauseResumeAction"
-                class="actions.PauseResumeAction"
+                class="actions.PauseResumeTrackingAction"
                 text="Pause Tracking">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.StartStopTrackingAction"/>
         </action>

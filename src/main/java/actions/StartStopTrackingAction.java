@@ -22,7 +22,7 @@ public class StartStopTrackingAction extends AnAction {
     private static IDETracker iDETracker;
     private static EyeTracker eyeTracker;
 
-    private ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
+    private final ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
     Config config = new Config();
 

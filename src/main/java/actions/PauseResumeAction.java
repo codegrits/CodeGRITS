@@ -8,7 +8,7 @@ import trackers.ScreenRecorder;
 import java.io.IOException;
 
 public class PauseResumeAction extends AnAction {
-    private ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
+    private final ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
     @Override
     public void update(@NotNull AnActionEvent e) {

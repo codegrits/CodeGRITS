@@ -18,17 +18,13 @@ public class ScreenRecorder {
      * 2: started, paused; only resumeAction enabled
      */
     int state = 0;
-    private Thread recordThread;
     private AWTSequenceEncoder awtEncoder;
-    private ArrayList<String[]> timeList = new ArrayList<>();
+    private final ArrayList<String[]> timeList = new ArrayList<>();
     private CSVWriter csvWriter;
     boolean isRecording = false;
     private int clipNumber = 1;
-
     private String dataOutputPath = "";
 
-
-    //refactor into singleton
     private static ScreenRecorder instance = null;
 
     private ScreenRecorder() {
@@ -42,17 +38,19 @@ public class ScreenRecorder {
     }
 
 
-
     private void createEncoder() throws IOException {
-        awtEncoder = AWTSequenceEncoder.createSequenceEncoder(new File("video" + System.currentTimeMillis() + ".mp4"), 24);
+        awtEncoder = AWTSequenceEncoder.createSequenceEncoder(
+                new File(dataOutputPath + "/screen_recording/video_clip_" + clipNumber + ".mp4"), 24);
     }
 
 
     public void startRecording() throws IOException {
         state = 1;
         isRecording = true;
-        csvWriter = new CSVWriter(new FileWriter(dataOutputPath + "screen_recordings"+ System.currentTimeMillis() + ".csv"));
-        csvWriter.writeNext(new String[]{"timestamp", "frame number", "clip number"});
+        File file = new File(dataOutputPath + "/screen_recording/frames.csv");
+        file.getParentFile().mkdirs();
+        csvWriter = new CSVWriter(new FileWriter(file));
+        csvWriter.writeNext(new String[]{"timestamp", "frame_number", "clip_number"});
         try {
             recordScreen();
         } catch (AWTException | IOException e) {
@@ -65,8 +63,6 @@ public class ScreenRecorder {
         isRecording = false;
         csvWriter.writeAll(timeList);
         csvWriter.close();
-
-
     }
 
     public void pauseRecording() throws IOException {
@@ -91,7 +87,7 @@ public class ScreenRecorder {
         Robot robot = new Robot();
         createEncoder();
         long frameRate = 24;
-        recordThread = new Thread(() -> {
+        Thread recordThread = new Thread(() -> {
             long frameNumber = 0;
             long lastFrameTime = System.nanoTime();
             long frameDuration = 1000000000 / frameRate;
@@ -117,7 +113,6 @@ public class ScreenRecorder {
                 throw new RuntimeException(e);
             }
         });
-        System.out.println(recordThread.getId());
         recordThread.start();
     }
 

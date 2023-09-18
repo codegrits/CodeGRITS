@@ -85,7 +85,7 @@ public class EyeTracker implements Disposable {
 
 
     public void startTracking(Project project) throws IOException {
-        isTracking = false;
+        isTracking = true;
         psiDocumentManager = PsiDocumentManager.getInstance(project);
         editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
         if (editor != null) {
@@ -125,12 +125,12 @@ public class EyeTracker implements Disposable {
         String rightGazePointY = rightInfo.split(", ")[1];
 
         if (leftGazePointX.equals("nan") || leftGazePointY.equals("nan") || rightGazePointX.equals("nan") || rightGazePointY.equals("nan")) {
-            gaze.setAttribute("remark", "Fail");
+            gaze.setAttribute("remark", "Fail | Invalid Gaze Point");
             return;
         }
 
-        if (editor == null || !isTracking) {
-            gaze.setAttribute("remark", "Fail");
+        if (editor == null) {
+            gaze.setAttribute("remark", "Fail | No Editor");
             return;
         }
 
@@ -142,14 +142,14 @@ public class EyeTracker implements Disposable {
             editorX = editor.getContentComponent().getLocationOnScreen().x;
             editorY = editor.getContentComponent().getLocationOnScreen().y;
         } catch (IllegalComponentStateException e) {
-            gaze.setAttribute("remark", "Fail");
+            gaze.setAttribute("remark", "Fail | No Editor");
             return;
         }
         int relativeX = eyeX - editorX;
         int relativeY = eyeY - editorY;
         if ((relativeX - visibleArea.x) < 0 || (relativeY - visibleArea.y) < 0
                 || (relativeX - visibleArea.x) > visibleArea.width || (relativeY - visibleArea.y) > visibleArea.height) {
-            gaze.setAttribute("remark", "Fail");
+            gaze.setAttribute("remark", "Fail | Out of Text Editor");
             return;
         }
 
@@ -173,7 +173,7 @@ public class EyeTracker implements Disposable {
                     gaze.appendChild(aSTStructure);
                 }
                 lastElement = psiElement;
-//                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
             }
         }));
     }

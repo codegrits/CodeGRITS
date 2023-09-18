@@ -1,3 +1,0 @@
-// TODO: Simulate Mouse Positions
-// int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-// int mouseY = MouseInfo.getPointerInfo().getLocation().y;

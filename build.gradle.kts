@@ -17,8 +17,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.7.1")
-
-
 }
 
 // Configure Gradle IntelliJ Plugin

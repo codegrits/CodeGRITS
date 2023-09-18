@@ -173,7 +173,7 @@ public class EyeTracker implements Disposable {
                     gaze.appendChild(aSTStructure);
                 }
                 lastElement = psiElement;
-                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+//                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
             }
         }));
     }

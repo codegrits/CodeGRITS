@@ -1,8 +1,12 @@
 package trackers;
 
 import com.opencsv.CSVWriter;
+import org.jcodec.api.SequenceEncoder;
 import org.jcodec.api.awt.AWTSequenceEncoder;
+import org.jcodec.common.model.ColorSpace;
+import org.jcodec.common.model.Picture;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -83,7 +87,6 @@ public class ScreenRecorder {
 
     private void recordScreen() throws AWTException, IOException {
         Rectangle bounds = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-
         Robot robot = new Robot();
         createEncoder();
         long frameRate = 24;
@@ -99,6 +102,16 @@ public class ScreenRecorder {
                 lastFrameTime = currentTime;
 
                 BufferedImage screenCapture = robot.createScreenCapture(bounds);
+                System.out.println(bounds);
+
+//                try {
+//                    File file = new File(dataOutputPath + "/screen_recording/frames/frame_" + frameNumber + ".jpeg");
+//                    file.getParentFile().mkdirs();
+//                    ImageIO.write(screenCapture, "jpeg", file);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+
                 frameNumber++;
                 timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), String.valueOf(frameNumber), String.valueOf(clipNumber)});
                 try {

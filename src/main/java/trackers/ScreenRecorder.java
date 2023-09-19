@@ -102,7 +102,6 @@ public class ScreenRecorder {
                 lastFrameTime = currentTime;
 
                 BufferedImage screenCapture = robot.createScreenCapture(bounds);
-                System.out.println(bounds);
 
 //                try {
 //                    File file = new File(dataOutputPath + "/screen_recording/frames/frame_" + frameNumber + ".jpeg");

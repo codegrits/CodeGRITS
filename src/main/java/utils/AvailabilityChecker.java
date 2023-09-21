@@ -38,6 +38,20 @@ public class AvailabilityChecker {
         return line.equals("Found");
     }
 
+    public static String getEyeTrackerName(String pythonInterpreter) throws IOException, InterruptedException {
+        String pythonScript = """
+                import tobii_research as tr
+                                
+                found_eyetrackers = tr.find_all_eyetrackers()
+                if found_eyetrackers == ():
+                    print('Not Found')
+                else:
+                    print(found_eyetrackers[0].device_name)
+                """;
+
+        return runPythonScript(pythonInterpreter, pythonScript);
+    }
+
     private static String runPythonScript(String pythonInterpreter, String pythonScript) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true);

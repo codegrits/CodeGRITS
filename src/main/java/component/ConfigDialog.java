@@ -40,7 +40,7 @@ public class ConfigDialog extends DialogWrapper {
     private static TextFieldWithBrowseButton dataOutputTextField;
 
     private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 60, 120});
-    private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse", "Tobii Pro"});
+    private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
 
     public ConfigDialog(Project project) {
         super(true);
@@ -167,6 +167,13 @@ public class ConfigDialog extends DialogWrapper {
                 boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
                 if (avail) {
                     checkPythonResult.setIcon(AllIcons.General.InspectionsOK);
+                    String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
+                    if (trackerName != null && !trackerName.equals("Not Found")) {
+                        deviceCombo.removeAllItems();
+                        deviceCombo.addItem("Mouse");
+                        deviceCombo.addItem(trackerName);
+                    }
+
                 } else {
                     checkPythonResult.setIcon(AllIcons.RunConfigurations.TestFailed);
                 }

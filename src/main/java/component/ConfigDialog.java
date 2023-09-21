@@ -300,7 +300,7 @@ public class ConfigDialog extends DialogWrapper {
         Pattern digitsPattern = Pattern.compile(digitsRegex);
         Pattern lettersPattern = Pattern.compile(lettersRegex);
         Pattern punctuationPattern = Pattern.compile(punctuationRegex);
-        ComponentValidator validator = new ComponentValidator(getDisposable()).withValidator(() -> {
+        new ComponentValidator(getDisposable()).withValidator(() -> {
             String text = textField.getText();
             Matcher spaceMatcher = spacePattern.matcher(textField.getText());
             Matcher digitsMatcher = digitsPattern.matcher(textField.getText());
@@ -327,7 +327,6 @@ public class ConfigDialog extends DialogWrapper {
                 }
             }
         }).installOn(textField);
-
 
         textField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override

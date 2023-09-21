@@ -33,7 +33,11 @@ public class StartStopTrackingAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        config.loadFromJson();
+        if(config.configExists()){
+            config.loadFromJson();
+        }else{
+            JOptionPane.showMessageDialog(null, "Please configure the plugin first.");
+        }
         try {
             if (!isTracking) {
                 if (config.getCheckBoxes().get(1)) {
@@ -48,6 +52,8 @@ public class StartStopTrackingAction extends AnAction {
                 }
 
                 isTracking = true;
+                ConfigAction.setIsEnabled(false);
+                TakeNoteActionGroup.setIsEnabled(true);
                 String projectPath = e.getProject() != null ? e.getProject().getBasePath() : "";
                 String realDataOutputPath = Objects.equals(config.getDataOutputPath(), "Select Data Output Folder")
                         ? projectPath : config.getDataOutputPath();
@@ -72,12 +78,14 @@ public class StartStopTrackingAction extends AnAction {
                 if (config.getCheckBoxes().get(2)) {
                     screenRecorder.setDataOutputPath(realDataOutputPath);
                     screenRecorder.startRecording();
-
                 }
+                TakeNoteAction.setIsEnabled(true);
 
             } else {
                 isTracking = false;
                 iDETracker.stopTracking();
+                TakeNoteAction.setIsEnabled(false);
+                ConfigAction.setIsEnabled(true);
                 if (config.getCheckBoxes().get(1) && eyeTracker != null) {
                     eyeTracker.stopTracking();
                 }
@@ -112,4 +120,5 @@ public class StartStopTrackingAction extends AnAction {
             eyeTracker.resumeTracking();
         }
     }
+
 }

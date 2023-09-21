@@ -9,10 +9,12 @@ import javax.swing.*;
 public class TakeNoteAction extends AnAction {
 
     private String description;
+    private static boolean isEnabled = false;
 
     @Override
     public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setText(description);
+        e.getPresentation().setEnabled(isEnabled);
     }
 
     @Override
@@ -22,6 +24,10 @@ public class TakeNoteAction extends AnAction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static void setIsEnabled(boolean isEnabled) {
+        TakeNoteAction.isEnabled = isEnabled;
     }
 
     @Override

@@ -31,6 +31,13 @@ public class Config implements Serializable {
     public Config() {
     }
 
+    public boolean configExists() {
+        try (FileReader fileReader = new FileReader("config.json")) {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     public void saveAsJson() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("pythonInterpreter", pythonInterpreter);

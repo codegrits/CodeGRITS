@@ -284,7 +284,7 @@ public class ConfigDialog extends DialogWrapper {
         });
 
         JPanel noteAreaPanel = new JPanel();
-        JLabel notes = new JLabel("Pre-set Notes");
+        JLabel notes = new JLabel("Pre-set Labels");
         notes.setFont(headingFont);
         notes.setBorder(new EmptyBorder(headingMargin));
         notes.setHorizontalTextPosition(JLabel.LEFT);
@@ -316,7 +316,7 @@ public class ConfigDialog extends DialogWrapper {
             Set<String> invalidChars = new HashSet<>();
             if (spaceMatcher.matches()) {
                 button.setEnabled(false);
-                return new ValidationInfo("Note cannot be empty", textField);
+                return new ValidationInfo("Label cannot be empty", textField);
             } else{
                 for (int i = 0; i < text.length(); i++) {
                     String c = String.valueOf(text.charAt(i));
@@ -326,7 +326,7 @@ public class ConfigDialog extends DialogWrapper {
                     }
                 }
                 if(invalidChars.size() > 0){
-                    return new ValidationInfo("Note cannot contain " + invalidChars.toString(), textField);
+                    return new ValidationInfo("Label cannot contain " + invalidChars.toString(), textField);
                 }
                 else{
                     button.setEnabled(true);

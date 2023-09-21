@@ -322,6 +322,22 @@ public final class IDETracker implements Disposable {
         }
     }
 
+    public void startTracking(){
+        isTracking = true;
+        editorEventMulticaster.addDocumentListener(documentListener, () -> {
+        });
+        editorEventMulticaster.addEditorMouseListener(editorMouseListener, () -> {
+        });
+        editorEventMulticaster.addEditorMouseMotionListener(editorMouseMotionListener, () -> {
+        });
+        editorEventMulticaster.addCaretListener(caretListener, () -> {
+        });
+        editorEventMulticaster.addSelectionListener(selectionListener, () -> {
+        });
+        editorEventMulticaster.addVisibleAreaListener(visibleAreaListener, () -> {
+        });
+    }
+
     public void stopTracking() throws TransformerException {
         isTracking = false;
         editorEventMulticaster.removeDocumentListener(documentListener);

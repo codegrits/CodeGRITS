@@ -1,6 +1,11 @@
 package component;
 
 import actions.TakeNoteAction;
+import com.intellij.facet.ui.ValidationResult;
+import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.ui.*;
+import com.intellij.ui.DocumentAdapter;
+import org.jetbrains.annotations.NotNull;
 import utils.AvailabilityChecker;
 import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
@@ -8,19 +13,20 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.ComboBox;
-import com.intellij.openapi.ui.DialogWrapper;
-import com.intellij.openapi.ui.TextBrowseFolderListener;
-import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.util.ui.JBUI;
 import entity.Config;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ConfigDialog extends DialogWrapper {
@@ -207,8 +213,9 @@ public class ConfigDialog extends DialogWrapper {
         panel.add(settings);
 
         JLabel pythonInterpreterLabel = new JLabel("Python Interpreter Path");
-        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 5)));
+        pythonInterpreterLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
+        panel.add(pythonInterpreterLabel);
 
         pythonInterpreterTextField = new TextFieldWithBrowseButton();
         pythonInterpreterTextField.setEditable(false);
@@ -284,11 +291,56 @@ public class ConfigDialog extends DialogWrapper {
     private void addNoteArea(boolean isEmpty) {
         JPanel notePanel = new JPanel();
         JTextField textField = new JTextField();
+        JButton button = new JButton();
+        String spaceRegex = "^\\s*$";
+        String digitsRegex = "^\\d+$";
+        String lettersRegex = "^\\w+$";
+        String punctuationRegex = "^[\\p{Punct}&&[^,]]+$";
+        Pattern spacePattern = Pattern.compile(spaceRegex);
+        Pattern digitsPattern = Pattern.compile(digitsRegex);
+        Pattern lettersPattern = Pattern.compile(lettersRegex);
+        Pattern punctuationPattern = Pattern.compile(punctuationRegex);
+        ComponentValidator validator = new ComponentValidator(getDisposable()).withValidator(() -> {
+            String text = textField.getText();
+            Matcher spaceMatcher = spacePattern.matcher(textField.getText());
+            Matcher digitsMatcher = digitsPattern.matcher(textField.getText());
+            Matcher lettersMatcher = lettersPattern.matcher(textField.getText());
+            Matcher punctuationMatcher = punctuationPattern.matcher(textField.getText());
+            Set<String> invalidChars = new HashSet<>();
+            if (spaceMatcher.matches()) {
+                button.setEnabled(false);
+                return new ValidationInfo("Note cannot be empty", textField);
+            } else{
+                for (int i = 0; i < text.length(); i++) {
+                    String c = String.valueOf(text.charAt(i));
+                    if(!digitsMatcher.reset(c).matches() && !lettersMatcher.reset(c).matches() && !punctuationMatcher.reset(c).matches() && !c.equals(" ")){
+                        invalidChars.add(c);
+                        button.setEnabled(false);
+                    }
+                }
+                if(invalidChars.size() > 0){
+                    return new ValidationInfo("Note cannot contain " + invalidChars.toString(), textField);
+                }
+                else{
+                    button.setEnabled(true);
+                    return null;
+                }
+            }
+        }).installOn(textField);
+
+
+        textField.getDocument().addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(@NotNull DocumentEvent e) {
+                ComponentValidator.getInstance(textField).ifPresent(ComponentValidator::revalidate);
+            }
+        });
+
         textField.setColumns(20);
         notePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
         textField.setMaximumSize(new Dimension(500, 40));
-        JButton button = new JButton();
+
         button.setSize(40, 40);
         button.setAlignmentX(Component.LEFT_ALIGNMENT);
         notePanel.add(textField);
@@ -302,9 +354,6 @@ public class ConfigDialog extends DialogWrapper {
                     panel.revalidate();
                     panel.repaint();
                 } else {
-                    if (textField.getText().equals("")) {
-                        return;
-                    }
                     noteAreas.add(textField);
                     addNoteArea(true);
                     button.setIcon(AllIcons.General.Remove);

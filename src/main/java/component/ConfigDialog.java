@@ -20,6 +20,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -289,9 +291,9 @@ public class ConfigDialog extends DialogWrapper {
             if(!pythonEnvironment){
                 return new ValidationInfo("Python environment not configured." , pythonInterpreterTextField.getTextField());
             }
-            if(!eyeTracker && eyeTracking.isSelected()){
-                return new ValidationInfo("Eye tracker not found.", pythonInterpreterTextField.getTextField());
-            }
+//            if(!eyeTracker && eyeTracking.isSelected()){
+//                return new ValidationInfo("Eye tracker not found.", pythonInterpreterTextField.getTextField());
+//            }
             else{
                 File file = new File(text);
                 if(!file.exists()){
@@ -313,6 +315,7 @@ public class ConfigDialog extends DialogWrapper {
 
         new ComponentValidator(getDisposable()).withValidator(() -> {
             String text = dataOutputTextField.getText();
+            System.out.println(text);
             if(text.equals("Select Data Output Folder")){
                 return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
             }
@@ -342,6 +345,7 @@ public class ConfigDialog extends DialogWrapper {
                 ComponentValidator.getInstance(dataOutputTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
             }
         });
+
         panel.add(dataOutputTextField);
 
         JPanel freqPanel = new JPanel();
@@ -387,6 +391,29 @@ public class ConfigDialog extends DialogWrapper {
         noteAreaPanel.setLayout(new BoxLayout(noteAreaPanel, BoxLayout.X_AXIS));
         noteAreaPanel.add(notes);
         panel.add(noteAreaPanel);
+
+
+        eyeTracking.addActionListener(actionEvent -> {
+            if(!pythonEnvironment){
+                eyeTracking.setSelected(false);
+                JOptionPane.showMessageDialog(this.panel, "Python environment not configured.");
+                return;
+            }
+            if(eyeTracking.isSelected() && pythonEnvironment) {
+                try {
+                    eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
+                    if(!eyeTracker){
+                        eyeTracking.setSelected(false);
+                        JOptionPane.showMessageDialog(this.panel, "Eye tracker not found. Please use mouse tracker instead.");
+
+                    }
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+
         return panel;
     }
 

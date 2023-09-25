@@ -56,12 +56,9 @@ public class ConfigDialog extends DialogWrapper {
             loadConfig();
         }
         addNoteArea(true);
-//        if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
-//            pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-//            if(pythonEnvironment){
-//                eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-//            }
-//        }
+        if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
+            pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+        }
 
 
     }
@@ -104,6 +101,10 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
         dataOutputTextField.setText(config.getDataOutputPath());
         deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
+        if(!checkBoxes.get(1).isSelected()){
+            freqCombo.setEnabled(false);
+            deviceCombo.setEnabled(false);
+        }
     }
 
     private void saveConfig() {
@@ -270,14 +271,11 @@ public class ConfigDialog extends DialogWrapper {
                             //TODO: what if using mac/unix/anaconda
                             if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
                                 pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-                                if(pythonEnvironment && eyeTracking.isSelected()){
-                                    eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-                                }
                             }
                             else{
                                 pythonEnvironment = false;
-                                eyeTracker = false;
                             }
+                            ComponentValidator.getInstance(pythonInterpreterTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
                         } catch (IOException | InterruptedException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -291,9 +289,6 @@ public class ConfigDialog extends DialogWrapper {
             if(!pythonEnvironment){
                 return new ValidationInfo("Python environment not configured." , pythonInterpreterTextField.getTextField());
             }
-//            if(!eyeTracker && eyeTracking.isSelected()){
-//                return new ValidationInfo("Eye tracker not found.", pythonInterpreterTextField.getTextField());
-//            }
             else{
                 File file = new File(text);
                 if(!file.exists()){
@@ -303,14 +298,8 @@ public class ConfigDialog extends DialogWrapper {
                     return null;
                 }
             }
-
         }).installOn(pythonInterpreterTextField.getTextField());
-        pythonInterpreterTextField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
-            @Override
-            protected void textChanged(@NotNull DocumentEvent e) {
-                ComponentValidator.getInstance(pythonInterpreterTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
-            }
-        });
+
         panel.add(pythonInterpreterTextField);
 
         new ComponentValidator(getDisposable()).withValidator(() -> {
@@ -399,13 +388,19 @@ public class ConfigDialog extends DialogWrapper {
                 JOptionPane.showMessageDialog(this.panel, "Python environment not configured.");
                 return;
             }
+            if(!eyeTracking.isSelected()){
+                freqCombo.setEnabled(false);
+                deviceCombo.setEnabled(false);
+            }
             if(eyeTracking.isSelected() && pythonEnvironment) {
+                deviceCombo.setEnabled(true);
                 try {
                     eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                     if(!eyeTracker){
-                        eyeTracking.setSelected(false);
                         JOptionPane.showMessageDialog(this.panel, "Eye tracker not found. Please use mouse tracker instead.");
-
+                    }else{
+                        JOptionPane.showConfirmDialog(this.panel, "Eye tracker found.");
+                        freqCombo.setEnabled(true);
                     }
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);

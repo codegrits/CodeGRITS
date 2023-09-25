@@ -79,6 +79,9 @@ public class StartStopTrackingAction extends AnAction {
                     screenRecorder.setDataOutputPath(realDataOutputPath);
                     screenRecorder.startRecording();
                 }
+                if (config.getCheckBoxes().get(3)){ //socket
+                    iDETracker.transmitRealTimeData();
+                }
                 TakeNoteAction.setIsEnabled(true);
 
             } else {

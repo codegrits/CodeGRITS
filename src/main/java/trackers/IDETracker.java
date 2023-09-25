@@ -18,8 +18,9 @@ import org.w3c.dom.Element;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -348,6 +349,27 @@ public final class IDETracker implements Disposable {
         editorEventMulticaster.removeVisibleAreaListener(visibleAreaListener);
         String filePath = dataOutputPath + "/ide_tracking.xml";
         XMLWriter.writeToXML(iDETracking, filePath);
+    }
+
+    public void transmitRealTimeData() throws IOException {
+        //start a new thread
+        Thread serverThread = new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(12345);
+                Socket socket = serverSocket.accept();
+                System.out.println("Connected to client");
+                try (OutputStream outputStream = socket.getOutputStream();
+                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+                     BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter)) {
+                    bufferedWriter.write("Hello World!");
+                    bufferedWriter.flush();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        serverThread.start();
+
     }
 
     public void pauseTracking() {

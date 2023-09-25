@@ -23,6 +23,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 
 public class EyeTracker implements Disposable {
@@ -286,6 +288,8 @@ public class EyeTracker implements Disposable {
         }
         return aSTStructure;
     }
+
+
 
     public void setPythonInterpreter(String pythonInterpreter) {
         this.pythonInterpreter = pythonInterpreter;

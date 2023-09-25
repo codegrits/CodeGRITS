@@ -178,9 +178,14 @@ public class ConfigDialog extends DialogWrapper {
         checkBoxes.add(screenRecording);
         checkBoxPanel.add(screenRecording);
 
+        JCheckBox transmitData = new JCheckBox("Transmit Data");
+        checkBoxes.add(transmitData);
+        checkBoxPanel.add(transmitData);
+
         iDETracking.setBorder(new EmptyBorder(contentMargin));
         eyeTracking.setBorder(new EmptyBorder(contentMargin));
         screenRecording.setBorder(new EmptyBorder(contentMargin));
+        transmitData.setBorder(new EmptyBorder(contentMargin));
 
         panel.add(checkBoxPanel);
 
@@ -308,15 +313,16 @@ public class ConfigDialog extends DialogWrapper {
             if(text.equals("Select Data Output Folder")){
                 return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
             }
-            else{
-                File file = new File(text);
-                if(!file.exists()){
-                    return new ValidationInfo("Data output folder not found");
-                }
-                else{
-                    return null;
-                }
-            }
+            return null;
+//            else{
+//                File file = new File(text);
+//                if(!file.exists()){
+//                    return new ValidationInfo("Data output folder not found");
+//                }
+//                else{
+//                    return null;
+//                }
+//            }
         }).installOn(dataOutputTextField.getTextField());
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);

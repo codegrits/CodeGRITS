@@ -21,10 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,13 +34,16 @@ public class ConfigDialog extends DialogWrapper {
     private final JPanel panel = new JPanel();
     private static List<JTextField> noteAreas = new ArrayList<>();
 
-    private static TextFieldWithBrowseButton pythonInterpreterTextField;
-    private static TextFieldWithBrowseButton dataOutputTextField;
+    private static TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
+    private static TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
 
     private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 60, 120});
     private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
 
-    public ConfigDialog(Project project) {
+    private boolean pythonEnvironment = false;
+    private boolean eyeTracker = false;
+
+    public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
         init();
         setTitle("Configuration");
@@ -53,6 +54,32 @@ public class ConfigDialog extends DialogWrapper {
             loadConfig();
         }
         addNoteArea(true);
+//        if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
+//            pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+//            if(pythonEnvironment){
+//                eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
+//            }
+//        }
+
+
+    }
+
+    private void checkPythonAvail(){
+        try {
+            boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+            System.out.println(avail);
+            if (avail) {
+
+
+            } else {
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private void checkEyeTrackerAvail(){
+
     }
 
     private void loadConfig() {
@@ -100,7 +127,9 @@ public class ConfigDialog extends DialogWrapper {
         for (AnAction child : actions) {
             actionGroup.remove(child);
             String childId = ActionManager.getInstance().getId(child);
-            ActionManager.getInstance().unregisterAction(childId);
+            if(childId!=null){
+                ActionManager.getInstance().unregisterAction(childId);
+            }
         }
         //add new actions
         for (String note : notes) {
@@ -155,7 +184,7 @@ public class ConfigDialog extends DialogWrapper {
         JLabel availabilities = new JLabel("Availabilities");
         availabilities.setBorder(new EmptyBorder(headingMargin));
         availabilities.setFont(headingFont);
-        panel.add(availabilities);
+//        panel.add(availabilities);
 
         JPanel checkPythonPanel = new JPanel();
         JButton checkPython = new JButton("Check Python Environment");
@@ -187,7 +216,7 @@ public class ConfigDialog extends DialogWrapper {
         checkPythonPanel.add(checkPython);
         checkPythonPanel.add(checkPythonResult);
         checkPythonPanel.setBorder(new EmptyBorder(contentMargin));
-        panel.add(checkPythonPanel);
+//        panel.add(checkPythonPanel);
 
         JPanel checkEyeTrackerPanel = new JPanel();
         JButton checkEyeTracker = new JButton("Check Eye Tracker");
@@ -212,7 +241,7 @@ public class ConfigDialog extends DialogWrapper {
         checkEyeTrackerPanel.add(checkEyeTracker);
         checkEyeTrackerPanel.add(checkEyeTrackerResult);
         checkEyeTrackerPanel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 5, 20)));
-        panel.add(checkEyeTrackerPanel);
+//        panel.add(checkEyeTrackerPanel);
 
         JLabel settings = new JLabel("Settings");
         settings.setBorder(new EmptyBorder(headingMargin));
@@ -224,29 +253,95 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
         panel.add(pythonInterpreterLabel);
 
-        pythonInterpreterTextField = new TextFieldWithBrowseButton();
+//        pythonInterpreterTextField = new TextFieldWithBrowseButton();
         pythonInterpreterTextField.setEditable(false);
         pythonInterpreterTextField.setMaximumSize(new Dimension(500, 40));
         pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
         pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         pythonInterpreterTextField.setText("Select Python Interpreter");
         pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
+        pythonInterpreterTextField.getTextField().getDocument().addDocumentListener(
+                new DocumentAdapter() {
+                    @Override
+                    protected void textChanged(@NotNull DocumentEvent e) {
+                        try {
+                            //TODO: what if using mac/unix/anaconda
+                            if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
+                                pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+                                if(pythonEnvironment && eyeTracking.isSelected()){
+                                    eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
+                                }
+                            }
+                            else{
+                                pythonEnvironment = false;
+                                eyeTracker = false;
+                            }
+                        } catch (IOException | InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                }
+        );
+        //add validator for python interpreter
+        new ComponentValidator(getDisposable()).withValidator(() -> {
+            String text = pythonInterpreterTextField.getText();
+            System.out.println(text);
+            if(!pythonEnvironment){
+                return new ValidationInfo("Python environment not configured." , pythonInterpreterTextField.getTextField());
+            }
+            if(!eyeTracker && eyeTracking.isSelected()){
+                return new ValidationInfo("Eye tracker not found.", pythonInterpreterTextField.getTextField());
+            }
+            else{
+                File file = new File(text);
+                if(!file.exists()){
+                    return new ValidationInfo("Python interpreter not found", pythonInterpreterTextField.getTextField());
+                }
+                else{
+                    return null;
+                }
+            }
 
+        }).installOn(pythonInterpreterTextField.getTextField());
+        pythonInterpreterTextField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(@NotNull DocumentEvent e) {
+                ComponentValidator.getInstance(pythonInterpreterTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
+            }
+        });
         panel.add(pythonInterpreterTextField);
 
+        new ComponentValidator(getDisposable()).withValidator(() -> {
+            String text = dataOutputTextField.getText();
+            if(text.equals("Select Data Output Folder")){
+                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
+            }
+            else{
+                File file = new File(text);
+                if(!file.exists()){
+                    return new ValidationInfo("Data output folder not found");
+                }
+                else{
+                    return null;
+                }
+            }
+        }).installOn(dataOutputTextField.getTextField());
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
         dataOutputLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
         panel.add(dataOutputLabel);
-
-        dataOutputTextField = new TextFieldWithBrowseButton();
         dataOutputTextField.setEditable(false);
         dataOutputTextField.setBorder(new EmptyBorder(contentMargin));
         dataOutputTextField.setMaximumSize(new Dimension(500, 40));
         dataOutputTextField.setText("Select Data Output Folder");
         dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
-
+        dataOutputTextField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
+            @Override
+            protected void textChanged(@NotNull DocumentEvent e) {
+                ComponentValidator.getInstance(dataOutputTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
+            }
+        });
         panel.add(dataOutputTextField);
 
         JPanel freqPanel = new JPanel();
@@ -354,6 +449,10 @@ public class ConfigDialog extends DialogWrapper {
         if (isEmpty) {
             button.setIcon(AllIcons.General.Add);
             button.addActionListener(e -> {
+                if(Objects.equals(textField.getText(), "")){
+                    button.setEnabled(false);
+                    return;
+                }
                 if (button.getIcon() == AllIcons.General.Remove) {
                     panel.remove(notePanel);
                     noteAreas.remove(textField);
@@ -402,6 +501,12 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     public static String getPythonInterpreter() {
+        if(ProjectManager.getInstance().getOpenProjects().length == 0){
+            return "python";
+        }
+        if(pythonInterpreterTextField.getText().equals("")){
+            return "python";
+        }
         return pythonInterpreterTextField.getText().equals("Select Python Interpreter")
                 ? "python" : pythonInterpreterTextField.getText();
     }

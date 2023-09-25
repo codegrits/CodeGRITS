@@ -308,26 +308,29 @@ public class EyeTracker implements Disposable {
                             
                             
                 def gaze_data_callback(gaze_data):
-                    message = f'{round(time.time() * 1000)}; ' \\
-                              f'{gaze_data["left_gaze_point_on_display_area"][0]}, ' \\
-                              f'{gaze_data["left_gaze_point_on_display_area"][1]}, ' \\
-                              f'{gaze_data["left_gaze_point_validity"]}, ' \\
-                              f'{gaze_data["left_pupil_diameter"]}, ' \\
-                              f'{gaze_data["left_pupil_validity"]}; ' \\
-                              f'{gaze_data["right_gaze_point_on_display_area"][0]}, ' \\
-                              f'{gaze_data["right_gaze_point_on_display_area"][1]}, ' \\
-                              f'{gaze_data["right_gaze_point_validity"]}, ' \\
-                              f'{gaze_data["right_pupil_diameter"]}, ' \\
-                              f'{gaze_data["right_pupil_validity"]}'
+                    message = '{}; {}, {}, {}, {}, {}; {}, {}, {}, {}, {}'.format(
+                        round(time.time() * 1000),
+                        gaze_data['left_gaze_point_on_display_area'][0],
+                        gaze_data['left_gaze_point_on_display_area'][1],
+                        gaze_data['left_gaze_point_validity'],
+                        gaze_data['left_pupil_diameter'],
+                        gaze_data['left_pupil_validity'],
+                        gaze_data['right_gaze_point_on_display_area'][0],
+                        gaze_data['right_gaze_point_on_display_area'][1],
+                        gaze_data['right_gaze_point_validity'],
+                        gaze_data['right_pupil_diameter'],
+                        gaze_data['right_pupil_validity']
+                    )
                     print(message)
                     sys.stdout.flush()
-                            
                             
                 found_eyetrackers = tr.find_all_eyetrackers()
                 my_eyetracker = found_eyetrackers[0]
                 my_eyetracker.set_gaze_output_frequency(freq)
                 my_eyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback, as_dictionary=True)
-                time.sleep(math.inf)
+                start_time = time.time()
+                while time.time() - start_time <= math.inf:
+                    continue
                 """;
     }
 

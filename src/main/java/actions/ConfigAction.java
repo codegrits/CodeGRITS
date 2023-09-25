@@ -6,6 +6,8 @@ import com.intellij.openapi.project.Project;
 import component.ConfigDialog;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 public class ConfigAction extends AnAction {
 
     private static boolean isEnabled = true;
@@ -18,7 +20,12 @@ public class ConfigAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
-        ConfigDialog configDialog = new ConfigDialog(project);
+        ConfigDialog configDialog;
+        try {
+            configDialog = new ConfigDialog(project);
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
         configDialog.show();
     }
 

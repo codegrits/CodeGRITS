@@ -179,8 +179,8 @@ public class ConfigDialog extends DialogWrapper {
         checkBoxPanel.add(screenRecording);
 
         JCheckBox transmitData = new JCheckBox("Transmit Data");
-        checkBoxes.add(transmitData);
-        checkBoxPanel.add(transmitData);
+//        checkBoxes.add(transmitData);
+//        checkBoxPanel.add(transmitData);
 
         iDETracking.setBorder(new EmptyBorder(contentMargin));
         eyeTracking.setBorder(new EmptyBorder(contentMargin));

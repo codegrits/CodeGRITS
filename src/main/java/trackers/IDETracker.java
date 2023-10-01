@@ -3,6 +3,8 @@ package trackers;
 import javax.xml.parsers.*;
 import javax.xml.transform.TransformerException;
 
+import com.intellij.execution.ui.ConsoleView;
+import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.event.*;
@@ -11,7 +13,9 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.wm.ToolWindowManager;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -353,22 +357,29 @@ public final class IDETracker implements Disposable {
 
     public void transmitRealTimeData() throws IOException {
         //start a new thread
-        Thread serverThread = new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(12345);
-                Socket socket = serverSocket.accept();
-                System.out.println("Connected to client");
-                try (OutputStream outputStream = socket.getOutputStream();
-                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-                     BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter)) {
-                    bufferedWriter.write("Hello World!");
-                    bufferedWriter.flush();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        serverThread.start();
+//        Thread serverThread = new Thread(() -> {
+//            try {
+//                ServerSocket serverSocket = new ServerSocket(12345);
+//                Socket socket = serverSocket.accept();
+//                System.out.println("Connected to client");
+//                try (OutputStream outputStream = socket.getOutputStream();
+//                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+//                     BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter)) {
+//                    bufferedWriter.write("Hello World!");
+//                    bufferedWriter.flush();
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+//        serverThread.start();
+        //get current project
+        Project project = ProjectManager.getInstance().getOpenProjects()[0];
+        ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
+        System.out.println(Arrays.toString(toolWindowManager.getToolWindowIds()));
+        ConsoleView consoleView = (ConsoleView) toolWindowManager.getToolWindow(toolWindowManager.getActiveToolWindowId()).getContentManager().getContent(0).getComponent();
+        consoleView.print("Hello World!", ConsoleViewContentType.NORMAL_OUTPUT);
+
 
     }
 

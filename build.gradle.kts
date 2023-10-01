@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.intellij") version "1.13.3"
 }
 
-group = "com.example"
+group = "com.nd"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -56,5 +56,18 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    val createOpenApiSourceJar by registering(Jar::class){
+        from(sourceSets.main.get().java) {
+            include("**/api/**/*.java")
+        }
+        destinationDirectory.set(layout.buildDirectory.dir("libs"))
+        archiveClassifier.set("src")
+    }
+
+    buildPlugin{
+        dependsOn(createOpenApiSourceJar)
+        from(createOpenApiSourceJar) { into("lib/src") }
     }
 }

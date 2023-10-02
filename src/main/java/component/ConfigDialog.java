@@ -50,7 +50,7 @@ public class ConfigDialog extends DialogWrapper {
     public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
         init();
-        setTitle("Configuration");
+        setTitle("CodeVision Configuration");
         setSize(500, 500);
         setAutoAdjustable(true);
         setResizable(false);
@@ -369,7 +369,7 @@ public class ConfigDialog extends DialogWrapper {
         eyeTracking.addActionListener(actionEvent -> {
             if (!pythonEnvironment) {
                 eyeTracking.setSelected(false);
-                JOptionPane.showMessageDialog(this.panel, "Python environment not configured.");
+                new AlertDialog("Python environment not configured.", AllIcons.General.BalloonWarning).show();
                 return;
             }
             if (!eyeTracking.isSelected()) {
@@ -381,9 +381,9 @@ public class ConfigDialog extends DialogWrapper {
                 try {
                     eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                     if (!eyeTracker) {
-                        JOptionPane.showMessageDialog(this.panel, "Eye tracker not found. Please use mouse tracker instead.");
+                        new AlertDialog("Eye tracker not found. Using mouse tracker.",AllIcons.General.BalloonWarning).show();
                     } else {
-                        JOptionPane.showConfirmDialog(this.panel, "Eye tracker found.");
+                        new AlertDialog("Eye tracker found.",AllIcons.General.InspectionsOK).show();
                         freqCombo.setEnabled(true);
                     }
                 } catch (IOException | InterruptedException e) {

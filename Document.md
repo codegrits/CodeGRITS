@@ -1,4 +1,6 @@
-Data output structure:
+# CodeVision Documentation
+
+## Output Directory Structure
 
 ```
 [OUTPUT_DIR]
@@ -27,7 +29,22 @@ Comment:
 
 All the timestamps used by CodeVision are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.
 
+The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems)
+(e.g., line, column) of IntelliJ Platform is start from 0.
+
 ## IDE Tracking
+
+```
+[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── ide_tracking.xml
+│   ├── archives
+│   │   ├── [ARCHIVE_TIMESTAMP_1].archive
+│   │   ├── [ARCHIVE_TIMESTAMP_2].archive
+│   │   ├── ...
+```
+
+---
 
 Element: `<ide_tracking>`
 
@@ -84,9 +101,7 @@ Comment:
 
 Element: `<archives>`
 
-Sub-element:
-
-- `<archive>`
+Sub-element: `<archive>`
 
 Comment:
 
@@ -415,4 +430,282 @@ Comment:
 
 ## Eye Tracking
 
+```
+[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── eye_tracking.xml
+```
+
+---
+
+Element: `<eye_tracking>`
+
+Sub-element:
+
+- `<setting>`
+- `<gazes>`
+
+Comment:
+
+- The root element of the `eye_tracking.xml` file. CodeVision support both Mouse simulation and Tobii Pro eye tracker
+  devices.
+- Since [Tobii Pro SDK](https://developer.tobiipro.com/index.html) not support Java, we use Python
+  library `tobii-research` to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect
+  data. The python interpreter is specified in the configuration.
+
+---
+
+Element: `<setting>`
+
+Attribute:
+
+- eye_tracker
+- sampling_rate
+
+Example:
+
+```xml
+
+<setting eye_tracker="Tobii Pro Fusion" sample_frequency="30"/>
+```
+
+Comment:
+
+- `eye_tracker` could be `Mouse` for simulation, or real Tobii Pro eye tracker device name (e.g., `Tobii Pro Fusion`),
+  which is got from `eyetracker.model` in the `tobii-research` library.
+- `sampling_rate` is the sampling rate of the eye tracker in Hz, which is pre-set in the configuration and whose range
+  could be in `eyetracker.get_all_gaze_output_frequencies()` called in the `tobii-research` library.
+
+---
+
+Element: `<gazes>`
+
+Sub-element: `<gaze>`
+
+Comment:
+
+- Collection of all gaze data.
+
+---
+
+Element: `<gaze>`
+
+Sub-element:
+
+- `<left_eye>`
+- `<right_eye>`
+- `<location>`: only used when the gaze point can be mapped to location in the code editor
+- `<ast_structure>`: only used when the gaze point cannot be mapped to location in the code editor, and the code file is
+  java.
+
+Attribute:
+
+- timestamp
+- remark: only used when the gaze point cannot be mapped to location in the code editor
+
+Example:
+
+```xml
+
+<gaze timestamp="1696224370377">
+    <left_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
+              pupil_diameter="2.4835662841796875" pupil_validity="1.0"/>
+    <right_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
+               pupil_diameter="2.7188568115234375" pupil_validity="1.0"/>
+    <location column="25" line="2" path="/src/Main.java" x="820" y="150"/>
+    <ast_structure token="println" type="IDENTIFIER">
+        <level end="2:26" start="2:19" tag="PsiIdentifier:println"/>
+        <level end="2:26" start="2:8" tag="PsiReferenceExpression:System.out.println"/>
+        <level end="2:42" start="2:8" tag="PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)"/>
+        <level end="2:43" start="2:8" tag="PsiExpressionStatement"/>
+        <level end="3:5" start="1:43" tag="PsiCodeBlock"/>
+        <level end="3:5" start="1:4" tag="PsiMethod:main"/>
+        <level end="4:1" start="0:0" tag="PsiClass:Main"/>
+    </ast_structure>
+</gaze>
+```
+
+Comment:
+
+When the gaze point cannot be mapped to location in the code editor in the following 3 cases, the `remark` attribute is
+used:
+
+1. The raw gaze point from the eye tracker is invalid. (i.e., nan). In this case, the `remark`
+   is `Fail | Invalid Gaze Point`.
+2. The code editor is not founded. In this case, the `remark` is `Fail | No Editor`.
+3. The code editor is founded, but the gaze point is out of the code editor. In this case, the `remark`
+   is `Fail | Out of Text Editor`.
+
+---
+
+Element: `<left_eye>`
+
+Attribute:
+
+- gaze_point_x
+- gaze_point_y
+- gaze_validity
+- pupil_diameter
+- pupil_validity
+
+Example:
+
+```xml
+
+<left_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
+          pupil_diameter="2.4835662841796875" pupil_validity="1.0"/>
+```
+
+Comment:
+
+- `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
+  corner of the screen, and (1, 1) is the bottom-right corner of the screen.
+- `gaze_validity` and `pupil_validity` are the validity of the gaze point and pupil diameter, which is binary, 0 for
+  invalid, 1 for valid. When using Mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity` is
+  always 0.0.
+- `pupil_diameter` is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, `pupil_diameter` is
+  always 0.
+
+---
+
+Element: `<right_eye>`
+
+Attribute:
+
+- gaze_point_x
+- gaze_point_y
+- gaze_validity
+- pupil_diameter
+- pupil_validity
+
+Example:
+
+```xml
+
+<right_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
+           pupil_diameter="2.7188568115234375" pupil_validity="1.0"/>
+```
+
+Comment:
+
+- `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
+  corner of the screen, and (1, 1) is the bottom-right corner of the screen.
+- `gaze_validity` and `pupil_validity` are the validity of the gaze point and pupil diameter, which is binary, 0 for
+  invalid, 1 for valid. When using Mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity` is
+  always 0.0.
+- `pupil_diameter` is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, `pupil_diameter` is
+  always 0.
+
+---
+
+Element: `<location>`
+
+Attribute:
+
+- path
+- line
+- column
+- x
+- y
+
+Example:
+
+```xml
+
+<location column="25" line="2" path="/src/Main.java" x="820" y="150"/>
+```
+
+Comment:
+
+---
+
+Element: `<ast_structure>`
+
+Sub-element: `<level>`: only used when the current token is different from the previous token
+
+Attribute:
+
+- token
+- type
+- remark: only used when the current token is same to the previous token
+
+Example:
+
+```xml
+
+<ast_structure token="println" type="IDENTIFIER">
+    <level end="2:26" start="2:19" tag="PsiIdentifier:println"/>
+    <level end="2:26" start="2:8" tag="PsiReferenceExpression:System.out.println"/>
+    <level end="2:42" start="2:8" tag="PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)"/>
+    <level end="2:43" start="2:8" tag="PsiExpressionStatement"/>
+    <level end="3:5" start="1:43" tag="PsiCodeBlock"/>
+    <level end="3:5" start="1:4" tag="PsiMethod:main"/>
+    <level end="4:1" start="0:0" tag="PsiClass:Main"/>
+</ast_structure>
+```
+
+Comment:
+
+---
+
+Element: `<level>`
+
+Attribute:
+
+- start
+- end
+- tag
+
+Example:
+
+```xml
+
+<level end="3:5" start="1:4" tag="PsiMethod:main"/>
+```
+
+Comment:
+
 ## Screen Recording
+
+```
+[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── screen_recording
+│   │   ├── video_clip_1.mp4
+│   │   ├── video_clip_2.mp4
+│   │   ├── ...
+│   │   ├── frames.csv
+```
+
+---
+
+`video_clip_[k].mp4`
+
+Comment:
+
+- The video clip of the screen recording from the (k-1)-th pause (0-th pause is start) to the k-th pause. We designed
+  this mechanism to avoid the video file in the memory being too large especially when pausing the tracking for a long
+  time.
+
+---
+
+`frames.csv`
+
+Column:
+
+- timestamp
+- frame_number
+- clip_number
+
+Example:
+
+```csv
+timestamp,frame_number,clip_number
+1696224360619,1,1
+1696224360991,2,1
+```
+
+Comment:
+
+- `frame_number` is the frame number of the frame in its video clip.
+- `clip_number` is the number of the video clip to which the frame belongs.

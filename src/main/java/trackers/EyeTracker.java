@@ -34,6 +34,7 @@ public class EyeTracker implements Disposable {
     public Editor editor;
     Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     Element root = eyeTracking.createElement("eye_tracking");
+    Element setting = eyeTracking.createElement("setting");
     Element gazes = eyeTracking.createElement("gazes");
 
     boolean isTracking = false;
@@ -51,6 +52,7 @@ public class EyeTracker implements Disposable {
     public EyeTracker() throws ParserConfigurationException {
 
         eyeTracking.appendChild(root);
+        root.appendChild(setting);
         root.appendChild(gazes);
 
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
@@ -95,6 +97,12 @@ public class EyeTracker implements Disposable {
         }
         filePath = FileEditorManager.getInstance(project).getSelectedFiles()[0].getPath();
         visibleArea = editor.getScrollingModel().getVisibleArea();
+        if (deviceIndex == 0) {
+            setting.setAttribute("eye_tracker", "Mouse");
+        } else {
+            setting.setAttribute("eye_tracker", "Tobii Pro Fusion");
+        }
+        setting.setAttribute("sample_frequency", String.valueOf(sampleFrequency));
         track();
     }
 
@@ -353,8 +361,8 @@ public class EyeTracker implements Disposable {
                     current_time = time.time()
                     if current_time - last_time > 1 / freq:
                         message = f'{round(current_time * 1000)}; ' \\
-                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0; ' \\
-                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 0, 0, 0'
+                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 1.0, 0, 0.0; ' \\
+                                  f'{pyautogui.position().x / width}, {pyautogui.position().y / height}, 1.0, 0, 0.0'
                         print(message)
                         last_time = current_time
                         sys.stdout.flush()

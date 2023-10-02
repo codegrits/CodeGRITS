@@ -2,6 +2,8 @@ package component;
 
 import actions.TakeNoteAction;
 import com.intellij.facet.ui.ValidationResult;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.*;
 import com.intellij.ui.DocumentAdapter;
@@ -56,29 +58,9 @@ public class ConfigDialog extends DialogWrapper {
             loadConfig();
         }
         addNoteArea(true);
-        if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
+        if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
         }
-
-
-    }
-
-    private void checkPythonAvail(){
-        try {
-            boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-            System.out.println(avail);
-            if (avail) {
-
-
-            } else {
-            }
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-    private void checkEyeTrackerAvail(){
-
     }
 
     private void loadConfig() {
@@ -101,7 +83,7 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
         dataOutputTextField.setText(config.getDataOutputPath());
         deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
-        if(!checkBoxes.get(1).isSelected()){
+        if (!checkBoxes.get(1).isSelected()) {
             freqCombo.setEnabled(false);
             deviceCombo.setEnabled(false);
         }
@@ -120,17 +102,17 @@ public class ConfigDialog extends DialogWrapper {
         super.doOKAction();
     }
 
-    private void updateActionGroup() {
+    public void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
-        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("actions.TakeNoteActionGroup");
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("CodeVision.TakeNoteActionGroup");
         List<String> notes = getCurrentNotes();
         //reset action group
         AnAction[] actions = actionGroup.getChildActionsOrStubs();
         for (AnAction child : actions) {
             actionGroup.remove(child);
             String childId = ActionManager.getInstance().getId(child);
-            if(childId!=null){
+            if (childId != null) {
                 ActionManager.getInstance().unregisterAction(childId);
             }
         }
@@ -138,11 +120,10 @@ public class ConfigDialog extends DialogWrapper {
         for (String note : notes) {
             TakeNoteAction newNote = new TakeNoteAction();
             newNote.setDescription(note);
-            actionManager.registerAction("CodeVision.TakeNoteAction.[" + note + "]", newNote);
+            actionManager.registerAction("CodeVision.AddLabelAction.[" + note + "]", newNote);
             actionGroup.add(newNote);
         }
     }
-
 
     @Override
     protected JComponent createCenterPanel() {
@@ -274,10 +255,9 @@ public class ConfigDialog extends DialogWrapper {
                     protected void textChanged(@NotNull DocumentEvent e) {
                         try {
                             //TODO: what if using mac/unix/anaconda
-                            if(getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")){
+                            if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
                                 pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-                            }
-                            else{
+                            } else {
                                 pythonEnvironment = false;
                             }
                             ComponentValidator.getInstance(pythonInterpreterTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
@@ -291,15 +271,13 @@ public class ConfigDialog extends DialogWrapper {
         new ComponentValidator(getDisposable()).withValidator(() -> {
             String text = pythonInterpreterTextField.getText();
             System.out.println(text);
-            if(!pythonEnvironment){
-                return new ValidationInfo("Python environment not configured." , pythonInterpreterTextField.getTextField());
-            }
-            else{
+            if (!pythonEnvironment) {
+                return new ValidationInfo("Python environment not configured.", pythonInterpreterTextField.getTextField());
+            } else {
                 File file = new File(text);
-                if(!file.exists()){
+                if (!file.exists()) {
                     return new ValidationInfo("Python interpreter not found", pythonInterpreterTextField.getTextField());
-                }
-                else{
+                } else {
                     return null;
                 }
             }
@@ -310,7 +288,7 @@ public class ConfigDialog extends DialogWrapper {
         new ComponentValidator(getDisposable()).withValidator(() -> {
             String text = dataOutputTextField.getText();
             System.out.println(text);
-            if(text.equals("Select Data Output Folder")){
+            if (text.equals("Select Data Output Folder")) {
                 return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
             }
             return null;
@@ -389,22 +367,22 @@ public class ConfigDialog extends DialogWrapper {
 
 
         eyeTracking.addActionListener(actionEvent -> {
-            if(!pythonEnvironment){
+            if (!pythonEnvironment) {
                 eyeTracking.setSelected(false);
                 JOptionPane.showMessageDialog(this.panel, "Python environment not configured.");
                 return;
             }
-            if(!eyeTracking.isSelected()){
+            if (!eyeTracking.isSelected()) {
                 freqCombo.setEnabled(false);
                 deviceCombo.setEnabled(false);
             }
-            if(eyeTracking.isSelected() && pythonEnvironment) {
+            if (eyeTracking.isSelected() && pythonEnvironment) {
                 deviceCombo.setEnabled(true);
                 try {
                     eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-                    if(!eyeTracker){
+                    if (!eyeTracker) {
                         JOptionPane.showMessageDialog(this.panel, "Eye tracker not found. Please use mouse tracker instead.");
-                    }else{
+                    } else {
                         JOptionPane.showConfirmDialog(this.panel, "Eye tracker found.");
                         freqCombo.setEnabled(true);
                     }
@@ -440,18 +418,17 @@ public class ConfigDialog extends DialogWrapper {
             if (spaceMatcher.matches()) {
                 button.setEnabled(false);
                 return new ValidationInfo("Label cannot be empty", textField);
-            } else{
+            } else {
                 for (int i = 0; i < text.length(); i++) {
                     String c = String.valueOf(text.charAt(i));
-                    if(!digitsMatcher.reset(c).matches() && !lettersMatcher.reset(c).matches() && !punctuationMatcher.reset(c).matches() && !c.equals(" ")){
+                    if (!digitsMatcher.reset(c).matches() && !lettersMatcher.reset(c).matches() && !punctuationMatcher.reset(c).matches() && !c.equals(" ")) {
                         invalidChars.add(c);
                         button.setEnabled(false);
                     }
                 }
-                if(invalidChars.size() > 0){
+                if (invalidChars.size() > 0) {
                     return new ValidationInfo("Label cannot contain " + invalidChars.toString(), textField);
-                }
-                else{
+                } else {
                     button.setEnabled(true);
                     return null;
                 }
@@ -477,7 +454,7 @@ public class ConfigDialog extends DialogWrapper {
         if (isEmpty) {
             button.setIcon(AllIcons.General.Add);
             button.addActionListener(e -> {
-                if(Objects.equals(textField.getText(), "")){
+                if (Objects.equals(textField.getText(), "")) {
                     button.setEnabled(false);
                     return;
                 }
@@ -529,10 +506,10 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     public static String getPythonInterpreter() {
-        if(ProjectManager.getInstance().getOpenProjects().length == 0){
+        if (ProjectManager.getInstance().getOpenProjects().length == 0) {
             return "python";
         }
-        if(pythonInterpreterTextField.getText().equals("")){
+        if (pythonInterpreterTextField.getText().equals("")) {
             return "python";
         }
         return pythonInterpreterTextField.getText().equals("Select Python Interpreter")

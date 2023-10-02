@@ -290,7 +290,6 @@ public class EyeTracker implements Disposable {
     }
 
 
-
     public void setPythonInterpreter(String pythonInterpreter) {
         this.pythonInterpreter = pythonInterpreter;
     }

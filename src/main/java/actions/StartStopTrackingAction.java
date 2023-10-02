@@ -1,7 +1,10 @@
 package actions;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import component.ConfigDialog;
 import entity.Config;
 import org.jetbrains.annotations.NotNull;
 import trackers.EyeTracker;
@@ -33,16 +36,19 @@ public class StartStopTrackingAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        if(config.configExists()){
+        if (config.configExists()) {
             config.loadFromJson();
-        }else{
-            JOptionPane.showMessageDialog(null, "Please configure the plugin first.");
+        } else {
+            Notification notification = new Notification("CodeVision Notification Group", "Configuration",
+                    "Please configure the plugin first.", NotificationType.WARNING);
+            notification.notify(e.getProject());
+            return;
         }
         try {
             if (!isTracking) {
                 if (config.getCheckBoxes().get(1)) {
                     if (!AvailabilityChecker.checkPythonEnvironment(config.getPythonInterpreter())) {
-                        JOptionPane.showMessageDialog(null, "Python interpreter not found. Please check your configuration.");
+                        JOptionPane.showMessageDialog(null, "Python interpreter not found. Please configure the plugin first.");
                         return;
                     }
                     if (config.getEyeTrackerDevice() != 0 && !AvailabilityChecker.checkEyeTracker(config.getPythonInterpreter())) {

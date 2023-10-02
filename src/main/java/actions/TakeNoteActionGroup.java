@@ -17,12 +17,13 @@ public class TakeNoteActionGroup extends DefaultActionGroup {
         if(!defaultNotesLoaded && config.configExists()){
             config.loadFromJson();
             ActionManager actionManager = ActionManager.getInstance();
-            DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("actions.TakeNoteActionGroup");
+            DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("CodeVision.TakeNoteActionGroup");
             actionGroup.removeAll();
             List<String> notes= config.getNotes();
             for (String note : notes) {
                 TakeNoteAction takeNoteAction = new TakeNoteAction();
                 takeNoteAction.setDescription(note);
+                actionManager.registerAction("CodeVision.AddLabelAction.[" + note + "]", takeNoteAction);
                 actionGroup.add(takeNoteAction);
             }
             defaultNotesLoaded = true;

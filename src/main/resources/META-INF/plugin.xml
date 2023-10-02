@@ -26,9 +26,9 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="api.RealtimeDataImpl" serviceInterface="api.RealtimeDataInterface"/>
+        <notificationGroup id="CodeVision Notification Group"
+                           displayType="BALLOON"/>
     </extensions>
-
-
 
     <actions>
         <action id="CodeVision.StartStopTrackingAction"
@@ -42,17 +42,13 @@
                 text="Pause Tracking">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.StartStopTrackingAction"/>
         </action>
-        <action id="CodeVision.ConfigAction" class="actions.ConfigAction" text="Config Tracking"
+        <action id="CodeVision.ConfigAction" class="actions.ConfigAction" text="Configuration"
                 description="Configure tracking options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.PauseResumeAction"/>
         </action>
-        <group id="actions.TakeNoteActionGroup" class="actions.TakeNoteActionGroup" text="Take Note" description="Take note" popup="true">
+        <group id="CodeVision.TakeNoteActionGroup" class="actions.TakeNoteActionGroup" text="Add Label"
+               description="Add label" popup="true" icon="AllIcons.Actions.Edit">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>
-
-<!--        <action id="actions.RecordScreenAction" class="actions.RecordScreenAction" text="Record Screen"-->
-<!--                description="RecordScreen">-->
-<!--            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.ConfigAction"/>-->
-<!--        </action>-->
     </actions>
 </idea-plugin>

@@ -23,8 +23,6 @@ import org.w3c.dom.Element;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,7 +44,7 @@ public final class IDETracker implements Disposable {
     Element root = iDETracking.createElement("ide_tracking");
     Element environment = iDETracking.createElement("environment");
     Element actions = iDETracking.createElement("actions");
-    Element logs = iDETracking.createElement("logs");
+    Element archives = iDETracking.createElement("archives");
     Element typings = iDETracking.createElement("typings");
     Element files = iDETracking.createElement("files");
     Element mouses = iDETracking.createElement("mouses");
@@ -64,8 +62,8 @@ public final class IDETracker implements Disposable {
             if (EditorFactory.getInstance().getEditors(event.getDocument()).length == 0) return;
             Editor currentEditor = EditorFactory.getInstance().getEditors(event.getDocument())[0];
             if (currentEditor != null && currentEditor.getEditorKind() == EditorKind.CONSOLE) {
-                logFile("unknown", String.valueOf(System.currentTimeMillis()),
-                        "contentChanged | CONSOLE", event.getDocument().getText());
+                archiveFile("unknown", String.valueOf(System.currentTimeMillis()),
+                        "", event.getDocument().getText());
                 return;
             }
             VirtualFile changedFile = FileDocumentManager.getInstance().getFile(event.getDocument());
@@ -178,8 +176,8 @@ public final class IDETracker implements Disposable {
         public void run() {
             if (changedFilepath.length() > 0) {
                 if (!isTracking) return;
-                logFile(changedFilepath, String.valueOf(System.currentTimeMillis()),
-                        "contentChanged | MAIN_EDITOR", changedFileText);
+                archiveFile(changedFilepath, String.valueOf(System.currentTimeMillis()),
+                        "contentChanged", changedFileText);
                 changedFilepath = "";
             }
         }
@@ -188,14 +186,19 @@ public final class IDETracker implements Disposable {
     IDETracker() throws ParserConfigurationException {
         iDETracking.appendChild(root);
         root.appendChild(environment);
-        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
-        environment.setAttribute("screen_width", String.valueOf(size.getWidth()));
-        environment.setAttribute("screen_height", String.valueOf(size.getHeight()));
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        environment.setAttribute("screen_size", "(" + size.width + "," + size.height + ")");
+        GraphicsConfiguration config = GraphicsEnvironment.getLocalGraphicsEnvironment().
+                getDefaultScreenDevice().getDefaultConfiguration();
+        environment.setAttribute("scale_x", String.valueOf(config.getDefaultTransform().getScaleX()));
+        environment.setAttribute("scale_y", String.valueOf(config.getDefaultTransform().getScaleY()));
+        environment.setAttribute("os_name", System.getProperty("os.name"));
+        environment.setAttribute("java_version", System.getProperty("java.version"));
         environment.setAttribute("ide_version", ApplicationInfo.getInstance().getFullVersion());
         environment.setAttribute("ide_name", ApplicationInfo.getInstance().getVersionName());
 
-        root.appendChild(logs);
+        root.appendChild(archives);
         root.appendChild(actions);
         root.appendChild(typings);
         root.appendChild(files);
@@ -255,7 +258,7 @@ public final class IDETracker implements Disposable {
                             fileElement.setAttribute("timestamp", timestamp);
                             fileElement.setAttribute("path",
                                     RelativePathGetter.getRelativePath(file.getPath(), projectPath));
-                            logFile(file.getPath(), timestamp, "fileOpened", null);
+                            archiveFile(file.getPath(), timestamp, "fileOpened", null);
                         }
                     }
 
@@ -269,7 +272,7 @@ public final class IDETracker implements Disposable {
                             fileElement.setAttribute("timestamp", timestamp);
                             fileElement.setAttribute("path",
                                     RelativePathGetter.getRelativePath(file.getPath(), projectPath));
-                            logFile(file.getPath(), timestamp, "fileClosed", null);
+                            archiveFile(file.getPath(), timestamp, "fileClosed", null);
                         }
                     }
 
@@ -283,13 +286,13 @@ public final class IDETracker implements Disposable {
                             if (event.getOldFile() != null) {
                                 fileElement.setAttribute("old_path",
                                         RelativePathGetter.getRelativePath(event.getOldFile().getPath(), projectPath));
-                                logFile(event.getOldFile().getPath(), String.valueOf(System.currentTimeMillis()),
+                                archiveFile(event.getOldFile().getPath(), String.valueOf(System.currentTimeMillis()),
                                         "selectionChanged | OldFile", null);
                             }
                             if (event.getNewFile() != null) {
                                 fileElement.setAttribute("new_path",
                                         RelativePathGetter.getRelativePath(event.getNewFile().getPath(), projectPath));
-                                logFile(event.getNewFile().getPath(), String.valueOf(System.currentTimeMillis()),
+                                archiveFile(event.getNewFile().getPath(), String.valueOf(System.currentTimeMillis()),
                                         "selectionChanged | NewFile", null);
                             }
                         }
@@ -323,11 +326,11 @@ public final class IDETracker implements Disposable {
 
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         for (VirtualFile file : fileEditorManager.getOpenFiles()) {
-            logFile(file.getPath(), String.valueOf(System.currentTimeMillis()), "fileOpened", null);
+            archiveFile(file.getPath(), String.valueOf(System.currentTimeMillis()), "fileOpened", null);
         }
     }
 
-    public void startTracking(){
+    public void startTracking() {
         isTracking = true;
         editorEventMulticaster.addDocumentListener(documentListener, () -> {
         });
@@ -379,8 +382,6 @@ public final class IDETracker implements Disposable {
         System.out.println(Arrays.toString(toolWindowManager.getToolWindowIds()));
         ConsoleView consoleView = (ConsoleView) toolWindowManager.getToolWindow(toolWindowManager.getActiveToolWindowId()).getContentManager().getContent(0).getComponent();
         consoleView.print("Hello World!", ConsoleViewContentType.NORMAL_OUTPUT);
-
-
     }
 
     public void pauseTracking() {
@@ -399,9 +400,9 @@ public final class IDETracker implements Disposable {
         this.projectPath = projectPath;
     }
 
-    public void logFile(String path, String timestamp, String remark, String text) {
+    public void archiveFile(String path, String timestamp, String remark, String text) {
         File srcFile = new File(path);
-        File destFile = new File(dataOutputPath + "/logs/" + timestamp + ".log");
+        File destFile = new File(dataOutputPath + "/archives/" + timestamp + ".archive");
         String[] codeExtensions = {".java", ".cpp", ".c", ".py", ".rb", ".js", ".md"};
         try {
             if (path.equals("unknown")) {
@@ -421,12 +422,18 @@ public final class IDETracker implements Disposable {
             remark += " | IOException | Fail";
         }
 
-        Element log = iDETracking.createElement("log");
-        logs.appendChild(log);
-        log.setAttribute("id", "fileLog");
-        log.setAttribute("timestamp", timestamp);
-        log.setAttribute("path", RelativePathGetter.getRelativePath(path, projectPath));
-        log.setAttribute("remark", remark);
+        Element archive = iDETracking.createElement("archive");
+        archives.appendChild(archive);
+        if (!path.equals("unknown")) {
+            archive.setAttribute("id", "fileArchive");
+        } else {
+            archive.setAttribute("id", "consoleArchive");
+        }
+        archive.setAttribute("timestamp", timestamp);
+        if (!path.equals("unknown")) {
+            archive.setAttribute("path", RelativePathGetter.getRelativePath(path, projectPath));
+            archive.setAttribute("remark", remark);
+        }
     }
 
     public Element getMouseElement(EditorMouseEvent e, String id) {

@@ -69,7 +69,6 @@ public class Config implements Serializable {
 //            }.getType());
             checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {
             }.getType());
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

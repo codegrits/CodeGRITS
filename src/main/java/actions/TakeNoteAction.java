@@ -1,5 +1,7 @@
 package actions;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +21,9 @@ public class TakeNoteAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Successfully Take Note \"" + description + "\"!");
+        Notification notification = new Notification("CodeVision Notification Group", "Add label",
+                "Successfully add label \"" + description + "\"!", NotificationType.INFORMATION);
+        notification.notify(e.getProject());
     }
 
     public void setDescription(String description) {

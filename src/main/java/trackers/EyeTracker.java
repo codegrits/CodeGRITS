@@ -29,7 +29,7 @@ import java.net.Socket;
 
 public class EyeTracker implements Disposable {
     String dataOutputPath = "";
-    int sampleFrequency;
+    double sampleFrequency;
     PsiDocumentManager psiDocumentManager;
     public Editor editor;
     Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -306,7 +306,7 @@ public class EyeTracker implements Disposable {
         this.dataOutputPath = dataOutputPath;
     }
 
-    public void setSampleFrequency(int sampleFrequency) {
+    public void setSampleFrequency(double sampleFrequency) {
         this.sampleFrequency = sampleFrequency;
     }
 

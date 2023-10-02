@@ -14,12 +14,12 @@ import java.util.List;
 public class Config implements Serializable {
     private List<Boolean> checkBoxes;
     private List<String> notes;
-    private Integer sampleFreq;
+    private Double sampleFreq;
     private String pythonInterpreter;
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
 
-    public Config(List<Boolean> checkBoxes, List<String> notes, Integer sampleFreq, String pythonInterpreter, String dataOutputPath, Integer eyeTrackerDevice) {
+    public Config(List<Boolean> checkBoxes, List<String> notes, Double sampleFreq, String pythonInterpreter, String dataOutputPath, Integer eyeTrackerDevice) {
         this.checkBoxes = checkBoxes;
         this.notes = notes;
         this.sampleFreq = sampleFreq;
@@ -60,7 +60,7 @@ public class Config implements Serializable {
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             pythonInterpreter = jsonObject.get("pythonInterpreter").getAsString();
-            sampleFreq = jsonObject.get("sampleFreq").getAsInt();
+            sampleFreq = jsonObject.get("sampleFreq").getAsDouble();
             dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
             eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
             String notesString = jsonObject.get("notes").getAsString().substring(1, jsonObject.get("notes").getAsString().length() - 1);
@@ -78,7 +78,7 @@ public class Config implements Serializable {
         return pythonInterpreter;
     }
 
-    public Integer getSampleFreq() {
+    public Double getSampleFreq() {
         return sampleFreq;
     }
 

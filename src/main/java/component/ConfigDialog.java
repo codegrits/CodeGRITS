@@ -58,7 +58,7 @@ public class ConfigDialog extends DialogWrapper {
             loadConfig();
         }
         addNoteArea(true);
-        if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
+        if (getPythonInterpreter().equals("Select Python Interpreter") || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
         }
     }
@@ -247,7 +247,7 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setMaximumSize(new Dimension(500, 40));
         pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
         pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        pythonInterpreterTextField.setText("Select Python Interpreter");
+        pythonInterpreterTextField.setText("Select Python Interpreter. Default is \"python\".");
         pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
         pythonInterpreterTextField.getTextField().getDocument().addDocumentListener(
                 new DocumentAdapter() {
@@ -270,7 +270,6 @@ public class ConfigDialog extends DialogWrapper {
         //add validator for python interpreter
         new ComponentValidator(getDisposable()).withValidator(() -> {
             String text = pythonInterpreterTextField.getText();
-            System.out.println(text);
             if (!pythonEnvironment) {
                 return new ValidationInfo("Python environment not configured.", pythonInterpreterTextField.getTextField());
             } else {
@@ -285,23 +284,7 @@ public class ConfigDialog extends DialogWrapper {
 
         panel.add(pythonInterpreterTextField);
 
-        new ComponentValidator(getDisposable()).withValidator(() -> {
-            String text = dataOutputTextField.getText();
-            System.out.println(text);
-            if (text.equals("Select Data Output Folder")) {
-                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
-            }
-            return null;
-//            else{
-//                File file = new File(text);
-//                if(!file.exists()){
-//                    return new ValidationInfo("Data output folder not found");
-//                }
-//                else{
-//                    return null;
-//                }
-//            }
-        }).installOn(dataOutputTextField.getTextField());
+
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
         dataOutputLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
@@ -309,15 +292,19 @@ public class ConfigDialog extends DialogWrapper {
         dataOutputTextField.setEditable(false);
         dataOutputTextField.setBorder(new EmptyBorder(contentMargin));
         dataOutputTextField.setMaximumSize(new Dimension(500, 40));
-        dataOutputTextField.setText("Select Data Output Folder");
+        dataOutputTextField.setText("Select Data Output Folder. Default is project root.");
         dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
-        dataOutputTextField.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
-            @Override
-            protected void textChanged(@NotNull DocumentEvent e) {
-                ComponentValidator.getInstance(dataOutputTextField.getTextField()).ifPresent(ComponentValidator::revalidate);
+
+        new ComponentValidator(getDisposable()).withValidator(() -> {
+            String text = dataOutputTextField.getText();
+            if (text.equals("Select Data Output Folder")) {
+                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
             }
-        });
+            return null;
+        }).installOn(dataOutputTextField.getTextField());
+
+
 
         panel.add(dataOutputTextField);
 
@@ -415,7 +402,7 @@ public class ConfigDialog extends DialogWrapper {
             Matcher lettersMatcher = lettersPattern.matcher(textField.getText());
             Matcher punctuationMatcher = punctuationPattern.matcher(textField.getText());
             Set<String> invalidChars = new HashSet<>();
-            if (spaceMatcher.matches()) {
+            if (spaceMatcher.matches() || text.equals("")) {
                 button.setEnabled(false);
                 return new ValidationInfo("Label cannot be empty", textField);
             } else {

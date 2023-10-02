@@ -64,9 +64,9 @@ public class Config implements Serializable {
             dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
             eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
             String notesString = jsonObject.get("notes").getAsString().substring(1, jsonObject.get("notes").getAsString().length() - 1);
-            notes = List.of(notesString.split(", "));
-//            notes = gson.fromJson(jsonObject.get("notes").getAsString(), new TypeToken<List<String>>() {
-//            }.getType());
+            if (notesString.equals("")) {
+                notes = List.of();
+            } else notes = List.of(notesString.split(", "));
             checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {
             }.getType());
         } catch (Exception e) {

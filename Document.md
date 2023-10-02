@@ -617,6 +617,11 @@ Example:
 
 Comment:
 
+- `x` and `y` are the coordinates of the gaze relative to the top-left corner of the visible code editor, whose unit is
+  same to the `screen_size`'s in `environment`, not the actual screen resolution.
+- `line` and `column` are the line number and column number of the gaze point in the code editor, which is calculated
+  by `xyToLogicalPosition(@NotNull Point p)` method of `Editor` interface in IntelliJ Platform.
+
 ---
 
 Element: `<ast_structure>`
@@ -644,7 +649,32 @@ Example:
 </ast_structure>
 ```
 
+```xml
+
+<ast_structure remark="Same (Last Successful AST)" token="println" type="IDENTIFIER"/>
+```
+
 Comment:
+
+- The abstract syntax tree (AST) of the code file is recorded in the `<ast_structure>` element. The AST is calculated by
+  [program structure interface (PSI)](https://plugins.jetbrains.com/docs/intellij/psi-elements.html) of IntelliJ
+  Platform.
+- `token` is text of the leaf node in the AST of current gaze point, which is calculated by `psiElement.getText()`.
+- `type` is the type of the leaf node, which is calculated by `psiElement.getNode().getElementType()`.
+- `remark` is used when the current token is same to the previous token, which means the gaze point is still in the same
+  leaf node. In this case, the `remark` is `Same (Last Successful AST)`. We designed this mechanism to
+  avoid `eye_tracking.xml` to be too large.
+- We calculate the parent nodes of the leaf node by `psiElement.getParent()` until the file-level (i.e. `PsiFile`), and
+  save them in the `<level>` element. In the previous example, the leaf node is `PsiIdentifier:println`, and its parent
+  nodes are `PsiReferenceExpression:System.out.println` => `PsiMethodCallExpression:System.out.println("Hello world!")`
+  => `PsiExpressionStatement` => `PsiCodeBlock` => `PsiMethod:main` => `PsiClass:Main`. The original code text is
+  ```java
+  public class Main {
+      public static void main(String[] args) {
+          System.out.println("Hello world!");
+      }
+  }
+  ```
 
 ---
 
@@ -652,8 +682,8 @@ Element: `<level>`
 
 Attribute:
 
-- start
-- end
+- start: line:column
+- end: line:column
 - tag
 
 Example:
@@ -664,6 +694,10 @@ Example:
 ```
 
 Comment:
+
+- `start` and `end` are the start and end position of the AST node level in the code file, which is calculated by
+  `psiElement.getTextRange()`.
+- `tag` is the type of the AST node level, which is calculated by `psiElement.toString()`.
 
 ## Screen Recording
 

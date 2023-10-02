@@ -27,7 +27,7 @@ Comment:
 
 All the timestamps used by CodeVision are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.
 
----
+## IDE Tracking
 
 Element: `<ide_tracking>`
 
@@ -78,6 +78,7 @@ Comment:
   above, the real screen resolution is (1536\*1.25, 864\*1.25) = (1920, 1080).
 - `java_version` will be replaced by `python_version` in PyCharm, etc.
 - All `path` attributes in the data start with `/` are relative to `project_path`, otherwise they are absolute paths.
+  Sometimes the path is empty, which means the data is irrelevant to any file or not successfully tracked.
 
 ---
 
@@ -93,6 +94,11 @@ Comment:
   timestamp during the development process. The **file archive** is triggered under two specific conditions: (1) When a
   file is opened or closed, or its selection changes; (2) When the content of the code in the main editor changes. The
   **console archive** is triggered when the console output changes (e.g., run class).
+- The archived data is stored in the `archives` directory, with the name `[ARCHIVE_TIMESTAMP].archive`, where
+  `[ARCHIVE_TIMESTAMP]` is the timestamp when the archive is triggered. Relevant information is stored in the
+  `<archive>` element, including the timestamp, the path of the file, and the remark.
+- Thus, if you want to know the state of the code file at a specific timestamp, you can find the archive file with the
+  largest timestamp that is smaller than the target timestamp.
 
 ---
 
@@ -102,8 +108,8 @@ Attribute:
 
 - id
 - timestamp
-- path
-- remark
+- path: only used in `fileArchive`
+- remark: only used in `fileArchive`
 
 Example:
 
@@ -119,7 +125,6 @@ Example:
 Comment:
 
 - `id` could be `fileArchive` or `consoleArchive`.
-- `path` and `remark` is only used in the file archive.
 - `remark` could be `fileOpened`, `fileClosed`, `fileSelectionChanged`, `contentChanged | OldFile`, `contentChanged |
   NewFile`.
 - If the file is not a code file, i.e., the file extension is not in the ".java", ".cpp", ".c", ".py", ".rb", ".js",
@@ -129,6 +134,285 @@ Comment:
 ---
 
 Element: `<actions>`
+
 Sub-element: `<action>`
 
-- `<action>`
+Comment:
+
+- The elements in `<actions>` are all the IDE-specific features, technically are all objects that implement
+  the `AnAction` abstract class in IntelliJ IDEA. The range is diverse, from the basic editing features
+  like `EditorEnter`, `EditorBackSpace`, clipboard features like `EditorPaste`, `EditorCut`, run features
+  like `RunClass`, `Stop`, `ToggleLineBreakpoint`, `Debug`, navigating features
+  like `GotoDeclaration`, `Find`, `ShowIntentionActions`, advanced IDE features
+  like `CompareTwoFiles`, `ReformatCode`, to many others that cannot be fully listed here.
+
+---
+
+Element: `<action>`
+
+Attribute:
+
+- id
+- timestamp
+- path
+
+Example:
+
+```xml
+
+<actions id="ReformatCode" path="/src/Main.java" timestamp="1696214487353"/>
+<actions id="SaveAll" path="/src/Main.java" timestamp="1696214490354"/>
+<actions id="RunClass" path="/src/Main.java" timestamp="1696214496053"/>
+<actions id="ToggleLineBreakpoint" path="/src/Main.java" timestamp="1696214500296"/>
+<actions id="EditorEnter" path="/src/Main.java" timestamp="1696214504846"/>
+<actions id="EditorBackSpace" path="/src/Main.java" timestamp="1696214505280"/>
+<actions id="SaveAll" path="/src/Main.java" timestamp="1696214506877"/>
+<actions id="GotoDeclaration" path="/src/Main.java" timestamp="1696214513473"/>
+<actions id="CodeVision.StartStopTrackingAction"
+         path="C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java"
+         timestamp="1696214517658"/>
+<actions id="EditorCopy" path="/src/Main.java" timestamp="1696216114539"/>
+<actions id="$Paste" path="/src/Main.java" timestamp="1696216116839"/>
+<actions id="$Undo" path="/src/Main.java" timestamp="1696216117569"/>
+<actions id="Debug" path="/src/Main.java" timestamp="1696216129173"/>
+<actions id="NewClass" path="/src" timestamp="1696217116236"/>
+<actions id="RenameElement" path="/src/ABC.java" timestamp="1696217122074"/>
+```
+
+Comment:
+
+- CodeVision-related actions are also implemented as `AnAction` objects, and their `id` is prefixed with `CodeVision`,
+  such as `CodeVision.StartStopTrackingAction`, `CodeVision.PauseResumeTrackingAction`, etc.
+- The "add label" action is also tracked here, with `id` as `"CodeVision.AddLabelAction.[LABEL_NAME]"`, where label name
+  is pre-set in the configuration.
+- Other IntelliJ plugins may also implement their own `AnAction` objects, which will also be tracked here. For example,
+  the `copilot.applyInlays` in the GitHub Copilot plugin.
+
+---
+
+Element: `<typings>`
+
+Sub-element: `<typing>`
+
+Comment:
+
+- The `<typings>` element records the typing action of the user in the code editor. The data including the character,
+  the timestamp, the path of the file, the line number, and the column number.
+
+---
+
+Element: `<typing>`
+
+Attribute:
+
+- character
+- timestamp
+- path
+- line
+- column
+
+Example:
+
+```xml
+
+<typing character="S" column="8" line="3" path="/src/Main.java" timestamp="1696216429855"/>
+<typing character="y" column="9" line="3" path="/src/Main.java" timestamp="1696216430111"/>
+<typing character="s" column="10" line="3" path="/src/Main.java" timestamp="1696216430233"/>
+```
+
+---
+
+Element: `<files>`
+
+Sub-element: `<file>`
+
+Comment:
+
+- The `<files>` element records the file-related actions including opening, closing, and selection change. The data
+  including the timestamp and the path of the file.
+
+---
+
+Element: `<file>`
+
+Attribute:
+
+- id
+- timestamp
+- path: only used in `fileOpened`/`fileClosed`
+- old_path: only used in `selectionChanged`
+- new_path: only used in `selectionChanged`
+
+Example:
+
+```xml
+
+<file id="fileClosed" path="/src/Main.java" timestamp="1696216679318"/>
+<file id="selectionChanged" new_path="/src/ABC.java" old_path="/src/Main.java"
+      timestamp="1696216679330"/>
+<file id="fileOpened" path="/src/ABC.java" timestamp="1696216679338"/>
+```
+
+Comment:
+
+- `id` could be `fileOpened`, `fileClosed`, or `selectionChanged`.
+
+---
+
+Element: `<mouses>`
+
+Sub-element: `<mouse>`
+
+Comment:
+
+- The `<mouses>` element records the mouse-related actions including pressing, releasing, clicking, moving, and
+  dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.
+
+---
+
+Element: `<mouse>`
+
+Attribute:
+
+- id
+- timestamp
+- path
+- x
+- y
+
+Example:
+
+```xml
+
+<mouse id="mousePressed" path="/src/DEF.java" timestamp="1696217839651" x="642" y="120"/>
+<mouse id="mouseReleased" path="/src/DEF.java" timestamp="1696217840187" x="642" y="120"/>
+<mouse id="mouseClicked" path="/src/DEF.java" timestamp="1696217840188" x="642" y="120"/>
+<mouse id="mousePressed" path="/src/DEF.java" timestamp="1696217843026" x="642" y="120"/>
+<mouse id="mouseDragged" path="/src/DEF.java" timestamp="1696217843026" x="634" y="118"/>
+<mouse id="mouseReleased" path="/src/DEF.java" timestamp="1696217843830" x="535" y="117"/>
+<mouse id="mouseMoved" path="/src/DEF.java" timestamp="1696217843901" x="536" y="117"/>
+<mouse id="mouseMoved" path="/src/DEF.java" timestamp="1696217843908" x="537" y="117"/>
+```
+
+Comment:
+
+- `id` could be `mousePressed`, `mouseReleased`, `mouseClicked`, `mouseMoved`, or `mouseDragged`.
+- `x` and `y` are the coordinates relative to the `screen_size` in the `environment`, not the actual screen resolution.
+
+---
+
+Element: `<carets>`
+
+Sub-element: `<caret>`
+
+Comment:
+
+- Caret is the cursor in the code editor. The `<carets>` element records the change of the caret position in the code
+  editor. The data including the timestamp, the path of the file, the line number, and the column number.
+
+---
+
+Element: `<caret>`
+
+Attribute:
+
+- id
+- timestamp
+- path
+- line
+- column
+
+Example:
+
+```xml
+
+<caret column="18" id="caretPositionChanged" line="0" path="/src/DEF.java" timestamp="1696217839651"/>
+```
+
+Comment:
+
+- `id` could only be `caretPositionChanged`.
+
+---
+
+Element: `<selections>`
+
+Sub-element: `<selection>`
+
+Comment:
+
+- The `<selections>` element records data when the user selects a piece of code in the code editor. The data including
+  the timestamp, the path of the file, the start position, the end position, and the selected text.
+
+---
+
+Element: `<selection>`
+
+Attribute:
+
+- id
+- timestamp
+- path
+- start_position: line:column
+- end_position: line:column
+- selected_text
+
+Example:
+
+```xml
+
+<selection end_position="0:18" id="selectionChanged" path="/src/DEF.java" selected_text="F {" start_position="0:15"
+           timestamp="1696219345156"/>
+<selection end_position="0:18" id="selectionChanged" path="/src/DEF.java" selected_text="EF {" start_position="0:14"
+           timestamp="1696219345169"/>
+```
+
+Comment:
+
+- `id` could only be `selectionChanged`.
+
+---
+
+Element: `<visible_areas>`
+
+Sub-element: `<visible_area>`
+
+Comment:
+
+- The `<visible_areas>` element records the visible area of the code editor.
+
+---
+
+Element: `<visible_area>`
+Attribute:
+
+- id
+- timestamp
+- path
+- x
+- y
+- width
+- height
+
+```xml
+
+<visible_area height="277" id="visibleAreaChanged" path="/src/DEF.java" timestamp="1696219585893" width="883" x="0"
+              y="198"/>
+<visible_area height="275" id="visibleAreaChanged" path="/src/DEF.java" timestamp="1696219585921" width="883" x="0"
+              y="198"/>
+```
+
+Comment:
+
+- `id` could only be `visibleAreaChanged`.
+- `x` and `y` are the coordinates of the **left-top corner of the visible area** in code editor, relative to the
+  **left-top corner of the code editor** including the invisible part (i.e., the line 0 and column 0). The unit
+  of `x`, `y`, `width`, and `height` is measured by `screen_size` in the `environment`, not the actual screen
+  resolution.
+- The change of `x` and `y` is usually caused by **scrolling** code editor, which could be used to track the
+  horizontal and vertical scrolling respectively. The change of `width` and `height` is usually caused by **resizing**
+  code editor, which could be used to track the horizontal and vertical resizing respectively.
+
+## Eye Tracking
+
+## Screen Recording

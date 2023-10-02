@@ -53,6 +53,7 @@ public final class IDETracker implements Disposable {
     Element visibleAreas = iDETracking.createElement("visible_areas");
     String projectPath = "";
     String dataOutputPath = "";
+    String lastSelectionInfo = "";
 
     DocumentListener documentListener = new DocumentListener() {
         @Override
@@ -133,8 +134,8 @@ public final class IDETracker implements Disposable {
         @Override
         public void selectionChanged(@NotNull SelectionEvent e) {
             if (!isTracking) return;
+
             Element selectionElement = iDETracking.createElement("selection");
-            selections.appendChild(selectionElement);
             selectionElement.setAttribute("id", "selectionChanged");
             selectionElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
             VirtualFile virtualFile = FileDocumentManager.getInstance().getFile(e.getEditor().getDocument());
@@ -147,6 +148,14 @@ public final class IDETracker implements Disposable {
             selectionElement.setAttribute("end_position", endLogicalPos.line + ":" +
                     endLogicalPos.column);
             selectionElement.setAttribute("selected_text", e.getEditor().getSelectionModel().getSelectedText());
+
+            String currentSelectionInfo = selectionElement.getAttribute("path") + "-" +
+                    selectionElement.getAttribute("start_position") + "-" +
+                    selectionElement.getAttribute("end_position") + "-" +
+                    selectionElement.getAttribute("selected_text");
+            if (currentSelectionInfo.equals(lastSelectionInfo)) return;
+            selections.appendChild(selectionElement);
+            lastSelectionInfo = currentSelectionInfo;
         }
     };
 
@@ -213,7 +222,7 @@ public final class IDETracker implements Disposable {
                     @Override
                     public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
                         if (isTracking) {
-                            Element actionElement = iDETracking.createElement("actions");
+                            Element actionElement = iDETracking.createElement("action");
                             actionElement.setAttribute("id", ActionManager.getInstance().getId(action));
                             actionElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
                             VirtualFile virtualFile = event.getData(PlatformDataKeys.VIRTUAL_FILE);

@@ -41,7 +41,7 @@ public class ConfigDialog extends DialogWrapper {
     private static TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
     private static TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
 
-    private final JComboBox<Integer> freqCombo = new ComboBox<>(new Integer[]{30, 60, 120});
+    private final JComboBox<Double> freqCombo = new ComboBox<>();
     private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
 
     private boolean pythonEnvironment = false;
@@ -60,6 +60,24 @@ public class ConfigDialog extends DialogWrapper {
         addNoteArea(true);
         if (getPythonInterpreter().equals("Select Python Interpreter") || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+            if(pythonEnvironment){
+                eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
+                if(eyeTracker){
+                    String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
+                    if (trackerName != null && !trackerName.equals("Not Found")) {
+                        deviceCombo.removeAllItems();
+                        deviceCombo.addItem(trackerName);
+                        deviceCombo.addItem("Mouse");
+                        deviceCombo.setSelectedIndex(0);
+                    }
+                    List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
+                    freqCombo.removeAllItems();
+                    System.out.println(freqList);
+                    for (String freq : freqList) {
+                        freqCombo.addItem(Double.parseDouble(freq));
+                    }
+                }
+            }
         }
     }
 
@@ -69,7 +87,7 @@ public class ConfigDialog extends DialogWrapper {
 
         List<Boolean> selected = config.getCheckBoxes();
         List<String> notes = config.getNotes();
-        Integer freq = config.getSampleFreq();
+        Double freq = config.getSampleFreq();
         for (int i = 0; i < selected.size(); i++) {
             checkBoxes.get(i).setSelected(selected.get(i));
         }
@@ -90,7 +108,7 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     private void saveConfig() {
-        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Integer) freqCombo.getSelectedItem(),
+        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Double) freqCombo.getSelectedItem(),
                 getPythonInterpreter(), getDataOutputPath(), deviceCombo.getSelectedIndex());
         config.saveAsJson();
     }
@@ -169,68 +187,6 @@ public class ConfigDialog extends DialogWrapper {
         transmitData.setBorder(new EmptyBorder(contentMargin));
 
         panel.add(checkBoxPanel);
-
-        JLabel availabilities = new JLabel("Availabilities");
-        availabilities.setBorder(new EmptyBorder(headingMargin));
-        availabilities.setFont(headingFont);
-//        panel.add(availabilities);
-
-        JPanel checkPythonPanel = new JPanel();
-        JButton checkPython = new JButton("Check Python Environment");
-        JLabel checkPythonResult = new JLabel();
-        checkPythonResult.setBorder(new EmptyBorder(JBUI.insetsLeft(5)));
-
-        checkPython.addActionListener(e -> {
-            try {
-                boolean avail = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-                if (avail) {
-                    checkPythonResult.setIcon(AllIcons.General.InspectionsOK);
-                    String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
-                    if (trackerName != null && !trackerName.equals("Not Found")) {
-                        deviceCombo.removeAllItems();
-                        deviceCombo.addItem("Mouse");
-                        deviceCombo.addItem(trackerName);
-                    }
-
-                } else {
-                    checkPythonResult.setIcon(AllIcons.RunConfigurations.TestFailed);
-                }
-            } catch (IOException | InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        checkPythonPanel.setLayout(new BoxLayout(checkPythonPanel, BoxLayout.X_AXIS));
-        checkPythonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        checkPythonPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-        checkPythonPanel.add(checkPython);
-        checkPythonPanel.add(checkPythonResult);
-        checkPythonPanel.setBorder(new EmptyBorder(contentMargin));
-//        panel.add(checkPythonPanel);
-
-        JPanel checkEyeTrackerPanel = new JPanel();
-        JButton checkEyeTracker = new JButton("Check Eye Tracker");
-        JLabel checkEyeTrackerResult = new JLabel();
-        checkEyeTrackerResult.setBorder(new EmptyBorder(JBUI.insetsLeft(5)));
-
-        checkEyeTracker.addActionListener(e -> {
-            try {
-                boolean avail = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-                if (avail) {
-                    checkEyeTrackerResult.setIcon(AllIcons.General.InspectionsOK);
-                } else {
-                    checkEyeTrackerResult.setIcon(AllIcons.RunConfigurations.TestFailed);
-                }
-            } catch (IOException | InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        checkEyeTrackerPanel.setLayout(new BoxLayout(checkEyeTrackerPanel, BoxLayout.X_AXIS));
-        checkEyeTrackerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        checkEyeTrackerPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-        checkEyeTrackerPanel.add(checkEyeTracker);
-        checkEyeTrackerPanel.add(checkEyeTrackerResult);
-        checkEyeTrackerPanel.setBorder(new EmptyBorder(JBUI.insets(0, 20, 5, 20)));
-//        panel.add(checkEyeTrackerPanel);
 
         JLabel settings = new JLabel("Settings");
         settings.setBorder(new EmptyBorder(headingMargin));
@@ -370,8 +326,23 @@ public class ConfigDialog extends DialogWrapper {
                     if (!eyeTracker) {
                         new AlertDialog("Eye tracker not found. Using mouse tracker.",AllIcons.General.BalloonWarning).show();
                     } else {
-                        new AlertDialog("Eye tracker found.",AllIcons.General.InspectionsOK).show();
                         freqCombo.setEnabled(true);
+                        String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
+                        if (trackerName != null && !trackerName.equals("Not Found")) {
+                            deviceCombo.removeAllItems();
+                            deviceCombo.addItem(trackerName);
+                            deviceCombo.addItem("Mouse");
+                        }
+                        deviceCombo.setSelectedIndex(0);
+                        List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
+                        freqCombo.removeAllItems();
+                        System.out.println(freqList);
+                        for (String freq : freqList) {
+                            freqCombo.addItem(Double.parseDouble(freq));
+                        }
+                        new AlertDialog("Eye tracker found.",AllIcons.General.InspectionsOK).show();
+
+
                     }
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);

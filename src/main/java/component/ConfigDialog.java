@@ -47,6 +47,9 @@ public class ConfigDialog extends DialogWrapper {
     private boolean pythonEnvironment = false;
     private boolean eyeTracker = false;
 
+    public static String selectDataOutputPlaceHolder = "Select Data Output Folder. Default is project root.";
+    public static String selectPythonInterpreterPlaceHolder = "Select Python Interpreter. Default is \"python\".";
+
     public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
         init();
@@ -58,9 +61,9 @@ public class ConfigDialog extends DialogWrapper {
             loadConfig();
         }
         addNoteArea(true);
-        if (getPythonInterpreter().equals("Select Python Interpreter") || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
+        if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-            if(pythonEnvironment){
+            if(pythonEnvironment && checkBoxes.get(1).isSelected()){
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                 if(eyeTracker){
                     String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
@@ -77,6 +80,14 @@ public class ConfigDialog extends DialogWrapper {
                         freqCombo.addItem(Double.parseDouble(freq));
                     }
                 }
+            }
+            if(!checkBoxes.get(1).isSelected() || !pythonEnvironment){
+                freqCombo.setEnabled(false);
+                deviceCombo.setEnabled(false);
+                freqCombo.removeAllItems();
+                deviceCombo.removeAllItems();
+                deviceCombo.addItem("Mouse");
+                freqCombo.addItem(30.0);
             }
         }
     }
@@ -203,7 +214,7 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setMaximumSize(new Dimension(500, 40));
         pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
         pythonInterpreterTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        pythonInterpreterTextField.setText("Select Python Interpreter. Default is \"python\".");
+        pythonInterpreterTextField.setText(selectPythonInterpreterPlaceHolder);
         pythonInterpreterTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(true, false, false, false, false, false)));
         pythonInterpreterTextField.getTextField().getDocument().addDocumentListener(
                 new DocumentAdapter() {
@@ -248,17 +259,17 @@ public class ConfigDialog extends DialogWrapper {
         dataOutputTextField.setEditable(false);
         dataOutputTextField.setBorder(new EmptyBorder(contentMargin));
         dataOutputTextField.setMaximumSize(new Dimension(500, 40));
-        dataOutputTextField.setText("Select Data Output Folder. Default is project root.");
+        dataOutputTextField.setText(selectDataOutputPlaceHolder);
         dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
-
-        new ComponentValidator(getDisposable()).withValidator(() -> {
-            String text = dataOutputTextField.getText();
-            if (text.equals("Select Data Output Folder")) {
-                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
-            }
-            return null;
-        }).installOn(dataOutputTextField.getTextField());
+//
+//        new ComponentValidator(getDisposable()).withValidator(() -> {
+//            String text = dataOutputTextField.getText();
+//            if (text.equals("Select Data Output Folder")) {
+//                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
+//            }
+//            return null;
+//        }).installOn(dataOutputTextField.getTextField());
 
 
 
@@ -470,13 +481,13 @@ public class ConfigDialog extends DialogWrapper {
         if (pythonInterpreterTextField.getText().equals("")) {
             return "python";
         }
-        return pythonInterpreterTextField.getText().equals("Select Python Interpreter")
+        return pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)
                 ? "python" : pythonInterpreterTextField.getText();
     }
 
     public static String getDataOutputPath() {
-        return dataOutputTextField.getText().equals("Select Data Output Folder")
-                ? "Select Data Output Folder" : dataOutputTextField.getText();
+        return dataOutputTextField.getText().equals(selectDataOutputPlaceHolder)
+                ? selectDataOutputPlaceHolder : dataOutputTextField.getText();
     }
 
 }

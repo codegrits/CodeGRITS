@@ -14,6 +14,7 @@ repositories {
 dependencies {
     implementation("org.jcodec:jcodec:0.2.5")
     implementation("org.jcodec:jcodec-javase:0.2.5")
+    implementation("org.bytedeco:javacv-platform:1.5.9")
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.7.1")

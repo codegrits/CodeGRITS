@@ -1,12 +1,28 @@
 package trackers;
 
 import com.opencsv.CSVWriter;
+import org.bytedeco.ffmpeg.global.avcodec;
+import org.bytedeco.ffmpeg.global.avutil;
+import org.bytedeco.javacv.*;
+import org.bytedeco.javacv.Frame;
+import org.bytedeco.opencv.opencv_core.Mat;
 import org.jcodec.api.SequenceEncoder;
 import org.jcodec.api.awt.AWTSequenceEncoder;
-import org.jcodec.common.model.ColorSpace;
-import org.jcodec.common.model.Picture;
-
+import org.opencv.core.CvType;
+import org.opencv.imgproc.Imgproc;
+import org.bytedeco.javacv.*;
+import org.bytedeco.javacpp.*;
+import org.bytedeco.javacpp.indexer.*;
+import org.bytedeco.opencv.opencv_core.*;
+import org.bytedeco.opencv.opencv_imgproc.*;
+import org.bytedeco.opencv.opencv_calib3d.*;
+import org.bytedeco.opencv.opencv_objdetect.*;
+import static org.bytedeco.opencv.global.opencv_core.*;
+import static org.bytedeco.opencv.global.opencv_imgproc.*;
+import static org.bytedeco.opencv.global.opencv_calib3d.*;
+import static org.bytedeco.opencv.global.opencv_objdetect.*;
 import javax.imageio.ImageIO;
+import javax.tools.Tool;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,6 +45,8 @@ public class ScreenRecorder {
     private int clipNumber = 1;
     private String dataOutputPath = "";
 
+    private FrameRecorder recorder;
+
     private static ScreenRecorder instance = null;
 
     private ScreenRecorder() {
@@ -41,11 +59,16 @@ public class ScreenRecorder {
         return instance;
     }
 
-
     private void createEncoder() throws IOException {
-        awtEncoder = AWTSequenceEncoder.createSequenceEncoder(
-                new File(dataOutputPath + "/screen_recording/video_clip_" + clipNumber + ".mp4"), 24);
+        recorder = FrameRecorder.createDefault(dataOutputPath + "/screen_recording/clip_" + clipNumber + ".avi", 1920, 1080);
+        recorder.setFormat("avi");
+        recorder.setFrameRate(30);
+//        recorder.setPixelFormat(2);
+        System.out.println(recorder.getPixelFormat());
+
+
     }
+
 
 
     public void startRecording() throws IOException {
@@ -85,42 +108,36 @@ public class ScreenRecorder {
         }
     }
 
+
     private void recordScreen() throws AWTException, IOException {
-        Rectangle bounds = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-        Robot robot = new Robot();
         createEncoder();
-        long frameRate = 24;
+        Robot robot = new Robot();
+        Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+        OpenCVFrameConverter.ToMat converterToMat = new OpenCVFrameConverter.ToMat();
         Thread recordThread = new Thread(() -> {
-            long frameNumber = 0;
-            long lastFrameTime = System.nanoTime();
-            long frameDuration = 1000000000 / frameRate;
+            try {
+                recorder.start();
+            } catch (FrameRecorder.Exception e) {
+                throw new RuntimeException(e);
+            }
             while (isRecording) {
-                long currentTime = System.nanoTime();
-                if (currentTime - lastFrameTime < frameDuration) {
-                    continue;
-                }
-                lastFrameTime = currentTime;
-
-                BufferedImage screenCapture = robot.createScreenCapture(bounds);
-
-//                try {
-//                    File file = new File(dataOutputPath + "/screen_recording/frames/frame_" + frameNumber + ".jpeg");
-//                    file.getParentFile().mkdirs();
-//                    ImageIO.write(screenCapture, "jpeg", file);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
-                frameNumber++;
-                timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), String.valueOf(frameNumber), String.valueOf(clipNumber)});
                 try {
-                    awtEncoder.encodeImage(screenCapture);
-                } catch (IOException e) {
+                    Mat grabbedImage = Java2DFrameUtils.toMat(robot.createScreenCapture(screenRect));
+
+                    int height = grabbedImage.rows();
+                    int width = grabbedImage.cols();
+                    grabbedImage.convertTo(grabbedImage, CvType.CV_8UC3);
+                    Mat rgbImage = new Mat(height, width, CvType.CV_8UC3);
+//                    cvtColor(grabbedImage, rgbImage, COLOR_RGB2BGR);
+                    recorder.record(converterToMat.convert(grabbedImage));
+                    Thread.sleep(1000/30);
+                } catch (InterruptedException | FrameRecorder.Exception e) {
                     throw new RuntimeException(e);
                 }
+
             }
             try {
-                awtEncoder.finish();
+                recorder.stop();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

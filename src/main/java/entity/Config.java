@@ -40,6 +40,7 @@ public class Config implements Serializable {
     }
     public void saveAsJson() {
         JsonObject jsonObject = new JsonObject();
+        if(sampleFreq == null) sampleFreq = 30.0;
         jsonObject.addProperty("pythonInterpreter", pythonInterpreter);
         jsonObject.addProperty("sampleFreq", sampleFreq);
         jsonObject.addProperty("notes", notes.toString());

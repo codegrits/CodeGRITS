@@ -61,7 +61,7 @@ public class StartStopTrackingAction extends AnAction {
                 ConfigAction.setIsEnabled(false);
                 TakeNoteActionGroup.setIsEnabled(true);
                 String projectPath = e.getProject() != null ? e.getProject().getBasePath() : "";
-                String realDataOutputPath = Objects.equals(config.getDataOutputPath(), "Select Data Output Folder")
+                String realDataOutputPath = Objects.equals(config.getDataOutputPath(), ConfigDialog.selectDataOutputPlaceHolder)
                         ? projectPath : config.getDataOutputPath();
                 realDataOutputPath += "/" + System.currentTimeMillis() + "/";
 

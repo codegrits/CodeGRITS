@@ -18,7 +18,7 @@
 │   │   ├── frames.csv
 ```
 
-Comment:
+**Comment**:
 
 - `[OUTPUT_DIR]` is the output directory specified in the configuration.
 - `[START_TIMESTAMP]` is the timestamp when the tracking starts.
@@ -44,11 +44,43 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 │   │   ├── ...
 ```
 
+### XML Element Tree
+
+<style>
+    .tree {
+        color: #1956AF;
+        border-radius: 10px;
+        border: 1px solid #1956AF;
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+:::tree
+- **`<ide_tracking>`**
+  - [`<environment>`](#environment)
+  - [`<archives>`](#archives)
+    - [`<archive>`](#archive)
+  - [`<actions>`](#actions)
+    - [`<action>`](#action)
+  - [`<typings>`](#typings)
+    - [`<typing>`](#typing)
+  - [`<files>`](#files)
+    - [`<file>`](#file)
+  - [`<mouses>`](#mouses)
+    - [`<mouse>`](#mouse)
+  - [`<carets>`](#carets)
+    - [`<caret>`](#caret)
+  - [`<selections>`](#selections)
+    - [`<selection>`](#selection)
+  - [`<visible_areas>`](#vis_areas)
+    - [`<visible_area>`](#vis_area)
+:::
+
 ---
 
-Element: `<ide_tracking>`
+**Element**: `<ide_tracking>`
 
-Sub-element:
+**Sub-element**:
 
 - `<environment>`
 - `<archives>`
@@ -60,15 +92,15 @@ Sub-element:
 - `<selections>`
 - `<visible_areas>`
 
-Comment:
+**Comment**:
 
 - The root element of the `ide_tracking.xml` file.
 
 ---
+<a name="environment"></a>
+**Element**: `<environment>`
 
-Element: `<environment>`
-
-Attribute:
+**Attribute**:
 
 - ide_name
 - ide_version
@@ -80,7 +112,7 @@ Attribute:
 - scale_x
 - scale_y
 
-Example:
+**Example**:
 
 ```xml
 
@@ -89,7 +121,7 @@ Example:
              scale_y="1.25" screen_size="(1536,864)"/>
 ```
 
-Comment:
+**Comment**:
 
 - `scale_x` and `scale_y` are used to calculate the real screen resolution based on the `screen_size`. In the example
   above, the real screen resolution is (1536\*1.25, 864\*1.25) = (1920, 1080).
@@ -98,12 +130,12 @@ Comment:
   Sometimes the path is empty, which means the data is irrelevant to any file or not successfully tracked.
 
 ---
+<a name="archives"></a>
+**Element**: `<archives>`
 
-Element: `<archives>`
+**Sub-element**: `<archive>`
 
-Sub-element: `<archive>`
-
-Comment:
+**Comment**:
 
 - A **real-time archive mechanism** is implemented to track the state of the code file and console output at any
   timestamp during the development process. The **file archive** is triggered under two specific conditions: (1) When a
@@ -116,17 +148,17 @@ Comment:
   largest timestamp that is smaller than the target timestamp.
 
 ---
+<a name="archive"></a>
+**Element**: `<archive>`
 
-Element: `<archive>`
-
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
 - path: only used in `fileArchive`
 - remark: only used in `fileArchive`
 
-Example:
+**Example**:
 
 ```xml
 
@@ -137,7 +169,7 @@ Example:
 <archive id="consoleArchive" timestamp="1696203842925"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could be `fileArchive` or `consoleArchive`.
 - `remark` could be `fileOpened`, `fileClosed`, `fileSelectionChanged`, `contentChanged | OldFile`, `contentChanged |
@@ -147,12 +179,12 @@ Comment:
 - If there are IO errors when archiving the file, `IOException | Fail` would be added to the remark.
 
 ---
+<a name="actions"></a>
+**Element**: `<actions>`
 
-Element: `<actions>`
+**Sub-element**: `<action>`
 
-Sub-element: `<action>`
-
-Comment:
+**Comment**:
 
 - The elements in `<actions>` are all the IDE-specific features, technically are all objects that implement
   the `AnAction` abstract class in IntelliJ IDEA. The range is diverse, from the basic editing features
@@ -162,16 +194,16 @@ Comment:
   like `CompareTwoFiles`, `ReformatCode`, to many others that cannot be fully listed here.
 
 ---
+<a name="action"></a>
+**Element**: `<action>`
 
-Element: `<action>`
-
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
 - path
 
-Example:
+**Example**:
 
 ```xml
 
@@ -194,7 +226,7 @@ Example:
 <actions id="RenameElement" path="/src/ABC.java" timestamp="1696217122074"/>
 ```
 
-Comment:
+**Comment**:
 
 - CodeVision-related actions are also implemented as `AnAction` objects, and their `id` is prefixed with `CodeVision`,
   such as `CodeVision.StartStopTrackingAction`, `CodeVision.PauseResumeTrackingAction`, etc.
@@ -204,21 +236,21 @@ Comment:
   the `copilot.applyInlays` in the GitHub Copilot plugin.
 
 ---
+<a name="typings"></a>
+**Element**: `<typings>`
 
-Element: `<typings>`
+**Sub-element**: `<typing>`
 
-Sub-element: `<typing>`
-
-Comment:
+**Comment**:
 
 - The `<typings>` element records the typing action of the user in the code editor. The data including the character,
   the timestamp, the path of the file, the line number, and the column number.
 
 ---
+<a name="typing"></a>
+**Element**: `<typing>`
 
-Element: `<typing>`
-
-Attribute:
+**Attribute**:
 
 - character
 - timestamp
@@ -226,7 +258,7 @@ Attribute:
 - line
 - column
 
-Example:
+**Example**:
 
 ```xml
 
@@ -236,21 +268,21 @@ Example:
 ```
 
 ---
+<a name="files"></a>
+**Element**: `<files>`
 
-Element: `<files>`
+**Sub-element**: `<file>`
 
-Sub-element: `<file>`
-
-Comment:
+**Comment**:
 
 - The `<files>` element records the file-related actions including opening, closing, and selection change. The data
   including the timestamp and the path of the file.
 
 ---
+<a name="file"></a>
+**Element**: `<file>`
 
-Element: `<file>`
-
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
@@ -258,7 +290,7 @@ Attribute:
 - old_path: only used in `selectionChanged`
 - new_path: only used in `selectionChanged`
 
-Example:
+**Example**:
 
 ```xml
 
@@ -268,26 +300,27 @@ Example:
 <file id="fileOpened" path="/src/ABC.java" timestamp="1696216679338"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could be `fileOpened`, `fileClosed`, or `selectionChanged`.
 
 ---
+<a name="mouses"></a>
+**Element**: `<mouses>`
 
-Element: `<mouses>`
+**Sub-element**: `<mouse>`
 
-Sub-element: `<mouse>`
-
-Comment:
+**Comment**:
 
 - The `<mouses>` element records the mouse-related actions including pressing, releasing, clicking, moving, and
   dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.
 
 ---
 
-Element: `<mouse>`
+<a name="mouse"></a>
+**Element**: `<mouse>`
 
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
@@ -295,7 +328,7 @@ Attribute:
 - x
 - y
 
-Example:
+**Example**:
 
 ```xml
 
@@ -309,27 +342,27 @@ Example:
 <mouse id="mouseMoved" path="/src/DEF.java" timestamp="1696217843908" x="537" y="117"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could be `mousePressed`, `mouseReleased`, `mouseClicked`, `mouseMoved`, or `mouseDragged`.
 - `x` and `y` are the coordinates relative to the `screen_size` in the `environment`, not the actual screen resolution.
 
 ---
+<a name="carets"></a>
+**Element**: `<carets>`
 
-Element: `<carets>`
+**Sub-element**: `<caret>`
 
-Sub-element: `<caret>`
-
-Comment:
+**Comment**:
 
 - Caret is the cursor in the code editor. The `<carets>` element records the change of the caret position in the code
   editor. The data including the timestamp, the path of the file, the line number, and the column number.
 
 ---
+<a name="caret"></a>
+**Element**: `<caret>`
 
-Element: `<caret>`
-
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
@@ -337,33 +370,33 @@ Attribute:
 - line
 - column
 
-Example:
+**Example**:
 
 ```xml
 
 <caret column="18" id="caretPositionChanged" line="0" path="/src/DEF.java" timestamp="1696217839651"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could only be `caretPositionChanged`.
 
 ---
+<a name="selections"></a>
+**Element**: `<selections>`
 
-Element: `<selections>`
+**Sub-element**: `<selection>`
 
-Sub-element: `<selection>`
-
-Comment:
+**Comment**:
 
 - The `<selections>` element records data when the user selects a piece of code in the code editor. The data including
   the timestamp, the path of the file, the start position, the end position, and the selected text.
 
 ---
+<a name="selection"></a>
+**Element**: `<selection>`
 
-Element: `<selection>`
-
-Attribute:
+**Attribute**:
 
 - id
 - timestamp
@@ -372,7 +405,7 @@ Attribute:
 - end_position: line:column
 - selected_text
 
-Example:
+**Example**:
 
 ```xml
 
@@ -382,24 +415,24 @@ Example:
            timestamp="1696219345169"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could only be `selectionChanged`.
 
 ---
+<a name="vis_areas"></a>
+**Element**: `<visible_areas>`
 
-Element: `<visible_areas>`
+**Sub-element**: `<visible_area>`
 
-Sub-element: `<visible_area>`
-
-Comment:
+**Comment**:
 
 - The `<visible_areas>` element records the visible area of the code editor.
 
 ---
-
-Element: `<visible_area>`
-Attribute:
+<a name="vis_area"></a>
+**Element**: `<visible_area>`
+**Attribute**:
 
 - id
 - timestamp
@@ -417,7 +450,7 @@ Attribute:
               y="198"/>
 ```
 
-Comment:
+**Comment**:
 
 - `id` could only be `visibleAreaChanged`.
 - `x` and `y` are the coordinates of the **left-top corner of the visible area** in code editor, relative to the
@@ -438,14 +471,14 @@ Comment:
 
 ---
 
-Element: `<eye_tracking>`
+**Element**: `<eye_tracking>`
 
-Sub-element:
+**Sub-element**:
 
 - `<setting>`
 - `<gazes>`
 
-Comment:
+**Comment**:
 
 - The root element of the `eye_tracking.xml` file. CodeVision support both Mouse simulation and Tobii Pro eye tracker
   devices.
@@ -455,21 +488,21 @@ Comment:
 
 ---
 
-Element: `<setting>`
+**Element**: `<setting>`
 
-Attribute:
+**Attribute**:
 
 - eye_tracker
 - sampling_rate
 
-Example:
+**Example**:
 
 ```xml
 
 <setting eye_tracker="Tobii Pro Fusion" sample_frequency="30"/>
 ```
 
-Comment:
+**Comment**:
 
 - `eye_tracker` could be `Mouse` for simulation, or real Tobii Pro eye tracker device name (e.g., `Tobii Pro Fusion`),
   which is got from `eyetracker.model` in the `tobii-research` library.
@@ -478,19 +511,19 @@ Comment:
 
 ---
 
-Element: `<gazes>`
+**Element**: `<gazes>`
 
-Sub-element: `<gaze>`
+**Sub-element**: `<gaze>`
 
-Comment:
+**Comment**:
 
 - Collection of all gaze data.
 
 ---
 
-Element: `<gaze>`
+**Element**: `<gaze>`
 
-Sub-element:
+**Sub-element**:
 
 - `<left_eye>`
 - `<right_eye>`
@@ -498,12 +531,12 @@ Sub-element:
 - `<ast_structure>`: only used when the gaze point cannot be mapped to location in the code editor, and the code file is
   java.
 
-Attribute:
+**Attribute**:
 
 - timestamp
 - remark: only used when the gaze point cannot be mapped to location in the code editor
 
-Example:
+**Example**:
 
 ```xml
 
@@ -525,7 +558,7 @@ Example:
 </gaze>
 ```
 
-Comment:
+**Comment**:
 
 When the gaze point cannot be mapped to location in the code editor in the following 3 cases, the `remark` attribute is
 used:
@@ -538,9 +571,9 @@ used:
 
 ---
 
-Element: `<left_eye>`
+**Element**: `<left_eye>`
 
-Attribute:
+**Attribute**:
 
 - gaze_point_x
 - gaze_point_y
@@ -548,7 +581,7 @@ Attribute:
 - pupil_diameter
 - pupil_validity
 
-Example:
+**Example**:
 
 ```xml
 
@@ -556,7 +589,7 @@ Example:
           pupil_diameter="2.4835662841796875" pupil_validity="1.0"/>
 ```
 
-Comment:
+**Comment**:
 
 - `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
   corner of the screen, and (1, 1) is the bottom-right corner of the screen.
@@ -568,9 +601,9 @@ Comment:
 
 ---
 
-Element: `<right_eye>`
+**Element**: `<right_eye>`
 
-Attribute:
+**Attribute**:
 
 - gaze_point_x
 - gaze_point_y
@@ -578,7 +611,7 @@ Attribute:
 - pupil_diameter
 - pupil_validity
 
-Example:
+**Example**:
 
 ```xml
 
@@ -586,7 +619,7 @@ Example:
            pupil_diameter="2.7188568115234375" pupil_validity="1.0"/>
 ```
 
-Comment:
+**Comment**:
 
 - `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
   corner of the screen, and (1, 1) is the bottom-right corner of the screen.
@@ -598,9 +631,9 @@ Comment:
 
 ---
 
-Element: `<location>`
+**Element**: `<location>`
 
-Attribute:
+**Attribute**:
 
 - path
 - line
@@ -608,14 +641,14 @@ Attribute:
 - x
 - y
 
-Example:
+**Example**:
 
 ```xml
 
 <location column="25" line="2" path="/src/Main.java" x="820" y="150"/>
 ```
 
-Comment:
+**Comment**:
 
 - `x` and `y` are the coordinates of the gaze relative to the top-left corner of the visible code editor, whose unit is
   same to the `screen_size`'s in `environment`, not the actual screen resolution.
@@ -624,17 +657,17 @@ Comment:
 
 ---
 
-Element: `<ast_structure>`
+**Element**: `<ast_structure>`
 
-Sub-element: `<level>`: only used when the current token is different from the previous token
+**Sub-element**: `<level>`: only used when the current token is different from the previous token
 
-Attribute:
+**Attribute**:
 
 - token
 - type
 - remark: only used when the current token is same to the previous token
 
-Example:
+**Example**:
 
 ```xml
 
@@ -654,7 +687,7 @@ Example:
 <ast_structure remark="Same (Last Successful AST)" token="println" type="IDENTIFIER"/>
 ```
 
-Comment:
+**Comment**:
 
 - The abstract syntax tree (AST) of the code file is recorded in the `<ast_structure>` element. The AST is calculated by
   [program structure interface (PSI)](https://plugins.jetbrains.com/docs/intellij/psi-elements.html) of IntelliJ
@@ -678,22 +711,22 @@ Comment:
 
 ---
 
-Element: `<level>`
+**Element**: `<level>`
 
-Attribute:
+**Attribute**:
 
 - start: line:column
 - end: line:column
 - tag
 
-Example:
+**Example**:
 
 ```xml
 
 <level end="3:5" start="1:4" tag="PsiMethod:main"/>
 ```
 
-Comment:
+**Comment**:
 
 - `start` and `end` are the start and end position of the AST node level in the code file, which is calculated by
   `psiElement.getTextRange()`.
@@ -715,7 +748,7 @@ Comment:
 
 `video_clip_[k].mp4`
 
-Comment:
+**Comment**:
 
 - The video clip of the screen recording from the (k-1)-th pause (0-th pause is start) to the k-th pause. We designed
   this mechanism to avoid the video file in the memory being too large especially when pausing the tracking for a long
@@ -731,7 +764,7 @@ Column:
 - frame_number
 - clip_number
 
-Example:
+**Example**:
 
 ```csv
 timestamp,frame_number,clip_number
@@ -739,7 +772,7 @@ timestamp,frame_number,clip_number
 1696224360991,2,1
 ```
 
-Comment:
+**Comment**:
 
 - `frame_number` is the frame number of the frame in its video clip.
 - `clip_number` is the number of the video clip to which the frame belongs.

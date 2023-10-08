@@ -23,6 +23,9 @@ import org.w3c.dom.Element;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,6 +57,10 @@ public final class IDETracker implements Disposable {
     String projectPath = "";
     String dataOutputPath = "";
     String lastSelectionInfo = "";
+
+    private boolean isRealTimeDataTransmitting = false;
+
+    OutputStream realTimeDataOutputStream = null;
 
     DocumentListener documentListener = new DocumentListener() {
         @Override
@@ -290,6 +297,7 @@ public final class IDETracker implements Disposable {
                         if (isTracking) {
                             Element fileElement = iDETracking.createElement("file");
                             files.appendChild(fileElement);
+
                             fileElement.setAttribute("id", "selectionChanged");
                             fileElement.setAttribute("timestamp", String.valueOf(System.currentTimeMillis()));
                             if (event.getOldFile() != null) {
@@ -332,6 +340,25 @@ public final class IDETracker implements Disposable {
         });
         editorEventMulticaster.addVisibleAreaListener(visibleAreaListener, () -> {
         });
+
+        if (isRealTimeDataTransmitting) {
+            Thread dataThread = new Thread(() -> {
+                try {
+                    System.out.println("Waiting for IDE client");
+                    ServerSocket serverSocket = new ServerSocket(12346);
+                    Socket socket = serverSocket.accept();
+                    System.out.println("Connected to IDE client");
+                    realTimeDataOutputStream = socket.getOutputStream();
+                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(realTimeDataOutputStream);
+                    BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
+                    bufferedWriter.write("Hello World!");
+                    bufferedWriter.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            dataThread.start();
+        }
 
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         for (VirtualFile file : fileEditorManager.getOpenFiles()) {
@@ -383,6 +410,10 @@ public final class IDETracker implements Disposable {
 
     public void resumeTracking() {
         isTracking = true;
+    }
+
+    public void setIsRealTimeDataTransmitting(boolean isRealTimeDataTransmitting) {
+        this.isRealTimeDataTransmitting  = isRealTimeDataTransmitting;
     }
 
     @Override

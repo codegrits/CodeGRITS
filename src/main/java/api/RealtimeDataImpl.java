@@ -6,12 +6,19 @@ import trackers.IDETracker;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
 import java.util.function.Consumer;
 
-public class RealtimeDataImpl implements RealtimeDataInterface{
+public class RealtimeDataImpl{
 
     //make it singleton
     private static RealtimeDataImpl realtimeData = new RealtimeDataImpl();
+
+    Socket socket;
+    InputStream dataInputStream;
 
 
     private Consumer<String> ideTrackerDataHandler;
@@ -28,43 +35,58 @@ public class RealtimeDataImpl implements RealtimeDataInterface{
         return realtimeData;
     }
 
-    @Override
+
     public void checkEnvironment() {
         System.out.println("Hello World!");
     }
 
-    @Override
+
     public void getRawIDETrackerData(Project project) throws ParserConfigurationException {
         ideTracker = IDETracker.getInstance();
         ideTracker.startTracking(project);
     }
 
-    @Override
+
     public void getRawEyeTrackerData() {
 
     }
 
-    @Override
+
     public void stopIDETrackerData() throws TransformerException {
         ideTracker.stopTracking();
     }
 
-    @Override
+
     public void stopEyeTrackerData() {
 
     }
 
-    @Override
-    public void getHandledIDETrackerData() throws ParserConfigurationException {
-        if(ideTrackerDataHandler == null){
-            throw new RuntimeException("IDE Tracker Data Handler not set!");
-        }
-        ideTracker = IDETracker.getInstance();
-//        ideTracker.startTracking();
 
+    public void getHandledIDETrackerData(Project project) throws ParserConfigurationException, IOException {
+        if(ideTrackerDataHandler == null){
+            return;
+        }
+        Thread ideTrackerThread = new Thread(() -> {
+            try {
+                ideTracker = IDETracker.getInstance();
+                ideTracker.setIsRealTimeDataTransmitting(true);
+                ideTracker.startTracking(project);
+                Thread.sleep(1000);
+                Socket socket = new Socket("localhost", 12346);
+                System.out.println("IDE Tracker connected!");
+                dataInputStream = socket.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new java.io.InputStreamReader(dataInputStream));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    ideTrackerDataHandler.accept(line);
+                }
+            } catch (IOException | ParserConfigurationException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        ideTrackerThread.start();
     }
 
-    @Override
     public void getHandledEyeTrackerData() {
         if(eyeTrackerDataHandler == null){
             throw new RuntimeException("Eye Tracker Data Handler not set!");
@@ -72,12 +94,12 @@ public class RealtimeDataImpl implements RealtimeDataInterface{
     }
 
 
-    @Override
+
     public void setIDETrackerDataHandler(Consumer<String> ideTrackerDataHandler) {
         this.ideTrackerDataHandler = ideTrackerDataHandler;
     }
 
-    @Override
+
     public void setEyeTrackerDataHandler(Consumer<String> eyeTrackerDataHandler) {
         this.eyeTrackerDataHandler = eyeTrackerDataHandler;
     }

@@ -482,7 +482,7 @@ public class ConfigDialog extends DialogWrapper {
             return "python";
         }
         return pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)
-                ? "python" : pythonInterpreterTextField.getText();
+                ? selectPythonInterpreterPlaceHolder : pythonInterpreterTextField.getText();
     }
 
     public static String getDataOutputPath() {

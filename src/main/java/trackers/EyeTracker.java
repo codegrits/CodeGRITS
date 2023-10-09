@@ -10,8 +10,9 @@ import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
-//import com.jetbrains.python.psi.*;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,9 +23,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.awt.*;
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.function.Consumer;
 
 
 public class EyeTracker implements Disposable {
@@ -48,6 +51,9 @@ public class EyeTracker implements Disposable {
     String pythonScriptTobii;
     String pythonScriptMouse;
     int deviceIndex = 0;
+
+    private static boolean isRealTimeDataTransmitting = false;
+    private Consumer<Element> eyeTrackerDataHandler;
 
     public EyeTracker() throws ParserConfigurationException {
 
@@ -186,6 +192,8 @@ public class EyeTracker implements Disposable {
 //                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
             }
         }));
+
+        handleElement(gaze);
     }
 
     public void track() {
@@ -295,6 +303,14 @@ public class EyeTracker implements Disposable {
             parent = parent.getParent();
         }
         return aSTStructure;
+    }
+
+    private void handleElement(Element element) {
+        if (eyeTrackerDataHandler != null && isRealTimeDataTransmitting) {
+            eyeTrackerDataHandler.accept(element);
+        }else if(eyeTrackerDataHandler==null){
+            throw new RuntimeException("eyeTrackerDataHandler is null");
+        }
     }
 
 

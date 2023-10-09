@@ -16,6 +16,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindowManager;
+import jnr.ffi.annotations.Out;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,6 +30,7 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Consumer;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
@@ -58,9 +60,8 @@ public final class IDETracker implements Disposable {
     String dataOutputPath = "";
     String lastSelectionInfo = "";
 
-    private boolean isRealTimeDataTransmitting = false;
-
-    OutputStream realTimeDataOutputStream = null;
+    private  static boolean isRealTimeDataTransmitting = false;
+    private Consumer<Element> ideTrackerDataHandler;
 
     DocumentListener documentListener = new DocumentListener() {
         @Override
@@ -95,6 +96,8 @@ public final class IDETracker implements Disposable {
             if (!isTracking) return;
             Element mouseElement = getMouseElement(e, "mouseClicked");
             mouses.appendChild(mouseElement);
+            handleElement(mouseElement);
+
         }
 
         @Override
@@ -102,6 +105,8 @@ public final class IDETracker implements Disposable {
             if (!isTracking) return;
             Element mouseElement = getMouseElement(e, "mouseReleased");
             mouses.appendChild(mouseElement);
+            handleElement(mouseElement);
+
         }
     };
 
@@ -111,6 +116,7 @@ public final class IDETracker implements Disposable {
             if (!isTracking) return;
             Element mouseElement = getMouseElement(e, "mouseMoved");
             mouses.appendChild(mouseElement);
+            handleElement(mouseElement);
         }
 
         @Override
@@ -118,6 +124,7 @@ public final class IDETracker implements Disposable {
             if (!isTracking) return;
             Element mouseElement = getMouseElement(e, "mouseDragged");
             mouses.appendChild(mouseElement);
+            handleElement(mouseElement);
         }
     };
 
@@ -134,6 +141,7 @@ public final class IDETracker implements Disposable {
                     RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
             caretElement.setAttribute("line", String.valueOf(e.getNewPosition().line));
             caretElement.setAttribute("column", String.valueOf(e.getNewPosition().column));
+            handleElement(caretElement);
         }
     };
 
@@ -163,6 +171,7 @@ public final class IDETracker implements Disposable {
             if (currentSelectionInfo.equals(lastSelectionInfo)) return;
             selections.appendChild(selectionElement);
             lastSelectionInfo = currentSelectionInfo;
+            handleElement(selectionElement);
         }
     };
 
@@ -180,7 +189,9 @@ public final class IDETracker implements Disposable {
             visibleAreaElement.setAttribute("y", String.valueOf(e.getEditor().getScrollingModel().getVerticalScrollOffset()));
             visibleAreaElement.setAttribute("width", String.valueOf(e.getEditor().getScrollingModel().getVisibleArea().width));
             visibleAreaElement.setAttribute("height", String.valueOf(e.getEditor().getScrollingModel().getVisibleArea().height));
+            handleElement(visibleAreaElement);
         }
+
     };
 
     EditorEventMulticaster editorEventMulticaster = EditorFactory.getInstance().getEventMulticaster();
@@ -236,6 +247,7 @@ public final class IDETracker implements Disposable {
                             actionElement.setAttribute("path", virtualFile != null ?
                                     RelativePathGetter.getRelativePath(virtualFile.getPath(), projectPath) : null);
                             actions.appendChild(actionElement);
+                            handleElement(actionElement);
                         }
                     }
 
@@ -257,6 +269,7 @@ public final class IDETracker implements Disposable {
                                 typingElement.setAttribute("line", String.valueOf(logicalPos.line));
                                 typingElement.setAttribute("column", String.valueOf(logicalPos.column));
                             }
+                            handleElement(typingElement);
                         }
                     }
                 });
@@ -275,6 +288,7 @@ public final class IDETracker implements Disposable {
                             fileElement.setAttribute("path",
                                     RelativePathGetter.getRelativePath(file.getPath(), projectPath));
                             archiveFile(file.getPath(), timestamp, "fileOpened", null);
+                            handleElement(fileElement);
                         }
                     }
 
@@ -289,6 +303,7 @@ public final class IDETracker implements Disposable {
                             fileElement.setAttribute("path",
                                     RelativePathGetter.getRelativePath(file.getPath(), projectPath));
                             archiveFile(file.getPath(), timestamp, "fileClosed", null);
+                            handleElement(fileElement);
                         }
                     }
 
@@ -312,6 +327,7 @@ public final class IDETracker implements Disposable {
                                 archiveFile(event.getNewFile().getPath(), String.valueOf(System.currentTimeMillis()),
                                         "selectionChanged | NewFile", null);
                             }
+                            handleElement(fileElement);
                         }
                     }
                 });
@@ -340,30 +356,14 @@ public final class IDETracker implements Disposable {
         });
         editorEventMulticaster.addVisibleAreaListener(visibleAreaListener, () -> {
         });
-
-        if (isRealTimeDataTransmitting) {
-            Thread dataThread = new Thread(() -> {
-                try {
-                    System.out.println("Waiting for IDE client");
-                    ServerSocket serverSocket = new ServerSocket(12346);
-                    Socket socket = serverSocket.accept();
-                    System.out.println("Connected to IDE client");
-                    realTimeDataOutputStream = socket.getOutputStream();
-                    OutputStreamWriter outputStreamWriter = new OutputStreamWriter(realTimeDataOutputStream);
-                    BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
-                    bufferedWriter.write("Hello World!");
-                    bufferedWriter.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            dataThread.start();
-        }
-
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         for (VirtualFile file : fileEditorManager.getOpenFiles()) {
             archiveFile(file.getPath(), String.valueOf(System.currentTimeMillis()), "fileOpened", null);
         }
+    }
+
+    public void setIdeTrackerDataHandler(Consumer<Element> ideTrackerDataHandler) {
+        this.ideTrackerDataHandler = ideTrackerDataHandler;
     }
 
     public void stopTracking() throws TransformerException {
@@ -378,32 +378,6 @@ public final class IDETracker implements Disposable {
         XMLWriter.writeToXML(iDETracking, filePath);
     }
 
-    public void transmitRealTimeData() throws IOException {
-        //start a new thread
-//        Thread serverThread = new Thread(() -> {
-//            try {
-//                ServerSocket serverSocket = new ServerSocket(12345);
-//                Socket socket = serverSocket.accept();
-//                System.out.println("Connected to client");
-//                try (OutputStream outputStream = socket.getOutputStream();
-//                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-//                     BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter)) {
-//                    bufferedWriter.write("Hello World!");
-//                    bufferedWriter.flush();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//        serverThread.start();
-        //get current project
-        Project project = ProjectManager.getInstance().getOpenProjects()[0];
-        ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
-        System.out.println(Arrays.toString(toolWindowManager.getToolWindowIds()));
-        ConsoleView consoleView = (ConsoleView) toolWindowManager.getToolWindow(toolWindowManager.getActiveToolWindowId()).getContentManager().getContent(0).getComponent();
-        consoleView.print("Hello World!", ConsoleViewContentType.NORMAL_OUTPUT);
-    }
-
     public void pauseTracking() {
         isTracking = false;
     }
@@ -413,7 +387,7 @@ public final class IDETracker implements Disposable {
     }
 
     public void setIsRealTimeDataTransmitting(boolean isRealTimeDataTransmitting) {
-        this.isRealTimeDataTransmitting  = isRealTimeDataTransmitting;
+        IDETracker.isRealTimeDataTransmitting = isRealTimeDataTransmitting;
     }
 
     @Override
@@ -475,6 +449,13 @@ public final class IDETracker implements Disposable {
 
     public void setDataOutputPath(String dataOutputPath) {
         this.dataOutputPath = dataOutputPath;
+    }
+
+    private void handleElement(Element element){
+        if(ideTrackerDataHandler == null) throw new RuntimeException("ideTrackerDataHandler is null");
+        if(isRealTimeDataTransmitting){
+            ideTrackerDataHandler.accept(element);
+        }
     }
 
     public boolean isTracking() {

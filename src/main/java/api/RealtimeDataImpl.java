@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.function.Consumer;
 
@@ -66,21 +67,24 @@ public class RealtimeDataImpl{
         if(ideTrackerDataHandler == null){
             return;
         }
+        ideTracker = IDETracker.getInstance();
+        ideTracker.setIsRealTimeDataTransmitting(true);
+        ideTracker.startTracking(project);
         Thread ideTrackerThread = new Thread(() -> {
             try {
-                ideTracker = IDETracker.getInstance();
-                ideTracker.setIsRealTimeDataTransmitting(true);
-                ideTracker.startTracking(project);
-                Thread.sleep(1000);
+
+                Thread.sleep(2000);
                 Socket socket = new Socket("localhost", 12346);
-                System.out.println("IDE Tracker connected!");
-                dataInputStream = socket.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new java.io.InputStreamReader(dataInputStream));
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    ideTrackerDataHandler.accept(line);
+                InputStream dataInputStream = socket.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(dataInputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                while (true) {
+                    String line = bufferedReader.readLine();
+                    System.out.println(ideTrackerDataHandler.toString());
+//                    ideTrackerDataHandler.accept(line);
+                    System.out.println(line);
                 }
-            } catch (IOException | ParserConfigurationException | InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });

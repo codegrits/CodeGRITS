@@ -24,13 +24,19 @@ dependencies {
 intellij {
     version.set("2022.2.5")
 
-    type.set("IC") // Target IDE Platform
-    plugins.set(listOf(/* Plugin Dependencies */
-            "com.intellij.java"))
+    type.set("IC")
+    plugins.set(listOf("com.intellij.java"))
 
-//    type.set("PC") // Target IDE Platform
-//    plugins.set(listOf(/* Plugin Dependencies */
-//            "PythonCore"))
+//    type.set("PC")
+//    plugins.set(listOf("PythonCore"))
+
+//    type.set("CL")
+
+//    type.set("PS")
+
+//    version.set("2023.1.4")
+//    type.set("IC")
+//    plugins.set(listOf("android"))
 }
 
 tasks {
@@ -58,7 +64,7 @@ tasks {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
 
-    val createOpenApiSourceJar by registering(Jar::class){
+    val createOpenApiSourceJar by registering(Jar::class) {
         from(sourceSets.main.get().java) {
             include("**/api/**/*.java")
         }
@@ -66,7 +72,7 @@ tasks {
         archiveClassifier.set("src")
     }
 
-    buildPlugin{
+    buildPlugin {
         dependsOn(createOpenApiSourceJar)
         from(createOpenApiSourceJar) { into("lib/src") }
     }

@@ -16,7 +16,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindowManager;
-import jnr.ffi.annotations.Out;
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -60,7 +59,7 @@ public final class IDETracker implements Disposable {
     String dataOutputPath = "";
     String lastSelectionInfo = "";
 
-    private  static boolean isRealTimeDataTransmitting = false;
+    private static boolean isRealTimeDataTransmitting = false;
     private Consumer<Element> ideTrackerDataHandler;
 
     DocumentListener documentListener = new DocumentListener() {
@@ -451,9 +450,12 @@ public final class IDETracker implements Disposable {
         this.dataOutputPath = dataOutputPath;
     }
 
-    private void handleElement(Element element){
-        if(ideTrackerDataHandler == null) throw new RuntimeException("ideTrackerDataHandler is null");
-        if(isRealTimeDataTransmitting){
+    private void handleElement(Element element) {
+        if (ideTrackerDataHandler == null) {
+            return;
+//            throw new RuntimeException("ideTrackerDataHandler is null");
+        }
+        if (isRealTimeDataTransmitting) {
             ideTrackerDataHandler.accept(element);
         }
     }

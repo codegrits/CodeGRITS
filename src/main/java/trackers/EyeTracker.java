@@ -141,9 +141,12 @@ public class EyeTracker implements Disposable {
         editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
         if (editor != null) {
             editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+            visibleArea = editor.getScrollingModel().getVisibleArea();
         }
-        filePath = FileEditorManager.getInstance(project).getSelectedFiles()[0].getPath();
-        visibleArea = editor.getScrollingModel().getVisibleArea();
+        VirtualFile[] virtualFiles = FileEditorManager.getInstance(project).getSelectedFiles();
+        if (virtualFiles.length > 0) {
+            filePath = virtualFiles[0].getPath();
+        }
         if (deviceIndex == 0) {
             setting.setAttribute("eye_tracker", "Mouse");
         } else {
@@ -225,10 +228,8 @@ public class EyeTracker implements Disposable {
                 location.setAttribute("column", String.valueOf(logicalPosition.column));
                 location.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
                 gaze.appendChild(location);
-                if (filePath.endsWith(".java")) {
-                    Element aSTStructure = getASTStructureElement(psiElement);
-                    gaze.appendChild(aSTStructure);
-                }
+                Element aSTStructure = getASTStructureElement(psiElement);
+                gaze.appendChild(aSTStructure);
                 lastElement = psiElement;
 //                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
             }
@@ -349,8 +350,8 @@ public class EyeTracker implements Disposable {
     private void handleElement(Element element) {
         if (eyeTrackerDataHandler != null && isRealTimeDataTransmitting) {
             eyeTrackerDataHandler.accept(element);
-        }else if(eyeTrackerDataHandler==null){
-            throw new RuntimeException("eyeTrackerDataHandler is null");
+        } else if (eyeTrackerDataHandler == null) {
+//            throw new RuntimeException("eyeTrackerDataHandler is null");
         }
     }
 

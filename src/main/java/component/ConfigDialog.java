@@ -63,9 +63,9 @@ public class ConfigDialog extends DialogWrapper {
         addNoteArea(true);
         if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
-            if(pythonEnvironment && checkBoxes.get(1).isSelected()){
+            if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-                if(eyeTracker){
+                if (eyeTracker) {
                     String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
                     if (trackerName != null && !trackerName.equals("Not Found")) {
                         deviceCombo.removeAllItems();
@@ -81,7 +81,7 @@ public class ConfigDialog extends DialogWrapper {
                     }
                 }
             }
-            if(!checkBoxes.get(1).isSelected() || !pythonEnvironment){
+            if (!checkBoxes.get(1).isSelected() || !pythonEnvironment) {
                 freqCombo.setEnabled(false);
                 deviceCombo.setEnabled(false);
                 freqCombo.removeAllItems();
@@ -272,7 +272,6 @@ public class ConfigDialog extends DialogWrapper {
 //        }).installOn(dataOutputTextField.getTextField());
 
 
-
         panel.add(dataOutputTextField);
 
         JPanel freqPanel = new JPanel();
@@ -335,7 +334,7 @@ public class ConfigDialog extends DialogWrapper {
                 try {
                     eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                     if (!eyeTracker) {
-                        new AlertDialog("Eye tracker not found. Using mouse tracker.",AllIcons.General.BalloonWarning).show();
+                        new AlertDialog("Eye tracker not found. Using mouse tracker.", AllIcons.General.BalloonWarning).show();
                     } else {
                         freqCombo.setEnabled(true);
                         String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
@@ -351,7 +350,7 @@ public class ConfigDialog extends DialogWrapper {
                         for (String freq : freqList) {
                             freqCombo.addItem(Double.parseDouble(freq));
                         }
-                        new AlertDialog("Eye tracker found.",AllIcons.General.InspectionsOK).show();
+                        new AlertDialog("Eye tracker found.", AllIcons.General.InspectionsOK).show();
 
 
                     }
@@ -478,7 +477,8 @@ public class ConfigDialog extends DialogWrapper {
         if (ProjectManager.getInstance().getOpenProjects().length == 0) {
             return "python";
         }
-        if (pythonInterpreterTextField.getText().equals("")) {
+        if (pythonInterpreterTextField.getText().equals("")
+                || pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)) {
             return "python";
         }
         return pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)

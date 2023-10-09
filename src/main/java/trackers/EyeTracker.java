@@ -91,6 +91,47 @@ public class EyeTracker implements Disposable {
 
     }
 
+    public EyeTracker(String pythonInterpreter, double sampleFrequency) throws ParserConfigurationException {
+
+        eyeTracking.appendChild(root);
+        root.appendChild(setting);
+        root.appendChild(gazes);
+
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        screenWidth = size.getWidth();
+        screenHeight = size.getHeight();
+
+        this.pythonInterpreter = pythonInterpreter;
+        this.sampleFrequency = sampleFrequency;
+        setPythonScriptMouse();
+        setPythonScriptMouse();
+
+        ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
+            @Override
+            public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
+                editor = source.getSelectedTextEditor();
+                if (editor != null) {
+                    editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                }
+                filePath = file.getPath();
+                visibleArea = editor.getScrollingModel().getVisibleArea();
+            }
+
+            @Override
+            public void selectionChanged(@NotNull FileEditorManagerEvent event) {
+                editor = event.getManager().getSelectedTextEditor() != null ? event.getManager().getSelectedTextEditor() : editor;
+                if (event.getNewFile() != null) {
+                    if (editor != null) {
+                        editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                    }
+                    filePath = event.getNewFile().getPath();
+                    visibleArea = editor.getScrollingModel().getVisibleArea();
+                }
+            }
+        });
+
+    }
+
     VisibleAreaListener visibleAreaListener = e -> visibleArea = e.getNewRectangle();
 
 
@@ -313,6 +354,13 @@ public class EyeTracker implements Disposable {
         }
     }
 
+    public static void setIsRealTimeDataTransmitting(boolean isRealTimeDataTransmitting) {
+        EyeTracker.isRealTimeDataTransmitting = isRealTimeDataTransmitting;
+    }
+
+    public void setEyeTrackerDataHandler(Consumer<Element> eyeTrackerDataHandler) {
+        this.eyeTrackerDataHandler = eyeTrackerDataHandler;
+    }
 
     public void setPythonInterpreter(String pythonInterpreter) {
         this.pythonInterpreter = pythonInterpreter;

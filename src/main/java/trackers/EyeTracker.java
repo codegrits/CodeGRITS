@@ -91,7 +91,7 @@ public class EyeTracker implements Disposable {
 
     }
 
-    public EyeTracker(String pythonInterpreter, double sampleFrequency) throws ParserConfigurationException {
+    public EyeTracker(String pythonInterpreter, double sampleFrequency, boolean isUsingMouse) throws ParserConfigurationException {
 
         eyeTracking.appendChild(root);
         root.appendChild(setting);
@@ -105,6 +105,12 @@ public class EyeTracker implements Disposable {
         this.sampleFrequency = sampleFrequency;
         setPythonScriptMouse();
         setPythonScriptTobii();
+
+        if(isUsingMouse) {
+            deviceIndex = 0;
+        } else {
+            deviceIndex = 1;
+        }
 
         ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
             @Override
@@ -147,7 +153,7 @@ public class EyeTracker implements Disposable {
         if (virtualFiles.length > 0) {
             filePath = virtualFiles[0].getPath();
         }
-        if (deviceIndex == 0 && !isRealTimeDataTransmitting) {
+        if (deviceIndex == 0 ) {
             setting.setAttribute("eye_tracker", "Mouse");
         } else {
             setting.setAttribute("eye_tracker", "Tobii Pro Fusion");
@@ -241,7 +247,7 @@ public class EyeTracker implements Disposable {
     public void track() {
         try {
             ProcessBuilder processBuilder;
-            if (deviceIndex == 0 && !isRealTimeDataTransmitting) {
+            if (deviceIndex == 0) {
                 processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptMouse);
             } else {
                 processBuilder = new ProcessBuilder(pythonInterpreter, "-c", pythonScriptTobii);

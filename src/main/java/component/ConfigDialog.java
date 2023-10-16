@@ -65,7 +65,7 @@ public class ConfigDialog extends DialogWrapper {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
-                if (eyeTracker) {
+                if (eyeTracker) { //eye tracker found, add mouse and eye tracker name, add eye tracker freq
                     String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
                     if (trackerName != null && !trackerName.equals("Not Found")) {
                         deviceCombo.removeAllItems();
@@ -79,6 +79,13 @@ public class ConfigDialog extends DialogWrapper {
                     for (String freq : freqList) {
                         freqCombo.addItem(Double.parseDouble(freq));
                     }
+                }else{ //use mouse and default freq
+                    deviceCombo.removeAllItems();
+                    deviceCombo.addItem("Mouse");
+                    freqCombo.removeAllItems();
+                    freqCombo.addItem(30.0);
+                    freqCombo.addItem(60.0);
+                    freqCombo.addItem(120.0);
                 }
             }
             if (!checkBoxes.get(1).isSelected() || !pythonEnvironment) {

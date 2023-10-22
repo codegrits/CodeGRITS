@@ -74,7 +74,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
     - [`<selection>`](#selection)
   - [`<visible_areas>`](#vis_areas)
     - [`<visible_area>`](#vis_area)
-:::
+      :::
 
 ---
 
@@ -207,23 +207,23 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 ```xml
 
-<actions id="ReformatCode" path="/src/Main.java" timestamp="1696214487353"/>
-<actions id="SaveAll" path="/src/Main.java" timestamp="1696214490354"/>
-<actions id="RunClass" path="/src/Main.java" timestamp="1696214496053"/>
-<actions id="ToggleLineBreakpoint" path="/src/Main.java" timestamp="1696214500296"/>
-<actions id="EditorEnter" path="/src/Main.java" timestamp="1696214504846"/>
-<actions id="EditorBackSpace" path="/src/Main.java" timestamp="1696214505280"/>
-<actions id="SaveAll" path="/src/Main.java" timestamp="1696214506877"/>
-<actions id="GotoDeclaration" path="/src/Main.java" timestamp="1696214513473"/>
-<actions id="CodeVision.StartStopTrackingAction"
-         path="C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java"
-         timestamp="1696214517658"/>
-<actions id="EditorCopy" path="/src/Main.java" timestamp="1696216114539"/>
-<actions id="$Paste" path="/src/Main.java" timestamp="1696216116839"/>
-<actions id="$Undo" path="/src/Main.java" timestamp="1696216117569"/>
-<actions id="Debug" path="/src/Main.java" timestamp="1696216129173"/>
-<actions id="NewClass" path="/src" timestamp="1696217116236"/>
-<actions id="RenameElement" path="/src/ABC.java" timestamp="1696217122074"/>
+<action id="ReformatCode" path="/src/Main.java" timestamp="1696214487353"/>
+<action id="SaveAll" path="/src/Main.java" timestamp="1696214490354"/>
+<action id="RunClass" path="/src/Main.java" timestamp="1696214496053"/>
+<action id="ToggleLineBreakpoint" path="/src/Main.java" timestamp="1696214500296"/>
+<action id="EditorEnter" path="/src/Main.java" timestamp="1696214504846"/>
+<action id="EditorBackSpace" path="/src/Main.java" timestamp="1696214505280"/>
+<action id="SaveAll" path="/src/Main.java" timestamp="1696214506877"/>
+<action id="GotoDeclaration" path="/src/Main.java" timestamp="1696214513473"/>
+<action id="CodeVision.StartStopTrackingAction"
+        path="C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java"
+        timestamp="1696214517658"/>
+<action id="EditorCopy" path="/src/Main.java" timestamp="1696216114539"/>
+<action id="$Paste" path="/src/Main.java" timestamp="1696216116839"/>
+<action id="$Undo" path="/src/Main.java" timestamp="1696216117569"/>
+<action id="Debug" path="/src/Main.java" timestamp="1696216129173"/>
+<action id="NewClass" path="/src" timestamp="1696217116236"/>
+<action id="RenameElement" path="/src/ABC.java" timestamp="1696217122074"/>
 ```
 
 **Comment**:
@@ -672,13 +672,13 @@ used:
 ```xml
 
 <ast_structure token="println" type="IDENTIFIER">
-    <level end="2:26" start="2:19" tag="PsiIdentifier:println"/>
-    <level end="2:26" start="2:8" tag="PsiReferenceExpression:System.out.println"/>
-    <level end="2:42" start="2:8" tag="PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)"/>
-    <level end="2:43" start="2:8" tag="PsiExpressionStatement"/>
-    <level end="3:5" start="1:43" tag="PsiCodeBlock"/>
-    <level end="3:5" start="1:4" tag="PsiMethod:main"/>
-    <level end="4:1" start="0:0" tag="PsiClass:Main"/>
+  <level end="2:26" start="2:19" tag="PsiIdentifier:println"/>
+  <level end="2:26" start="2:8" tag="PsiReferenceExpression:System.out.println"/>
+  <level end="2:42" start="2:8" tag="PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)"/>
+  <level end="2:43" start="2:8" tag="PsiExpressionStatement"/>
+  <level end="3:5" start="1:43" tag="PsiCodeBlock"/>
+  <level end="3:5" start="1:4" tag="PsiMethod:main"/>
+  <level end="4:1" start="0:0" tag="PsiClass:Main"/>
 </ast_structure>
 ```
 

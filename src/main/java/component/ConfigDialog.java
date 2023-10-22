@@ -47,13 +47,13 @@ public class ConfigDialog extends DialogWrapper {
     private boolean pythonEnvironment = false;
     private boolean eyeTracker = false;
 
-    public static String selectDataOutputPlaceHolder = "Select Data Output Folder. Default is project root.";
-    public static String selectPythonInterpreterPlaceHolder = "Select Python Interpreter. Default is \"python\".";
+    public static String selectDataOutputPlaceHolder = "Select Data Output Folder (Default: Project Root)";
+    public static String selectPythonInterpreterPlaceHolder = "Select Python Interpreter (Default: \"python\")";
 
     public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
         init();
-        setTitle("CodeVision Configuration");
+        setTitle("CodeGRITS Configuration");
         setSize(500, 500);
         setAutoAdjustable(true);
         setResizable(false);
@@ -316,7 +316,7 @@ public class ConfigDialog extends DialogWrapper {
         });
 
         JPanel noteAreaPanel = new JPanel();
-        JLabel notes = new JLabel("Pre-set Labels");
+        JLabel notes = new JLabel("Preset Labels");
         notes.setFont(headingFont);
         notes.setBorder(new EmptyBorder(headingMargin));
         notes.setHorizontalTextPosition(JLabel.LEFT);

@@ -63,7 +63,7 @@ public class AvailabilityChecker {
                 else:
                     print(found_eyetrackers[0].get_all_gaze_output_frequencies())
                 """;
-        String resultTuple = runPythonScript(pythonInterpreter, pythonScript); //(30.0,60.0, 90.0)
+        String resultTuple = runPythonScript(pythonInterpreter, pythonScript); //(30.0, 60.0, 90.0)
 
         return List.of(resultTuple.substring(1, resultTuple.length() - 1).split(", "));
     }

@@ -27,8 +27,8 @@ intellij {
 //    type.set("IC")
 //    plugins.set(listOf("com.intellij.java"))
 
-    type.set("PC")
-    plugins.set(listOf("PythonCore"))
+//    type.set("PC")
+//    plugins.set(listOf("PythonCore"))
 
 //    type.set("CL")
 

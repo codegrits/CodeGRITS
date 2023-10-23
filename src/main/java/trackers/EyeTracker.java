@@ -93,6 +93,12 @@ public class EyeTracker implements Disposable {
 
     public EyeTracker(String pythonInterpreter, double sampleFrequency, boolean isUsingMouse) throws ParserConfigurationException {
 
+//        if(isUsingMouse) {
+//            deviceIndex = 0;
+//        } else {
+//            deviceIndex = 1;
+//        }
+
         eyeTracking.appendChild(root);
         root.appendChild(setting);
         root.appendChild(gazes);
@@ -105,12 +111,6 @@ public class EyeTracker implements Disposable {
         this.sampleFrequency = sampleFrequency;
         setPythonScriptMouse();
         setPythonScriptTobii();
-
-        if(isUsingMouse) {
-            deviceIndex = 0;
-        } else {
-            deviceIndex = 1;
-        }
 
         ApplicationManager.getApplication().getMessageBus().connect(this).subscribe(FileEditorManagerListener.FILE_EDITOR_MANAGER, new FileEditorManagerListener() {
             @Override
@@ -237,11 +237,10 @@ public class EyeTracker implements Disposable {
                 Element aSTStructure = getASTStructureElement(psiElement);
                 gaze.appendChild(aSTStructure);
                 lastElement = psiElement;
-//                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+                handleElement(gaze);
             }
         }));
-
-        handleElement(gaze);
     }
 
     public void track() {

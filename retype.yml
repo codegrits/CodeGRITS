@@ -2,7 +2,7 @@ input: .
 output: .retype
 url: # Add your website address here
 branding:
-  title: Project Name
+  title: CodeGRITS
   label: Docs
 links:
 - text: Getting Started

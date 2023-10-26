@@ -1,4 +1,4 @@
-# CodeVision
+# CodeGRITS
 
 ## Environment
 

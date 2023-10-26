@@ -1,4 +1,4 @@
-# CodeVision Documentation
+# CodeGRITS Documentation
 
 ## Output Directory Structure
 

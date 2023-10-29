@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="fix api bug">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="change doc name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,6 +114,7 @@
       <workItem from="1698087792092" duration="2774000" />
       <workItem from="1698110251753" duration="594000" />
       <workItem from="1698191867923" duration="596000" />
+      <workItem from="1698332818910" duration="1311000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />
@@ -126,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698087383036</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="change doc name">
+      <option name="closed" value="true" />
+      <created>1698332915802</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698332915802</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,6 +140,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix api bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix api bug" />
+    <MESSAGE value="change doc name" />
+    <option name="LAST_COMMIT_MESSAGE" value="change doc name" />
   </component>
 </project>

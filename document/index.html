@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.751863217992">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 3.5.0">
+
+    <!-- Primary Meta Tags -->
+    <title>CodeGRITS Documentation</title>
+    <meta name="title" content="CodeGRITS Documentation">
+    <meta name="description" content="Comment:">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="/document/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/document/">
+    <meta property="og:title" content="CodeGRITS Documentation">
+    <meta property="og:description" content="Comment:">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="/document/">
+    <meta property="twitter:title" content="CodeGRITS Documentation">
+    <meta property="twitter:description" content="Comment:">
+
+    <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
+
+    <link href="../resources/css/retype.css?v=3.5.0.751863217992" rel="stylesheet">
+
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.751863217992" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.751863217992" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.751863217992" defer></script>
+</head>
+<body>
+    <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
+        <div class="absolute bottom-0 left-0 bg-gray-100 dark:bg-dark-800" style="top: 5rem; right: 50%"></div>
+    
+        <header id="docs-site-header" class="sticky top-0 z-30 flex w-full h-16 bg-white border-b border-gray-200 md:h-20 dark:bg-dark-850 dark:border-dark-650">
+            <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+                <!-- Mobile menu button skeleton -->
+                <button v-cloak class="skeleton docs-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-none rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+                <div v-cloak id="docs-sidebar-toggle"></div>
+        
+                <!-- Logo -->
+                <div class="flex items-center justify-between h-full py-2 md:w-75">
+                    <div class="flex items-center px-2 md:px-6">
+                        <a id="docs-site-logo" href="../" class="flex items-center leading-snug text-2xl">
+                            <span class="dark:text-white font-semibold line-clamp-1 md:line-clamp-2">CodeGRITS</span>
+                        </a><span class="hidden px-2 py-1 ml-4 text-sm font-semibold leading-none text-root-logo-label-text bg-root-logo-label-bg rounded-sm md:inline-block">Docs</span>
+                    </div>
+        
+                    <span class="hidden h-8 border-r md:inline-block dark:border-dark-650"></span>
+                </div>
+        
+                <div class="flex justify-between md:grow">
+                    <!-- Top Nav -->
+                    <nav class="hidden md:flex">
+                        <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                            
+                        </ul>
+                    </nav>
+        
+                    <!-- Header Right Skeleton -->
+                    <div v-cloak class="flex justify-end grow skeleton">
+        
+                        <!-- Search input mock -->
+                        <div class="relative hidden w-40 lg:block lg:max-w-sm lg:ml-auto">
+                            <div class="absolute flex items-center justify-center h-full pl-3 dark:text-dark-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon-base" width="16" height="16" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 1px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                            </div>
+                            <input class="w-full h-10 placeholder-gray-400 transition-colors duration-200 ease-in bg-gray-200 border border-transparent rounded md:text-sm hover:bg-white hover:border-gray-300 focus:outline-none focus:bg-white focus:border-gray-500 dark:bg-dark-600 dark:border-dark-600 dark:placeholder-dark-400" style="padding: 0.625rem 0.75rem 0.625rem 2rem" type="text" placeholder="Search">
+                        </div>
+        
+                        <!-- Mobile search button -->
+                        <div class="flex items-center justify-center w-10 h-10 lg:hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="20" height="20" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><path d="M21.71 20.29l-3.68-3.68A8.963 8.963 0 0020 11c0-4.96-4.04-9-9-9s-9 4.04-9 9 4.04 9 9 9c2.12 0 4.07-.74 5.61-1.97l3.68 3.68c.2.19.45.29.71.29s.51-.1.71-.29c.39-.39.39-1.03 0-1.42zM4 11c0-3.86 3.14-7 7-7s7 3.14 7 7c0 1.92-.78 3.66-2.04 4.93-.01.01-.02.01-.02.01-.01.01-.01.01-.01.02A6.98 6.98 0 0111 18c-3.86 0-7-3.14-7-7z" ></path></g></svg>
+                        </div>
+        
+                        <!-- Dark mode switch placeholder -->
+                        <div class="w-10 h-10 lg:ml-2"></div>
+        
+                        <!-- History button -->
+                        <div class="flex items-center justify-center w-10 h-10" style="margin-right: -0.625rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 icon-base" width="22" height="22" viewBox="0 0 24 24" aria-labelledby="icon" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor" ><g ><path d="M12.01 6.01c-.55 0-1 .45-1 1V12a1 1 0 00.4.8l3 2.22a.985.985 0 001.39-.2.996.996 0 00-.21-1.4l-2.6-1.92V7.01c.02-.55-.43-1-.98-1z"></path><path d="M12.01 1.91c-5.33 0-9.69 4.16-10.05 9.4l-.29-.26a.997.997 0 10-1.34 1.48l1.97 1.79c.19.17.43.26.67.26s.48-.09.67-.26l1.97-1.79a.997.997 0 10-1.34-1.48l-.31.28c.34-4.14 3.82-7.41 8.05-7.41 4.46 0 8.08 3.63 8.08 8.09s-3.63 8.08-8.08 8.08c-2.18 0-4.22-.85-5.75-2.4a.996.996 0 10-1.42 1.4 10.02 10.02 0 007.17 2.99c5.56 0 10.08-4.52 10.08-10.08.01-5.56-4.52-10.09-10.08-10.09z"></path></g></g></svg>
+                        </div>
+                    </div>
+        
+                    <div v-cloak class="flex justify-end grow">
+                        <div id="docs-mobile-search-button"></div>
+                        <doc-search-desktop></doc-search-desktop>
+        
+                        <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                        <doc-history></doc-history>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+        <div class="container relative flex bg-white">
+            <!-- Sidebar Skeleton -->
+            <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-gray-100 border-gray-200 sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton dark:bg-dark-800 dark:border-dark-650">
+            
+                <!-- Render this div, if config.showSidebarFilter is `true` -->
+                <div class="flex items-center h-16 px-6">
+                    <input class="w-full h-8 px-3 py-2 transition-colors duration-200 ease-linear bg-white border border-gray-200 rounded shadow-none text-sm focus:outline-none focus:border-gray-600 dark:bg-dark-600 dark:border-dark-600" type="text" placeholder="Filter">
+                </div>
+            
+                <div class="pl-6 mt-1 mb-4">
+                    <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-32 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-48 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                    <div class="w-40 h-3 mb-4 bg-gray-200 rounded-full loading dark:bg-dark-600"></div>
+                </div>
+            
+                <div class="shrink-0 mt-auto bg-transparent dark:border-dark-650">
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Sidebar component -->
+            <doc-sidebar v-cloak>
+                <template #sidebar-footer>
+                    <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-dark-650">
+            
+                        <a class="flex items-center justify-center flex-nowrap h-16 text-gray-400 dark:text-dark-400 hover:text-gray-700 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                            <span class="text-xs whitespace-nowrap">Powered by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                        </a>
+                    </div>
+                </template>
+            </doc-sidebar>
+    
+            <div class="grow min-w-0 dark:bg-dark-850">
+                <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+                <div class="flex">
+                    <div class="min-w-0 p-4 grow md:px-16">
+                        <main class="relative pb-12 lg:pt-2">
+                            <div class="docs-markdown" id="docs-content">
+                                <!-- Rendered if sidebar right is enabled -->
+                                <div id="docs-sidebar-right-toggle"></div>
+                                <!-- Page content  -->
+<doc-anchor-target id="codegrits-documentation" class="break-words">
+    <h1>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#codegrits-documentation">#</doc-anchor-trigger>
+        <span>CodeGRITS Documentation</span>
+    </h1>
+</doc-anchor-target>
+<doc-anchor-target id="output-directory-structure">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#output-directory-structure">#</doc-anchor-trigger>
+        <span>Output Directory Structure</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── ide_tracking.xml
+│   ├── eye_tracking.xml
+│   ├── archives
+│   │   ├── [ARCHIVE_TIMESTAMP_1].archive
+│   │   ├── [ARCHIVE_TIMESTAMP_2].archive
+│   │   ├── ...
+│   ├── screen_recording
+│   │   ├── video_clip_1.mp4
+│   │   ├── video_clip_2.mp4
+│   │   ├── ...
+│   │   ├── frames.csv</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>[OUTPUT_DIR]</code> is the output directory specified in the configuration.</li>
+<li><code v-pre>[START_TIMESTAMP]</code> is the timestamp when the tracking starts.</li>
+<li><code v-pre>[ARCHIVE_TIMESTAMP]</code> is the timestamp when the archive is triggered.</li>
+<li><code v-pre>video_clip_[k].mp4</code> is the video clip of the screen recording from the (k-1)-th pause (0-th pause is start) to the
+k-th pause.</li>
+<li><code v-pre>frames.csv</code> records the timestamp and clip number of each frame in the video clip.</li>
+</ul>
+<p>All the timestamps used by CodeVision are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.</p>
+<p>The <a href="https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems">editor coordinate system</a>
+(e.g., line, column) of IntelliJ Platform is start from 0.</p>
+<doc-anchor-target id="ide-tracking">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ide-tracking">#</doc-anchor-trigger>
+        <span>IDE Tracking</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── ide_tracking.xml
+│   ├── archives
+│   │   ├── [ARCHIVE_TIMESTAMP_1].archive
+│   │   ├── [ARCHIVE_TIMESTAMP_2].archive
+│   │   ├── ...</code></pre>
+</doc-codeblock></div>
+<doc-anchor-target id="xml-element-tree">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#xml-element-tree">#</doc-anchor-trigger>
+        <span>XML Element Tree</span>
+    </h3>
+</doc-anchor-target>
+<style>
+    .tree {
+        color: #1956AF;
+        border-radius: 10px;
+        border: 1px solid #1956AF;
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="tree">
+<ul>
+<li><strong><code v-pre>&lt;ide_tracking&gt;</code></strong>
+<ul>
+<li><doc-anchor-trigger to="#environment"><code v-pre>&lt;environment&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#archives"><code v-pre>&lt;archives&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#archive"><code v-pre>&lt;archive&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#actions"><code v-pre>&lt;actions&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#action"><code v-pre>&lt;action&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#typings"><code v-pre>&lt;typings&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#typing"><code v-pre>&lt;typing&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#files"><code v-pre>&lt;files&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#file"><code v-pre>&lt;file&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#mouses"><code v-pre>&lt;mouses&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#mouse"><code v-pre>&lt;mouse&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#carets"><code v-pre>&lt;carets&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#caret"><code v-pre>&lt;caret&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#selections"><code v-pre>&lt;selections&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#selection"><code v-pre>&lt;selection&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+<li><doc-anchor-trigger to="#vis_areas"><code v-pre>&lt;visible_areas&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#vis_area"><code v-pre>&lt;visible_area&gt;</code></doc-anchor-trigger>
+<div></div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;ide_tracking&gt;</code></p>
+<p><strong>Sub-element</strong>:</p>
+<ul>
+<li><code v-pre>&lt;environment&gt;</code></li>
+<li><code v-pre>&lt;archives&gt;</code></li>
+<li><code v-pre>&lt;actions&gt;</code></li>
+<li><code v-pre>&lt;typings&gt;</code></li>
+<li><code v-pre>&lt;files&gt;</code></li>
+<li><code v-pre>&lt;mouses&gt;</code></li>
+<li><code v-pre>&lt;carets&gt;</code></li>
+<li><code v-pre>&lt;selections&gt;</code></li>
+<li><code v-pre>&lt;visible_areas&gt;</code></li>
+</ul>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The root element of the <code v-pre>ide_tracking.xml</code> file.</li>
+</ul>
+<hr>
+<p><a name="environment"></a>
+<strong>Element</strong>: <code v-pre>&lt;environment&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>ide_name</li>
+<li>ide_version</li>
+<li>os_name</li>
+<li>java_version</li>
+<li>project_name</li>
+<li>project_path</li>
+<li>screen_size</li>
+<li>scale_x</li>
+<li>scale_y</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;environment ide_name=&quot;IntelliJ IDEA&quot; ide_version=&quot;2022.2.5&quot; java_version=&quot;17.0.6&quot; os_name=&quot;Windows 10&quot;
+             project_name=&quot;HelloWorld&quot; project_path=&quot;C:/Users/Lenovo/IdeaProjects/HelloWorld&quot; scale_x=&quot;1.25&quot;
+             scale_y=&quot;1.25&quot; screen_size=&quot;(1536,864)&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>scale_x</code> and <code v-pre>scale_y</code> are used to calculate the real screen resolution based on the <code v-pre>screen_size</code>. In the example
+above, the real screen resolution is (1536*1.25, 864*1.25) = (1920, 1080).</li>
+<li><code v-pre>java_version</code> will be replaced by <code v-pre>python_version</code> in PyCharm, etc.</li>
+<li>All <code v-pre>path</code> attributes in the data start with <code v-pre>/</code> are relative to <code v-pre>project_path</code>, otherwise they are absolute paths.
+Sometimes the path is empty, which means the data is irrelevant to any file or not successfully tracked.</li>
+</ul>
+<hr>
+<p><a name="archives"></a>
+<strong>Element</strong>: <code v-pre>&lt;archives&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;archive&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>A <strong>real-time archive mechanism</strong> is implemented to track the state of the code file and console output at any
+timestamp during the development process. The <strong>file archive</strong> is triggered under two specific conditions: (1) When a
+file is opened or closed, or its selection changes; (2) When the content of the code in the main editor changes. The
+<strong>console archive</strong> is triggered when the console output changes (e.g., run class).</li>
+<li>The archived data is stored in the <code v-pre>archives</code> directory, with the name <code v-pre>[ARCHIVE_TIMESTAMP].archive</code>, where
+<code v-pre>[ARCHIVE_TIMESTAMP]</code> is the timestamp when the archive is triggered. Relevant information is stored in the
+<code v-pre>&lt;archive&gt;</code> element, including the timestamp, the path of the file, and the remark.</li>
+<li>Thus, if you want to know the state of the code file at a specific timestamp, you can find the archive file with the
+largest timestamp that is smaller than the target timestamp.</li>
+</ul>
+<hr>
+<p><a name="archive"></a>
+<strong>Element</strong>: <code v-pre>&lt;archive&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path: only used in <code v-pre>fileArchive</code></li>
+<li>remark: only used in <code v-pre>fileArchive</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;archive id=&quot;fileArchive&quot; path=&quot;/src/Main.java&quot; remark=&quot;fileOpened&quot; timestamp=&quot;1696203834202&quot;/&gt;
+&lt;archive id=&quot;fileArchive&quot; path=&quot;/1696203101069/ide_tracking.xml&quot; remark=&quot;fileOpened | NotCodeFile | Fail&quot;
+         timestamp=&quot;1696203834208&quot;/&gt;
+&lt;archive id=&quot;fileArchive&quot; path=&quot;/src/Main.java&quot; remark=&quot;contentChanged&quot; timestamp=&quot;1696203839648&quot;/&gt;
+&lt;archive id=&quot;consoleArchive&quot; timestamp=&quot;1696203842925&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could be <code v-pre>fileArchive</code> or <code v-pre>consoleArchive</code>.</li>
+<li><code v-pre>remark</code> could be <code v-pre>fileOpened</code>, <code v-pre>fileClosed</code>, <code v-pre>fileSelectionChanged</code>, <code v-pre>contentChanged | OldFile</code>, <code v-pre>contentChanged | NewFile</code>.</li>
+<li>If the file is not a code file, i.e., the file extension is not in the &quot;.java&quot;, &quot;.cpp&quot;, &quot;.c&quot;, &quot;.py&quot;, &quot;.rb&quot;, &quot;.js&quot;,
+or &quot;.md&quot;, <code v-pre>NotCodeFile | Fail</code> would be added to the remark. This is to prevent archiving data file with large size.</li>
+<li>If there are IO errors when archiving the file, <code v-pre>IOException | Fail</code> would be added to the remark.</li>
+</ul>
+<hr>
+<p><a name="actions"></a>
+<strong>Element</strong>: <code v-pre>&lt;actions&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;action&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The elements in <code v-pre>&lt;actions&gt;</code> are all the IDE-specific features, technically are all objects that implement
+the <code v-pre>AnAction</code> abstract class in IntelliJ IDEA. The range is diverse, from the basic editing features
+like <code v-pre>EditorEnter</code>, <code v-pre>EditorBackSpace</code>, clipboard features like <code v-pre>EditorPaste</code>, <code v-pre>EditorCut</code>, run features
+like <code v-pre>RunClass</code>, <code v-pre>Stop</code>, <code v-pre>ToggleLineBreakpoint</code>, <code v-pre>Debug</code>, navigating features
+like <code v-pre>GotoDeclaration</code>, <code v-pre>Find</code>, <code v-pre>ShowIntentionActions</code>, advanced IDE features
+like <code v-pre>CompareTwoFiles</code>, <code v-pre>ReformatCode</code>, to many others that cannot be fully listed here.</li>
+</ul>
+<hr>
+<p><a name="action"></a>
+<strong>Element</strong>: <code v-pre>&lt;action&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;action id=&quot;ReformatCode&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214487353&quot;/&gt;
+&lt;action id=&quot;SaveAll&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214490354&quot;/&gt;
+&lt;action id=&quot;RunClass&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214496053&quot;/&gt;
+&lt;action id=&quot;ToggleLineBreakpoint&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214500296&quot;/&gt;
+&lt;action id=&quot;EditorEnter&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214504846&quot;/&gt;
+&lt;action id=&quot;EditorBackSpace&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214505280&quot;/&gt;
+&lt;action id=&quot;SaveAll&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214506877&quot;/&gt;
+&lt;action id=&quot;GotoDeclaration&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214513473&quot;/&gt;
+&lt;action id=&quot;CodeVision.StartStopTrackingAction&quot;
+        path=&quot;C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java&quot;
+        timestamp=&quot;1696214517658&quot;/&gt;
+&lt;action id=&quot;EditorCopy&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216114539&quot;/&gt;
+&lt;action id=&quot;$Paste&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216116839&quot;/&gt;
+&lt;action id=&quot;$Undo&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216117569&quot;/&gt;
+&lt;action id=&quot;Debug&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216129173&quot;/&gt;
+&lt;action id=&quot;NewClass&quot; path=&quot;/src&quot; timestamp=&quot;1696217116236&quot;/&gt;
+&lt;action id=&quot;RenameElement&quot; path=&quot;/src/ABC.java&quot; timestamp=&quot;1696217122074&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>CodeVision-related actions are also implemented as <code v-pre>AnAction</code> objects, and their <code v-pre>id</code> is prefixed with <code v-pre>CodeVision</code>,
+such as <code v-pre>CodeVision.StartStopTrackingAction</code>, <code v-pre>CodeVision.PauseResumeTrackingAction</code>, etc.</li>
+<li>The &quot;add label&quot; action is also tracked here, with <code v-pre>id</code> as <code v-pre>&quot;CodeVision.AddLabelAction.[LABEL_NAME]&quot;</code>, where label name
+is pre-set in the configuration.</li>
+<li>Other IntelliJ plugins may also implement their own <code v-pre>AnAction</code> objects, which will also be tracked here. For example,
+the <code v-pre>copilot.applyInlays</code> in the GitHub Copilot plugin.</li>
+</ul>
+<hr>
+<p><a name="typings"></a>
+<strong>Element</strong>: <code v-pre>&lt;typings&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;typing&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The <code v-pre>&lt;typings&gt;</code> element records the typing action of the user in the code editor. The data including the character,
+the timestamp, the path of the file, the line number, and the column number.</li>
+</ul>
+<hr>
+<p><a name="typing"></a>
+<strong>Element</strong>: <code v-pre>&lt;typing&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>character</li>
+<li>timestamp</li>
+<li>path</li>
+<li>line</li>
+<li>column</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;typing character=&quot;S&quot; column=&quot;8&quot; line=&quot;3&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216429855&quot;/&gt;
+&lt;typing character=&quot;y&quot; column=&quot;9&quot; line=&quot;3&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216430111&quot;/&gt;
+&lt;typing character=&quot;s&quot; column=&quot;10&quot; line=&quot;3&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216430233&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<hr>
+<p><a name="files"></a>
+<strong>Element</strong>: <code v-pre>&lt;files&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;file&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The <code v-pre>&lt;files&gt;</code> element records the file-related actions including opening, closing, and selection change. The data
+including the timestamp and the path of the file.</li>
+</ul>
+<hr>
+<p><a name="file"></a>
+<strong>Element</strong>: <code v-pre>&lt;file&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path: only used in <code v-pre>fileOpened</code>/<code v-pre>fileClosed</code></li>
+<li>old_path: only used in <code v-pre>selectionChanged</code></li>
+<li>new_path: only used in <code v-pre>selectionChanged</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;file id=&quot;fileClosed&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216679318&quot;/&gt;
+&lt;file id=&quot;selectionChanged&quot; new_path=&quot;/src/ABC.java&quot; old_path=&quot;/src/Main.java&quot;
+      timestamp=&quot;1696216679330&quot;/&gt;
+&lt;file id=&quot;fileOpened&quot; path=&quot;/src/ABC.java&quot; timestamp=&quot;1696216679338&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could be <code v-pre>fileOpened</code>, <code v-pre>fileClosed</code>, or <code v-pre>selectionChanged</code>.</li>
+</ul>
+<hr>
+<p><a name="mouses"></a>
+<strong>Element</strong>: <code v-pre>&lt;mouses&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;mouse&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The <code v-pre>&lt;mouses&gt;</code> element records the mouse-related actions including pressing, releasing, clicking, moving, and
+dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.</li>
+</ul>
+<hr>
+<p><a name="mouse"></a>
+<strong>Element</strong>: <code v-pre>&lt;mouse&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path</li>
+<li>x</li>
+<li>y</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;mouse id=&quot;mousePressed&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217839651&quot; x=&quot;642&quot; y=&quot;120&quot;/&gt;
+&lt;mouse id=&quot;mouseReleased&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217840187&quot; x=&quot;642&quot; y=&quot;120&quot;/&gt;
+&lt;mouse id=&quot;mouseClicked&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217840188&quot; x=&quot;642&quot; y=&quot;120&quot;/&gt;
+&lt;mouse id=&quot;mousePressed&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217843026&quot; x=&quot;642&quot; y=&quot;120&quot;/&gt;
+&lt;mouse id=&quot;mouseDragged&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217843026&quot; x=&quot;634&quot; y=&quot;118&quot;/&gt;
+&lt;mouse id=&quot;mouseReleased&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217843830&quot; x=&quot;535&quot; y=&quot;117&quot;/&gt;
+&lt;mouse id=&quot;mouseMoved&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217843901&quot; x=&quot;536&quot; y=&quot;117&quot;/&gt;
+&lt;mouse id=&quot;mouseMoved&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217843908&quot; x=&quot;537&quot; y=&quot;117&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could be <code v-pre>mousePressed</code>, <code v-pre>mouseReleased</code>, <code v-pre>mouseClicked</code>, <code v-pre>mouseMoved</code>, or <code v-pre>mouseDragged</code>.</li>
+<li><code v-pre>x</code> and <code v-pre>y</code> are the coordinates relative to the <code v-pre>screen_size</code> in the <code v-pre>environment</code>, not the actual screen resolution.</li>
+</ul>
+<hr>
+<p><a name="carets"></a>
+<strong>Element</strong>: <code v-pre>&lt;carets&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;caret&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>Caret is the cursor in the code editor. The <code v-pre>&lt;carets&gt;</code> element records the change of the caret position in the code
+editor. The data including the timestamp, the path of the file, the line number, and the column number.</li>
+</ul>
+<hr>
+<p><a name="caret"></a>
+<strong>Element</strong>: <code v-pre>&lt;caret&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path</li>
+<li>line</li>
+<li>column</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;caret column=&quot;18&quot; id=&quot;caretPositionChanged&quot; line=&quot;0&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696217839651&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could only be <code v-pre>caretPositionChanged</code>.</li>
+</ul>
+<hr>
+<p><a name="selections"></a>
+<strong>Element</strong>: <code v-pre>&lt;selections&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;selection&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The <code v-pre>&lt;selections&gt;</code> element records data when the user selects a piece of code in the code editor. The data including
+the timestamp, the path of the file, the start position, the end position, and the selected text.</li>
+</ul>
+<hr>
+<p><a name="selection"></a>
+<strong>Element</strong>: <code v-pre>&lt;selection&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path</li>
+<li>start_position: line:column</li>
+<li>end_position: line:column</li>
+<li>selected_text</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;selection end_position=&quot;0:18&quot; id=&quot;selectionChanged&quot; path=&quot;/src/DEF.java&quot; selected_text=&quot;F {&quot; start_position=&quot;0:15&quot;
+           timestamp=&quot;1696219345156&quot;/&gt;
+&lt;selection end_position=&quot;0:18&quot; id=&quot;selectionChanged&quot; path=&quot;/src/DEF.java&quot; selected_text=&quot;EF {&quot; start_position=&quot;0:14&quot;
+           timestamp=&quot;1696219345169&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could only be <code v-pre>selectionChanged</code>.</li>
+</ul>
+<hr>
+<p><a name="vis_areas"></a>
+<strong>Element</strong>: <code v-pre>&lt;visible_areas&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;visible_area&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The <code v-pre>&lt;visible_areas&gt;</code> element records the visible area of the code editor.</li>
+</ul>
+<hr>
+<p><a name="vis_area"></a>
+<strong>Element</strong>: <code v-pre>&lt;visible_area&gt;</code>
+<strong>Attribute</strong>:</p>
+<ul>
+<li>id</li>
+<li>timestamp</li>
+<li>path</li>
+<li>x</li>
+<li>y</li>
+<li>width</li>
+<li>height</li>
+</ul>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;visible_area height=&quot;277&quot; id=&quot;visibleAreaChanged&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696219585893&quot; width=&quot;883&quot; x=&quot;0&quot;
+              y=&quot;198&quot;/&gt;
+&lt;visible_area height=&quot;275&quot; id=&quot;visibleAreaChanged&quot; path=&quot;/src/DEF.java&quot; timestamp=&quot;1696219585921&quot; width=&quot;883&quot; x=&quot;0&quot;
+              y=&quot;198&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>id</code> could only be <code v-pre>visibleAreaChanged</code>.</li>
+<li><code v-pre>x</code> and <code v-pre>y</code> are the coordinates of the <strong>left-top corner of the visible area</strong> in code editor, relative to the
+<strong>left-top corner of the code editor</strong> including the invisible part (i.e., the line 0 and column 0). The unit
+of <code v-pre>x</code>, <code v-pre>y</code>, <code v-pre>width</code>, and <code v-pre>height</code> is measured by <code v-pre>screen_size</code> in the <code v-pre>environment</code>, not the actual screen
+resolution.</li>
+<li>The change of <code v-pre>x</code> and <code v-pre>y</code> is usually caused by <strong>scrolling</strong> code editor, which could be used to track the
+horizontal and vertical scrolling respectively. The change of <code v-pre>width</code> and <code v-pre>height</code> is usually caused by <strong>resizing</strong>
+code editor, which could be used to track the horizontal and vertical resizing respectively.</li>
+</ul>
+<doc-anchor-target id="eye-tracking">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#eye-tracking">#</doc-anchor-trigger>
+        <span>Eye Tracking</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── eye_tracking.xml</code></pre>
+</doc-codeblock></div>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;eye_tracking&gt;</code></p>
+<p><strong>Sub-element</strong>:</p>
+<ul>
+<li><code v-pre>&lt;setting&gt;</code></li>
+<li><code v-pre>&lt;gazes&gt;</code></li>
+</ul>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The root element of the <code v-pre>eye_tracking.xml</code> file. CodeVision support both Mouse simulation and Tobii Pro eye tracker
+devices.</li>
+<li>Since <a href="https://developer.tobiipro.com/index.html">Tobii Pro SDK</a> not support Java, we use Python
+library <code v-pre>tobii-research</code> to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect
+data. The python interpreter is specified in the configuration.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;setting&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>eye_tracker</li>
+<li>sampling_rate</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;setting eye_tracker=&quot;Tobii Pro Fusion&quot; sample_frequency=&quot;30&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>eye_tracker</code> could be <code v-pre>Mouse</code> for simulation, or real Tobii Pro eye tracker device name (e.g., <code v-pre>Tobii Pro Fusion</code>),
+which is got from <code v-pre>eyetracker.model</code> in the <code v-pre>tobii-research</code> library.</li>
+<li><code v-pre>sampling_rate</code> is the sampling rate of the eye tracker in Hz, which is pre-set in the configuration and whose range
+could be in <code v-pre>eyetracker.get_all_gaze_output_frequencies()</code> called in the <code v-pre>tobii-research</code> library.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;gazes&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;gaze&gt;</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>Collection of all gaze data.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;gaze&gt;</code></p>
+<p><strong>Sub-element</strong>:</p>
+<ul>
+<li><code v-pre>&lt;left_eye&gt;</code></li>
+<li><code v-pre>&lt;right_eye&gt;</code></li>
+<li><code v-pre>&lt;location&gt;</code>: only used when the gaze point can be mapped to location in the code editor</li>
+<li><code v-pre>&lt;ast_structure&gt;</code>: only used when the gaze point cannot be mapped to location in the code editor, and the code file is
+java.</li>
+</ul>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>timestamp</li>
+<li>remark: only used when the gaze point cannot be mapped to location in the code editor</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;gaze timestamp=&quot;1696224370377&quot;&gt;
+    &lt;left_eye gaze_point_x=&quot;0.5338541666666666&quot; gaze_point_y=&quot;0.17407407407407408&quot; gaze_validity=&quot;1.0&quot;
+              pupil_diameter=&quot;2.4835662841796875&quot; pupil_validity=&quot;1.0&quot;/&gt;
+    &lt;right_eye gaze_point_x=&quot;0.5338541666666666&quot; gaze_point_y=&quot;0.17407407407407408&quot; gaze_validity=&quot;1.0&quot;
+               pupil_diameter=&quot;2.7188568115234375&quot; pupil_validity=&quot;1.0&quot;/&gt;
+    &lt;location column=&quot;25&quot; line=&quot;2&quot; path=&quot;/src/Main.java&quot; x=&quot;820&quot; y=&quot;150&quot;/&gt;
+    &lt;ast_structure token=&quot;println&quot; type=&quot;IDENTIFIER&quot;&gt;
+        &lt;level end=&quot;2:26&quot; start=&quot;2:19&quot; tag=&quot;PsiIdentifier:println&quot;/&gt;
+        &lt;level end=&quot;2:26&quot; start=&quot;2:8&quot; tag=&quot;PsiReferenceExpression:System.out.println&quot;/&gt;
+        &lt;level end=&quot;2:42&quot; start=&quot;2:8&quot; tag=&quot;PsiMethodCallExpression:System.out.println(&amp;quot;Hello world!&amp;quot;)&quot;/&gt;
+        &lt;level end=&quot;2:43&quot; start=&quot;2:8&quot; tag=&quot;PsiExpressionStatement&quot;/&gt;
+        &lt;level end=&quot;3:5&quot; start=&quot;1:43&quot; tag=&quot;PsiCodeBlock&quot;/&gt;
+        &lt;level end=&quot;3:5&quot; start=&quot;1:4&quot; tag=&quot;PsiMethod:main&quot;/&gt;
+        &lt;level end=&quot;4:1&quot; start=&quot;0:0&quot; tag=&quot;PsiClass:Main&quot;/&gt;
+    &lt;/ast_structure&gt;
+&lt;/gaze&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<p>When the gaze point cannot be mapped to location in the code editor in the following 3 cases, the <code v-pre>remark</code> attribute is
+used:</p>
+<ol>
+<li>The raw gaze point from the eye tracker is invalid. (i.e., nan). In this case, the <code v-pre>remark</code>
+is <code v-pre>Fail | Invalid Gaze Point</code>.</li>
+<li>The code editor is not founded. In this case, the <code v-pre>remark</code> is <code v-pre>Fail | No Editor</code>.</li>
+<li>The code editor is founded, but the gaze point is out of the code editor. In this case, the <code v-pre>remark</code>
+is <code v-pre>Fail | Out of Text Editor</code>.</li>
+</ol>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;left_eye&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>gaze_point_x</li>
+<li>gaze_point_y</li>
+<li>gaze_validity</li>
+<li>pupil_diameter</li>
+<li>pupil_validity</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;left_eye gaze_point_x=&quot;0.5338541666666666&quot; gaze_point_y=&quot;0.17407407407407408&quot; gaze_validity=&quot;1.0&quot;
+          pupil_diameter=&quot;2.4835662841796875&quot; pupil_validity=&quot;1.0&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>gaze_point_x</code> and <code v-pre>gaze_point_y</code> are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
+corner of the screen, and (1, 1) is the bottom-right corner of the screen.</li>
+<li><code v-pre>gaze_validity</code> and <code v-pre>pupil_validity</code> are the validity of the gaze point and pupil diameter, which is binary, 0 for
+invalid, 1 for valid. When using Mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code> is
+always 0.0.</li>
+<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
+always 0.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;right_eye&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>gaze_point_x</li>
+<li>gaze_point_y</li>
+<li>gaze_validity</li>
+<li>pupil_diameter</li>
+<li>pupil_validity</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;right_eye gaze_point_x=&quot;0.5338541666666666&quot; gaze_point_y=&quot;0.17407407407407408&quot; gaze_validity=&quot;1.0&quot;
+           pupil_diameter=&quot;2.7188568115234375&quot; pupil_validity=&quot;1.0&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>gaze_point_x</code> and <code v-pre>gaze_point_y</code> are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
+corner of the screen, and (1, 1) is the bottom-right corner of the screen.</li>
+<li><code v-pre>gaze_validity</code> and <code v-pre>pupil_validity</code> are the validity of the gaze point and pupil diameter, which is binary, 0 for
+invalid, 1 for valid. When using Mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code> is
+always 0.0.</li>
+<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
+always 0.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;location&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>path</li>
+<li>line</li>
+<li>column</li>
+<li>x</li>
+<li>y</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;location column=&quot;25&quot; line=&quot;2&quot; path=&quot;/src/Main.java&quot; x=&quot;820&quot; y=&quot;150&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>x</code> and <code v-pre>y</code> are the coordinates of the gaze relative to the top-left corner of the visible code editor, whose unit is
+same to the <code v-pre>screen_size</code>&#x27;s in <code v-pre>environment</code>, not the actual screen resolution.</li>
+<li><code v-pre>line</code> and <code v-pre>column</code> are the line number and column number of the gaze point in the code editor, which is calculated
+by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pre>Editor</code> interface in IntelliJ Platform.</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;ast_structure&gt;</code></p>
+<p><strong>Sub-element</strong>: <code v-pre>&lt;level&gt;</code>: only used when the current token is different from the previous token</p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>token</li>
+<li>type</li>
+<li>remark: only used when the current token is same to the previous token</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;ast_structure token=&quot;println&quot; type=&quot;IDENTIFIER&quot;&gt;
+  &lt;level end=&quot;2:26&quot; start=&quot;2:19&quot; tag=&quot;PsiIdentifier:println&quot;/&gt;
+  &lt;level end=&quot;2:26&quot; start=&quot;2:8&quot; tag=&quot;PsiReferenceExpression:System.out.println&quot;/&gt;
+  &lt;level end=&quot;2:42&quot; start=&quot;2:8&quot; tag=&quot;PsiMethodCallExpression:System.out.println(&amp;quot;Hello world!&amp;quot;)&quot;/&gt;
+  &lt;level end=&quot;2:43&quot; start=&quot;2:8&quot; tag=&quot;PsiExpressionStatement&quot;/&gt;
+  &lt;level end=&quot;3:5&quot; start=&quot;1:43&quot; tag=&quot;PsiCodeBlock&quot;/&gt;
+  &lt;level end=&quot;3:5&quot; start=&quot;1:4&quot; tag=&quot;PsiMethod:main&quot;/&gt;
+  &lt;level end=&quot;4:1&quot; start=&quot;0:0&quot; tag=&quot;PsiClass:Main&quot;/&gt;
+&lt;/ast_structure&gt;</code></pre>
+</doc-codeblock></div>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;ast_structure remark=&quot;Same (Last Successful AST)&quot; token=&quot;println&quot; type=&quot;IDENTIFIER&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The abstract syntax tree (AST) of the code file is recorded in the <code v-pre>&lt;ast_structure&gt;</code> element. The AST is calculated by
+<a href="https://plugins.jetbrains.com/docs/intellij/psi-elements.html">program structure interface (PSI)</a> of IntelliJ
+Platform.</li>
+<li><code v-pre>token</code> is text of the leaf node in the AST of current gaze point, which is calculated by <code v-pre>psiElement.getText()</code>.</li>
+<li><code v-pre>type</code> is the type of the leaf node, which is calculated by <code v-pre>psiElement.getNode().getElementType()</code>.</li>
+<li><code v-pre>remark</code> is used when the current token is same to the previous token, which means the gaze point is still in the same
+leaf node. In this case, the <code v-pre>remark</code> is <code v-pre>Same (Last Successful AST)</code>. We designed this mechanism to
+avoid <code v-pre>eye_tracking.xml</code> to be too large.</li>
+<li>We calculate the parent nodes of the leaf node by <code v-pre>psiElement.getParent()</code> until the file-level (i.e. <code v-pre>PsiFile</code>), and
+save them in the <code v-pre>&lt;level&gt;</code> element. In the previous example, the leaf node is <code v-pre>PsiIdentifier:println</code>, and its parent
+nodes are <code v-pre>PsiReferenceExpression:System.out.println</code> =&gt; <code v-pre>PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)</code>
+=&gt; <code v-pre>PsiExpressionStatement</code> =&gt; <code v-pre>PsiCodeBlock</code> =&gt; <code v-pre>PsiMethod:main</code> =&gt; <code v-pre>PsiClass:Main</code>. The original code text is
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-java"><code v-pre class="language-java">public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello world!&quot;);
+    }
+}</code></pre>
+</doc-codeblock></div>
+</li>
+</ul>
+<hr>
+<p><strong>Element</strong>: <code v-pre>&lt;level&gt;</code></p>
+<p><strong>Attribute</strong>:</p>
+<ul>
+<li>start: line:column</li>
+<li>end: line:column</li>
+<li>tag</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;level end=&quot;3:5&quot; start=&quot;1:4&quot; tag=&quot;PsiMethod:main&quot;/&gt;</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>start</code> and <code v-pre>end</code> are the start and end position of the AST node level in the code file, which is calculated by
+<code v-pre>psiElement.getTextRange()</code>.</li>
+<li><code v-pre>tag</code> is the type of the AST node level, which is calculated by <code v-pre>psiElement.toString()</code>.</li>
+</ul>
+<doc-anchor-target id="screen-recording">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#screen-recording">#</doc-anchor-trigger>
+        <span>Screen Recording</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">[OUTPUT_DIR]
+├── [START_TIMESTAMP]
+│   ├── screen_recording
+│   │   ├── video_clip_1.mp4
+│   │   ├── video_clip_2.mp4
+│   │   ├── ...
+│   │   ├── frames.csv</code></pre>
+</doc-codeblock></div>
+<hr>
+<p><code v-pre>video_clip_[k].mp4</code></p>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li>The video clip of the screen recording from the (k-1)-th pause (0-th pause is start) to the k-th pause. We designed
+this mechanism to avoid the video file in the memory being too large especially when pausing the tracking for a long
+time.</li>
+</ul>
+<hr>
+<p><code v-pre>frames.csv</code></p>
+<p>Column:</p>
+<ul>
+<li>timestamp</li>
+<li>frame_number</li>
+<li>clip_number</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-csv"><code v-pre class="language-csv">timestamp,frame_number,clip_number
+1696224360619,1,1
+1696224360991,2,1</code></pre>
+</doc-codeblock></div>
+<p><strong>Comment</strong>:</p>
+<ul>
+<li><code v-pre>frame_number</code> is the frame number of the frame in its video clip.</li>
+<li><code v-pre>clip_number</code> is the number of the video clip to which the frame belongs.</li>
+</ul>
+</div>
+
+                                
+                                <!-- Required only on API pages -->
+                                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+                            </div>
+                            <footer class="clear-both">
+                            
+                                <nav class="flex mt-14">
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                            <span>
+                                                <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
+                                                <span class="block mt-1">Code​GRITS</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                            
+                                    <div class="w-1/2">
+                                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../api-reference/">
+                                            <span>
+                                                <span class="block text-xs font-normal text-right text-gray-400 dark:text-dark-400">Next</span>
+                                                <span class="block mt-1">Real-​time Data API Reference</span>
+                                            </span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                                        </a>
+                                    </div>
+                                </nav>
+                            </footer>
+                        </main>
+                
+                        <div class="border-t dark:border-dark-650 pt-6 mb-8">
+                            <footer class="flex flex-wrap items-center justify-between">
+                                <div>
+                                    <ul class="flex flex-wrap items-center text-sm">
+                                    </ul>
+                                </div>
+                                <div class="docs-copyright py-2 text-gray-500 dark:text-dark-350 text-sm leading-relaxed"><p>© Copyright 2023. All rights reserved.</p></div>
+                            </footer>
+                        </div>
+                    </div>
+                
+                    <!-- Rendered if sidebar right is enabled -->
+                    <!-- Sidebar right skeleton-->
+                    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-white border-gray-200 lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:transform-none sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton dark:bg-dark-850 dark:border-dark-650">
+                        <div class="pl-5">
+                            <div class="w-32 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                            <div class="w-48 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                            <div class="w-40 h-3 mb-4 bg-gray-200 dark:bg-dark-600 rounded-full loading"></div>
+                        </div>
+                    </div>
+                
+                    <!-- User should be able to hide sidebar right -->
+                    <doc-sidebar-right v-cloak></doc-sidebar-right>
+                </div>
+
+            </div>
+        </div>
+    
+        <doc-search-mobile></doc-search-mobile>
+        <doc-back-to-top></doc-back-to-top>
+    </div>
+
+
+    <div id="docs-overlay-target"></div>
+
+    <script data-cfasync="false">window.__DOCS__ = { "title": "CodeGRITS Documentation", level: 1, icon: "file", hasPrism: true, hasMermaid: false, hasMath: false, tocDepth: 23 }</script>
+</body>
+</html>

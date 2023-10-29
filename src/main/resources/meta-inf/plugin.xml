@@ -1,0 +1,58 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.nd.codevision</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>CodeVision</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@sd.com" url="https://www.sd.com">sd</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+   For testing purposes only. This is a plugin for tracking user behavior. Still in development
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+<!--    <depends>com.intellij.modules.python</depends>-->
+<!--    <depends>com.intellij.java</depends>-->
+<!--    <depends>com.intellij.clion</depends>-->
+<!--    <depends>org.jetbrains.android</depends>-->
+<!--    <depends>com.intellij.modules.androidstudio</depends>-->
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="api.RealtimeDataImpl"/>
+        <notificationGroup id="CodeVision Notification Group"
+                           displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="CodeVision.StartStopTrackingAction"
+                class="actions.StartStopTrackingAction"
+                text="Start Tracking"
+                icon="AllIcons.Actions.ToggleVisibility">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="CodeVision.PauseResumeAction"
+                class="actions.PauseResumeTrackingAction"
+                text="Pause Tracking">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.StartStopTrackingAction"/>
+        </action>
+        <action id="CodeVision.ConfigAction" class="actions.ConfigAction" text="Configuration"
+                description="Configure tracking options">
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.PauseResumeAction"/>
+        </action>
+        <group id="CodeVision.TakeNoteActionGroup" class="actions.TakeNoteActionGroup" text="Add Label"
+               description="Add label" popup="true" icon="AllIcons.Actions.Edit">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </group>
+    </actions>
+</idea-plugin>

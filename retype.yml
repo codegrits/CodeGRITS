@@ -1,9 +1,10 @@
 input: .
 output: .retype
-url: # Add your website address here
+url:
 branding:
   title: CodeGRITS
-  label: Docs
+#  label: Docs
+  logo: /logo.png
 
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."

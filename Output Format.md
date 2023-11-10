@@ -1,4 +1,4 @@
-# CodeGRITS Documentation
+# Output Format
 
 ## Output Directory Structure
 
@@ -74,7 +74,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
     - [`<selection>`](#selection)
   - [`<visible_areas>`](#vis_areas)
     - [`<visible_area>`](#vis_area)
-      :::
+
+:::
 
 ---
 

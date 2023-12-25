@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API Reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/API Reference.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOCUMENT.md" beforeDir="false" afterPath="$PROJECT_DIR$/Output Format.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,17 +71,18 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;JavaVariableFindUsagesOptions.isSearchForAccessors&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/IdeaProjects/CodeGRITS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Tai-e-assignments/A1/tai-e&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -103,6 +106,18 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StructuralSearchPlugin">
+    <searchConfiguration name="$Qualifier$::$Method$" created="1700455312225" uuid="9637ce76-ebdf-3549-a5b2-67a3262c83d2" text="$Qualifier$::$Method$" recursive="true" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" search_injected="false" history="1">
+      <constraint name="__context__" within="" contains="" />
+      <constraint name="Qualifier" within="" contains="" />
+      <constraint name="Method" target="true" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="$Expr$ instanceof $Type$" created="1700455267644" uuid="87383e7a-b033-3359-beda-410098c0d97e" text="$Expr$ instanceof $Type$" recursive="true" caseInsensitive="false" type="JAVA" pattern_context="default" scope_type="PROJECT" scope_descriptor="" search_injected="false" history="1">
+      <constraint name="__context__" within="" contains="" />
+      <constraint name="Expr" within="" contains="" />
+      <constraint name="Type" within="" contains="" />
+    </searchConfiguration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="" />
@@ -121,6 +136,16 @@
       <workItem from="1698538889005" duration="1115000" />
       <workItem from="1698547984000" duration="82000" />
       <workItem from="1699580673480" duration="3076000" />
+      <workItem from="1700450377387" duration="524000" />
+      <workItem from="1700450925421" duration="8149000" />
+      <workItem from="1701319707843" duration="4935000" />
+      <workItem from="1702446987219" duration="254000" />
+      <workItem from="1702790447857" duration="725000" />
+      <workItem from="1703293633081" duration="735000" />
+      <workItem from="1703485997553" duration="452000" />
+      <workItem from="1703495906239" duration="25000" />
+      <workItem from="1703495947720" duration="14652000" />
+      <workItem from="1703514033102" duration="497000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

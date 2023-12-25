@@ -79,7 +79,7 @@ public class ConfigDialog extends DialogWrapper {
                     for (String freq : freqList) {
                         freqCombo.addItem(Double.parseDouble(freq));
                     }
-                }else{ //use mouse and default freq
+                } else { //use mouse and default freq
                     deviceCombo.removeAllItems();
                     deviceCombo.addItem("Mouse");
                     freqCombo.removeAllItems();

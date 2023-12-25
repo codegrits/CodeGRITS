@@ -153,7 +153,7 @@ public class EyeTracker implements Disposable {
         if (virtualFiles.length > 0) {
             filePath = virtualFiles[0].getPath();
         }
-        if (deviceIndex == 0 ) {
+        if (deviceIndex == 0) {
             setting.setAttribute("eye_tracker", "Mouse");
         } else {
             setting.setAttribute("eye_tracker", "Tobii Pro Fusion");
@@ -237,7 +237,7 @@ public class EyeTracker implements Disposable {
                 Element aSTStructure = getASTStructureElement(psiElement);
                 gaze.appendChild(aSTStructure);
                 lastElement = psiElement;
-                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
+//                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());
                 handleElement(gaze);
             }
         }));

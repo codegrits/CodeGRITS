@@ -17,15 +17,17 @@ dependencies {
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.7.1")
+    implementation("org.bytedeco:javacv-platform:1.5.9")
+
 }
 
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.2.5")
+    version.set("2023.1.4")
 
-//    type.set("IC")
-//    plugins.set(listOf("com.intellij.java"))
+    type.set("IC")
+    plugins.set(listOf("com.intellij.java"))
 
 //    type.set("PC")
 //    plugins.set(listOf("PythonCore"))

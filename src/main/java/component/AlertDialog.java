@@ -33,8 +33,6 @@ public class AlertDialog extends DialogWrapper {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
 
-        //show a warning icon
-
         JLabel label = new JLabel(this.label);
         JLabel icon = new JLabel();
         label.setIcon(this.icon);

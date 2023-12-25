@@ -1,10 +1,13 @@
 package trackers;
 
 import com.opencsv.CSVWriter;
+import org.bytedeco.javacv.FFmpegFrameRecorder;
+import org.jcodec.api.FrameGrab;
 import org.jcodec.api.SequenceEncoder;
 import org.jcodec.api.awt.AWTSequenceEncoder;
 import org.jcodec.common.model.ColorSpace;
 import org.jcodec.common.model.Picture;
+import org.jcodec.scale.AWTUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,6 +16,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ScreenRecorder {
 
@@ -22,17 +27,16 @@ public class ScreenRecorder {
      * 2: started, paused; only resumeAction enabled
      */
     int state = 0;
+    int frameRate = 4;
     private AWTSequenceEncoder awtEncoder;
+//    private FFmpegFrameRecorder recorder;
     private final ArrayList<String[]> timeList = new ArrayList<>();
     private CSVWriter csvWriter;
     boolean isRecording = false;
     private int clipNumber = 1;
+    private int frameNumber = 0;
     private String dataOutputPath = "";
-
     private static ScreenRecorder instance = null;
-
-    private ScreenRecorder() {
-    }
 
     public static ScreenRecorder getInstance() {
         if (instance == null) {
@@ -44,12 +48,13 @@ public class ScreenRecorder {
 
     private void createEncoder() throws IOException {
         awtEncoder = AWTSequenceEncoder.createSequenceEncoder(
-                new File(dataOutputPath + "/screen_recording/video_clip_" + clipNumber + ".mp4"), 24);
+                new File(dataOutputPath + "/screen_recording/video_clip_" + clipNumber + ".mp4"), frameRate);
     }
 
 
     public void startRecording() throws IOException {
         state = 1;
+        clipNumber = 1;
         isRecording = true;
         File file = new File(dataOutputPath + "/screen_recording/frames.csv");
         file.getParentFile().mkdirs();
@@ -86,37 +91,36 @@ public class ScreenRecorder {
     }
 
     private void recordScreen() throws AWTException, IOException {
+        createEncoder();
+        frameNumber = 0;
         Rectangle bounds = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         Robot robot = new Robot();
-        createEncoder();
-        long frameRate = 24;
-        Thread recordThread = new Thread(() -> {
-            long frameNumber = 0;
-            long lastFrameTime = System.nanoTime();
-            long frameDuration = 1000000000 / frameRate;
-            while (isRecording) {
-                long currentTime = System.nanoTime();
-                if (currentTime - lastFrameTime < frameDuration) {
-                    continue;
-                }
-                lastFrameTime = currentTime;
-
-                BufferedImage screenCapture = robot.createScreenCapture(bounds);
-                frameNumber++;
-                timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), String.valueOf(frameNumber), String.valueOf(clipNumber)});
-                try {
-                    awtEncoder.encodeImage(screenCapture);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (!isRecording) {
+                    try {
+                        awtEncoder.finish();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    timer.cancel();
+                } else {
+                    BufferedImage screenCapture = robot.createScreenCapture(bounds);
+                    frameNumber++;
+                    timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), String.valueOf(frameNumber), String.valueOf(clipNumber)});
+                    try {
+                        if (frameNumber == 1) {
+                            ImageIO.write(screenCapture, "png", new File(dataOutputPath + "/screen_recording/frame_" + frameNumber + ".png"));
+                        }
+                        awtEncoder.encodeImage(screenCapture);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-            try {
-                awtEncoder.finish();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        recordThread.start();
+        }, 0, 1000 / frameRate);
     }
 
     public void setDataOutputPath(String dataOutputPath) {

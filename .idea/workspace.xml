@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/OSDetector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,7 +167,7 @@
       <workItem from="1703495906239" duration="25000" />
       <workItem from="1703495947720" duration="14652000" />
       <workItem from="1703514033102" duration="3339000" />
-      <workItem from="1703517543701" duration="7074000" />
+      <workItem from="1703517543701" duration="9181000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

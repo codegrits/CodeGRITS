@@ -21,7 +21,7 @@ public class ScreenRecorder {
      * 2: started, paused; only resumeAction enabled
      */
     int state = 0;
-    int frameRate = 12;
+    int frameRate = 4; // higher frame rate (e.g., 12) will result in larger file size and blurry video
     private FrameRecorder recorder;
     private FrameGrabber grabber;
     private final ArrayList<String[]> timeList = new ArrayList<>();

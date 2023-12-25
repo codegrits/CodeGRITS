@@ -75,7 +75,6 @@ public class ConfigDialog extends DialogWrapper {
                     }
                     List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
                     freqCombo.removeAllItems();
-                    System.out.println(freqList);
                     for (String freq : freqList) {
                         freqCombo.addItem(Double.parseDouble(freq));
                     }
@@ -353,7 +352,6 @@ public class ConfigDialog extends DialogWrapper {
                         deviceCombo.setSelectedIndex(0);
                         List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
                         freqCombo.removeAllItems();
-                        System.out.println(freqList);
                         for (String freq : freqList) {
                             freqCombo.addItem(Double.parseDouble(freq));
                         }

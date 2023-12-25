@@ -1,17 +1,11 @@
 package trackers;
 
 import com.opencsv.CSVWriter;
-import org.bytedeco.javacv.FFmpegFrameRecorder;
-import org.jcodec.api.FrameGrab;
-import org.jcodec.api.SequenceEncoder;
-import org.jcodec.api.awt.AWTSequenceEncoder;
-import org.jcodec.common.model.ColorSpace;
-import org.jcodec.common.model.Picture;
-import org.jcodec.scale.AWTUtil;
+import org.bytedeco.ffmpeg.global.avcodec;
+import org.bytedeco.javacv.*;
+import org.bytedeco.javacv.Frame;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,9 +21,9 @@ public class ScreenRecorder {
      * 2: started, paused; only resumeAction enabled
      */
     int state = 0;
-    int frameRate = 4;
-    private AWTSequenceEncoder awtEncoder;
-//    private FFmpegFrameRecorder recorder;
+    int frameRate = 12;
+    private FrameRecorder recorder;
+    private FrameGrabber grabber;
     private final ArrayList<String[]> timeList = new ArrayList<>();
     private CSVWriter csvWriter;
     boolean isRecording = false;
@@ -47,8 +41,32 @@ public class ScreenRecorder {
 
 
     private void createEncoder() throws IOException {
-        awtEncoder = AWTSequenceEncoder.createSequenceEncoder(
-                new File(dataOutputPath + "/screen_recording/video_clip_" + clipNumber + ".mp4"), frameRate);
+        grabber = new FFmpegFrameGrabber("desktop");
+        grabber.setFrameRate(frameRate);
+
+        // avfoundation for macOS, gdigrab for Windows, x11grab for Linux
+        if (utils.OSDetector.isMac()) {
+            grabber.setFormat("avfoundation");
+        } else if (utils.OSDetector.isWindows()) {
+            grabber.setFormat("gdigrab");
+        } else if (utils.OSDetector.isUnix()) {
+            grabber.setFormat("x11grab");
+        } else {
+            throw new IOException("Unsupported OS");
+        }
+
+        GraphicsConfiguration config = GraphicsEnvironment.getLocalGraphicsEnvironment().
+                getDefaultScreenDevice().getDefaultConfiguration();
+        grabber.setImageWidth((int) (Toolkit.getDefaultToolkit().getScreenSize().width * config.getDefaultTransform().getScaleX()));
+        grabber.setImageHeight((int) (Toolkit.getDefaultToolkit().getScreenSize().height * config.getDefaultTransform().getScaleY()));
+        grabber.setOption("offset_x", "0");
+        grabber.setOption("offset_y", "0");
+        grabber.start();
+
+        recorder = FrameRecorder.createDefault(dataOutputPath + "/screen_recording/clip_" + clipNumber + ".mp4", grabber.getImageWidth(), grabber.getImageHeight());
+        recorder.setFrameRate(frameRate);
+        recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
+        recorder.start();
     }
 
 
@@ -93,31 +111,30 @@ public class ScreenRecorder {
     private void recordScreen() throws AWTException, IOException {
         createEncoder();
         frameNumber = 0;
-        Rectangle bounds = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-        Robot robot = new Robot();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (!isRecording) {
                     try {
-                        awtEncoder.finish();
+                        grabber.stop();
+                        recorder.stop();
+                        grabber.release();
+                        recorder.release();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                     timer.cancel();
                 } else {
-                    BufferedImage screenCapture = robot.createScreenCapture(bounds);
                     frameNumber++;
                     timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), String.valueOf(frameNumber), String.valueOf(clipNumber)});
                     try {
-                        if (frameNumber == 1) {
-                            ImageIO.write(screenCapture, "png", new File(dataOutputPath + "/screen_recording/frame_" + frameNumber + ".png"));
-                        }
-                        awtEncoder.encodeImage(screenCapture);
-                    } catch (IOException e) {
+                        Frame frame = grabber.grabFrame();
+                        recorder.record(frame);
+                    } catch (FrameGrabber.Exception | FrameRecorder.Exception e) {
                         throw new RuntimeException(e);
                     }
+
                 }
             }
         }, 0, 1000 / frameRate);

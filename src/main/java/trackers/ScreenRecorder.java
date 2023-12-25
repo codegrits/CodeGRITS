@@ -41,20 +41,20 @@ public class ScreenRecorder {
 
 
     private void createEncoder() throws IOException {
-        grabber = new FFmpegFrameGrabber("desktop");
-        grabber.setFrameRate(frameRate);
-
-        // avfoundation for macOS, gdigrab for Windows, x11grab for Linux
+        // avfoundation for macOS, gdigrab for Windows, xcbgrab for Linux
         if (utils.OSDetector.isMac()) {
+            grabber = new FFmpegFrameGrabber("1");
             grabber.setFormat("avfoundation");
         } else if (utils.OSDetector.isWindows()) {
+            grabber = new FFmpegFrameGrabber("desktop");
             grabber.setFormat("gdigrab");
         } else if (utils.OSDetector.isUnix()) {
+            grabber = new FFmpegFrameGrabber(":0.0");
             grabber.setFormat("x11grab");
         } else {
             throw new IOException("Unsupported OS");
         }
-
+        grabber.setFrameRate(frameRate);
         GraphicsConfiguration config = GraphicsEnvironment.getLocalGraphicsEnvironment().
                 getDefaultScreenDevice().getDefaultConfiguration();
         grabber.setImageWidth((int) (Toolkit.getDefaultToolkit().getScreenSize().width * config.getDefaultTransform().getScaleX()));

@@ -6,9 +6,8 @@ CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem, w
 for empirical software engineering (SE) researchers. CodeGRITS is built on top of IntelliJ’s SDK, with wide
 compatibility with the entire family of JetBrains IDEs to track developers’ IDE interactions and eye gaze data.
 
-<div style="text-align: center;">
-    <img src="imgs/overview.png" style="width: 55%;">
-</div>
+<img src="./docs/imgs/overview.png" alt="Overview of CodeGRITS" style="zoom:55%;" />
+
 
 ## Key Features
 

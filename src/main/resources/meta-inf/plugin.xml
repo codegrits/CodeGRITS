@@ -24,6 +24,7 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <!--    CodeGRITS does not require the following dependencies, because it does not use language-specific PSI.-->
     <!--    <depends>com.intellij.modules.python</depends>-->
     <!--    <depends>com.intellij.java</depends>-->
     <!--    <depends>com.intellij.clion</depends>-->

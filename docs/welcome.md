@@ -11,7 +11,7 @@ for empirical software engineering (SE) researchers. CodeGRITS is built on top o
 compatibility with the entire family of JetBrains IDEs to track developers’ IDE interactions and eye gaze data.
 
 <div style="text-align: center;">
-    <img src="imgs/overview.png" style="width: 55%;">
+    <img src="imgs/overview.png" style="width: 5%;">
 </div>
 
 ## Key Features

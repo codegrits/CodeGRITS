@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
-      <change afterPath="$PROJECT_DIR$/docs/citation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/imgs/eye-tracking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/imgs/ide-tracking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/imgs/overview.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/imgs/visualization.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/usage.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/welcome.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API Reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/api-reference.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Output Format.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/output.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/imgs/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/welcome.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +178,7 @@
       <workItem from="1703548146035" duration="5923000" />
       <workItem from="1703554157001" duration="5970000" />
       <workItem from="1703566127086" duration="2719000" />
-      <workItem from="1703575373869" duration="9270000" />
+      <workItem from="1703575373869" duration="9543000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

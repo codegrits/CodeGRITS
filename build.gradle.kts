@@ -14,7 +14,7 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.7.1")
-    // implementation("org.bytedeco:javacv-platform:1.5.9")
+    // implementation("org.bytedeco:javacv-platform:1.5.9") // NOTE: This is too large
     implementation("org.bytedeco:javacv:1.5.9")
     implementation("org.bytedeco:ffmpeg:6.0-1.5.9")
     implementation("org.bytedeco:ffmpeg-platform:6.0-1.5.9")
@@ -25,17 +25,19 @@ dependencies {
 intellij {
     version.set("2023.1.4")
 
-    type.set("IC")
+    type.set("IC") // IntelliJ Community Edition
+//    type.set("IU") // IntelliJ Ultimate Edition
     plugins.set(listOf("com.intellij.java"))
 
-//    type.set("PC")
+//    type.set("PC") // PyCharm Community Edition
+//    type.set("PY") // PyCharm Professional Edition
 //    plugins.set(listOf("PythonCore"))
 
-//    type.set("CL")
+//    type.set("CL") // CLion
 
-//    type.set("PS")
+//    type.set("PS") // PhpStorm
 
-//    version.set("2023.1.4")
+//    Fixme: Android Studio
 //    type.set("IC")
 //    plugins.set(listOf("android"))
 }
@@ -51,8 +53,8 @@ tasks {
 //    }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild.set("222") // 2022.2 NOTE Java 17 is now required
+        untilBuild.set("233.*")
     }
 
     signPlugin {

@@ -1,10 +1,9 @@
-input: .
+input: ./docs
 output: .retype
 url:
 branding:
   title: CodeGRITS
-#  label: Docs
-  logo: /src/resources/pluginIcon.svg
+  logo: imgs/logo.png
 
 footer:
   copyright: "&copy; Copyright {{ year }}. All rights reserved."

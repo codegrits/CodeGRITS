@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756844527940">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756868946698">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -30,12 +30,12 @@
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../resources/css/retype.css?v=3.5.0.756844527940" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.756868946698" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756844527940" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756868946698" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756844527940" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756844527940" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756868946698" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756868946698" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -190,7 +190,7 @@
 k-th pause.</li>
 <li><code v-pre>frames.csv</code> records the timestamp and clip number of each frame in the video clip.</li>
 </ul>
-<p>All the timestamps used by CodeVision are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.</p>
+<p>All the timestamps used by CodeGRITS are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.</p>
 <p>The <a href="https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems">editor coordinate system</a>
 (e.g., line, column) of IntelliJ Platform is start from 0.</p>
 <doc-anchor-target id="ide-tracking">
@@ -396,7 +396,7 @@ like <code v-pre>CompareTwoFiles</code>, <code v-pre>ReformatCode</code>, to man
 &lt;action id=&quot;EditorBackSpace&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214505280&quot;/&gt;
 &lt;action id=&quot;SaveAll&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214506877&quot;/&gt;
 &lt;action id=&quot;GotoDeclaration&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696214513473&quot;/&gt;
-&lt;action id=&quot;CodeVision.StartStopTrackingAction&quot;
+&lt;action id=&quot;CodeGRITS.StartStopTracking&quot;
         path=&quot;C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java&quot;
         timestamp=&quot;1696214517658&quot;/&gt;
 &lt;action id=&quot;EditorCopy&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216114539&quot;/&gt;
@@ -408,9 +408,9 @@ like <code v-pre>CompareTwoFiles</code>, <code v-pre>ReformatCode</code>, to man
 </doc-codeblock></div>
 <p><strong>Comment</strong>:</p>
 <ul>
-<li>CodeVision-related actions are also implemented as <code v-pre>AnAction</code> objects, and their <code v-pre>id</code> is prefixed with <code v-pre>CodeVision</code>,
-such as <code v-pre>CodeVision.StartStopTrackingAction</code>, <code v-pre>CodeVision.PauseResumeTrackingAction</code>, etc.</li>
-<li>The &quot;add label&quot; action is also tracked here, with <code v-pre>id</code> as <code v-pre>&quot;CodeVision.AddLabelAction.[LABEL_NAME]&quot;</code>, where label name
+<li>CodeGRITS-related actions are also implemented as <code v-pre>AnAction</code> objects, and their <code v-pre>id</code> is prefixed with <code v-pre>CodeGRITS</code>,
+such as <code v-pre>CodeGRITS.StartStopTracking</code>, <code v-pre>CodeGRITS.PauseResumeTracking</code>, etc.</li>
+<li>The &quot;add label&quot; action is also tracked here, with <code v-pre>id</code> as <code v-pre>&quot;CodeGRITS.AddLabel.[LABEL_NAME]&quot;</code>, where label name
 is pre-set in the configuration.</li>
 <li>Other IntelliJ plugins may also implement their own <code v-pre>AnAction</code> objects, which will also be tracked here. For example,
 the <code v-pre>copilot.applyInlays</code> in the GitHub Copilot plugin.</li>
@@ -632,7 +632,7 @@ code editor, which could be used to track the horizontal and vertical resizing r
 </ul>
 <p><strong>Comment</strong>:</p>
 <ul>
-<li>The root element of the <code v-pre>eye_tracking.xml</code> file. CodeVision support both Mouse simulation and Tobii Pro eye tracker
+<li>The root element of the <code v-pre>eye_tracking.xml</code> file. CodeGRITS support both Mouse simulation and Tobii Pro eye tracker
 devices.</li>
 <li>Since <a href="https://developer.tobiipro.com/index.html">Tobii Pro SDK</a> not support Java, we use Python
 library <code v-pre>tobii-research</code> to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect

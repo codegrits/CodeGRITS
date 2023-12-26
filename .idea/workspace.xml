@@ -5,8 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API Reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/API Reference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Output Format.md" beforeDir="false" afterPath="$PROJECT_DIR$/Output Format.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/TypingProcessor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/TakeNoteAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/TakeNoteActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelActionGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/OutputHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +97,7 @@
     "JavaVariableFindUsagesOptions.isSearchForAccessors": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
@@ -167,7 +188,8 @@
       <workItem from="1703495906239" duration="25000" />
       <workItem from="1703495947720" duration="14652000" />
       <workItem from="1703514033102" duration="3339000" />
-      <workItem from="1703517543701" duration="11159000" />
+      <workItem from="1703517543701" duration="11738000" />
+      <workItem from="1703548146035" duration="5165000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

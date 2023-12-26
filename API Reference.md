@@ -8,7 +8,7 @@ Before using the API, you first need to add the following dependency to the `int
 
 ```groovy
 intellij {
-    plugins.set(file("path-to-CodeGRITS-project\\build\\idea-sandbox\\plugins\\CodeVision"))
+    plugins.set(file("path-to-CodeGRITS-project\\build\\idea-sandbox\\plugins\\CodeGRITS"))
 }
 ```
 

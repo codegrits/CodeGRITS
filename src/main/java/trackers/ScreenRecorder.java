@@ -57,6 +57,7 @@ public class ScreenRecorder {
         grabber.setFrameRate(frameRate);
         GraphicsConfiguration config = GraphicsEnvironment.getLocalGraphicsEnvironment().
                 getDefaultScreenDevice().getDefaultConfiguration();
+        // set image width and height to be the same as the resolution of the *first* screen (in case of multiple screens)
         grabber.setImageWidth((int) (Toolkit.getDefaultToolkit().getScreenSize().width * config.getDefaultTransform().getScaleX()));
         grabber.setImageHeight((int) (Toolkit.getDefaultToolkit().getScreenSize().height * config.getDefaultTransform().getScaleY()));
         grabber.setOption("offset_x", "0");
@@ -78,6 +79,7 @@ public class ScreenRecorder {
         file.getParentFile().mkdirs();
         csvWriter = new CSVWriter(new FileWriter(file));
         csvWriter.writeNext(new String[]{"timestamp", "frame_number", "clip_number"});
+        timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), "Start", String.valueOf(clipNumber)});
         try {
             recordScreen();
         } catch (AWTException | IOException e) {
@@ -88,6 +90,7 @@ public class ScreenRecorder {
     public void stopRecording() throws IOException {
         state = 0;
         isRecording = false;
+        timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), "Stop", String.valueOf(clipNumber)});
         csvWriter.writeAll(timeList);
         csvWriter.close();
     }
@@ -95,12 +98,14 @@ public class ScreenRecorder {
     public void pauseRecording() throws IOException {
         state = 2;
         isRecording = false;
+        timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), "Pause", String.valueOf(clipNumber)});
         clipNumber++;
     }
 
     public void resumeRecording() {
         state = 1;
         isRecording = true;
+        timeList.add(new String[]{String.valueOf(System.currentTimeMillis()), "Resume", String.valueOf(clipNumber)});
         try {
             recordScreen();
         } catch (AWTException | IOException e) {

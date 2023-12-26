@@ -27,7 +27,7 @@
   k-th pause.
 - `frames.csv` records the timestamp and clip number of each frame in the video clip.
 
-All the timestamps used by CodeVision are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.
+All the timestamps used by CodeGRITS are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.
 
 The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems)
 (e.g., line, column) of IntelliJ Platform is start from 0.
@@ -216,7 +216,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 <action id="EditorBackSpace" path="/src/Main.java" timestamp="1696214505280"/>
 <action id="SaveAll" path="/src/Main.java" timestamp="1696214506877"/>
 <action id="GotoDeclaration" path="/src/Main.java" timestamp="1696214513473"/>
-<action id="CodeVision.StartStopTrackingAction"
+<action id="CodeGRITS.StartStopTracking"
         path="C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/io/PrintStream.java"
         timestamp="1696214517658"/>
 <action id="EditorCopy" path="/src/Main.java" timestamp="1696216114539"/>
@@ -229,9 +229,9 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-- CodeVision-related actions are also implemented as `AnAction` objects, and their `id` is prefixed with `CodeVision`,
-  such as `CodeVision.StartStopTrackingAction`, `CodeVision.PauseResumeTrackingAction`, etc.
-- The "add label" action is also tracked here, with `id` as `"CodeVision.AddLabelAction.[LABEL_NAME]"`, where label name
+- CodeGRITS-related actions are also implemented as `AnAction` objects, and their `id` is prefixed with `CodeGRITS`,
+  such as `CodeGRITS.StartStopTracking`, `CodeGRITS.PauseResumeTracking`, etc.
+- The "add label" action is also tracked here, with `id` as `"CodeGRITS.AddLabel.[LABEL_NAME]"`, where label name
   is pre-set in the configuration.
 - Other IntelliJ plugins may also implement their own `AnAction` objects, which will also be tracked here. For example,
   the `copilot.applyInlays` in the GitHub Copilot plugin.
@@ -481,7 +481,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-- The root element of the `eye_tracking.xml` file. CodeVision support both Mouse simulation and Tobii Pro eye tracker
+- The root element of the `eye_tracking.xml` file. CodeGRITS support both Mouse simulation and Tobii Pro eye tracker
   devices.
 - Since [Tobii Pro SDK](https://developer.tobiipro.com/index.html) not support Java, we use Python
   library `tobii-research` to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect

@@ -28,15 +28,15 @@ public class PauseResumeTrackingAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (StartStopTrackingAction.isPaused()) {
-            StartStopTrackingAction.resumeTracking();
-            TakeNoteAction.setIsEnabled(true);
             screenRecorder.resumeRecording();
+            StartStopTrackingAction.resumeTracking();
+            AddLabelAction.setIsEnabled(true);
             ConfigAction.setIsEnabled(false);
 
         } else {
             StartStopTrackingAction.pauseTracking();
             ConfigAction.setIsEnabled(false);
-            TakeNoteAction.setIsEnabled(false);
+            AddLabelAction.setIsEnabled(false);
             try {
                 screenRecorder.pauseRecording();
             } catch (IOException ex) {

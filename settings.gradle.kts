@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "CodeVision"
+rootProject.name = "CodeGRITS"

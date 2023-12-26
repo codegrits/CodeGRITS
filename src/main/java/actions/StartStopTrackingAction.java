@@ -39,7 +39,7 @@ public class StartStopTrackingAction extends AnAction {
         if (config.configExists()) {
             config.loadFromJson();
         } else {
-            Notification notification = new Notification("CodeVision Notification Group", "Configuration",
+            Notification notification = new Notification("CodeGRITS Notification Group", "Configuration",
                     "Please configure the plugin first.", NotificationType.WARNING);
             notification.notify(e.getProject());
             return;
@@ -59,11 +59,16 @@ public class StartStopTrackingAction extends AnAction {
 
                 isTracking = true;
                 ConfigAction.setIsEnabled(false);
-                TakeNoteActionGroup.setIsEnabled(true);
+                AddLabelActionGroup.setIsEnabled(true);
                 String projectPath = e.getProject() != null ? e.getProject().getBasePath() : "";
                 String realDataOutputPath = Objects.equals(config.getDataOutputPath(), ConfigDialog.selectDataOutputPlaceHolder)
                         ? projectPath : config.getDataOutputPath();
                 realDataOutputPath += "/" + System.currentTimeMillis() + "/";
+
+                if (config.getCheckBoxes().get(2)) {
+                    screenRecorder.setDataOutputPath(realDataOutputPath);
+                    screenRecorder.startRecording();
+                }
 
                 iDETracker = IDETracker.getInstance();
                 iDETracker.setProjectPath(projectPath);
@@ -81,19 +86,12 @@ public class StartStopTrackingAction extends AnAction {
                     eyeTracker.setPythonScriptMouse();
                     eyeTracker.startTracking(e.getProject());
                 }
-                if (config.getCheckBoxes().get(2)) {
-                    screenRecorder.setDataOutputPath(realDataOutputPath);
-                    screenRecorder.startRecording();
-                }
-//                if (config.getCheckBoxes().get(3)){ //socket
-//                    iDETracker.transmitRealTimeData();
-//                }
-                TakeNoteAction.setIsEnabled(true);
+                AddLabelAction.setIsEnabled(true);
 
             } else {
                 isTracking = false;
                 iDETracker.stopTracking();
-                TakeNoteAction.setIsEnabled(false);
+                AddLabelAction.setIsEnabled(false);
                 ConfigAction.setIsEnabled(true);
                 if (config.getCheckBoxes().get(1) && eyeTracker != null) {
                     eyeTracker.stopTracking();

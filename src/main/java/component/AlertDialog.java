@@ -1,18 +1,17 @@
 package component;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class AlertDialog extends DialogWrapper {
     private String label;
     private Icon icon;
-    public AlertDialog(String label,Icon icon) {
+
+    public AlertDialog(String label, Icon icon) {
 
         super(true); // use current window as parent
         this.label = label;

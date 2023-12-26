@@ -1,56 +1,60 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.nd.codevision</id>
+    <id>com.nd.codegrits</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>CodeVision</name>
+    <name>CodeGRITS</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@sd.com" url="https://www.sd.com">sd</vendor>
+    <vendor email="toby.j.li@nd.edu" url="https://toby.li/">SaNDwich Lab</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-   For testing purposes only. This is a plugin for tracking user behavior. Still in development
-  ]]></description>
+    CodeGRITS stands for <strong>G</strong>aze <strong>R</strong>ecording &amp; <strong>I</strong>DE
+    <strong>T</strong>racking <strong>S</strong>ystem, which is a plugin specifically designed for SE researchers.
+    CodeGRITS is built on top of IntelliJ’s SDK, with wide compatibility with the entire family of JetBrains IDEs to
+    track developers’ IDE interactions and eye gaze data. For more information, please visit our website
+    <a href="https://codegrits.github.io/CodeGRITS/">CodeGRITS</a>.
+    ]]></description>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-<!--    <depends>com.intellij.modules.python</depends>-->
-<!--    <depends>com.intellij.java</depends>-->
-<!--    <depends>com.intellij.clion</depends>-->
-<!--    <depends>org.jetbrains.android</depends>-->
-<!--    <depends>com.intellij.modules.androidstudio</depends>-->
+    <!--    <depends>com.intellij.modules.python</depends>-->
+    <!--    <depends>com.intellij.java</depends>-->
+    <!--    <depends>com.intellij.clion</depends>-->
+    <!--    <depends>org.jetbrains.android</depends>-->
+    <!--    <depends>com.intellij.modules.androidstudio</depends>-->
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="api.RealtimeDataImpl"/>
-        <notificationGroup id="CodeVision Notification Group"
+        <notificationGroup id="CodeGRITS Notification Group"
                            displayType="BALLOON"/>
     </extensions>
 
     <actions>
-        <action id="CodeVision.StartStopTrackingAction"
+        <action id="CodeGRITS.StartStopTracking"
                 class="actions.StartStopTrackingAction"
                 text="Start Tracking"
                 icon="AllIcons.Actions.ToggleVisibility">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="CodeVision.PauseResumeAction"
+        <action id="CodeGRITS.PauseResumeTracking"
                 class="actions.PauseResumeTrackingAction"
                 text="Pause Tracking">
-            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.StartStopTrackingAction"/>
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeGRITS.StartStopTracking"/>
         </action>
-        <action id="CodeVision.ConfigAction" class="actions.ConfigAction" text="Configuration"
+        <action id="CodeGRITS.Config" class="actions.ConfigAction" text="Configuration"
                 description="Configure tracking options">
-            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeVision.PauseResumeAction"/>
+            <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeGRITS.PauseResumeTracking"/>
         </action>
-        <group id="CodeVision.TakeNoteActionGroup" class="actions.TakeNoteActionGroup" text="Add Label"
+        <group id="CodeGRITS.AddLabelActionGroup" class="actions.AddLabelActionGroup" text="Add Label"
                description="Add label" popup="true" icon="AllIcons.Actions.Edit">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </group>

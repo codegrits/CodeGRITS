@@ -1,9 +1,6 @@
 package component;
 
-import actions.TakeNoteAction;
-import com.intellij.facet.ui.ValidationResult;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
+import actions.AddLabelAction;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.ui.*;
 import com.intellij.ui.DocumentAdapter;
@@ -22,8 +19,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.List;
@@ -36,7 +31,7 @@ public class ConfigDialog extends DialogWrapper {
     private List<JCheckBox> checkBoxes;
 
     private final JPanel panel = new JPanel();
-    private static List<JTextField> noteAreas = new ArrayList<>();
+    private static List<JTextField> labelAreas = new ArrayList<>();
 
     private static TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
     private static TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
@@ -60,7 +55,7 @@ public class ConfigDialog extends DialogWrapper {
         if (new File("config.json").exists()) {
             loadConfig();
         }
-        addNoteArea(true);
+        addLabelArea(true);
         if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
@@ -103,16 +98,16 @@ public class ConfigDialog extends DialogWrapper {
         config.loadFromJson();
 
         List<Boolean> selected = config.getCheckBoxes();
-        List<String> notes = config.getNotes();
+        List<String> labels = config.getLabels();
         Double freq = config.getSampleFreq();
         for (int i = 0; i < selected.size(); i++) {
             checkBoxes.get(i).setSelected(selected.get(i));
         }
 
-        noteAreas = new ArrayList<>();
-        for (int i = 0; i < notes.size(); i++) {
-            addNoteArea(false);
-            noteAreas.get(i).setText(notes.get(i));
+        labelAreas = new ArrayList<>();
+        for (int i = 0; i < labels.size(); i++) {
+            addLabelArea(false);
+            labelAreas.get(i).setText(labels.get(i));
         }
         freqCombo.setSelectedItem(freq);
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
@@ -125,7 +120,7 @@ public class ConfigDialog extends DialogWrapper {
     }
 
     private void saveConfig() {
-        Config config = new Config(getSelectedCheckboxes(), getCurrentNotes(), (Double) freqCombo.getSelectedItem(),
+        Config config = new Config(getSelectedCheckboxes(), getCurrentLabels(), (Double) freqCombo.getSelectedItem(),
                 getPythonInterpreter(), getDataOutputPath(), deviceCombo.getSelectedIndex());
         config.saveAsJson();
     }
@@ -140,8 +135,8 @@ public class ConfigDialog extends DialogWrapper {
     public void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
-        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("CodeVision.TakeNoteActionGroup");
-        List<String> notes = getCurrentNotes();
+        DefaultActionGroup actionGroup = (DefaultActionGroup) actionManager.getAction("CodeGRITS.AddLabelActionGroup");
+        List<String> labels = getCurrentLabels();
         //reset action group
         AnAction[] actions = actionGroup.getChildActionsOrStubs();
         for (AnAction child : actions) {
@@ -152,11 +147,11 @@ public class ConfigDialog extends DialogWrapper {
             }
         }
         //add new actions
-        for (String note : notes) {
-            TakeNoteAction newNote = new TakeNoteAction();
-            newNote.setDescription(note);
-            actionManager.registerAction("CodeVision.AddLabelAction.[" + note + "]", newNote);
-            actionGroup.add(newNote);
+        for (String label : labels) {
+            AddLabelAction newLabel = new AddLabelAction();
+            newLabel.setDescription(label);
+            actionManager.registerAction("CodeGRITS.AddLabelAction.[" + label + "]", newLabel);
+            actionGroup.add(newLabel);
         }
     }
 
@@ -314,15 +309,15 @@ public class ConfigDialog extends DialogWrapper {
             freqCombo.setEnabled(eyeTracking.isSelected());
         });
 
-        JPanel noteAreaPanel = new JPanel();
-        JLabel notes = new JLabel("Preset Labels");
-        notes.setFont(headingFont);
-        notes.setBorder(new EmptyBorder(headingMargin));
-        notes.setHorizontalTextPosition(JLabel.LEFT);
-        noteAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        noteAreaPanel.setLayout(new BoxLayout(noteAreaPanel, BoxLayout.X_AXIS));
-        noteAreaPanel.add(notes);
-        panel.add(noteAreaPanel);
+        JPanel labelAreaPanel = new JPanel();
+        JLabel labels = new JLabel("Preset Labels");
+        labels.setFont(headingFont);
+        labels.setBorder(new EmptyBorder(headingMargin));
+        labels.setHorizontalTextPosition(JLabel.LEFT);
+        labelAreaPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelAreaPanel.setLayout(new BoxLayout(labelAreaPanel, BoxLayout.X_AXIS));
+        labelAreaPanel.add(labels);
+        panel.add(labelAreaPanel);
 
 
         eyeTracking.addActionListener(actionEvent -> {
@@ -369,8 +364,8 @@ public class ConfigDialog extends DialogWrapper {
         return panel;
     }
 
-    private void addNoteArea(boolean isEmpty) {
-        JPanel notePanel = new JPanel();
+    private void addLabelArea(boolean isEmpty) {
+        JPanel labelPanel = new JPanel();
         JTextField textField = new JTextField();
         JButton button = new JButton();
         String spaceRegex = "^\\s*$";
@@ -416,14 +411,14 @@ public class ConfigDialog extends DialogWrapper {
         });
 
         textField.setColumns(20);
-        notePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        labelPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         textField.setAlignmentX(Component.LEFT_ALIGNMENT);
         textField.setMaximumSize(new Dimension(500, 40));
 
         button.setSize(40, 40);
         button.setAlignmentX(Component.LEFT_ALIGNMENT);
-        notePanel.add(textField);
-        notePanel.add(button);
+        labelPanel.add(textField);
+        labelPanel.add(button);
         if (isEmpty) {
             button.setIcon(AllIcons.General.Add);
             button.addActionListener(e -> {
@@ -432,35 +427,35 @@ public class ConfigDialog extends DialogWrapper {
                     return;
                 }
                 if (button.getIcon() == AllIcons.General.Remove) {
-                    panel.remove(notePanel);
-                    noteAreas.remove(textField);
+                    panel.remove(labelPanel);
+                    labelAreas.remove(textField);
                     panel.revalidate();
                     panel.repaint();
                 } else {
-                    noteAreas.add(textField);
-                    addNoteArea(true);
+                    labelAreas.add(textField);
+                    addLabelArea(true);
                     button.setIcon(AllIcons.General.Remove);
                 }
             });
         } else {
-            noteAreas.add(textField);
+            labelAreas.add(textField);
             button.setIcon(AllIcons.General.Remove);
             button.addActionListener(e -> {
-                panel.remove(notePanel);
-                noteAreas.remove(textField);
+                panel.remove(labelPanel);
+                labelAreas.remove(textField);
                 panel.revalidate();
                 panel.repaint();
             });
         }
-        panel.add(notePanel);
-        notePanel.setLayout(new BoxLayout(notePanel, BoxLayout.X_AXIS));
-        notePanel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 20)));
-        notePanel.setMaximumSize(new Dimension(500, 40));
+        panel.add(labelPanel);
+        labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.X_AXIS));
+        labelPanel.setBorder(new EmptyBorder(JBUI.insets(5, 20, 0, 20)));
+        labelPanel.setMaximumSize(new Dimension(500, 40));
     }
 
-    public static List<String> getCurrentNotes() {
+    public static List<String> getCurrentLabels() {
         List<String> selected = new ArrayList<>();
-        for (JTextField textField : noteAreas) {
+        for (JTextField textField : labelAreas) {
             selected.add(textField.getText());
         }
         return selected;

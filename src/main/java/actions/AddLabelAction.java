@@ -6,9 +6,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-
-public class TakeNoteAction extends AnAction {
+public class AddLabelAction extends AnAction {
 
     private String description;
     private static boolean isEnabled = false;
@@ -21,7 +19,7 @@ public class TakeNoteAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Notification notification = new Notification("CodeVision Notification Group", "Add label",
+        Notification notification = new Notification("CodeGRITS Notification Group", "Add label",
                 "Successfully add label \"" + description + "\"!", NotificationType.INFORMATION);
         notification.notify(e.getProject());
     }
@@ -31,7 +29,7 @@ public class TakeNoteAction extends AnAction {
     }
 
     public static void setIsEnabled(boolean isEnabled) {
-        TakeNoteAction.isEnabled = isEnabled;
+        AddLabelAction.isEnabled = isEnabled;
     }
 
     @Override

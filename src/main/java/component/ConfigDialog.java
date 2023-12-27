@@ -91,9 +91,11 @@ public class ConfigDialog extends DialogWrapper {
                 freqCombo.addItem(30.0);
             }
         }
-        if (new File("config.json").exists()) {
-            loadConfig();
-        }
+        Config config = new Config();
+        config.loadFromJson();
+        //load freq
+        freqCombo.setSelectedItem(config.getSampleFreq());
+
     }
 
     private void loadConfig() {
@@ -153,7 +155,9 @@ public class ConfigDialog extends DialogWrapper {
         for (String label : labels) {
             AddLabelAction newLabel = new AddLabelAction();
             newLabel.setDescription(label);
-            actionManager.registerAction("CodeGRITS.AddLabelAction.[" + label + "]", newLabel);
+            String id = "CodeGRITS.AddLabelAction.[" + label + "]";
+            if(actionManager.getAction(id) != null) actionManager.unregisterAction(id);
+            actionManager.registerAction(id, newLabel);
             actionGroup.add(newLabel);
         }
     }

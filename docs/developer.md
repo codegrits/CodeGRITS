@@ -34,7 +34,7 @@ tracker API.
 
 ### Overview
 
-We provide a real-time data API for future JetBrains plugin developers and researchers to get the real-time data from
+We provide a real-time data API for future JetBrains plugin developers and researchers to get real-time data from
 IDE tracker and eye tracker separately. The API is based on the [IDE Tracker](#ide-tracker)
 and [Eye Tracker](#eye-tracker).
 
@@ -55,7 +55,7 @@ intellij {
 ### Quick Start
 
 To use the API, simply call the `getInstance()` method to get the instance of the IDE Tracker or Eye Tracker. Then, set
-the `isRealTimeDataTransmitting` to `true` to enable the real-time data transmitting. After that, set
+the `isRealTimeDataTransmitting` to `true` to enable real-time data transmitting. After that, set
 the `ideTrackerDataHandler` or `eyeTrackerDataHandler` to handle the real-time data. Finally, call the `startTracking()`
 method to start tracking.
 
@@ -70,7 +70,7 @@ ideTracker.startTracking(currentProject);
 ```
 
 !!!
-`Element` object is an XML element which is imported from `org.w3c.dom.Element` package.
+`Element` object is an XML element that is imported from `org.w3c.dom.Element` package.
 !!!
 
 ### IDE Tracker

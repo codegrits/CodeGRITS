@@ -37,7 +37,7 @@ of them. We provide a list of JetBrains IDEs that we have tested CodeGRITS on.
 | Clion | 2022.2 - 2023.3 |
 | PhpStorm | 2022.2 - 2023.3 |
 
-Since CodeGRITS is still in its early developmental stage, even we believe it would work well, some minor
+Since CodeGRITS is still in its early developmental stage, even though we believe it would work well, some minor
 issues may still exist. If you encounter any of them, please feel free to contact us or create
 a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
@@ -45,7 +45,7 @@ a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
 Since [Tobii Pro SDK](https://developer.tobiipro.com/tobiiprosdk.html) did not provide a Java API, we have to use
 the [Python API](https://developer.tobiipro.com/python.html) to collect eye gaze data. Thus, it is
-necessary to install the following packages in your python environment to run this plugin (minor version differences
+necessary to install the following packages in your Python environment to run this plugin (minor version differences
 should be fine).
 
 ```
@@ -75,7 +75,7 @@ We provide the direct download link of the plugin zip file for the following Jet
 
 #### Build from Source
 
-We also encourage you to build the plugin from source code, especially for the IDEs that are not listed above.
+We also encourage you to build the plugin from the source code, especially for the IDEs that are not listed above.
 
 1. Clone the [repository](https://github.com/codegrits/CodeGRITS) to your local machine.
 2. Set the IDE type and version in `build.gradle.kts` file. For example, if you want to build the plugin for IntelliJ
@@ -96,14 +96,14 @@ We also encourage you to build the plugin from source code, especially for the I
    the [Gradle IntelliJ Plugin - Configuration](https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration)
    and [Plugins Targeting IntelliJ Platform-Based IDEs](https://plugins.jetbrains.com/docs/intellij/dev-alternate-products.html)
    for more details.
-3. Open command line and run `./gradlew build` in the root folder to build the plugin.
-4. Find the plugin zip file in `build/distributions` folder.
+3. Open the command line and run `./gradlew build` in the root folder to build the plugin.
+4. Find the plugin zip file in the `build/distributions` folder.
 
 ### Install the Plugin
 
 1. Open the JetBrains IDE, click `File` - `Settings` - `Plugins` - `Install Plugin from Disk...` to install the plugin
    zip file.
-2. Restart IntelliJ IDEA to enable the plugin, then all CodeGRITS features are available in `Tools` dropdown menu,
+2. Restart IntelliJ IDEA to enable the plugin, then all CodeGRITS features are available in the `Tools` dropdown menu,
    including `Start/Stop Tracking`, `Pause/Resume Tracking`, and `Configuration`.
 
 <div style="text-align: center;">
@@ -132,7 +132,7 @@ compatible eye-tracking device is not available, CodeGRITS would use the mouse c
 You can configure the following settings:
 
 - The Python interpreter path that is used for Eye Tracker;
-- The output directory for the collected data, default to the root folder of your project;
+- The output directory for the collected data, defaults to the root folder of your project;
 - The sample frequency of Eye Tracker. The range depends on the eye-tracking device;
 - The eye-tracking device to use. The mouse is also available as a substitute.
 
@@ -180,7 +180,7 @@ The workflow of Eye Tracker is divided into three steps:
 
 (1) Connect to the eye-tracking device and receive raw data,
 which includes the coordinates of the eye gaze points, pupil diameters of both eyes and their validity;
-If a compatible eye-tracking device is not available, CodeGRITS would use the mouse cursor as a substitute.
+If a compatible eye-tracking device is not available, CodeGRITS will use the mouse cursor as a substitute.
 
 (2) Map the coordinates of raw gazes within the text editor to specific locations in the code (i.e., file path, line and
 column number);

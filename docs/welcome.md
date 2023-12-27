@@ -46,7 +46,7 @@ tailored assistance based on your specific OS and JetBrains IDE environment.
 
 - :mag: **IDE Tracking**: CodeGRITS tracks developers’ IDE interactions, including mouse clicks, keyboard inputs, etc.
 - :eye: **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data
-  from [Tobii eye-tracking devices](https://www.tobii.com/), and mapping them to corresponding source code elements.
+  from [Tobii eye-tracking devices](https://www.tobii.com/), and maps them to corresponding source code elements.
 - :computer: **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
 - 🔨 **Research Toolkit**: CodeGRITS provides a set of extra features for empirical SE
   researchers, including dynamic configuration, activity labeling, real-time data API, etc.

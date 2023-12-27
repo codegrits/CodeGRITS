@@ -20,10 +20,10 @@ for future plugin developers and researchers to design context-aware programming
 
 ## Key Features
 
-- 🔍 **IDE Tracking**: CodeGRITS tracks developers’ IDE interactions, including mouse clicks, keyboard inputs, etc.
-- 👁️ **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data
-  from [Tobii eye-tracking devices](https://www.tobii.com/), and mapping them to corresponding source code elements.
-- 💻 **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
+- :mag: **IDE Tracking**: CodeGRITS tracks developers’ IDE interactions, including mouse clicks, keyboard inputs, etc.
+- :eye: **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data
+  from [Tobii eye-tracking devices](https://www.tobii.com/), and maps them to corresponding source code elements.
+- :computer: **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
 - 🔨 **Research Toolkit**: CodeGRITS provides a set of extra features for empirical SE
   researchers, including dynamic configuration, activity labeling, real-time data API, etc.
 - 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](data.md)

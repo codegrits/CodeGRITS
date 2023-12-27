@@ -18,7 +18,7 @@ researchers. See [Trackers](usage.md#trackers) for more details.
 #### Q2. Can I use CodeGRITS without an eye-tracking device?
 
 Yes. CodeGRITS provides mouse simulation as a substitute for eye gaze. You could also uncheck the `Eye Tracking` option
-in the configuration window to disable eye tracker to only use IDE tracker and screen recorder.
+in the configuration window to disable the eye tracker to only use the IDE tracker and screen recorder.
 
 #### Q3. How to integrate other eye-tracking devices with CodeGRITS?
 

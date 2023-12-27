@@ -37,7 +37,7 @@ order: 80
 All the timestamps used by CodeGRITS are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.
 
 The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems)
-(e.g., line, column) of IntelliJ Platform is start from 0.
+(e.g., line, column) of IntelliJ Platform starts from 0.
 
 ## IDE Tracking
 
@@ -181,8 +181,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - `remark` could be `fileOpened`, `fileClosed`, `fileSelectionChanged`, `contentChanged | OldFile`, `contentChanged |
   NewFile`.
 - If the file is not a code file, i.e., the file extension is not in the ".java", ".cpp", ".c", ".py", ".rb", ".js",
-  or ".md", `NotCodeFile | Fail` would be added to the remark. This is to prevent archiving data file with large size.
-- If there are IO errors when archiving the file, `IOException | Fail` would be added to the remark.
+  or ".md", `NotCodeFile | Fail` would be added to the remark. This is to prevent archiving data files with large sizes.
+- If there are IO errors when archiving the file, `IOException | Fail` will be added to the remark.
 
 ---
 ### Actions
@@ -237,7 +237,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 - CodeGRITS-related actions are also implemented as `AnAction` objects, and their `id` is prefixed with `CodeGRITS`,
   such as `CodeGRITS.StartStopTracking`, `CodeGRITS.PauseResumeTracking`, etc.
-- The "add label" action is also tracked here, with `id` as `"CodeGRITS.AddLabel.[LABEL_NAME]"`, where label name
+- The "add label" action is also tracked here, with `id` as `"CodeGRITS.AddLabel.[LABEL_NAME]"`, where the label name
   is pre-set in the configuration.
 - Other IntelliJ plugins may also implement their own `AnAction` objects, which will also be tracked here. For example,
   the `copilot.applyInlays` in the GitHub Copilot plugin.
@@ -323,7 +323,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Comment**:
 
 - The `<mouses>` element records the mouse-related actions including pressing, releasing, clicking, moving, and
-  dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.
+  dragging. The data includes the timestamp, the path of the file, the x-coordinate, and the y-coordinate.
 
 ---
 #### Mouse
@@ -366,7 +366,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Comment**:
 
 - Caret is the cursor in the code editor. The `<carets>` element records the change of the caret position in the code
-  editor. The data including the timestamp, the path of the file, the line number, and the column number.
+  editor. The data includes the timestamp, the path of the file, the line number, and the column number.
 
 ---
 #### Caret
@@ -400,7 +400,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-- The `<selections>` element records data when the user selects a piece of code in the code editor. The data including
+- The `<selections>` element records data when the user selects a piece of code in the code editor. The data includes
   the timestamp, the path of the file, the start position, the end position, and the selected text.
 
 ---
@@ -504,11 +504,11 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-- The root element of the `eye_tracking.xml` file. CodeGRITS support both Mouse simulation and Tobii Pro eye tracker
+- The root element of the `eye_tracking.xml` file. CodeGRITS supports both Mouse simulation and Tobii Pro eye tracker
   devices.
-- Since [Tobii Pro SDK](https://developer.tobiipro.com/index.html) not support Java, we use Python
+- Since [Tobii Pro SDK](https://developer.tobiipro.com/index.html) does not support Java, we use the Python
   library `tobii-research` to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect
-  data. The python interpreter is specified in the configuration.
+  data. The Python interpreter is specified in the configuration.
 
 ---
 ### Setting
@@ -528,8 +528,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-- `eye_tracker` could be `Mouse` for simulation, or real Tobii Pro eye tracker device name (e.g., `Tobii Pro Fusion`),
-  which is got from `eyetracker.model` in the `tobii-research` library.
+- `eye_tracker` could be `Mouse` for simulation, or a real Tobii Pro eye tracker device name (e.g., `Tobii Pro Fusion`),
+  which is obtained from `eyetracker.model` in the `tobii-research` library.
 - `sampling_rate` is the sampling rate of the eye tracker in Hz, which is pre-set in the configuration and whose range
   could be in `eyetracker.get_all_gaze_output_frequencies()` called in the `tobii-research` library.
 
@@ -553,9 +553,9 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 - `<left_eye>`
 - `<right_eye>`
-- `<location>`: only used when the gaze point can be mapped to location in the code editor
-- `<ast_structure>`: only used when the gaze point cannot be mapped to location in the code editor, and the code file is
-  java.
+- `<location>`: only used when the gaze point can be mapped to its location in the code editor
+- `<ast_structure>`: only used when the gaze point cannot be mapped to its location in the code editor, and the code
+  file is java.
 
 **Attribute**:
 
@@ -585,8 +585,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 
 **Comment**:
 
-When the gaze point cannot be mapped to location in the code editor in the following 3 cases, the `remark` attribute is
-used:
+When the gaze point cannot be mapped to its location in the code editor in the following 3 cases, the `remark` attribute
+is used:
 
 1. The raw gaze point from the eye tracker is invalid. (i.e., nan). In this case, the `remark`
    is `Fail | Invalid Gaze Point`.
@@ -619,9 +619,9 @@ used:
 - `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
   corner of the screen, and (1, 1) is the bottom-right corner of the screen.
 - `gaze_validity` and `pupil_validity` are the validity of the gaze point and pupil diameter, which is binary, 0 for
-  invalid, 1 for valid. When using Mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity` is
-  always 0.0.
-- `pupil_diameter` is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, `pupil_diameter` is
+  invalid, 1 for valid. When using a mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity` 
+  is always 0.0.
+- `pupil_diameter` is the diameter of the pupil in mm, when using a mouse to simulate eye tracker, `pupil_diameter` is
   always 0.
 
 ---
@@ -649,9 +649,9 @@ used:
 - `gaze_point_x` and `gaze_point_y` are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
   corner of the screen, and (1, 1) is the bottom-right corner of the screen.
 - `gaze_validity` and `pupil_validity` are the validity of the gaze point and pupil diameter, which is binary, 0 for
-  invalid, 1 for valid. When using Mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity` is
-  always 0.0.
-- `pupil_diameter` is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, `pupil_diameter` is
+  invalid, 1 for valid. When using a mouse to simulate eye tracker, `gaze_validity` is always 1.0, and `pupil_validity`
+  is always 0.0.
+- `pupil_diameter` is the diameter of the pupil in mm, when using a mouse to simulate eye tracker, `pupil_diameter` is
   always 0.
 
 ---
@@ -676,9 +676,9 @@ used:
 **Comment**:
 
 - `x` and `y` are the coordinates of the gaze relative to the top-left corner of the visible code editor, whose unit is
-  same to the `screen_size`'s in `environment`, not the actual screen resolution.
+  same as the `screen_size` in `environment`, not the actual screen resolution.
 - `line` and `column` are the line number and column number of the gaze point in the code editor, which is calculated
-  by `xyToLogicalPosition(@NotNull Point p)` method of `Editor` interface in IntelliJ Platform.
+  by `xyToLogicalPosition(@NotNull Point p)` method of `Editor` interface in the IntelliJ Platform SDK.
 
 ---
 ##### AST Structure
@@ -691,7 +691,7 @@ used:
 
 - token
 - type
-- remark: only used when the current token is same to the previous token
+- remark: only used when the current token is same as the previous token
 
 **Example**:
 
@@ -716,12 +716,13 @@ used:
 - The abstract syntax tree (AST) of the code file is recorded in the `<ast_structure>` element. The AST is calculated by
   [program structure interface (PSI)](https://plugins.jetbrains.com/docs/intellij/psi-elements.html) of IntelliJ
   Platform.
-- `token` is text of the leaf node in the AST of current gaze point, which is calculated by `psiElement.getText()`.
+- `token` is the text of the leaf node in the AST of the current gaze point, which is calculated by 
+  `psiElement.getText()`.
 - `type` is the type of the leaf node, which is calculated by `psiElement.getNode().getElementType()`.
-- `remark` is used when the current token is same to the previous token, which means the gaze point is still in the same
+- `remark` is used when the current token is same as the previous token, which means the gaze point is still in the same
   leaf node. In this case, the `remark` is `Same (Last Successful AST)`. We designed this mechanism to
-  avoid `eye_tracking.xml` to be too large.
-- We calculate the parent nodes of the leaf node by `psiElement.getParent()` until the file-level (i.e. `PsiFile`), and
+  avoid `eye_tracking.xml` from being too large.
+- We calculate the parent nodes of the leaf node by `psiElement.getParent()` until the file level (i.e. `PsiFile`), and
   save them in the `<level>` element. In the previous example, the leaf node is `PsiIdentifier:println`, and its parent
   nodes are `PsiReferenceExpression:System.out.println` => `PsiMethodCallExpression:System.out.println("Hello world!")`
   => `PsiExpressionStatement` => `PsiCodeBlock` => `PsiMethod:main` => `PsiClass:Main`. The original code text is

@@ -10,11 +10,12 @@ HCI and SE researchers from [SaNDwich Lab](https://toby.li/) at the [University 
 and [Vanderbilt University](https://www.vanderbilt.edu/).
 We are committed to keeping CodeGRITS open source and making it beneficial for the community.
 
-The authors of CodeGRITS are: [Ningzhi Tang](https://nztang.com/), [Junwen An](https://wanteatfruit.github.io/),
+The authors of CodeGRITS are [Ningzhi Tang](https://nztang.com/) (equal contribution),
+[Junwen An](https://wanteatfruit.github.io/) (equal contribution),
 [Meng Chen](https://casardo-chen.github.io/), [Aakash Bansal](https://aakashba.github.io/),
 [Yu Huang](https://yuhuang-lab.github.io/), [Collin McMillan](https://sdf.org/~cmc/),
 and [Toby Jia-Jun Li](https://toby.li/). Technical support questions, bug reports, and feature requests are best started
-as an [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
+as a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
 We prepared a video demonstration of CodeGRITS for ICSE 2024.
 
@@ -22,7 +23,7 @@ We prepared a video demonstration of CodeGRITS for ICSE 2024.
 
 ## Credits
 
-CodeGRITS would not be possible without the following commercial and open source projects:
+CodeGRITS would not be possible without the following commercial and open-source projects:
 
 - [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html): CodeGRITS is built on top of the
   IntelliJ Platform.

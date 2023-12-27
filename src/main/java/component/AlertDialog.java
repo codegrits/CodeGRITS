@@ -1,18 +1,17 @@
 package component;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class AlertDialog extends DialogWrapper {
     private String label;
     private Icon icon;
-    public AlertDialog(String label,Icon icon) {
+
+    public AlertDialog(String label, Icon icon) {
 
         super(true); // use current window as parent
         this.label = label;
@@ -32,8 +31,6 @@ public class AlertDialog extends DialogWrapper {
     protected @Nullable JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
-
-        //show a warning icon
 
         JLabel label = new JLabel(this.label);
         JLabel icon = new JLabel();

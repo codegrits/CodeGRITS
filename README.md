@@ -1,56 +1,68 @@
-# Getting Started
+# CodeGRITS
 
-## What is CodeGRITS?
-CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem, which is a plugin specifically designed for SE researchers. CodeGRITS is
-built on top of IntelliJ’s SDK, with wide compatibility with the
-entire family of JetBrains IDEs to track developers’ IDE interactions and eye gaze data.
+[[Website]](https://codegrits.github.io/CodeGRITS/) [[Paper]](https://arxiv.org/abs/xxxx.yyyyy) [[Demo Video]](https://www.youtube.com/watch?v=d-YsJfW2NMI)
+
+[CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem,
+which is a plugin specifically designed
+for software engineering (SE) researchers, which is developed by the [SaNDwich Lab](https://toby.li/) at the
+[University of Notre Dame](https://www.nd.edu/). CodeGRITS is built on top
+of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with wide compatibility with the
+entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tracking devices](https://www.tobii.com/),
+to track developers’ IDE interactions and eye gaze data.
+
+<p align="center">
+    <img src="./docs/imgs/overview.png" width="600">
+</p>
+
+The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,
+especially those related to eye gaze. CodeGRITS also provides a [real-time data API](developer.md)
+for future plugin developers and researchers to design context-aware programming support tools.
 
 ## Key Features
-- **Gaze and IDE Recording**: CodeGRITS records developers’ eye gaze data and
-  IDE interactions.
-- **Screen Recording**: CodeGRITS records developers’ screen.
-- **Research Toolkit**: CodeGRITS provides a set of extra features for SE
-  researchers, including preset labels, real-time data API, etc.
-- **Data Export**: CodeGRITS exports data in XML format for further analysis.
-- **Real-time Data API**: CodeGRITS provides real-time data API for further
-  development.
 
-## Using CodeGRITS
+- :mag: **IDE Tracking**: CodeGRITS tracks developers’ IDE interactions, including mouse clicks, keyboard inputs, etc.
+- :eye: **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data
+  from [Tobii eye-tracking devices](https://www.tobii.com/), and maps them to corresponding source code elements.
+- :computer: **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
+- 🔨 **Research Toolkit**: CodeGRITS provides a set of extra features for empirical SE
+  researchers, including dynamic configuration, activity labeling, real-time data API, etc.
+- 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](data.md)
+  for more details.
 
-### Python Environment
-It is necessary to install the following packages in your python environment to run this plugin.
+### Cross-platform and Multilingual Support
 
+- [x] CodeGRITS provides cross-platform support for Windows, macOS,
+  and Linux, and is expected to be compatible with the entire family of JetBrains IDEs, including IntelliJ IDEA,
+  PyCharm, WebStorm, etc.
+- [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple
+  programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
+
+## Usage Guide
+
+Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details.
+
+## Citation
+
+[//]: # (TODO: Update the citation and PDF link after the paper is published.)
+
+The paper of CodeGRITS has been accepted
+by [ICSE 2024 Demonstrations Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations).
+The PDF version is available [here](https://arxiv.org/abs/xxxx.yyyyy).
+The [video demonstration](https://www.youtube.com/watch?v=d-YsJfW2NMI) is available on YouTube.
+
+Please cite the following if you use CodeGRITS in your research.
+
+```bibtex
+@inproceedings{tang2024codegrits,
+  title={CodeGRITS: A Research Toolkit for Developer Behavior and Eye Tracking in IDE},
+  author={Tang, Ningzhi and An, Junwen and Chen, Meng and Bansal, Aakash and Huang, Yu and McMillan, Collin and Li, Toby Jia-Jun},
+  booktitle={46th International Conference on Software Engineering Companion (ICSE-Companion '24)},
+  year={2024},
+  organization={ACM}
+}
 ```
-python==3.8.8
-tobii-research==1.10.1
-pyautogui==0.9.53
-screeninfo==0.8
-```
 
-### Installation
-1. Clone the [repository](https://github.com/codegrits/CodeGRITS) to your local machine.
-2. Open command line and run `./gradlew build` in the root folder to build the plugin.
-3. Open IntelliJ IDEA and click `File` - `Settings` - `Plugins` - `Install Plugin from Disk...` to install the plugin zip file in `build/distributions` folder.
-4. Restart IntelliJ IDEA to enable the plugin.
-5. All CodeGRITS features are available in `Tools` dropdown menu, including `Start Tracking`, `Pause Tracking`, and `Configuration`.
+## Contact us
 
-### Usage
-!!!
-Before starting tracking, you should first configure the plugin. Click `Tools` - `CodeGRITS` - `Configuration` to open the configuration window. To enable eye tracking,
-you need to have the necessary Python packages installed in your Python environment. The plugin automatically checks the Python environment. 
-
-We highly recommend
-using [Tobii Pro Eye Tracker Manager](https://www.tobii.com/products/software/applications-and-developer-kits/tobii-pro-eye-tracker-manager#downloads)
-to conduct calibration before using eye tracking. 
-!!!
-
-1. Click `Tools` - `CodeGRITS` - `Start Tracking` to start tracking.
-2. Click `Tools` - `CodeGRITS` - `Pause Tracking` to pause tracking.
-3. Click `Tools` - `CodeGRITS` - `Resume Tracking` to resume tracking.
-4. Click `Tools` - `CodeGRITS` - `Stop Tracking` to stop tracking. The plugin will export data in XML format to the configured folder.
-
-## Further Development
-
-1. Click `Run` - `Run Plugin` to run the plugin and test it.
-2. Open command line and run `./gradlew build` to build the plugin.
-3. Get the plugin zip file in `build/distributions` folder.
+Please feel free to contact Ningzhi Tang at ntang@nd.edu or Junwen An at jan2@nd.edu
+if you have any questions or suggestions.

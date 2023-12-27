@@ -5,36 +5,39 @@ plugins {
 }
 
 group = "com.nd"
-version = "0.11"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.jcodec:jcodec:0.2.5")
-    implementation("org.jcodec:jcodec-javase:0.2.5")
-    // https://mvnrepository.com/artifact/com.opencsv/opencsv
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     implementation("com.opencsv:opencsv:5.7.1")
+    // implementation("org.bytedeco:javacv-platform:1.5.9") // NOTE: This is too large
+    implementation("org.bytedeco:javacv:1.5.9")
+    implementation("org.bytedeco:ffmpeg:6.0-1.5.9")
+    implementation("org.bytedeco:ffmpeg-platform:6.0-1.5.9")
 }
 
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2022.2.5")
+    version.set("2023.1.4")
 
-//    type.set("IC")
-//    plugins.set(listOf("com.intellij.java"))
+    type.set("IC") // IntelliJ Community Edition
+//    type.set("IU") // IntelliJ Ultimate Edition
+    plugins.set(listOf("com.intellij.java"))
 
-//    type.set("PC")
+//    type.set("PC") // PyCharm Community Edition
+//    type.set("PY") // PyCharm Professional Edition
 //    plugins.set(listOf("PythonCore"))
 
-//    type.set("CL")
+//    type.set("CL") // CLion
 
-//    type.set("PS")
+//    type.set("PS") // PhpStorm
 
-//    version.set("2023.1.4")
+//    Fixme: Android Studio
 //    type.set("IC")
 //    plugins.set(listOf("android"))
 }
@@ -50,8 +53,8 @@ tasks {
 //    }
 
     patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
+        sinceBuild.set("222") // 2022.2 NOTE Java 17 is now required
+        untilBuild.set("233.*")
     }
 
     signPlugin {

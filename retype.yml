@@ -1,10 +1,37 @@
-input: .
+input: ./docs
 output: .retype
-url:
+url: https://codegrits.github.io/CodeGRITS/
+
 branding:
   title: CodeGRITS
-#  label: Docs
-  logo: /logo.png
+  logo: imgs/logo.png
+  label: v0.2.0
+
+links:
+  - text: GitHub
+    link: https://github.com/codegrits/CodeGRITS
+    icon: mark-github
+    target: blank
+  - text: Paper
+    link: https://arxiv.org/abs/xxxx.yyyyy # TODO: Update this
+    icon: file
+    target: blank
+  - text: Demo
+    link: https://www.youtube.com/watch?v=d-YsJfW2NMI
+    icon: video
+    target: blank
+  - text: Issues
+    link: https://github.com/codegrits/CodeGRITS/issues
+    icon: comment-discussion
+    target: blank
 
 footer:
-  copyright: "&copy; Copyright {{ year }}. All rights reserved."
+  copyright: © Copyright {{ year }} – [CodeGRITS](https://codegrits.github.io/CodeGRITS/) – All rights reserved
+  links:
+    - text: About
+      link: ./about.md
+      icon: info
+
+    - text: License
+      link: ./license.md
+      icon: shield-check

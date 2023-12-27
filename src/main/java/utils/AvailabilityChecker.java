@@ -68,22 +68,6 @@ public class AvailabilityChecker {
         return List.of(resultTuple.substring(1, resultTuple.length() - 1).split(", "));
     }
 
-    public static List<String> getFreqAndName(String pythonInterpreter) throws IOException, InterruptedException {
-            String pythonScript = """
-                import tobii_research as tr
-                                
-                found_eyetrackers = tr.find_all_eyetrackers()
-                if found_eyetrackers == ():
-                    print('Not Found')
-                else:
-                    print(found_eyetrackers[0].device_name)
-                    print(found_eyetrackers[0].get_all_gaze_output_frequencies())
-                """;
-        String resultTuple = runPythonScript(pythonInterpreter, pythonScript); //(30.0,60.0, 90.0)
-
-        return List.of(resultTuple.substring(1, resultTuple.length() - 1).split(", "));
-    }
-
     private static String runPythonScript(String pythonInterpreter, String pythonScript) throws IOException, InterruptedException {
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true);

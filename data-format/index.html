@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756989527493">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756991447279">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.756989527493" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.756991447279" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756989527493" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756991447279" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756989527493" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756989527493" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756991447279" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756991447279" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -210,10 +210,10 @@
         <span>Data Format</span>
     </h1>
 </doc-anchor-target>
-<doc-anchor-target id="output-directory-structure">
+<doc-anchor-target id="data-directory-structure">
     <h2>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#output-directory-structure">#</doc-anchor-trigger>
-        <span>Output Directory Structure</span>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#data-directory-structure">#</doc-anchor-trigger>
+        <span>Data Directory Structure</span>
     </h2>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -258,12 +258,6 @@ k-th pause.</li>
 │   │   ├── [ARCHIVE_TIMESTAMP_2].archive
 │   │   ├── ...</code></pre>
 </doc-codeblock></div>
-<doc-anchor-target id="xml-element-tree">
-    <h3>
-        <doc-anchor-trigger class="header-anchor-trigger" to="#xml-element-tree">#</doc-anchor-trigger>
-        <span>XML Element Tree</span>
-    </h3>
-</doc-anchor-target>
 <style>
     .tree {
         color: #1956AF;
@@ -313,9 +307,9 @@ k-th pause.</li>
 <li><doc-anchor-trigger to="#selection"><code v-pre>&lt;selection&gt;</code></doc-anchor-trigger></li>
 </ul>
 </li>
-<li><doc-anchor-trigger to="#vis_areas"><code v-pre>&lt;visible_areas&gt;</code></doc-anchor-trigger>
+<li><doc-anchor-trigger to="#visible-areas"><code v-pre>&lt;visible_areas&gt;</code></doc-anchor-trigger>
 <ul>
-<li><doc-anchor-trigger to="#vis_area"><code v-pre>&lt;visible_area&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#visible-area"><code v-pre>&lt;visible_area&gt;</code></doc-anchor-trigger></li>
 </ul>
 </li>
 </ul>
@@ -341,8 +335,13 @@ k-th pause.</li>
 <li>The root element of the <code v-pre>ide_tracking.xml</code> file.</li>
 </ul>
 <hr>
-<p><a name="environment"></a>
-<strong>Element</strong>: <code v-pre>&lt;environment&gt;</code></p>
+<doc-anchor-target id="environment">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#environment">#</doc-anchor-trigger>
+        <span>Environment</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;environment&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>ide_name</li>
@@ -370,8 +369,13 @@ above, the real screen resolution is (1536*1.25, 864*1.25) = (1920, 1080).</li>
 Sometimes the path is empty, which means the data is irrelevant to any file or not successfully tracked.</li>
 </ul>
 <hr>
-<p><a name="archives"></a>
-<strong>Element</strong>: <code v-pre>&lt;archives&gt;</code></p>
+<doc-anchor-target id="archives">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#archives">#</doc-anchor-trigger>
+        <span>Archives</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;archives&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;archive&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -386,8 +390,13 @@ file is opened or closed, or its selection changes; (2) When the content of the 
 largest timestamp that is smaller than the target timestamp.</li>
 </ul>
 <hr>
-<p><a name="archive"></a>
-<strong>Element</strong>: <code v-pre>&lt;archive&gt;</code></p>
+<doc-anchor-target id="archive">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#archive">#</doc-anchor-trigger>
+        <span>Archive</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;archive&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -412,8 +421,13 @@ or &quot;.md&quot;, <code v-pre>NotCodeFile | Fail</code> would be added to the 
 <li>If there are IO errors when archiving the file, <code v-pre>IOException | Fail</code> would be added to the remark.</li>
 </ul>
 <hr>
-<p><a name="actions"></a>
-<strong>Element</strong>: <code v-pre>&lt;actions&gt;</code></p>
+<doc-anchor-target id="actions">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#actions">#</doc-anchor-trigger>
+        <span>Actions</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;actions&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;action&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -425,8 +439,13 @@ like <code v-pre>GotoDeclaration</code>, <code v-pre>Find</code>, <code v-pre>Sh
 like <code v-pre>CompareTwoFiles</code>, <code v-pre>ReformatCode</code>, to many others that cannot be fully listed here.</li>
 </ul>
 <hr>
-<p><a name="action"></a>
-<strong>Element</strong>: <code v-pre>&lt;action&gt;</code></p>
+<doc-anchor-target id="action">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#action">#</doc-anchor-trigger>
+        <span>Action</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;action&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -463,8 +482,13 @@ is pre-set in the configuration.</li>
 the <code v-pre>copilot.applyInlays</code> in the GitHub Copilot plugin.</li>
 </ul>
 <hr>
-<p><a name="typings"></a>
-<strong>Element</strong>: <code v-pre>&lt;typings&gt;</code></p>
+<doc-anchor-target id="typings">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#typings">#</doc-anchor-trigger>
+        <span>Typings</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;typings&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;typing&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -472,8 +496,13 @@ the <code v-pre>copilot.applyInlays</code> in the GitHub Copilot plugin.</li>
 the timestamp, the path of the file, the line number, and the column number.</li>
 </ul>
 <hr>
-<p><a name="typing"></a>
-<strong>Element</strong>: <code v-pre>&lt;typing&gt;</code></p>
+<doc-anchor-target id="typing">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#typing">#</doc-anchor-trigger>
+        <span>Typing</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;typing&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>character</li>
@@ -489,8 +518,13 @@ the timestamp, the path of the file, the line number, and the column number.</li
 &lt;typing character=&quot;s&quot; column=&quot;10&quot; line=&quot;3&quot; path=&quot;/src/Main.java&quot; timestamp=&quot;1696216430233&quot;/&gt;</code></pre>
 </doc-codeblock></div>
 <hr>
-<p><a name="files"></a>
-<strong>Element</strong>: <code v-pre>&lt;files&gt;</code></p>
+<doc-anchor-target id="files">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#files">#</doc-anchor-trigger>
+        <span>Files</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;files&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;file&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -498,8 +532,13 @@ the timestamp, the path of the file, the line number, and the column number.</li
 including the timestamp and the path of the file.</li>
 </ul>
 <hr>
-<p><a name="file"></a>
-<strong>Element</strong>: <code v-pre>&lt;file&gt;</code></p>
+<doc-anchor-target id="file">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#file">#</doc-anchor-trigger>
+        <span>File</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;file&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -520,8 +559,13 @@ including the timestamp and the path of the file.</li>
 <li><code v-pre>id</code> could be <code v-pre>fileOpened</code>, <code v-pre>fileClosed</code>, or <code v-pre>selectionChanged</code>.</li>
 </ul>
 <hr>
-<p><a name="mouses"></a>
-<strong>Element</strong>: <code v-pre>&lt;mouses&gt;</code></p>
+<doc-anchor-target id="mouses">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mouses">#</doc-anchor-trigger>
+        <span>Mouses</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;mouses&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;mouse&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -529,8 +573,13 @@ including the timestamp and the path of the file.</li>
 dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.</li>
 </ul>
 <hr>
-<p><a name="mouse"></a>
-<strong>Element</strong>: <code v-pre>&lt;mouse&gt;</code></p>
+<doc-anchor-target id="mouse">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#mouse">#</doc-anchor-trigger>
+        <span>Mouse</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;mouse&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -556,8 +605,13 @@ dragging. The data including the timestamp, the path of the file, the x-coordina
 <li><code v-pre>x</code> and <code v-pre>y</code> are the coordinates relative to the <code v-pre>screen_size</code> in the <code v-pre>environment</code>, not the actual screen resolution.</li>
 </ul>
 <hr>
-<p><a name="carets"></a>
-<strong>Element</strong>: <code v-pre>&lt;carets&gt;</code></p>
+<doc-anchor-target id="carets">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#carets">#</doc-anchor-trigger>
+        <span>Carets</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;carets&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;caret&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -565,8 +619,13 @@ dragging. The data including the timestamp, the path of the file, the x-coordina
 editor. The data including the timestamp, the path of the file, the line number, and the column number.</li>
 </ul>
 <hr>
-<p><a name="caret"></a>
-<strong>Element</strong>: <code v-pre>&lt;caret&gt;</code></p>
+<doc-anchor-target id="caret">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#caret">#</doc-anchor-trigger>
+        <span>Caret</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;caret&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -584,8 +643,13 @@ editor. The data including the timestamp, the path of the file, the line number,
 <li><code v-pre>id</code> could only be <code v-pre>caretPositionChanged</code>.</li>
 </ul>
 <hr>
-<p><a name="selections"></a>
-<strong>Element</strong>: <code v-pre>&lt;selections&gt;</code></p>
+<doc-anchor-target id="selections">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#selections">#</doc-anchor-trigger>
+        <span>Selections</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;selections&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;selection&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -593,8 +657,13 @@ editor. The data including the timestamp, the path of the file, the line number,
 the timestamp, the path of the file, the start position, the end position, and the selected text.</li>
 </ul>
 <hr>
-<p><a name="selection"></a>
-<strong>Element</strong>: <code v-pre>&lt;selection&gt;</code></p>
+<doc-anchor-target id="selection">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#selection">#</doc-anchor-trigger>
+        <span>Selection</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;selection&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -616,16 +685,26 @@ the timestamp, the path of the file, the start position, the end position, and t
 <li><code v-pre>id</code> could only be <code v-pre>selectionChanged</code>.</li>
 </ul>
 <hr>
-<p><a name="vis_areas"></a>
-<strong>Element</strong>: <code v-pre>&lt;visible_areas&gt;</code></p>
+<doc-anchor-target id="visible-areas">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#visible-areas">#</doc-anchor-trigger>
+        <span>Visible Areas</span>
+    </h3>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;visible_areas&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;visible_area&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
 <li>The <code v-pre>&lt;visible_areas&gt;</code> element records the visible area of the code editor.</li>
 </ul>
 <hr>
-<p><a name="vis_area"></a>
-<strong>Element</strong>: <code v-pre>&lt;visible_area&gt;</code>
+<doc-anchor-target id="visible-area">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#visible-area">#</doc-anchor-trigger>
+        <span>Visible Area</span>
+    </h4>
+</doc-anchor-target>
+<p><strong>Element</strong>: <code v-pre>&lt;visible_area&gt;</code>
 <strong>Attribute</strong>:</p>
 <ul>
 <li>id</li>
@@ -664,6 +743,31 @@ code editor, which could be used to track the horizontal and vertical resizing r
 ├── [START_TIMESTAMP]
 │   ├── eye_tracking.xml</code></pre>
 </doc-codeblock></div>
+<div class="tree">
+<ul>
+<li><strong><code v-pre>&lt;eye_tracking&gt;</code></strong>
+<ul>
+<li><doc-anchor-trigger to="#setting"><code v-pre>&lt;setting&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#gazes"><code v-pre>&lt;gazes&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#gaze"><code v-pre>&lt;gaze&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#left-eye"><code v-pre>&lt;left_eye&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#right-eye"><code v-pre>&lt;right_eye&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#location"><code v-pre>&lt;location&gt;</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#ast-structure"><code v-pre>&lt;ast_structure&gt;</code></doc-anchor-trigger>
+<ul>
+<li><doc-anchor-trigger to="#level"><code v-pre>&lt;level&gt;</code></doc-anchor-trigger></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <hr>
 <p><strong>Element</strong>: <code v-pre>&lt;eye_tracking&gt;</code></p>
 <p><strong>Sub-element</strong>:</p>
@@ -680,6 +784,12 @@ library <code v-pre>tobii-research</code> to collect eye tracking data and use J
 data. The python interpreter is specified in the configuration.</li>
 </ul>
 <hr>
+<doc-anchor-target id="setting">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#setting">#</doc-anchor-trigger>
+        <span>Setting</span>
+    </h3>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;setting&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -698,6 +808,12 @@ which is got from <code v-pre>eyetracker.model</code> in the <code v-pre>tobii-r
 could be in <code v-pre>eyetracker.get_all_gaze_output_frequencies()</code> called in the <code v-pre>tobii-research</code> library.</li>
 </ul>
 <hr>
+<doc-anchor-target id="gazes">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gazes">#</doc-anchor-trigger>
+        <span>Gazes</span>
+    </h3>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;gazes&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;gaze&gt;</code></p>
 <p><strong>Comment</strong>:</p>
@@ -705,6 +821,12 @@ could be in <code v-pre>eyetracker.get_all_gaze_output_frequencies()</code> call
 <li>Collection of all gaze data.</li>
 </ul>
 <hr>
+<doc-anchor-target id="gaze">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#gaze">#</doc-anchor-trigger>
+        <span>Gaze</span>
+    </h4>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;gaze&gt;</code></p>
 <p><strong>Sub-element</strong>:</p>
 <ul>
@@ -749,6 +871,12 @@ is <code v-pre>Fail | Invalid Gaze Point</code>.</li>
 is <code v-pre>Fail | Out of Text Editor</code>.</li>
 </ol>
 <hr>
+<doc-anchor-target id="left-eye">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#left-eye">#</doc-anchor-trigger>
+        <span>Left Eye</span>
+    </h5>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;left_eye&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -774,6 +902,12 @@ always 0.0.</li>
 always 0.</li>
 </ul>
 <hr>
+<doc-anchor-target id="right-eye">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#right-eye">#</doc-anchor-trigger>
+        <span>Right Eye</span>
+    </h5>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;right_eye&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -799,6 +933,12 @@ always 0.0.</li>
 always 0.</li>
 </ul>
 <hr>
+<doc-anchor-target id="location">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#location">#</doc-anchor-trigger>
+        <span>Location</span>
+    </h5>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;location&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -820,6 +960,12 @@ same to the <code v-pre>screen_size</code>&#x27;s in <code v-pre>environment</co
 by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pre>Editor</code> interface in IntelliJ Platform.</li>
 </ul>
 <hr>
+<doc-anchor-target id="ast-structure">
+    <h5>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#ast-structure">#</doc-anchor-trigger>
+        <span>AST Structure</span>
+    </h5>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;ast_structure&gt;</code></p>
 <p><strong>Sub-element</strong>: <code v-pre>&lt;level&gt;</code>: only used when the current token is different from the previous token</p>
 <p><strong>Attribute</strong>:</p>
@@ -867,6 +1013,12 @@ nodes are <code v-pre>PsiReferenceExpression:System.out.println</code> =&gt; <co
 </li>
 </ul>
 <hr>
+<doc-anchor-target id="level">
+    <h6>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#level">#</doc-anchor-trigger>
+        <span>Level</span>
+    </h6>
+</doc-anchor-target>
 <p><strong>Element</strong>: <code v-pre>&lt;level&gt;</code></p>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -899,7 +1051,19 @@ nodes are <code v-pre>PsiReferenceExpression:System.out.println</code> =&gt; <co
 │   │   ├── ...
 │   │   ├── frames.csv</code></pre>
 </doc-codeblock></div>
+<div class="tree">
+<ul>
+<li><doc-anchor-trigger to="#video-clips"><code v-pre>clip_[k].mp4</code></doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#frames"><code v-pre>frames.csv</code></doc-anchor-trigger></li>
+</ul>
+</div>
 <hr>
+<doc-anchor-target id="video-clips">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#video-clips">#</doc-anchor-trigger>
+        <span>Video Clips</span>
+    </h3>
+</doc-anchor-target>
 <p><code v-pre>clip_[k].mp4</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
@@ -908,6 +1072,12 @@ this mechanism to avoid the video file in the memory being too large especially 
 time.</li>
 </ul>
 <hr>
+<doc-anchor-target id="frames">
+    <h3>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#frames">#</doc-anchor-trigger>
+        <span>Frames</span>
+    </h3>
+</doc-anchor-target>
 <p><code v-pre>frames.csv</code></p>
 <p>Column:</p>
 <ul>
@@ -973,7 +1143,7 @@ be used to separate each stage of the development process.</li>
                                             <a class="inline-flex items-center mr-4 py-2 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="../about/">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="mb-px mr-1" width="18" height="18" viewBox="0 0 24 24" role="presentation">
                                                     <g fill="currentColor">
-                                                        <path d="M10.97 8.265a1.45 1.45 0 0 0-.487.57.75.75 0 0 1-1.341-.67c.2-.402.513-.826.997-1.148C10.627 6.69 11.244 6.5 12 6.5c.658 0 1.369.195 1.934.619a2.45 2.45 0 0 1 1.004 2.006c0 1.033-.513 1.72-1.027 2.215-.19.183-.399.358-.579.508l-.147.123a4.329 4.329 0 0 0-.435.409v1.37a.75.75 0 1 1-1.5 0v-1.473c0-.237.067-.504.247-.736.22-.28.486-.517.718-.714l.183-.153.001-.001c.172-.143.324-.27.47-.412.368-.355.569-.676.569-1.136a.953.953 0 0 0-.404-.806C12.766 8.118 12.384 8 12 8c-.494 0-.814.121-1.03.265ZM13 17a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z"/>
+                                                        <path d="M13 7.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-3 3.75a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 .75.75v4.25h.75a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5h.75V12h-.75a.75.75 0 0 1-.75-.75Z"/><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1ZM2.5 12a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5A9.5 9.5 0 0 0 12 2.5 9.5 9.5 0 0 0 2.5 12Z"/>
                                                     </g>
                                                 </svg>
                                                 <span>About</span>

@@ -6,12 +6,6 @@ order: 90
 
 # Usage Guide
 
-## Demonstration
-
-We prepared a video demonstration of CodeGRITS for ICSE 2024.
-
-[!embed](https://www.youtube.com/embed/d-YsJfW2NMI)
-
 ## Environment Requirements
 
 ### Eye-tracking Device

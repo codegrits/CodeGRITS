@@ -16,6 +16,10 @@ The authors of CodeGRITS are: [Ningzhi Tang](https://nztang.com/), [Junwen An](h
 and [Toby Jia-Jun Li](https://toby.li/). Technical support questions, bug reports, and feature requests are best started
 as an [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
+We prepared a video demonstration of CodeGRITS for ICSE 2024.
+
+[!embed](https://www.youtube.com/embed/d-YsJfW2NMI)
+
 ## Credits
 
 CodeGRITS would not be possible without the following commercial and open source projects:

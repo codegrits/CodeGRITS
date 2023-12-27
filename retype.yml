@@ -8,13 +8,21 @@ branding:
   label: v0.2.0
 
 links:
-  - text: Issues
-    link: https://github.com/codegrits/CodeGRITS/issues
-    icon: comment-discussion
+  - text: GitHub
+    link: https://github.com/codegrits/CodeGRITS
+    icon: mark-github
     target: blank
   - text: Paper
     link: https://arxiv.org/abs/xxxx.yyyyy # TODO: Update this
     icon: file
+    target: blank
+  - text: Demo
+    link: https://www.youtube.com/watch?v=d-YsJfW2NMI
+    icon: video
+    target: blank
+  - text: Issues
+    link: https://github.com/codegrits/CodeGRITS/issues
+    icon: comment-discussion
     target: blank
 
 footer:

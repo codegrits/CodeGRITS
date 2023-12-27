@@ -22,7 +22,7 @@ footer:
   links:
     - text: About
       link: ./about.md
-      icon: question
+      icon: info
 
     - text: License
       link: ./license.md

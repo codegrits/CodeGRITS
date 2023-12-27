@@ -1,15 +1,20 @@
 ---
-layout: page
+icon: info
+order: 95
 ---
 
 # About
 
 [CodeGRITS](https://codegrits.github.io/CodeGRITS/) is professionally built and supported by a small dedicated team of
-HCI/SE researchers from [SaNDwich Lab](https://toby.li/) at the [University of Notre Dame](https://www.nd.edu/). We are
-committed to keeping CodeGRITS open source and making it beneficial for the community.
+HCI and SE researchers from [SaNDwich Lab](https://toby.li/) at the [University of Notre Dame](https://www.nd.edu/)
+and [Vanderbilt University](https://www.vanderbilt.edu/).
+We are committed to keeping CodeGRITS open source and making it beneficial for the community.
 
-Technical support questions, bug reports, and feature requests are best started as
-an [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
+The authors of CodeGRITS are: [Ningzhi Tang](https://nztang.com/), [Junwen An](https://wanteatfruit.github.io/),
+[Meng Chen](https://casardo-chen.github.io/), [Aakash Bansal](https://aakashba.github.io/),
+[Yu Huang](https://yuhuang-lab.github.io/), [Collin McMillan](https://sdf.org/~cmc/),
+and [Toby Jia-Jun Li](https://toby.li/). Technical support questions, bug reports, and feature requests are best started
+as an [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
 ## Credits
 

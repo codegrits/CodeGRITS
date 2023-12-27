@@ -7,7 +7,7 @@ order: 80
 
 # Data Format
 
-## Output Directory Structure
+## Data Directory Structure
 
 ```
 [OUTPUT_DIR]
@@ -51,8 +51,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 │   │   ├── ...
 ```
 
-### XML Element Tree
-
 <style>
     .tree {
         color: #1956AF;
@@ -79,9 +77,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
     - [`<caret>`](#caret)
   - [`<selections>`](#selections)
     - [`<selection>`](#selection)
-  - [`<visible_areas>`](#vis_areas)
-    - [`<visible_area>`](#vis_area)
-
+  - [`<visible_areas>`](#visible-areas)
+    - [`<visible_area>`](#visible-area)
 :::
 
 ---
@@ -105,7 +102,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - The root element of the `ide_tracking.xml` file.
 
 ---
-<a name="environment"></a>
+### Environment
+
 **Element**: `<environment>`
 
 **Attribute**:
@@ -137,7 +135,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   Sometimes the path is empty, which means the data is irrelevant to any file or not successfully tracked.
 
 ---
-<a name="archives"></a>
+### Archives
+
 **Element**: `<archives>`
 
 **Sub-element**: `<archive>`
@@ -155,7 +154,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   largest timestamp that is smaller than the target timestamp.
 
 ---
-<a name="archive"></a>
+#### Archive
+
 **Element**: `<archive>`
 
 **Attribute**:
@@ -185,7 +185,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - If there are IO errors when archiving the file, `IOException | Fail` would be added to the remark.
 
 ---
-<a name="actions"></a>
+### Actions
+
 **Element**: `<actions>`
 
 **Sub-element**: `<action>`
@@ -200,7 +201,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   like `CompareTwoFiles`, `ReformatCode`, to many others that cannot be fully listed here.
 
 ---
-<a name="action"></a>
+#### Action
+
 **Element**: `<action>`
 
 **Attribute**:
@@ -241,7 +243,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   the `copilot.applyInlays` in the GitHub Copilot plugin.
 
 ---
-<a name="typings"></a>
+### Typings
+
 **Element**: `<typings>`
 
 **Sub-element**: `<typing>`
@@ -252,7 +255,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   the timestamp, the path of the file, the line number, and the column number.
 
 ---
-<a name="typing"></a>
+#### Typing
+
 **Element**: `<typing>`
 
 **Attribute**:
@@ -272,7 +276,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 ```
 
 ---
-<a name="files"></a>
+### Files
+
 **Element**: `<files>`
 
 **Sub-element**: `<file>`
@@ -283,7 +288,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   including the timestamp and the path of the file.
 
 ---
-<a name="file"></a>
+#### File
+
 **Element**: `<file>`
 
 **Attribute**:
@@ -308,7 +314,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - `id` could be `fileOpened`, `fileClosed`, or `selectionChanged`.
 
 ---
-<a name="mouses"></a>
+### Mouses
+
 **Element**: `<mouses>`
 
 **Sub-element**: `<mouse>`
@@ -319,8 +326,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.
 
 ---
+#### Mouse
 
-<a name="mouse"></a>
 **Element**: `<mouse>`
 
 **Attribute**:
@@ -350,7 +357,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - `x` and `y` are the coordinates relative to the `screen_size` in the `environment`, not the actual screen resolution.
 
 ---
-<a name="carets"></a>
+### Carets
+
 **Element**: `<carets>`
 
 **Sub-element**: `<caret>`
@@ -361,7 +369,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   editor. The data including the timestamp, the path of the file, the line number, and the column number.
 
 ---
-<a name="caret"></a>
+#### Caret
+
 **Element**: `<caret>`
 
 **Attribute**:
@@ -383,7 +392,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - `id` could only be `caretPositionChanged`.
 
 ---
-<a name="selections"></a>
+### Selections
+
 **Element**: `<selections>`
 
 **Sub-element**: `<selection>`
@@ -394,7 +404,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   the timestamp, the path of the file, the start position, the end position, and the selected text.
 
 ---
-<a name="selection"></a>
+#### Selection
+
 **Element**: `<selection>`
 
 **Attribute**:
@@ -420,7 +431,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - `id` could only be `selectionChanged`.
 
 ---
-<a name="vis_areas"></a>
+### Visible Areas
+
 **Element**: `<visible_areas>`
 
 **Sub-element**: `<visible_area>`
@@ -430,7 +442,8 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - The `<visible_areas>` element records the visible area of the code editor.
 
 ---
-<a name="vis_area"></a>
+#### Visible Area
+
 **Element**: `<visible_area>`
 **Attribute**:
 
@@ -468,6 +481,18 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 │   ├── eye_tracking.xml
 ```
 
+:::tree
+- **`<eye_tracking>`**
+  - [`<setting>`](#setting)
+  - [`<gazes>`](#gazes)
+    - [`<gaze>`](#gaze)
+      - [`<left_eye>`](#left-eye)
+      - [`<right_eye>`](#right-eye)
+      - [`<location>`](#location)
+      - [`<ast_structure>`](#ast-structure)
+        - [`<level>`](#level)
+:::
+
 ---
 
 **Element**: `<eye_tracking>`
@@ -486,6 +511,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   data. The python interpreter is specified in the configuration.
 
 ---
+### Setting
 
 **Element**: `<setting>`
 
@@ -508,6 +534,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
   could be in `eyetracker.get_all_gaze_output_frequencies()` called in the `tobii-research` library.
 
 ---
+### Gazes
 
 **Element**: `<gazes>`
 
@@ -518,6 +545,7 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - Collection of all gaze data.
 
 ---
+#### Gaze
 
 **Element**: `<gaze>`
 
@@ -567,6 +595,7 @@ used:
    is `Fail | Out of Text Editor`.
 
 ---
+##### Left Eye
 
 **Element**: `<left_eye>`
 
@@ -596,6 +625,7 @@ used:
   always 0.
 
 ---
+##### Right Eye
 
 **Element**: `<right_eye>`
 
@@ -625,6 +655,7 @@ used:
   always 0.
 
 ---
+##### Location
 
 **Element**: `<location>`
 
@@ -650,6 +681,7 @@ used:
   by `xyToLogicalPosition(@NotNull Point p)` method of `Editor` interface in IntelliJ Platform.
 
 ---
+##### AST Structure
 
 **Element**: `<ast_structure>`
 
@@ -702,6 +734,7 @@ used:
   ```
 
 ---
+###### Level
 
 **Element**: `<level>`
 
@@ -735,7 +768,13 @@ used:
 │   │   ├── frames.csv
 ```
 
+:::tree
+- [`clip_[k].mp4`](#video-clips)
+- [`frames.csv`](#frames)
+:::
+
 ---
+### Video Clips
 
 `clip_[k].mp4`
 
@@ -746,6 +785,7 @@ used:
   time.
 
 ---
+### Frames
 
 `frames.csv`
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756991843027">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756993596460">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.756991843027" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.756993596460" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756991843027" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756993596460" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -310,7 +310,7 @@ of them. We provide a list of JetBrains IDEs that we have tested CodeGRITS on.</
 </tbody>
 </table>
 </div>
-<p>Since CodeGRITS is still in its early developmental stage, even we believe it would work well, some minor
+<p>Since CodeGRITS is still in its early developmental stage, even though we believe it would work well, some minor
 issues may still exist. If you encounter any of them, please feel free to contact us or create
 a <a href="https://github.com/codegrits/CodeGRITS/issues">GitHub Issue</a>.</p>
 <doc-anchor-target id="python-environment">
@@ -321,7 +321,7 @@ a <a href="https://github.com/codegrits/CodeGRITS/issues">GitHub Issue</a>.</p>
 </doc-anchor-target>
 <p>Since <a href="https://developer.tobiipro.com/tobiiprosdk.html">Tobii Pro SDK</a> did not provide a Java API, we have to use
 the <a href="https://developer.tobiipro.com/python.html">Python API</a> to collect eye gaze data. Thus, it is
-necessary to install the following packages in your python environment to run this plugin (minor version differences
+necessary to install the following packages in your Python environment to run this plugin (minor version differences
 should be fine).</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-none"><code v-pre class="language-none">python==3.8.8
@@ -380,7 +380,7 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
         <span>Build from Source</span>
     </h4>
 </doc-anchor-target>
-<p>We also encourage you to build the plugin from source code, especially for the IDEs that are not listed above.</p>
+<p>We also encourage you to build the plugin from the source code, especially for the IDEs that are not listed above.</p>
 <ol>
 <li>Clone the <a href="https://github.com/codegrits/CodeGRITS">repository</a> to your local machine.</li>
 <li>Set the IDE type and version in <code v-pre>build.gradle.kts</code> file. For example, if you want to build the plugin for IntelliJ
@@ -401,8 +401,8 @@ Please refer to
 the <a href="https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration">Gradle IntelliJ Plugin - Configuration</a>
 and <a href="https://plugins.jetbrains.com/docs/intellij/dev-alternate-products.html">Plugins Targeting IntelliJ Platform-Based IDEs</a>
 for more details.</li>
-<li>Open command line and run <code v-pre>./gradlew build</code> in the root folder to build the plugin.</li>
-<li>Find the plugin zip file in <code v-pre>build/distributions</code> folder.</li>
+<li>Open the command line and run <code v-pre>./gradlew build</code> in the root folder to build the plugin.</li>
+<li>Find the plugin zip file in the <code v-pre>build/distributions</code> folder.</li>
 </ol>
 <doc-anchor-target id="install-the-plugin">
     <h3>
@@ -413,7 +413,7 @@ for more details.</li>
 <ol>
 <li>Open the JetBrains IDE, click <code v-pre>File</code> - <code v-pre>Settings</code> - <code v-pre>Plugins</code> - <code v-pre>Install Plugin from Disk...</code> to install the plugin
 zip file.</li>
-<li>Restart IntelliJ IDEA to enable the plugin, then all CodeGRITS features are available in <code v-pre>Tools</code> dropdown menu,
+<li>Restart IntelliJ IDEA to enable the plugin, then all CodeGRITS features are available in the <code v-pre>Tools</code> dropdown menu,
 including <code v-pre>Start/Stop Tracking</code>, <code v-pre>Pause/Resume Tracking</code>, and <code v-pre>Configuration</code>.</li>
 </ol>
 <div style="text-align: center;">
@@ -454,7 +454,7 @@ compatible eye-tracking device is not available, CodeGRITS would use the mouse c
 <p>You can configure the following settings:</p>
 <ul>
 <li>The Python interpreter path that is used for Eye Tracker;</li>
-<li>The output directory for the collected data, default to the root folder of your project;</li>
+<li>The output directory for the collected data, defaults to the root folder of your project;</li>
 <li>The sample frequency of Eye Tracker. The range depends on the eye-tracking device;</li>
 <li>The eye-tracking device to use. The mouse is also available as a substitute.</li>
 </ul>
@@ -524,7 +524,7 @@ Tracker. See <a href="../data-format/">Data Format</a> for more details.</p>
 <p>The workflow of Eye Tracker is divided into three steps:</p>
 <p>(1) Connect to the eye-tracking device and receive raw data,
 which includes the coordinates of the eye gaze points, pupil diameters of both eyes and their validity;
-If a compatible eye-tracking device is not available, CodeGRITS would use the mouse cursor as a substitute.</p>
+If a compatible eye-tracking device is not available, CodeGRITS will use the mouse cursor as a substitute.</p>
 <p>(2) Map the coordinates of raw gazes within the text editor to specific locations in the code (i.e., file path, line and
 column number);</p>
 <div style="text-align: center;">

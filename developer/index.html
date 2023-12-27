@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756991843027">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756993596460">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.756991843027" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.756993596460" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756991843027" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756993596460" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -318,7 +318,7 @@ tracker API.</p>
         <span>Overview</span>
     </h3>
 </doc-anchor-target>
-<p>We provide a real-time data API for future JetBrains plugin developers and researchers to get the real-time data from
+<p>We provide a real-time data API for future JetBrains plugin developers and researchers to get real-time data from
 IDE tracker and eye tracker separately. The API is based on the <doc-anchor-trigger to="#ide-tracker">IDE Tracker</doc-anchor-trigger>
 and <doc-anchor-trigger to="#eye-tracker">Eye Tracker</doc-anchor-trigger>.</p>
 <doc-anchor-target id="configuration">
@@ -344,7 +344,7 @@ in <code v-pre>build.gradle.kts</code> file of your plugin project.</p>
     </h3>
 </doc-anchor-target>
 <p>To use the API, simply call the <code v-pre>getInstance()</code> method to get the instance of the IDE Tracker or Eye Tracker. Then, set
-the <code v-pre>isRealTimeDataTransmitting</code> to <code v-pre>true</code> to enable the real-time data transmitting. After that, set
+the <code v-pre>isRealTimeDataTransmitting</code> to <code v-pre>true</code> to enable real-time data transmitting. After that, set
 the <code v-pre>ideTrackerDataHandler</code> or <code v-pre>eyeTrackerDataHandler</code> to handle the real-time data. Finally, call the <code v-pre>startTracking()</code>
 method to start tracking.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -369,7 +369,7 @@ ideTracker.startTracking(currentProject);</code></pre>
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p><code v-pre>Element</code> object is an XML element which is imported from <code v-pre>org.w3c.dom.Element</code> package.</p>
+<p><code v-pre>Element</code> object is an XML element that is imported from <code v-pre>org.w3c.dom.Element</code> package.</p>
         </div>
     </div>
 </div>

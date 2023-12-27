@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756991843027">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.756993596460">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.756991843027" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.756993596460" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756991843027" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756991843027" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.756993596460" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.756993596460" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -282,7 +282,7 @@ k-th pause.</li>
 </ul>
 <p>All the timestamps used by CodeGRITS are Unix time in milliseconds, starting from 1970-01-01 00:00:00 UTC.</p>
 <p>The <a href="https://plugins.jetbrains.com/docs/intellij/coordinates-system.html#editor-coordinate-systems">editor coordinate system</a>
-(e.g., line, column) of IntelliJ Platform is start from 0.</p>
+(e.g., line, column) of IntelliJ Platform starts from 0.</p>
 <doc-anchor-target id="ide-tracking">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#ide-tracking">#</doc-anchor-trigger>
@@ -457,8 +457,8 @@ largest timestamp that is smaller than the target timestamp.</li>
 <li><code v-pre>id</code> could be <code v-pre>fileArchive</code> or <code v-pre>consoleArchive</code>.</li>
 <li><code v-pre>remark</code> could be <code v-pre>fileOpened</code>, <code v-pre>fileClosed</code>, <code v-pre>fileSelectionChanged</code>, <code v-pre>contentChanged | OldFile</code>, <code v-pre>contentChanged | NewFile</code>.</li>
 <li>If the file is not a code file, i.e., the file extension is not in the &quot;.java&quot;, &quot;.cpp&quot;, &quot;.c&quot;, &quot;.py&quot;, &quot;.rb&quot;, &quot;.js&quot;,
-or &quot;.md&quot;, <code v-pre>NotCodeFile | Fail</code> would be added to the remark. This is to prevent archiving data file with large size.</li>
-<li>If there are IO errors when archiving the file, <code v-pre>IOException | Fail</code> would be added to the remark.</li>
+or &quot;.md&quot;, <code v-pre>NotCodeFile | Fail</code> would be added to the remark. This is to prevent archiving data files with large sizes.</li>
+<li>If there are IO errors when archiving the file, <code v-pre>IOException | Fail</code> will be added to the remark.</li>
 </ul>
 <hr>
 <doc-anchor-target id="actions">
@@ -516,7 +516,7 @@ like <code v-pre>CompareTwoFiles</code>, <code v-pre>ReformatCode</code>, to man
 <ul>
 <li>CodeGRITS-related actions are also implemented as <code v-pre>AnAction</code> objects, and their <code v-pre>id</code> is prefixed with <code v-pre>CodeGRITS</code>,
 such as <code v-pre>CodeGRITS.StartStopTracking</code>, <code v-pre>CodeGRITS.PauseResumeTracking</code>, etc.</li>
-<li>The &quot;add label&quot; action is also tracked here, with <code v-pre>id</code> as <code v-pre>&quot;CodeGRITS.AddLabel.[LABEL_NAME]&quot;</code>, where label name
+<li>The &quot;add label&quot; action is also tracked here, with <code v-pre>id</code> as <code v-pre>&quot;CodeGRITS.AddLabel.[LABEL_NAME]&quot;</code>, where the label name
 is pre-set in the configuration.</li>
 <li>Other IntelliJ plugins may also implement their own <code v-pre>AnAction</code> objects, which will also be tracked here. For example,
 the <code v-pre>copilot.applyInlays</code> in the GitHub Copilot plugin.</li>
@@ -610,7 +610,7 @@ including the timestamp and the path of the file.</li>
 <p><strong>Comment</strong>:</p>
 <ul>
 <li>The <code v-pre>&lt;mouses&gt;</code> element records the mouse-related actions including pressing, releasing, clicking, moving, and
-dragging. The data including the timestamp, the path of the file, the x-coordinate, and the y-coordinate.</li>
+dragging. The data includes the timestamp, the path of the file, the x-coordinate, and the y-coordinate.</li>
 </ul>
 <hr>
 <doc-anchor-target id="mouse">
@@ -656,7 +656,7 @@ dragging. The data including the timestamp, the path of the file, the x-coordina
 <p><strong>Comment</strong>:</p>
 <ul>
 <li>Caret is the cursor in the code editor. The <code v-pre>&lt;carets&gt;</code> element records the change of the caret position in the code
-editor. The data including the timestamp, the path of the file, the line number, and the column number.</li>
+editor. The data includes the timestamp, the path of the file, the line number, and the column number.</li>
 </ul>
 <hr>
 <doc-anchor-target id="caret">
@@ -693,7 +693,7 @@ editor. The data including the timestamp, the path of the file, the line number,
 <p><strong>Sub-element</strong>: <code v-pre>&lt;selection&gt;</code></p>
 <p><strong>Comment</strong>:</p>
 <ul>
-<li>The <code v-pre>&lt;selections&gt;</code> element records data when the user selects a piece of code in the code editor. The data including
+<li>The <code v-pre>&lt;selections&gt;</code> element records data when the user selects a piece of code in the code editor. The data includes
 the timestamp, the path of the file, the start position, the end position, and the selected text.</li>
 </ul>
 <hr>
@@ -817,11 +817,11 @@ code editor, which could be used to track the horizontal and vertical resizing r
 </ul>
 <p><strong>Comment</strong>:</p>
 <ul>
-<li>The root element of the <code v-pre>eye_tracking.xml</code> file. CodeGRITS support both Mouse simulation and Tobii Pro eye tracker
+<li>The root element of the <code v-pre>eye_tracking.xml</code> file. CodeGRITS supports both Mouse simulation and Tobii Pro eye tracker
 devices.</li>
-<li>Since <a href="https://developer.tobiipro.com/index.html">Tobii Pro SDK</a> not support Java, we use Python
+<li>Since <a href="https://developer.tobiipro.com/index.html">Tobii Pro SDK</a> does not support Java, we use the Python
 library <code v-pre>tobii-research</code> to collect eye tracking data and use Java ProcessBuilder to call the Python script to collect
-data. The python interpreter is specified in the configuration.</li>
+data. The Python interpreter is specified in the configuration.</li>
 </ul>
 <hr>
 <doc-anchor-target id="setting">
@@ -842,8 +842,8 @@ data. The python interpreter is specified in the configuration.</li>
 </doc-codeblock></div>
 <p><strong>Comment</strong>:</p>
 <ul>
-<li><code v-pre>eye_tracker</code> could be <code v-pre>Mouse</code> for simulation, or real Tobii Pro eye tracker device name (e.g., <code v-pre>Tobii Pro Fusion</code>),
-which is got from <code v-pre>eyetracker.model</code> in the <code v-pre>tobii-research</code> library.</li>
+<li><code v-pre>eye_tracker</code> could be <code v-pre>Mouse</code> for simulation, or a real Tobii Pro eye tracker device name (e.g., <code v-pre>Tobii Pro Fusion</code>),
+which is obtained from <code v-pre>eyetracker.model</code> in the <code v-pre>tobii-research</code> library.</li>
 <li><code v-pre>sampling_rate</code> is the sampling rate of the eye tracker in Hz, which is pre-set in the configuration and whose range
 could be in <code v-pre>eyetracker.get_all_gaze_output_frequencies()</code> called in the <code v-pre>tobii-research</code> library.</li>
 </ul>
@@ -872,9 +872,9 @@ could be in <code v-pre>eyetracker.get_all_gaze_output_frequencies()</code> call
 <ul>
 <li><code v-pre>&lt;left_eye&gt;</code></li>
 <li><code v-pre>&lt;right_eye&gt;</code></li>
-<li><code v-pre>&lt;location&gt;</code>: only used when the gaze point can be mapped to location in the code editor</li>
-<li><code v-pre>&lt;ast_structure&gt;</code>: only used when the gaze point cannot be mapped to location in the code editor, and the code file is
-java.</li>
+<li><code v-pre>&lt;location&gt;</code>: only used when the gaze point can be mapped to its location in the code editor</li>
+<li><code v-pre>&lt;ast_structure&gt;</code>: only used when the gaze point cannot be mapped to its location in the code editor, and the code
+file is java.</li>
 </ul>
 <p><strong>Attribute</strong>:</p>
 <ul>
@@ -901,8 +901,8 @@ java.</li>
 &lt;/gaze&gt;</code></pre>
 </doc-codeblock></div>
 <p><strong>Comment</strong>:</p>
-<p>When the gaze point cannot be mapped to location in the code editor in the following 3 cases, the <code v-pre>remark</code> attribute is
-used:</p>
+<p>When the gaze point cannot be mapped to its location in the code editor in the following 3 cases, the <code v-pre>remark</code> attribute
+is used:</p>
 <ol>
 <li>The raw gaze point from the eye tracker is invalid. (i.e., nan). In this case, the <code v-pre>remark</code>
 is <code v-pre>Fail | Invalid Gaze Point</code>.</li>
@@ -936,9 +936,9 @@ is <code v-pre>Fail | Out of Text Editor</code>.</li>
 <li><code v-pre>gaze_point_x</code> and <code v-pre>gaze_point_y</code> are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
 corner of the screen, and (1, 1) is the bottom-right corner of the screen.</li>
 <li><code v-pre>gaze_validity</code> and <code v-pre>pupil_validity</code> are the validity of the gaze point and pupil diameter, which is binary, 0 for
-invalid, 1 for valid. When using Mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code> is
-always 0.0.</li>
-<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
+invalid, 1 for valid. When using a mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code>
+is always 0.0.</li>
+<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using a mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
 always 0.</li>
 </ul>
 <hr>
@@ -967,9 +967,9 @@ always 0.</li>
 <li><code v-pre>gaze_point_x</code> and <code v-pre>gaze_point_y</code> are the location on the screen, ranging from 0 to 1, where (0, 0) is the top-left
 corner of the screen, and (1, 1) is the bottom-right corner of the screen.</li>
 <li><code v-pre>gaze_validity</code> and <code v-pre>pupil_validity</code> are the validity of the gaze point and pupil diameter, which is binary, 0 for
-invalid, 1 for valid. When using Mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code> is
-always 0.0.</li>
-<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using Mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
+invalid, 1 for valid. When using a mouse to simulate eye tracker, <code v-pre>gaze_validity</code> is always 1.0, and <code v-pre>pupil_validity</code>
+is always 0.0.</li>
+<li><code v-pre>pupil_diameter</code> is the diameter of the pupil in mm, when using a mouse to simulate eye tracker, <code v-pre>pupil_diameter</code> is
 always 0.</li>
 </ul>
 <hr>
@@ -995,9 +995,9 @@ always 0.</li>
 <p><strong>Comment</strong>:</p>
 <ul>
 <li><code v-pre>x</code> and <code v-pre>y</code> are the coordinates of the gaze relative to the top-left corner of the visible code editor, whose unit is
-same to the <code v-pre>screen_size</code>&#x27;s in <code v-pre>environment</code>, not the actual screen resolution.</li>
+same as the <code v-pre>screen_size</code> in <code v-pre>environment</code>, not the actual screen resolution.</li>
 <li><code v-pre>line</code> and <code v-pre>column</code> are the line number and column number of the gaze point in the code editor, which is calculated
-by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pre>Editor</code> interface in IntelliJ Platform.</li>
+by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pre>Editor</code> interface in the IntelliJ Platform SDK.</li>
 </ul>
 <hr>
 <doc-anchor-target id="ast-structure">
@@ -1012,7 +1012,7 @@ by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pr
 <ul>
 <li>token</li>
 <li>type</li>
-<li>remark: only used when the current token is same to the previous token</li>
+<li>remark: only used when the current token is same as the previous token</li>
 </ul>
 <p><strong>Example</strong>:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
@@ -1034,12 +1034,13 @@ by <code v-pre>xyToLogicalPosition(@NotNull Point p)</code> method of <code v-pr
 <li>The abstract syntax tree (AST) of the code file is recorded in the <code v-pre>&lt;ast_structure&gt;</code> element. The AST is calculated by
 <a href="https://plugins.jetbrains.com/docs/intellij/psi-elements.html">program structure interface (PSI)</a> of IntelliJ
 Platform.</li>
-<li><code v-pre>token</code> is text of the leaf node in the AST of current gaze point, which is calculated by <code v-pre>psiElement.getText()</code>.</li>
+<li><code v-pre>token</code> is the text of the leaf node in the AST of the current gaze point, which is calculated by
+<code v-pre>psiElement.getText()</code>.</li>
 <li><code v-pre>type</code> is the type of the leaf node, which is calculated by <code v-pre>psiElement.getNode().getElementType()</code>.</li>
-<li><code v-pre>remark</code> is used when the current token is same to the previous token, which means the gaze point is still in the same
+<li><code v-pre>remark</code> is used when the current token is same as the previous token, which means the gaze point is still in the same
 leaf node. In this case, the <code v-pre>remark</code> is <code v-pre>Same (Last Successful AST)</code>. We designed this mechanism to
-avoid <code v-pre>eye_tracking.xml</code> to be too large.</li>
-<li>We calculate the parent nodes of the leaf node by <code v-pre>psiElement.getParent()</code> until the file-level (i.e. <code v-pre>PsiFile</code>), and
+avoid <code v-pre>eye_tracking.xml</code> from being too large.</li>
+<li>We calculate the parent nodes of the leaf node by <code v-pre>psiElement.getParent()</code> until the file level (i.e. <code v-pre>PsiFile</code>), and
 save them in the <code v-pre>&lt;level&gt;</code> element. In the previous example, the leaf node is <code v-pre>PsiIdentifier:println</code>, and its parent
 nodes are <code v-pre>PsiReferenceExpression:System.out.println</code> =&gt; <code v-pre>PsiMethodCallExpression:System.out.println(&quot;Hello world!&quot;)</code>
 =&gt; <code v-pre>PsiExpressionStatement</code> =&gt; <code v-pre>PsiCodeBlock</code> =&gt; <code v-pre>PsiMethod:main</code> =&gt; <code v-pre>PsiClass:Main</code>. The original code text is

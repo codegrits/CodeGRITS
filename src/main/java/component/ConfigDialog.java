@@ -156,7 +156,7 @@ public class ConfigDialog extends DialogWrapper {
             AddLabelAction newLabel = new AddLabelAction();
             newLabel.setDescription(label);
             String id = "CodeGRITS.AddLabelAction.[" + label + "]";
-            if(actionManager.getAction(id) != null) actionManager.unregisterAction(id);
+            if (actionManager.getAction(id) != null) actionManager.unregisterAction(id);
             actionManager.registerAction(id, newLabel);
             actionGroup.add(newLabel);
         }

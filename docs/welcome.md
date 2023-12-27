@@ -6,6 +6,12 @@ order: 100
 
 # Welcome to CodeGRITS
 
+!!! :zap: NEWS! :zap:
+We would present CodeGRITS at 
+[ICSE 2024 Demo Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations).
+Welcome to join us and discuss with us about it!
+!!!
+
 [CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem,
 which is a plugin specifically designed
 for software engineering (SE) researchers, which is developed by the [SaNDwich Lab](https://toby.li/) at the

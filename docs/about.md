@@ -29,7 +29,7 @@ set of extra functionalities (e.g., IDE tracking, screen recording, etc.) for em
 
 ## License
 
-Please see the CodeGRITS [LICENSE](LICENSE).
+CodeGRITS is licensed under the MIT License. See the [LICENSE](license.md) for details.
 
 ## Contact us
 

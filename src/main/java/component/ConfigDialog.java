@@ -97,6 +97,9 @@ public class ConfigDialog extends DialogWrapper {
                 freqCombo.addItem(30.0);
             }
         }
+        if (new File("config.json").exists()) {
+            loadConfig();
+        }
     }
 
     private void loadConfig() {
@@ -264,6 +267,7 @@ public class ConfigDialog extends DialogWrapper {
         dataOutputLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
         panel.add(dataOutputLabel);
         dataOutputTextField.setEditable(false);
+        dataOutputTextField.setButtonEnabled(false);
         dataOutputTextField.setBorder(new EmptyBorder(contentMargin));
         dataOutputTextField.setMaximumSize(new Dimension(500, 40));
         dataOutputTextField.setText(selectDataOutputPlaceHolder);

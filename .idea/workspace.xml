@@ -5,8 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/about.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/changelog.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/faq.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/add-label.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/ast.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/config.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/eye-tracker.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/ide-tracker.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/imgs/toolbar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api-reference.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/citation.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/imgs/eye-tracking.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/imgs/eye-data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/imgs/ide-tracking.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/imgs/ide-data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/output.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/data.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/usage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/welcome.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +103,7 @@
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/CodeGRITS/imgs",
+    "last_opened_file_path": "C:/Users/Lenovo/IdeaProjects/CodeGRITS/docs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -96,11 +118,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs" />
+      <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\src\main\resources\META-INF" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS" />
@@ -180,6 +205,7 @@
       <workItem from="1703554157001" duration="5970000" />
       <workItem from="1703566127086" duration="2719000" />
       <workItem from="1703575373869" duration="10043000" />
+      <workItem from="1703638913629" duration="23166000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

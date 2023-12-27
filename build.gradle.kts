@@ -25,13 +25,13 @@ dependencies {
 intellij {
     version.set("2023.1.4")
 
-    type.set("IC") // IntelliJ Community Edition
+//    type.set("IC") // IntelliJ Community Edition
 //    type.set("IU") // IntelliJ Ultimate Edition
-    plugins.set(listOf("com.intellij.java"))
+//    plugins.set(listOf("com.intellij.java"))
 
-//    type.set("PC") // PyCharm Community Edition
+    type.set("PC") // PyCharm Community Edition
 //    type.set("PY") // PyCharm Professional Edition
-//    plugins.set(listOf("PythonCore"))
+    plugins.set(listOf("PythonCore"))
 
 //    type.set("CL") // CLion
 

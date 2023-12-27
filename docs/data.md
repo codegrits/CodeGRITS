@@ -1,11 +1,11 @@
 ---
-id: Output Format
+id: Data Format
 icon: file-code
 order: 80
 ---
 
 
-# Output Format
+# Data Format
 
 ## Output Directory Structure
 
@@ -19,8 +19,8 @@ order: 80
 │   │   ├── [ARCHIVE_TIMESTAMP_2].archive
 │   │   ├── ...
 │   ├── screen_recording
-│   │   ├── video_clip_1.mp4
-│   │   ├── video_clip_2.mp4
+│   │   ├── clip_1.mp4
+│   │   ├── clip_2.mp4
 │   │   ├── ...
 │   │   ├── frames.csv
 ```
@@ -123,7 +123,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <environment ide_name="IntelliJ IDEA" ide_version="2022.2.5" java_version="17.0.6" os_name="Windows 10"
              project_name="HelloWorld" project_path="C:/Users/Lenovo/IdeaProjects/HelloWorld" scale_x="1.25"
              scale_y="1.25" screen_size="(1536,864)"/>
@@ -169,7 +168,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <archive id="fileArchive" path="/src/Main.java" remark="fileOpened" timestamp="1696203834202"/>
 <archive id="fileArchive" path="/1696203101069/ide_tracking.xml" remark="fileOpened | NotCodeFile | Fail"
          timestamp="1696203834208"/>
@@ -214,7 +212,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <action id="ReformatCode" path="/src/Main.java" timestamp="1696214487353"/>
 <action id="SaveAll" path="/src/Main.java" timestamp="1696214490354"/>
 <action id="RunClass" path="/src/Main.java" timestamp="1696214496053"/>
@@ -269,7 +266,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <typing character="S" column="8" line="3" path="/src/Main.java" timestamp="1696216429855"/>
 <typing character="y" column="9" line="3" path="/src/Main.java" timestamp="1696216430111"/>
 <typing character="s" column="10" line="3" path="/src/Main.java" timestamp="1696216430233"/>
@@ -301,7 +297,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <file id="fileClosed" path="/src/Main.java" timestamp="1696216679318"/>
 <file id="selectionChanged" new_path="/src/ABC.java" old_path="/src/Main.java"
       timestamp="1696216679330"/>
@@ -339,7 +334,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <mouse id="mousePressed" path="/src/DEF.java" timestamp="1696217839651" x="642" y="120"/>
 <mouse id="mouseReleased" path="/src/DEF.java" timestamp="1696217840187" x="642" y="120"/>
 <mouse id="mouseClicked" path="/src/DEF.java" timestamp="1696217840188" x="642" y="120"/>
@@ -381,7 +375,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <caret column="18" id="caretPositionChanged" line="0" path="/src/DEF.java" timestamp="1696217839651"/>
 ```
 
@@ -416,7 +409,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <selection end_position="0:18" id="selectionChanged" path="/src/DEF.java" selected_text="F {" start_position="0:15"
            timestamp="1696219345156"/>
 <selection end_position="0:18" id="selectionChanged" path="/src/DEF.java" selected_text="EF {" start_position="0:14"
@@ -451,7 +443,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 - height
 
 ```xml
-
 <visible_area height="277" id="visibleAreaChanged" path="/src/DEF.java" timestamp="1696219585893" width="883" x="0"
               y="198"/>
 <visible_area height="275" id="visibleAreaChanged" path="/src/DEF.java" timestamp="1696219585921" width="883" x="0"
@@ -506,7 +497,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <setting eye_tracker="Tobii Pro Fusion" sample_frequency="30"/>
 ```
 
@@ -547,7 +537,6 @@ The [editor coordinate system](https://plugins.jetbrains.com/docs/intellij/coord
 **Example**:
 
 ```xml
-
 <gaze timestamp="1696224370377">
     <left_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
               pupil_diameter="2.4835662841796875" pupil_validity="1.0"/>
@@ -592,7 +581,6 @@ used:
 **Example**:
 
 ```xml
-
 <left_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
           pupil_diameter="2.4835662841796875" pupil_validity="1.0"/>
 ```
@@ -622,7 +610,6 @@ used:
 **Example**:
 
 ```xml
-
 <right_eye gaze_point_x="0.5338541666666666" gaze_point_y="0.17407407407407408" gaze_validity="1.0"
            pupil_diameter="2.7188568115234375" pupil_validity="1.0"/>
 ```
@@ -652,7 +639,6 @@ used:
 **Example**:
 
 ```xml
-
 <location column="25" line="2" path="/src/Main.java" x="820" y="150"/>
 ```
 
@@ -678,7 +664,6 @@ used:
 **Example**:
 
 ```xml
-
 <ast_structure token="println" type="IDENTIFIER">
   <level end="2:26" start="2:19" tag="PsiIdentifier:println"/>
   <level end="2:26" start="2:8" tag="PsiReferenceExpression:System.out.println"/>
@@ -691,7 +676,6 @@ used:
 ```
 
 ```xml
-
 <ast_structure remark="Same (Last Successful AST)" token="println" type="IDENTIFIER"/>
 ```
 
@@ -730,7 +714,6 @@ used:
 **Example**:
 
 ```xml
-
 <level end="3:5" start="1:4" tag="PsiMethod:main"/>
 ```
 
@@ -746,15 +729,15 @@ used:
 [OUTPUT_DIR]
 ├── [START_TIMESTAMP]
 │   ├── screen_recording
-│   │   ├── video_clip_1.mp4
-│   │   ├── video_clip_2.mp4
+│   │   ├── clip_1.mp4
+│   │   ├── clip_2.mp4
 │   │   ├── ...
 │   │   ├── frames.csv
 ```
 
 ---
 
-`video_clip_[k].mp4`
+`clip_[k].mp4`
 
 **Comment**:
 
@@ -776,11 +759,19 @@ Column:
 
 ```csv
 timestamp,frame_number,clip_number
-1696224360619,1,1
-1696224360991,2,1
+1703661629399,Start,1
+1703661630996,1,1
+1703661631247,2,1
+1703661644518,Pause,1
+1703661646446,Resume,2
+1703661646824,1,2
+1703661647737,Stop,2
 ```
 
 **Comment**:
 
+- The frame rate is 12 fps.
 - `frame_number` is the frame number of the frame in its video clip.
 - `clip_number` is the number of the video clip to which the frame belongs.
+- We also record the timestamp of `Start`, `Pause`, `Resume`, and `Stop` actions in the `frames.csv` file, which could
+  be used to separate each stage of the development process.

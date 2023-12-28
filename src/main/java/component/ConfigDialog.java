@@ -89,17 +89,23 @@ public class ConfigDialog extends DialogWrapper {
                 deviceCombo.removeAllItems();
                 deviceCombo.addItem("Mouse");
                 freqCombo.addItem(30.0);
+                freqCombo.addItem(60.0);
+                freqCombo.addItem(120.0);
             }
         }
         Config config = new Config();
-        config.loadFromJson();
-        //load freq
-        freqCombo.setSelectedItem(config.getSampleFreq());
-
+        if (config.configExists()) {
+            config.loadFromJson();
+            // load freq
+            freqCombo.setSelectedItem(config.getSampleFreq());
+        }
     }
 
     private void loadConfig() {
         Config config = new Config();
+        if (!config.configExists()) {
+            return;
+        }
         config.loadFromJson();
 
         List<Boolean> selected = config.getCheckBoxes();

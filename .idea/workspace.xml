@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/developer.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/developer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +188,7 @@
       <workItem from="1703678759806" duration="1861000" />
       <workItem from="1703689805171" duration="3254000" />
       <workItem from="1703723025891" duration="8208000" />
-      <workItem from="1703743132882" duration="5834000" />
+      <workItem from="1703743132882" duration="6421000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

@@ -21,6 +21,10 @@ The data collected by CodeGRITS can be used by empirical SE researchers to under
 especially those related to eye gaze. CodeGRITS also provides a [real-time data API](developer.md)
 for future plugin developers and researchers to design context-aware programming support tools.
 
+We provide an example project [DataStreamReceiver](https://github.com/codegrits/DataStreamReceiver) that builds on top
+of the real-time data API. It is designed to receive the IDE and eye tracking data and directly visualize them in two
+separate windows.
+
 ## Key Features
 
 - :mag: **IDE Tracking**: CodeGRITS tracks developers’ IDE interactions, including mouse clicks, keyboard inputs, etc.

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.757052090030">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.757068653393">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.757052090030" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.757068653393" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.757052090030" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.757068653393" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.757052090030" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.757052090030" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.757068653393" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.757068653393" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -321,6 +321,16 @@ tracker API.</p>
 <p>We provide a real-time data API for future JetBrains plugin developers and researchers to get real-time data from
 IDE tracker and eye tracker separately. The API is based on the <doc-anchor-trigger to="#ide-tracker">IDE Tracker</doc-anchor-trigger>
 and <doc-anchor-trigger to="#eye-tracker">Eye Tracker</doc-anchor-trigger>.</p>
+<doc-anchor-target id="example-project">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#example-project">#</doc-anchor-trigger>
+        <span>Example Project</span>
+    </h4>
+</doc-anchor-target>
+<p>We provide an example project <a href="https://github.com/codegrits/DataStreamReceiver">DataStreamReceiver</a>
+that builds on top of the real-time data API. It is designed to receive real-time IDE tracking and eye tracking data and
+directly visualize them in two separate windows. You could refer to the source code of the example project to learn how
+to use the API.</p>
 <doc-anchor-target id="configuration">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#configuration">#</doc-anchor-trigger>
@@ -337,6 +347,11 @@ in <code v-pre>build.gradle.kts</code> file of your plugin project.</p>
     plugins.set(file(&quot;path-to-CodeGRITS-dependency&quot;))
 }</code></pre>
 </doc-codeblock></div>
+<p>You also need to add the following to <code v-pre>./src/main/resources/META-INF/plugin.xml</code>.</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-markup"><code v-pre class="language-markup">
+&lt;depends&gt;com.nd.codegrits&lt;/depends&gt;</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="quick-start">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#quick-start">#</doc-anchor-trigger>
@@ -348,13 +363,13 @@ the <code v-pre>isRealTimeDataTransmitting</code> to <code v-pre>true</code> to 
 the <code v-pre>ideTrackerDataHandler</code> or <code v-pre>eyeTrackerDataHandler</code> to handle the real-time data. Finally, call the <code v-pre>startTracking()</code>
 method to start tracking.</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-java"><code v-pre class="language-java">IDETracker ideTracker = IDETracker.getInstance();
-ideTracker.setIsRealTimeDataTransmitting(true);
-ideTracker.setIdeTrackerDataHandler(element -&gt; {
-    String formattedStr = &quot;Event: &quot; + element.getAttribute(&quot;id&quot;);
-    System.out.println(formattedStr);
-});
-ideTracker.startTracking(currentProject);</code></pre>
+<pre class="language-java"><code v-pre class="language-java">IDETracker ideTracker=IDETracker.getInstance();
+        ideTracker.setIsRealTimeDataTransmitting(true);
+        ideTracker.setIdeTrackerDataHandler(element-&gt;{
+        String formattedStr=&quot;Event: &quot;+element.getAttribute(&quot;id&quot;);
+        System.out.println(formattedStr);
+        });
+        ideTracker.startTracking(currentProject);</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>

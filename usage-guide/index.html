@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.757094971749">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.757101046365">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.757094971749" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.757101046365" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.757094971749" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.757101046365" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.757094971749" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.757094971749" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.757101046365" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.757101046365" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -417,7 +417,7 @@ zip file.</li>
 including <code v-pre>Start/Stop Tracking</code>, <code v-pre>Pause/Resume Tracking</code>, and <code v-pre>Configuration</code>.</li>
 </ol>
 <div style="text-align: center;">
-    <img src="../static/toolbar.png" style="max-width: 100%; height: auto;">
+    <img src="../static/toolbar.png" style="max-width: 100%; width: 180px; height: auto;">
 </div>
 <doc-anchor-target id="usage">
     <h2>
@@ -435,7 +435,7 @@ including <code v-pre>Start/Stop Tracking</code>, <code v-pre>Pause/Resume Track
 the configuration window. The configuration settings are stored in the <code v-pre>config.json</code> file in the <code v-pre>bin/</code> folder of
 your installed JetBrains IDE.</p>
 <div style="text-align: center;">
-    <img src="../static/config.png" style="max-width: 50%; height: auto;">
+    <img src="../static/config.png" style="max-width: 100%; width: 420px; height: auto;">
 </div>
 <doc-anchor-target id="functionalities">
     <h4>
@@ -470,7 +470,7 @@ Python environment. The plugin automatically checks if the required packages are
 be captured by explicit IDE interactions. You can add the labels by right-clicking during tracking. The label is also
 recorded in the output data via IDE Tracker.</p>
 <div style="text-align: center;">
-    <img src="../static/add-label.png" style="max-width: 50%; height: auto;">
+    <img src="../static/add-label.png" style="max-width: 100%; width: 400px; height: auto;">
 </div><br>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-300"></div>
@@ -507,13 +507,13 @@ in XML format to the configured folder.</p>
 </doc-anchor-target>
 <p>IDE Tracker could track a wide range of IDE interactions including all but not limited to the following.</p>
 <div style="text-align: center;">
-    <img src="../static/ide-tracker.png" style="max-width: 60%; height: auto;"><br><br>
+    <img src="../static/ide-tracker.png" style="max-width: 100%; width: 540px; height: auto;"><br><br>
 </div>
 <p>A <strong>real-time archive mechanism</strong> is also implemented to archive the whole code files when they
 are changed, and the console output during the development process. Below is one example of data collected by IDE
 Tracker. See <a href="../data-format/">Data Format</a> for more details.</p>
 <div style="text-align: center;">
-    <img src="../static/ide-data.png" style="max-width: 100%; height: auto;"><br><br>
+    <img src="../static/ide-data.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 <doc-anchor-target id="eye-tracker">
     <h4>
@@ -528,16 +528,16 @@ If a compatible eye-tracking device is not available, CodeGRITS will use the mou
 <p>(2) Map the coordinates of raw gazes within the text editor to specific locations in the code (i.e., file path, line and
 column number);</p>
 <div style="text-align: center;">
-    <img src="../static/eye-tracker.png" style="max-width: 100%; height: auto;"><br><br>
+    <img src="../static/eye-tracker.png" style="max-width: 100%; width:600px; height: auto;"><br><br>
 </div>
 (3) Infer the source code tokens that each gaze point is focusing on, as well as perform a bottom-up
    process to traverse the AST structures of the tokens.
 <div style="text-align: center;">
-    <img src="../static/ast.png" style="max-width: 100%; height: auto;"><br><br>
+    <img src="../static/ast.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 <p>Below is one example of the data collected by Eye Tracker. See <a href="../data-format/">Data Format</a> for more details.</p>
 <div style="text-align: center;">
-    <img src="../static/eye-data.png" style="max-width: 100%; height: auto;"><br><br>
+    <img src="../static/eye-data.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 <div class="flex mb-6">
     <div class="shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>

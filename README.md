@@ -1,8 +1,7 @@
 # CodeGRITS
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/)
-[![Pre-print](https://img.shields.io/badge/Preprint-arXiv-lightgrey)](https://arxiv.org/abs/xxxx.yyyyy)
-[![DOI](https://img.shields.io/badge/DOI-10.1000%2Fxyz123-blue)](https://doi.org/10.1000/xyz123)
+[![Paper PDF](https://img.shields.io/badge/Paper-PDF-blue)](https://codegrits.github.io/CodeGRITS/static/paper.pdf)
 [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI)
 [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:your-directory-id)
 [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
@@ -48,11 +47,9 @@ Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for m
 
 ## Citation
 
-[//]: # (TODO: Update the citation and PDF link after the paper is published.)
-
 The paper of CodeGRITS has been accepted
 by [ICSE 2024 Demonstrations Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations).
-The PDF version is available [here](https://arxiv.org/abs/xxxx.yyyyy).
+The PDF version is available [here](https://codegrits.github.io/CodeGRITS/static/paper.pdf).
 The [video demonstration](https://www.youtube.com/watch?v=d-YsJfW2NMI) is available on YouTube.
 
 Please cite the following if you use CodeGRITS in your research.

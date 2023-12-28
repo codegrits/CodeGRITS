@@ -5,23 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
-      <change afterPath="$PROJECT_DIR$/docs/static/paper.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/add-label.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/add-label.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/ast.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/ast.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/config.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/config.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/eye-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/eye-data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/eye-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/eye-tracker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/ide-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/ide-data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/ide-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/ide-tracker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/overview.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/overview.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/toolbar.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/toolbar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/visualization.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/static/visualization.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/usage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/welcome.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +187,7 @@
       <workItem from="1703638913629" duration="33159000" />
       <workItem from="1703678759806" duration="1861000" />
       <workItem from="1703689805171" duration="3254000" />
-      <workItem from="1703723025891" duration="6623000" />
+      <workItem from="1703723025891" duration="7209000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

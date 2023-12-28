@@ -13,7 +13,7 @@ links:
     icon: mark-github
     target: blank
   - text: Paper
-    link: https://arxiv.org/abs/xxxx.yyyyy # TODO: Update this
+    link: static/paper.pdf
     icon: file
     target: blank
   - text: Demo

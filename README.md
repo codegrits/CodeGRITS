@@ -6,10 +6,9 @@
 [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:your-directory-id)
 [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
 
-[CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem,
-which is a plugin specifically designed
-for software engineering (SE) researchers, which is developed by the [SaNDwich Lab](https://toby.li/) at the
-[University of Notre Dame](https://www.nd.edu/). CodeGRITS is built on top
+[CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem.
+It's a plugin developed by the [SaNDwich Lab](https://toby.li/) and is specially designed for empirical software
+engineering researchers. CodeGRITS is built on top
 of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with wide compatibility with the
 entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tracking devices](https://www.tobii.com/),
 to track developers’ IDE interactions and eye gaze data.

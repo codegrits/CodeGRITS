@@ -4,7 +4,7 @@ url: https://codegrits.github.io/CodeGRITS/
 
 branding:
   title: CodeGRITS
-  logo: imgs/logo.png
+  logo: static/logo.png
   label: v0.2.0
 
 links:

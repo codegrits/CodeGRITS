@@ -21,7 +21,7 @@ to track developers’ IDE interactions and eye gaze data. The source code is av
 on [GitHub](https://github.com/codegrits/CodeGRITS).
 
 <div style="text-align: center;">
-    <img src="imgs/visualization.png" style="width: 80%;"><br><br>
+    <img src="static/visualization.png" style="width: 80%;"><br><br>
 </div>
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,
@@ -59,16 +59,14 @@ tailored assistance based on your specific OS and JetBrains IDE environment.
   for more details.
 
 <div style="text-align: center;">
-    <img src="imgs/overview.png" style="width: 55%;">
+    <img src="static/overview.png" style="width: 55%;">
 </div>
 
 ## Citation
 
-[//]: # (TODO: Update the citation and PDF link after the paper is published.)
-
 The paper of CodeGRITS has been accepted
 by [ICSE 2024 Demonstrations Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations).
-The PDF version is available [here](https://arxiv.org/abs/xxxx.yyyyy).
+The PDF version is available [here](static/paper.pdf).
 Please cite the following if you use CodeGRITS in your research.
 
 ```bibtex

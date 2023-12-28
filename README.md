@@ -1,6 +1,11 @@
 # CodeGRITS
 
-[[Website]](https://codegrits.github.io/CodeGRITS/) [[Paper]](https://arxiv.org/abs/xxxx.yyyyy) [[Demo Video]](https://www.youtube.com/watch?v=d-YsJfW2NMI)
+[![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/)
+[![Pre-print](https://img.shields.io/badge/Preprint-arXiv-lightgrey)](https://arxiv.org/abs/xxxx.yyyyy)
+[![DOI](https://img.shields.io/badge/DOI-10.1000%2Fxyz123-blue)](https://doi.org/10.1000/xyz123)
+[![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI)
+[![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:your-directory-id)
+[![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
 
 [CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem,
 which is a plugin specifically designed
@@ -11,7 +16,7 @@ entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tra
 to track developers’ IDE interactions and eye gaze data.
 
 <p align="center">
-    <img src="./docs/imgs/overview.png" width="600">
+    <img src="docs/static/overview.png" width="600">
 </p>
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,

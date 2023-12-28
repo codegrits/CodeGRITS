@@ -59,7 +59,7 @@ tailored assistance based on your specific OS and JetBrains IDE environment.
   for more details.
 
 <div style="text-align: center;">
-    <img src="static/overview.png" style="width: 100%; max-width: 600px; height: auto;">
+    <img src="static/overview.png" style="width: 100%; max-width: 400px; height: auto;">
 </div>
 
 ## Citation

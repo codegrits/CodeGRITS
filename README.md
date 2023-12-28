@@ -14,7 +14,7 @@ entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tra
 to track developers’ IDE interactions and eye gaze data.
 
 <p align="center">
-    <img src="docs/static/overview.png" width="600">
+    <img src="docs/static/overview.png" width="600" max-width="90%" alt="CodeGRITS Overview">
 </p>
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,

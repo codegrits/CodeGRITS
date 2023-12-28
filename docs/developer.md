@@ -38,6 +38,13 @@ We provide a real-time data API for future JetBrains plugin developers and resea
 IDE tracker and eye tracker separately. The API is based on the [IDE Tracker](#ide-tracker)
 and [Eye Tracker](#eye-tracker).
 
+#### Example Project
+
+We provide an example project [DataStreamReceiver](https://github.com/codegrits/DataStreamReceiver)
+that builds on top of the real-time data API. It is designed to receive real-time IDE tracking and eye tracking data and
+directly visualize them in two separate windows. You could refer to the source code of the example project to learn how
+to use the API.
+
 ### Configuration
 
 Before using the API, you first need to build CodeGRITS from source
@@ -52,6 +59,13 @@ intellij {
 }
 ```
 
+You also need to add the following to `./src/main/resources/META-INF/plugin.xml`.
+
+```xml
+
+<depends>com.nd.codegrits</depends>
+```
+
 ### Quick Start
 
 To use the API, simply call the `getInstance()` method to get the instance of the IDE Tracker or Eye Tracker. Then, set
@@ -60,13 +74,13 @@ the `ideTrackerDataHandler` or `eyeTrackerDataHandler` to handle the real-time d
 method to start tracking.
 
 ```java
-IDETracker ideTracker = IDETracker.getInstance();
-ideTracker.setIsRealTimeDataTransmitting(true);
-ideTracker.setIdeTrackerDataHandler(element -> {
-    String formattedStr = "Event: " + element.getAttribute("id");
-    System.out.println(formattedStr);
-});
-ideTracker.startTracking(currentProject);
+IDETracker ideTracker=IDETracker.getInstance();
+        ideTracker.setIsRealTimeDataTransmitting(true);
+        ideTracker.setIdeTrackerDataHandler(element->{
+        String formattedStr="Event: "+element.getAttribute("id");
+        System.out.println(formattedStr);
+        });
+        ideTracker.startTracking(currentProject);
 ```
 
 !!!

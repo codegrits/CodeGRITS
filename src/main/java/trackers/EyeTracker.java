@@ -88,7 +88,20 @@ public class EyeTracker implements Disposable {
                 }
             }
         });
+    }
 
+    public EyeTracker(String pythonInterpreter, double sampleFrequency, boolean isUsingMouse) throws ParserConfigurationException {
+        // designed specifically for the real-time data API
+        this(); // call default constructor
+        if (isUsingMouse) {
+            deviceIndex = 0;
+        } else {
+            deviceIndex = 1;
+        }
+        this.pythonInterpreter = pythonInterpreter;
+        this.sampleFrequency = sampleFrequency;
+        setPythonScriptMouse();
+        setPythonScriptTobii();
     }
 
     VisibleAreaListener visibleAreaListener = e -> visibleArea = e.getNewRectangle();

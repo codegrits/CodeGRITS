@@ -107,7 +107,7 @@ We also encourage you to build the plugin from the source code, especially for t
    including `Start/Stop Tracking`, `Pause/Resume Tracking`, and `Configuration`.
 
 <div style="text-align: center;">
-    <img src="../static/toolbar.png" style="width: 16%;">
+    <img src="../static/toolbar.png" style="max-width: 100%; width: 180px; height: auto;">
 </div>
 
 ## Usage
@@ -119,7 +119,7 @@ the configuration window. The configuration settings are stored in the `config.j
 your installed JetBrains IDE.
 
 <div style="text-align: center;">
-    <img src="../static/config.png" style="width: 40%;">
+    <img src="../static/config.png" style="max-width: 100%; width: 420px; height: auto;">
 </div>
 
 #### Functionalities
@@ -146,7 +146,7 @@ be captured by explicit IDE interactions. You can add the labels by right-clicki
 recorded in the output data via IDE Tracker.
 
 <div style="text-align: center;">
-    <img src="../static/add-label.png" style="width: 40%;">
+    <img src="../static/add-label.png" style="max-width: 100%; width: 400px; height: auto;">
 </div><br>
 
 !!!info Buttons
@@ -163,7 +163,7 @@ in XML format to the configured folder.
 IDE Tracker could track a wide range of IDE interactions including all but not limited to the following.
 
 <div style="text-align: center;">
-    <img src="../static/ide-tracker.png" style="width: 50%;"><br><br>
+    <img src="../static/ide-tracker.png" style="max-width: 100%; width: 540px; height: auto;"><br><br>
 </div>
 
 A **real-time archive mechanism** is also implemented to archive the whole code files when they
@@ -171,7 +171,7 @@ are changed, and the console output during the development process. Below is one
 Tracker. See [Data Format](data.md) for more details.
 
 <div style="text-align: center;">
-    <img src="../static/ide-data.png" style="width: 70%;"><br><br>
+    <img src="../static/ide-data.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 
 #### Eye Tracker
@@ -185,17 +185,17 @@ If a compatible eye-tracking device is not available, CodeGRITS will use the mou
 (2) Map the coordinates of raw gazes within the text editor to specific locations in the code (i.e., file path, line and
 column number);
 <div style="text-align: center;">
-    <img src="../static/eye-tracker.png" style="width: 50%;"><br><br>
+    <img src="../static/eye-tracker.png" style="max-width: 100%; width:600px; height: auto;"><br><br>
 </div>
 (3) Infer the source code tokens that each gaze point is focusing on, as well as perform a bottom-up
    process to traverse the AST structures of the tokens.
 <div style="text-align: center;">
-    <img src="../static/ast.png" style="width: 50%;"><br><br>
+    <img src="../static/ast.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 
 Below is one example of the data collected by Eye Tracker. See [Data Format](data.md) for more details.
 <div style="text-align: center;">
-    <img src="../static/eye-data.png" style="width: 70%;"><br><br>
+    <img src="../static/eye-data.png" style="max-width: 100%; width: 650px; height: auto;"><br><br>
 </div>
 
 !!!

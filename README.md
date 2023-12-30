@@ -3,7 +3,7 @@
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/)
 [![Paper PDF](https://img.shields.io/badge/Paper-PDF-blue)](https://codegrits.github.io/CodeGRITS/static/paper.pdf)
 [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI)
-[![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:your-directory-id)
+[![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:8d3350b8efc8e545689565fddf1d8af55371d758)
 [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
 
 [CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem.

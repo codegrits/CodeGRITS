@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/faq.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +195,7 @@
       <workItem from="1703883173683" duration="72000" />
       <workItem from="1703883467507" duration="5648000" />
       <workItem from="1703905751252" duration="3293000" />
-      <workItem from="1703909684339" duration="1561000" />
+      <workItem from="1703909684339" duration="2871000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

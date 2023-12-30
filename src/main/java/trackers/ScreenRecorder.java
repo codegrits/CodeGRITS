@@ -74,6 +74,7 @@ public class ScreenRecorder {
     public void startRecording() throws IOException {
         state = 1;
         clipNumber = 1;
+        timeList.clear();
         isRecording = true;
         File file = new File(dataOutputPath + "/screen_recording/frames.csv");
         file.getParentFile().mkdirs();

@@ -52,11 +52,17 @@ public class ConfigDialog extends DialogWrapper {
         setSize(500, 500);
         setAutoAdjustable(true);
         setResizable(false);
-        if (new File("config.json").exists()) {
-            loadConfig();
+        Config config = new Config();
+        if (config.configExists()) {
+            config.loadFromJson();
+            List<Boolean> selected = config.getCheckBoxes();
+            for (int i = 0; i < selected.size(); i++) {
+                checkBoxes.get(i).setSelected(selected.get(i));
+            }
+            pythonInterpreterTextField.setText(config.getPythonInterpreter());
         }
-        addLabelArea(true);
         if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
+
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
@@ -64,9 +70,9 @@ public class ConfigDialog extends DialogWrapper {
                     String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
                     if (trackerName != null && !trackerName.equals("Not Found")) {
                         deviceCombo.removeAllItems();
-                        deviceCombo.addItem(trackerName);
                         deviceCombo.addItem("Mouse");
-                        deviceCombo.setSelectedIndex(0);
+                        deviceCombo.addItem(trackerName);
+                        deviceCombo.setSelectedIndex(1);
                     }
                     List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
                     freqCombo.removeAllItems();
@@ -81,8 +87,7 @@ public class ConfigDialog extends DialogWrapper {
                     freqCombo.addItem(60.0);
                     freqCombo.addItem(120.0);
                 }
-            }
-            if (!checkBoxes.get(1).isSelected() || !pythonEnvironment) {
+            } else {
                 freqCombo.setEnabled(false);
                 deviceCombo.setEnabled(false);
                 freqCombo.removeAllItems();
@@ -93,11 +98,8 @@ public class ConfigDialog extends DialogWrapper {
                 freqCombo.addItem(120.0);
             }
         }
-        Config config = new Config();
-        if (config.configExists()) {
-            config.loadFromJson();
-            // load freq
-            freqCombo.setSelectedItem(config.getSampleFreq());
+        if (new File("config.json").exists()) {
+            loadConfig();
         }
     }
 
@@ -114,16 +116,21 @@ public class ConfigDialog extends DialogWrapper {
         for (int i = 0; i < selected.size(); i++) {
             checkBoxes.get(i).setSelected(selected.get(i));
         }
-
         labelAreas = new ArrayList<>();
         for (int i = 0; i < labels.size(); i++) {
             addLabelArea(false);
             labelAreas.get(i).setText(labels.get(i));
         }
+        addLabelArea(true);
         freqCombo.setSelectedItem(freq);
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
         dataOutputTextField.setText(config.getDataOutputPath());
-        deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
+
+        if (deviceCombo.getItemCount() > 1){
+            deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
+        } else {
+            deviceCombo.setSelectedIndex(0);
+        }
         if (!checkBoxes.get(1).isSelected()) {
             freqCombo.setEnabled(false);
             deviceCombo.setEnabled(false);
@@ -202,14 +209,9 @@ public class ConfigDialog extends DialogWrapper {
         checkBoxes.add(screenRecording);
         checkBoxPanel.add(screenRecording);
 
-        JCheckBox transmitData = new JCheckBox("Transmit Data");
-//        checkBoxes.add(transmitData);
-//        checkBoxPanel.add(transmitData);
-
         iDETracking.setBorder(new EmptyBorder(contentMargin));
         eyeTracking.setBorder(new EmptyBorder(contentMargin));
         screenRecording.setBorder(new EmptyBorder(contentMargin));
-        transmitData.setBorder(new EmptyBorder(contentMargin));
 
         panel.add(checkBoxPanel);
 
@@ -223,7 +225,6 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterLabel.setHorizontalTextPosition(JLabel.LEFT);
         panel.add(pythonInterpreterLabel);
 
-//        pythonInterpreterTextField = new TextFieldWithBrowseButton();
         pythonInterpreterTextField.setEditable(false);
         pythonInterpreterTextField.setMaximumSize(new Dimension(500, 40));
         pythonInterpreterTextField.setBorder(new EmptyBorder(contentMargin));
@@ -265,7 +266,6 @@ public class ConfigDialog extends DialogWrapper {
 
         panel.add(pythonInterpreterTextField);
 
-
         JLabel dataOutputLabel = new JLabel("Data Output Path");
         dataOutputLabel.setHorizontalTextPosition(JLabel.LEFT);
         dataOutputLabel.setBorder(new EmptyBorder(JBUI.insetsLeft(20)));
@@ -277,15 +277,6 @@ public class ConfigDialog extends DialogWrapper {
         dataOutputTextField.setText(selectDataOutputPlaceHolder);
         dataOutputTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         dataOutputTextField.addBrowseFolderListener(new TextBrowseFolderListener(new FileChooserDescriptor(false, true, false, false, false, false)));
-//
-//        new ComponentValidator(getDisposable()).withValidator(() -> {
-//            String text = dataOutputTextField.getText();
-//            if (text.equals("Select Data Output Folder")) {
-//                return new ValidationInfo("Please select a data output folder", dataOutputTextField.getTextField());
-//            }
-//            return null;
-//        }).installOn(dataOutputTextField.getTextField());
-
 
         panel.add(dataOutputTextField);
 
@@ -321,6 +312,7 @@ public class ConfigDialog extends DialogWrapper {
 
         eyeTracking.addChangeListener(e -> {
             freqCombo.setEnabled(eyeTracking.isSelected());
+            deviceCombo.setEnabled(eyeTracking.isSelected());
         });
 
         JPanel labelAreaPanel = new JPanel();
@@ -332,7 +324,6 @@ public class ConfigDialog extends DialogWrapper {
         labelAreaPanel.setLayout(new BoxLayout(labelAreaPanel, BoxLayout.X_AXIS));
         labelAreaPanel.add(labels);
         panel.add(labelAreaPanel);
-
 
         eyeTracking.addActionListener(actionEvent -> {
             if (!pythonEnvironment) {
@@ -355,25 +346,22 @@ public class ConfigDialog extends DialogWrapper {
                         String trackerName = AvailabilityChecker.getEyeTrackerName(getPythonInterpreter());
                         if (trackerName != null && !trackerName.equals("Not Found")) {
                             deviceCombo.removeAllItems();
-                            deviceCombo.addItem(trackerName);
                             deviceCombo.addItem("Mouse");
+                            deviceCombo.addItem(trackerName);
+                            deviceCombo.setSelectedIndex(1);
                         }
-                        deviceCombo.setSelectedIndex(0);
                         List<String> freqList = AvailabilityChecker.getFrequencies(getPythonInterpreter());
                         freqCombo.removeAllItems();
                         for (String freq : freqList) {
                             freqCombo.addItem(Double.parseDouble(freq));
                         }
                         new AlertDialog("Eye tracker found.", AllIcons.General.InspectionsOK).show();
-
-
                     }
                 } catch (IOException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
         });
-
 
         return panel;
     }

@@ -52,7 +52,7 @@ public class StartStopTrackingAction extends AnAction {
                         return;
                     }
                     if (config.getEyeTrackerDevice() != 0 && !AvailabilityChecker.checkEyeTracker(config.getPythonInterpreter())) {
-                        JOptionPane.showMessageDialog(null, "Eye tracker not found. Please use mouse tracker instead.");
+                        JOptionPane.showMessageDialog(null, "Eye tracker not found. Please configure the mouse simulation first.");
                         return;
                     }
                 }

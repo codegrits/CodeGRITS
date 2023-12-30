@@ -36,12 +36,10 @@ public class AlertDialog extends DialogWrapper {
         JLabel icon = new JLabel();
         label.setIcon(this.icon);
 
-        System.out.println(UIManager.getIcon("OptionPane.warningIcon").getIconHeight());
         icon.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 5));
         label.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         icon.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        dialogPanel.add(icon);
         dialogPanel.add(label);
 
         return dialogPanel;

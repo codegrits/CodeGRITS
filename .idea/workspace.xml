@@ -5,62 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change afterPath="$PROJECT_DIR$/site/rename.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/AddLabelAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/AddLabelAction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/AddLabelActionGroup.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/AddLabelActionGroup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/ConfigAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/ConfigAction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/PauseResumeTrackingAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/PauseResumeTrackingAction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/StartStopTrackingAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/StartStopTrackingAction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/actions/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/actions/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/api/RealtimeDataImpl.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/api/RealtimeDataImpl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/api/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/api/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/api/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/api/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/components/AlertDialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/components/AlertDialog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/components/ConfigDialog.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/components/ConfigDialog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/components/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/components/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/components/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/components/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/entity/Config.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/entity/Config.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/entity/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/entity/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/entity/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/entity/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-16.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-17.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-18.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-19.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/serialized-form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/trackers/EyeTracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/trackers/EyeTracker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/trackers/IDETracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/trackers/IDETracker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/trackers/ScreenRecorder.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/trackers/ScreenRecorder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/trackers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/trackers/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/trackers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/trackers/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/AvailabilityChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/AvailabilityChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/OSDetector.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/OSDetector.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/RelativePathGetter.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/RelativePathGetter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/XMLWriter.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/XMLWriter.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/docs/utils/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/docs/utils/package-tree.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,35 +67,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaVariableFindUsagesOptions.isSearchForAccessors&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/IdeaProjects/CodeGRITS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaVariableFindUsagesOptions.isSearchForAccessors": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/IdeaProjects/CodeGRITS/site",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\CodeGRITS\site" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\static" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\imgs" />
-      <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\src\main\resources\META-INF" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
@@ -251,7 +197,7 @@
       <workItem from="1704278208707" duration="77000" />
       <workItem from="1704988439399" duration="3299000" />
       <workItem from="1704992329776" duration="6125000" />
-      <workItem from="1705003998689" duration="3688000" />
+      <workItem from="1705003998689" duration="6372000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

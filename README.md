@@ -70,5 +70,5 @@ Please cite the following if you use CodeGRITS in your research.
 
 ## Contact us
 
-Please feel free to contact Ningzhi Tang at ntang@nd.edu or Junwen An at jan2@nd.edu
+Please feel free to contact Ningzhi Tang at ntang@nd.edu or Junwen An at jan2@nd.edu/feasiblechart@gmail.com
 if you have any questions or suggestions.

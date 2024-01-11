@@ -35,3 +35,6 @@ footer:
     - text: License
       link: ./license.md
       icon: shield-check
+
+include:
+  - "**/docs/**"

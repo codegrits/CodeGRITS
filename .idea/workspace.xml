@@ -8,46 +8,85 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/about.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/changelog.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/data.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/data.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/developer.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/developer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/faq.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/favicon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/google3c26aad8347fc661.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/google3c26aad8347fc661.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/license.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/license.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/add-label.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/add-label.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/ast.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ast.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/config.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/config.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/eye-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/eye-data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/eye-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/eye-tracker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/ide-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ide-data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/ide-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ide-tracker.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/overview.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/overview.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/paper.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/paper.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/toolbar.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/toolbar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/static/visualization.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/visualization.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/usage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/welcome.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/AddLabelActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelActionGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/ConfigAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/ConfigAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/AlertDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/OSDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/OSDetector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/RelativePathGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/RelativePathGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/XMLWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/XMLWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/AddLabelAction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/AddLabelActionGroup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/ConfigAction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/PauseResumeTrackingAction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/StartStopTrackingAction.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/actions/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/RealtimeDataImpl.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/api/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/component/AlertDialog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/component/ConfigDialog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/component/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/component/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/components/AlertDialog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/components/ConfigDialog.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/components/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/components/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/entity/Config.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/entity/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/entity/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/jquery-ui.overrides.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/COPYRIGHT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/jquery.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/legal/jqueryUI.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/module-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/resources/x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-3.6.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script-dir/jquery-ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tag-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/trackers/EyeTracker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/trackers/IDETracker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/trackers/ScreenRecorder.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/trackers/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/trackers/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/AvailabilityChecker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/OSDetector.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/RelativePathGetter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/XMLWriter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/utils/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/developer.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/developer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/welcome.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +276,8 @@
       <workItem from="1704185134432" duration="207000" />
       <workItem from="1704278208707" duration="77000" />
       <workItem from="1704988439399" duration="3299000" />
-      <workItem from="1704992329776" duration="5788000" />
+      <workItem from="1704992329776" duration="6125000" />
+      <workItem from="1705003998689" duration="888000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

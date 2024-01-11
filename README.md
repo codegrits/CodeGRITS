@@ -1,7 +1,7 @@
 # CodeGRITS
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/)
-[![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://your-javadoc-hosted-url.com)
+[![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://codegrits.github.io/CodeGRITS/docs/index.html)
 [![Paper PDF](https://img.shields.io/badge/Paper-PDF-olive)](https://codegrits.github.io/CodeGRITS/static/paper.pdf)
 [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI)
 [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:8d3350b8efc8e545689565fddf1d8af55371d758)
@@ -48,6 +48,7 @@ separate windows.
 ## Usage Guide
 
 Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details.
+The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html).
 
 ## Citation
 

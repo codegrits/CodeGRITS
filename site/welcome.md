@@ -18,7 +18,7 @@ CodeGRITS is built on top
 of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with wide compatibility with the
 entire family of JetBrains IDEs and [Tobii eye-tracking devices](https://www.tobii.com/),
 to track developers’ IDE interactions and eye gaze data. The source code is available
-on [GitHub](https://github.com/codegrits/CodeGRITS).
+on [GitHub](https://github.com/codegrits/CodeGRITS) with [Javadoc](docs/index.html) documentation.
 
 <div style="text-align: center;">
     <img src="static/visualization.png" style="width: 100%; max-width: 900px; height: auto;"><br><br>

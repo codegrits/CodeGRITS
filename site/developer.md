@@ -9,6 +9,7 @@ order: 70
 ## Further Development
 
 Please refer to [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html) for more details.
+We also provide the [JavaDoc](docs/index.html) of the source code.
 Feel free to contact us if you need any help.
 
 ### Accommodating New IDEs

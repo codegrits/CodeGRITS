@@ -7,9 +7,17 @@ import trackers.ScreenRecorder;
 
 import java.io.IOException;
 
+/**
+ * This class is the action for pausing/resuming tracking.
+ */
 public class PauseResumeTrackingAction extends AnAction {
     private final ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
 
+    /**
+     * Update the text of the action button. If the tracking is not started, the button is disabled.
+     *
+     * @param e The action event.
+     */
     @Override
     public void update(@NotNull AnActionEvent e) {
         if (StartStopTrackingAction.isTracking()) {
@@ -25,6 +33,11 @@ public class PauseResumeTrackingAction extends AnAction {
         }
     }
 
+    /**
+     * This method is called when the action is performed. It will pause/resume tracking.
+     *
+     * @param e The action event.
+     */
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (StartStopTrackingAction.isPaused()) {

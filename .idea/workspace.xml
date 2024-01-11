@@ -5,8 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/about.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/data.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/data.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/developer.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/developer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/faq.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/google3c26aad8347fc661.html" beforeDir="false" afterPath="$PROJECT_DIR$/site/google3c26aad8347fc661.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/license.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/license.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/add-label.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/add-label.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/ast.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ast.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/config.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/config.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/eye-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/eye-data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/eye-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/eye-tracker.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/ide-data.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ide-data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/ide-tracker.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/ide-tracker.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/overview.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/overview.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/paper.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/paper.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/toolbar.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/toolbar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/static/visualization.png" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/visualization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/usage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/welcome.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/AddLabelActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelActionGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/ConfigAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/ConfigAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/PauseResumeTrackingAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/StartStopTrackingAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/RealtimeDataImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/AlertDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/component/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/IDETracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/ScreenRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/OSDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/OSDetector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/RelativePathGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/RelativePathGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/XMLWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/XMLWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +74,7 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CodeVision" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CodeVision" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+                <item name="CodeGRITS" type="f1a62948:ProjectNode" />
               </path>
             </expand>
             <select />
@@ -81,7 +117,7 @@
     &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Lenovo/IdeaProjects/CodeGRITS/build/distributions/CodeGRITS-0.2.0.zip&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/IdeaProjects/CodeGRITS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -195,7 +231,13 @@
       <workItem from="1703883173683" duration="72000" />
       <workItem from="1703883467507" duration="5648000" />
       <workItem from="1703905751252" duration="3293000" />
-      <workItem from="1703909684339" duration="2871000" />
+      <workItem from="1703909684339" duration="5296000" />
+      <workItem from="1703916956329" duration="9000" />
+      <workItem from="1704009334713" duration="15000" />
+      <workItem from="1704185134432" duration="207000" />
+      <workItem from="1704278208707" duration="77000" />
+      <workItem from="1704988439399" duration="3299000" />
+      <workItem from="1704992329776" duration="5788000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

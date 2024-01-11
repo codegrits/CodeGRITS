@@ -29,17 +29,27 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.function.Consumer;
 
-
+/**
+ * This class is the eye tracker.
+ */
 public class EyeTracker implements Disposable {
     String dataOutputPath = "";
+    /**
+     * This variable indicates the sample frequency of the eye tracker.
+     */
     double sampleFrequency;
     PsiDocumentManager psiDocumentManager;
     public Editor editor;
+    /**
+     * This variable is the XML document for storing the eye tracking data.
+     */
     Document eyeTracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     Element root = eyeTracking.createElement("eye_tracking");
     Element setting = eyeTracking.createElement("setting");
     Element gazes = eyeTracking.createElement("gazes");
-
+    /**
+     * This variable indicates whether the tracking is started.
+     */
     boolean isTracking = false;
     double screenWidth, screenHeight;
     String projectPath = "", filePath = "";
@@ -52,9 +62,18 @@ public class EyeTracker implements Disposable {
     String pythonScriptMouse;
     int deviceIndex = 0;
 
+    /**
+     * This variable indicates whether the real-time data is transmitting.
+     */
     private static boolean isRealTimeDataTransmitting = false;
+    /**
+     * This variable is the handler for eye tracking data.
+     */
     private Consumer<Element> eyeTrackerDataHandler;
 
+    /**
+     * This is the default constructor.
+     */
     public EyeTracker() throws ParserConfigurationException {
 
         eyeTracking.appendChild(root);
@@ -90,6 +109,13 @@ public class EyeTracker implements Disposable {
         });
     }
 
+    /**
+     * This is the constructor for the eye tracker.
+     *
+     * @param pythonInterpreter The path of the Python interpreter.
+     * @param sampleFrequency   The sample frequency of the eye tracker.
+     * @param isUsingMouse      Whether the mouse is used as the eye tracker.
+     */
     public EyeTracker(String pythonInterpreter, double sampleFrequency, boolean isUsingMouse) throws ParserConfigurationException {
         // designed specifically for the real-time data API
         this(); // call default constructor
@@ -104,9 +130,17 @@ public class EyeTracker implements Disposable {
         setPythonScriptTobii();
     }
 
+    /**
+     * The listener for the visible area used for filtering the eye tracking data.
+     */
     VisibleAreaListener visibleAreaListener = e -> visibleArea = e.getNewRectangle();
 
-
+    /**
+     * This method starts the eye tracking.
+     *
+     * @param project The project.
+     * @throws IOException The exception.
+     */
     public void startTracking(Project project) throws IOException {
         isTracking = true;
         psiDocumentManager = PsiDocumentManager.getInstance(project);
@@ -128,6 +162,11 @@ public class EyeTracker implements Disposable {
         track();
     }
 
+    /**
+     * This method stops the eye tracking.
+     *
+     * @throws TransformerException The exception.
+     */
     public void stopTracking() throws TransformerException {
         isTracking = false;
         pythonOutputThread.interrupt();
@@ -135,14 +174,25 @@ public class EyeTracker implements Disposable {
         XMLWriter.writeToXML(eyeTracking, dataOutputPath + "/eye_tracking.xml");
     }
 
+    /**
+     * This method pauses the eye tracking. The {@code isTracking} variable will be set to {@code false}.
+     */
     public void pauseTracking() {
         isTracking = false;
     }
 
+    /**
+     * This method resumes the eye tracking. The {@code isTracking} variable will be set to {@code true}.
+     */
     public void resumeTracking() {
         isTracking = true;
     }
 
+    /**
+     * This method processes the raw data message from the eye tracker. It will filter the data, map the data to the specific source code element, and perform the upward traversal in the AST.
+     *
+     * @param message The raw data.
+     */
     public void processRawData(String message) {
         if (!isTracking) return;
         Element gaze = getRawGazeElement(message);
@@ -209,6 +259,9 @@ public class EyeTracker implements Disposable {
         }));
     }
 
+    /**
+     * This method builds the Python process and redirects the output to the {@code pythonOutputThread} to process.
+     */
     public void track() {
         try {
             ProcessBuilder processBuilder;
@@ -239,6 +292,11 @@ public class EyeTracker implements Disposable {
         }
     }
 
+    /**
+     * This method sets the project path.
+     *
+     * @param projectPath The project path.
+     */
     public void setProjectPath(String projectPath) {
         this.projectPath = projectPath;
     }
@@ -247,6 +305,12 @@ public class EyeTracker implements Disposable {
     public void dispose() {
     }
 
+    /**
+     * This method gets the raw gaze xml element from the raw gaze data.
+     *
+     * @param message The raw gaze data.
+     * @return The raw gaze element.
+     */
     public Element getRawGazeElement(String message) {
         String timestamp = message.split("; ")[0];
 
@@ -288,6 +352,12 @@ public class EyeTracker implements Disposable {
         return rawGaze;
     }
 
+    /**
+     * This method gets the AST structure element from the PSI element. It performs the upward traversal in the AST.
+     *
+     * @param psiElement The PSI element.
+     * @return The AST structure element.
+     */
     public Element getASTStructureElement(PsiElement psiElement) {
         String token = "", type = "";
         Element aSTStructure = eyeTracking.createElement("ast_structure");
@@ -318,6 +388,11 @@ public class EyeTracker implements Disposable {
         return aSTStructure;
     }
 
+    /**
+     * This method handles the element.
+     *
+     * @param element The element.
+     */
     private void handleElement(Element element) {
         if (eyeTrackerDataHandler != null && isRealTimeDataTransmitting) {
             eyeTrackerDataHandler.accept(element);
@@ -346,6 +421,9 @@ public class EyeTracker implements Disposable {
         this.sampleFrequency = sampleFrequency;
     }
 
+    /**
+     * This method sets the Python script for the Tobii eye tracker.
+     */
     public void setPythonScriptTobii() {
         pythonScriptTobii = "freq = " + sampleFrequency + "\n" + """
                 import tobii_research as tr
@@ -381,6 +459,9 @@ public class EyeTracker implements Disposable {
                 """;
     }
 
+    /**
+     * This method sets the Python script for the mouse eye tracker.
+     */
     public void setPythonScriptMouse() {
         pythonScriptMouse = "freq = " + sampleFrequency + "\n" + """
                 import pyautogui
@@ -405,6 +486,11 @@ public class EyeTracker implements Disposable {
                 """;
     }
 
+    /**
+     * This method sets the device index.
+     *
+     * @param deviceIndex The device index.
+     */
     public void setDeviceIndex(int deviceIndex) {
         this.deviceIndex = deviceIndex;
     }

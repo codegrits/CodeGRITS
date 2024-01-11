@@ -13,21 +13,31 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class is the screen recorder.
+ */
 public class ScreenRecorder {
 
-    /*
-     * 0: initial state; only startAction enabled
-     * 1: started, not paused; stopAction and pauseAction enabled
-     * 2: started, paused; only resumeAction enabled
+    /**
+     * This variable indicates the state of the screen recorder. 0: initial state; only startAction enabled 1: started, not paused; stopAction and pauseAction enabled 2: started, paused; only resumeAction enabled
      */
     int state = 0;
+    /**
+     * This variable indicates the frame rate of the screen recorder.
+     */
     int frameRate = 4; // higher frame rate (e.g., 12) will result in larger file size and blurry video
     private FrameRecorder recorder;
     private FrameGrabber grabber;
     private final ArrayList<String[]> timeList = new ArrayList<>();
     private CSVWriter csvWriter;
     boolean isRecording = false;
+    /**
+     * This variable indicates the current clip number.
+     */
     private int clipNumber = 1;
+    /**
+     * This variable indicates the current frame number.
+     */
     private int frameNumber = 0;
     private String dataOutputPath = "";
     private static ScreenRecorder instance = null;
@@ -39,7 +49,9 @@ public class ScreenRecorder {
         return instance;
     }
 
-
+    /**
+     * Create the encoder using {@link FFmpegFrameGrabber} and {@link FFmpegFrameRecorder}.
+     */
     private void createEncoder() throws IOException {
         // avfoundation for macOS, gdigrab for Windows, xcbgrab for Linux
         if (utils.OSDetector.isMac()) {
@@ -70,7 +82,9 @@ public class ScreenRecorder {
         recorder.start();
     }
 
-
+    /**
+     * Start recording the screen. Reset the clip number and invoke {@link #recordScreen()}.
+     */
     public void startRecording() throws IOException {
         state = 1;
         clipNumber = 1;
@@ -88,6 +102,9 @@ public class ScreenRecorder {
         }
     }
 
+    /**
+     * Stop recording the screen. Write the time list to the CSV file.
+     */
     public void stopRecording() throws IOException {
         state = 0;
         isRecording = false;
@@ -96,6 +113,9 @@ public class ScreenRecorder {
         csvWriter.close();
     }
 
+    /**
+     * Pause recording the screen. Write the time list to the CSV file and increment the clip number.
+     */
     public void pauseRecording() throws IOException {
         state = 2;
         isRecording = false;
@@ -103,6 +123,9 @@ public class ScreenRecorder {
         clipNumber++;
     }
 
+    /**
+     * Resume recording the screen. Invoke {@link #recordScreen()}.
+     */
     public void resumeRecording() {
         state = 1;
         isRecording = true;
@@ -114,6 +137,9 @@ public class ScreenRecorder {
         }
     }
 
+    /**
+     * Record the screen. Use {@link Timer} to schedule the recording with the given frame rate.
+     */
     private void recordScreen() throws AWTException, IOException {
         createEncoder();
         frameNumber = 0;
@@ -146,6 +172,11 @@ public class ScreenRecorder {
         }, 0, 1000 / frameRate);
     }
 
+    /**
+     * Set the data output path.
+     *
+     * @param dataOutputPath The data output path.
+     */
     public void setDataOutputPath(String dataOutputPath) {
         this.dataOutputPath = dataOutputPath;
     }

@@ -10,7 +10,16 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
+/**
+ * This class is used to write the XML document to the XML file.
+ */
 public class XMLWriter {
+    /**
+     * Write the formatted XML document to the XML file.
+     *
+     * @param document The XML document.
+     * @param filePath The path of the XML file.
+     */
     public static void writeToXML(Document document, String filePath) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();

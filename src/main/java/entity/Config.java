@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class is used to store the configuration of the application.
+ */
 public class Config implements Serializable {
     private List<Boolean> checkBoxes;
     private List<String> labels;
@@ -19,6 +22,16 @@ public class Config implements Serializable {
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
 
+    /**
+     * The constructor of the Config class.
+     *
+     * @param checkBoxes        The list of the checkboxes.
+     * @param labels            The list of the labels.
+     * @param sampleFreq        The sample frequency.
+     * @param pythonInterpreter The path of the python interpreter.
+     * @param dataOutputPath    The path of the data output folder.
+     * @param eyeTrackerDevice  The index of the eye tracker device.
+     */
     public Config(List<Boolean> checkBoxes, List<String> labels, Double sampleFreq, String pythonInterpreter, String dataOutputPath, Integer eyeTrackerDevice) {
         this.checkBoxes = checkBoxes;
         this.labels = labels;
@@ -28,6 +41,9 @@ public class Config implements Serializable {
         this.eyeTrackerDevice = eyeTrackerDevice;
     }
 
+    /**
+     * The constructor of the Config class.
+     */
     public Config() {
     }
 
@@ -39,6 +55,9 @@ public class Config implements Serializable {
         }
     }
 
+    /**
+     * Save the configuration as a JSON file.
+     */
     public void saveAsJson() {
         JsonObject jsonObject = new JsonObject();
         if (sampleFreq == null) sampleFreq = 30.0;
@@ -56,6 +75,9 @@ public class Config implements Serializable {
         }
     }
 
+    /**
+     * Load the configuration from the JSON file.
+     */
     public void loadFromJson() {
         try (FileReader fileReader = new FileReader("config.json")) {
             Gson gson = new Gson();

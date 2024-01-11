@@ -1,4 +1,4 @@
-package component;
+package components;
 
 import actions.AddLabelAction;
 import com.intellij.openapi.project.ProjectManager;
@@ -25,7 +25,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * This class is used to create the configuration dialog.
+ */
 public class ConfigDialog extends DialogWrapper {
 
     private List<JCheckBox> checkBoxes;
@@ -33,11 +35,11 @@ public class ConfigDialog extends DialogWrapper {
     private final JPanel panel = new JPanel();
     private static List<JTextField> labelAreas = new ArrayList<>();
 
-    private static TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
-    private static TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
+    private static final TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
+    private static final TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
 
     private final JComboBox<Double> freqCombo = new ComboBox<>();
-    private JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
+    private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
 
     private boolean pythonEnvironment = false;
     private boolean eyeTracker = false;
@@ -45,6 +47,11 @@ public class ConfigDialog extends DialogWrapper {
     public static String selectDataOutputPlaceHolder = "Select Data Output Folder (Default: Project Root)";
     public static String selectPythonInterpreterPlaceHolder = "Select Python Interpreter (Default: \"python\")";
 
+    /**
+     * The constructor of the configuration dialog.
+     *
+     * @param project The project.
+     */
     public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
         init();
@@ -103,6 +110,9 @@ public class ConfigDialog extends DialogWrapper {
         }
     }
 
+    /**
+     * Load the configuration from the config.json file to the configuration dialog using the {@link Config} class.
+     */
     private void loadConfig() {
         Config config = new Config();
         if (!config.configExists()) {
@@ -126,7 +136,7 @@ public class ConfigDialog extends DialogWrapper {
         pythonInterpreterTextField.setText(config.getPythonInterpreter());
         dataOutputTextField.setText(config.getDataOutputPath());
 
-        if (deviceCombo.getItemCount() > 1){
+        if (deviceCombo.getItemCount() > 1) {
             deviceCombo.setSelectedIndex(config.getEyeTrackerDevice());
         } else {
             deviceCombo.setSelectedIndex(0);
@@ -137,12 +147,18 @@ public class ConfigDialog extends DialogWrapper {
         }
     }
 
+    /**
+     * Save the configuration from the configuration dialog to the config.json file using the {@link Config} class.
+     */
     private void saveConfig() {
         Config config = new Config(getSelectedCheckboxes(), getCurrentLabels(), (Double) freqCombo.getSelectedItem(),
                 getPythonInterpreter(), getDataOutputPath(), deviceCombo.getSelectedIndex());
         config.saveAsJson();
     }
 
+    /**
+     * Save the configuration when the OK button is clicked.
+     */
     @Override
     protected void doOKAction() {
         saveConfig();
@@ -150,6 +166,9 @@ public class ConfigDialog extends DialogWrapper {
         super.doOKAction();
     }
 
+    /**
+     * Update the {@link AddLabelAction} group when the configuration is changed.
+     */
     public void updateActionGroup() {
         //update action group
         ActionManager actionManager = ActionManager.getInstance();
@@ -175,6 +194,11 @@ public class ConfigDialog extends DialogWrapper {
         }
     }
 
+    /**
+     * Create the center panel of the configuration dialog.
+     *
+     * @return The center panel of the configuration dialog.
+     */
     @Override
     protected JComponent createCenterPanel() {
 
@@ -366,6 +390,11 @@ public class ConfigDialog extends DialogWrapper {
         return panel;
     }
 
+    /**
+     * Add the label area to the configuration dialog. A label area contains a text field and a button to add or remove the label area.
+     *
+     * @param isEmpty Whether the label panel is empty. If {@code true}, the button will be an add button. If {@code false}, the button will be a remove button.
+     */
     private void addLabelArea(boolean isEmpty) {
         JPanel labelPanel = new JPanel();
         JTextField textField = new JTextField();
@@ -455,6 +484,11 @@ public class ConfigDialog extends DialogWrapper {
         labelPanel.setMaximumSize(new Dimension(500, 40));
     }
 
+    /**
+     * Get the current labels in the configuration dialog.
+     *
+     * @return The current labels in the configuration dialog.
+     */
     public static List<String> getCurrentLabels() {
         List<String> selected = new ArrayList<>();
         for (JTextField textField : labelAreas) {
@@ -463,6 +497,11 @@ public class ConfigDialog extends DialogWrapper {
         return selected;
     }
 
+    /**
+     * Get the selected checkboxes in the configuration dialog.
+     *
+     * @return The selected checkboxes in the configuration dialog.
+     */
     public List<Boolean> getSelectedCheckboxes() {
         List<Boolean> selected = new ArrayList<>();
         for (JCheckBox checkBox : checkBoxes) {
@@ -475,6 +514,11 @@ public class ConfigDialog extends DialogWrapper {
         return selected;
     }
 
+    /**
+     * Get the python interpreter path in the configuration dialog. If the path is empty, the default "python" will be returned.
+     *
+     * @return The python interpreter path in the configuration dialog.
+     */
     public static String getPythonInterpreter() {
         if (ProjectManager.getInstance().getOpenProjects().length == 0) {
             return "python";
@@ -487,6 +531,11 @@ public class ConfigDialog extends DialogWrapper {
                 ? selectPythonInterpreterPlaceHolder : pythonInterpreterTextField.getText();
     }
 
+    /**
+     * Get the data output path in the configuration dialog. If the path is equal to the placeholder, the default project root will be returned.
+     *
+     * @return The data output path in the configuration dialog.
+     */
     public static String getDataOutputPath() {
         return dataOutputTextField.getText().equals(selectDataOutputPlaceHolder)
                 ? selectDataOutputPlaceHolder : dataOutputTextField.getText();

@@ -1,4 +1,4 @@
-input: ./docs
+input: ./site
 output: .retype
 url: https://codegrits.github.io/CodeGRITS/
 

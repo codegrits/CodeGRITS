@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.function.Consumer;
 
+/**
+ * This class provides the API for getting real-time data from the IDE and eye tracker.
+ */
 public class RealtimeDataImpl {
 
     // make it singleton

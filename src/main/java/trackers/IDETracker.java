@@ -34,9 +34,14 @@ import utils.XMLWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-
+/**
+ * This class is the IDE tracker.
+ */
 public final class IDETracker implements Disposable {
     boolean isTracking = false;
+    /**
+     * This variable is the XML document for storing the tracking data.
+     */
     Document iDETracking = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
     Element root = iDETracking.createElement("ide_tracking");
     Element environment = iDETracking.createElement("environment");
@@ -52,9 +57,18 @@ public final class IDETracker implements Disposable {
     String dataOutputPath = "";
     String lastSelectionInfo = "";
 
+    /**
+     * This variable indicates whether the data is transmitted in real time.
+     */
     private static boolean isRealTimeDataTransmitting = false;
+    /**
+     * This variable is the handler for the IDE tracker data.
+     */
     private Consumer<Element> ideTrackerDataHandler;
 
+    /**
+     * This variable is the document listener for the IDE tracker. When the document is changed, if the {@code EditorKind} is {@code CONSOLE}, the console output is archived. Otherwise, the {@code changedFilepath} and {@code changedFileText} are updated.
+     */
     DocumentListener documentListener = new DocumentListener() {
         @Override
         public void documentChanged(@NotNull DocumentEvent event) {
@@ -75,6 +89,10 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This variable is the mouse listener for the IDE tracker.
+     * When the mouse is pressed, clicked, or released, the mouse event is tracked.
+     */
     EditorMouseListener editorMouseListener = new EditorMouseListener() {
         @Override
         public void mousePressed(@NotNull EditorMouseEvent e) {
@@ -102,6 +120,10 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This variable is the mouse motion listener for the IDE tracker.
+     * When the mouse is moved or dragged, the mouse event is tracked.
+     */
     EditorMouseMotionListener editorMouseMotionListener = new EditorMouseMotionListener() {
         @Override
         public void mouseMoved(@NotNull EditorMouseEvent e) {
@@ -120,6 +142,10 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This variable is the caret listener for the IDE tracker.
+     * When the caret position is changed, the caret event is tracked.
+     */
     CaretListener caretListener = new CaretListener() {
         @Override
         public void caretPositionChanged(@NotNull CaretEvent e) {
@@ -137,6 +163,10 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This variable is the selection listener for the IDE tracker.
+     * When the selection is changed, the selection event is tracked.
+     */
     SelectionListener selectionListener = new SelectionListener() {
         @Override
         public void selectionChanged(@NotNull SelectionEvent e) {
@@ -167,6 +197,10 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This variable is the visible area listener for the IDE tracker.
+     * When the visible area is changed, the visible area event is tracked.
+     */
     VisibleAreaListener visibleAreaListener = e -> {
         if (!isTracking) return;
         if (e.getEditor().getEditorKind() == EditorKind.MAIN_EDITOR) {
@@ -186,10 +220,20 @@ public final class IDETracker implements Disposable {
 
     };
 
+    /**
+     * This variable is the editor event multicaster for the IDE tracker.
+     * It is used to add and remove all the listeners.
+     */
     EditorEventMulticaster editorEventMulticaster = EditorFactory.getInstance().getEventMulticaster();
+    /**
+     * This variable is the timer for tracking the document changes.
+     */
     Timer timer = new Timer();
     String changedFilepath = "";
     String changedFileText = "";
+    /**
+     * This variable is the timer task for tracking the document changes. If the {@code changedFilepath} is not empty, the file is archived.
+     */
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
@@ -202,6 +246,9 @@ public final class IDETracker implements Disposable {
         }
     };
 
+    /**
+     * This constructor initializes the IDE tracker.
+     */
     IDETracker() throws ParserConfigurationException {
         iDETracking.appendChild(root);
         root.appendChild(environment);
@@ -327,10 +374,20 @@ public final class IDETracker implements Disposable {
         timer.schedule(timerTask, 0, 1);
     }
 
+    /**
+     * This method returns the IDE tracker instance.
+     *
+     * @return The IDE tracker instance.
+     */
     public static IDETracker getInstance() throws ParserConfigurationException {
         return new IDETracker();
     }
 
+    /**
+     * This method starts tracking. All the listeners are added.
+     *
+     * @param project The project.
+     */
     public void startTracking(Project project) {
         isTracking = true;
         environment.setAttribute("project_path", projectPath);
@@ -354,10 +411,18 @@ public final class IDETracker implements Disposable {
         }
     }
 
+    /**
+     * This method sets the handler for the IDE tracker data for real-time data transmission.
+     *
+     * @param ideTrackerDataHandler The handler for the IDE tracker data.
+     */
     public void setIdeTrackerDataHandler(Consumer<Element> ideTrackerDataHandler) {
         this.ideTrackerDataHandler = ideTrackerDataHandler;
     }
 
+    /**
+     * This method stops tracking. All the listeners are removed. The tracking data is written to the XML file.
+     */
     public void stopTracking() throws TransformerException {
         isTracking = false;
         editorEventMulticaster.removeDocumentListener(documentListener);
@@ -370,14 +435,25 @@ public final class IDETracker implements Disposable {
         XMLWriter.writeToXML(iDETracking, filePath);
     }
 
+    /**
+     * This method pauses tracking. The {@code isTracking} is set to false.
+     */
     public void pauseTracking() {
         isTracking = false;
     }
 
+    /**
+     * This method resumes tracking. The {@code isTracking} is set to true.
+     */
     public void resumeTracking() {
         isTracking = true;
     }
 
+    /**
+     * This method sets the {@code isRealTimeDataTransmitting} variable.
+     *
+     * @param isRealTimeDataTransmitting Indicates whether the data is transmitted in real time.
+     */
     public void setIsRealTimeDataTransmitting(boolean isRealTimeDataTransmitting) {
         IDETracker.isRealTimeDataTransmitting = isRealTimeDataTransmitting;
     }
@@ -390,10 +466,18 @@ public final class IDETracker implements Disposable {
         this.projectPath = projectPath;
     }
 
+    /**
+     * This method archives the file. If the file is a code file, the file is copied to the archive folder.
+     *
+     * @param path      The path of the file.
+     * @param timestamp The timestamp of the file.
+     * @param remark    The remark of the file.
+     * @param text      The text of the file.
+     */
     public void archiveFile(String path, String timestamp, String remark, String text) {
         File srcFile = new File(path);
         File destFile = new File(dataOutputPath + "/archives/" + timestamp + ".archive");
-        String[] codeExtensions = {".java", ".cpp", ".c", ".py", ".rb", ".js", ".md"};
+        String[] codeExtensions = {".java", ".cpp", ".c", ".py", ".rb", ".js", ".md", ".cs", ".html", ".htm", ".css", ".php", ".ts", ".swift", ".go", ".kt", ".kts", ".rs", ".pl", ".sh", ".bat", ".ps1", ".asp", ".aspx", ".jsp", ".lua"};
         try {
             if (path.equals("unknown")) {
                 FileUtils.writeStringToFile(destFile, text, "UTF-8", true);
@@ -426,6 +510,13 @@ public final class IDETracker implements Disposable {
         }
     }
 
+    /**
+     * This method returns the mouse XML element.
+     *
+     * @param e  The editor mouse event.
+     * @param id The id of the mouse event.
+     * @return The mouse element.
+     */
     public Element getMouseElement(EditorMouseEvent e, String id) {
         Element mouseElement = iDETracking.createElement("mouse");
         mouseElement.setAttribute("id", id);
@@ -439,10 +530,20 @@ public final class IDETracker implements Disposable {
         return mouseElement;
     }
 
+    /**
+     * This method sets the data output path.
+     *
+     * @param dataOutputPath The data output path.
+     */
     public void setDataOutputPath(String dataOutputPath) {
         this.dataOutputPath = dataOutputPath;
     }
 
+    /**
+     * This method handles the XML element for real-time data transmission.
+     *
+     * @param element The XML element.
+     */
     private void handleElement(Element element) {
         if (ideTrackerDataHandler == null) {
             return;
@@ -453,6 +554,11 @@ public final class IDETracker implements Disposable {
         }
     }
 
+    /**
+     * This method returns whether the IDE tracker is tracking.
+     *
+     * @return Whether the IDE tracker is tracking.
+     */
     public boolean isTracking() {
         return isTracking;
     }

@@ -4,7 +4,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import component.ConfigDialog;
+import components.ConfigDialog;
 import entity.Config;
 import org.jetbrains.annotations.NotNull;
 import trackers.EyeTracker;
@@ -18,22 +18,47 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.util.Objects;
 
-
+/**
+ * This class is the action for starting/stopping tracking.
+ */
 public class StartStopTrackingAction extends AnAction {
 
+    /**
+     * This variable indicates whether the tracking is started.
+     */
     private static boolean isTracking = false;
+    /**
+     * This variable is the IDE tracker.
+     */
     private static IDETracker iDETracker;
+    /**
+     * This variable is the eye tracker.
+     */
     private static EyeTracker eyeTracker;
-
+    /**
+     * This variable is the screen recorder.
+     */
     private final ScreenRecorder screenRecorder = ScreenRecorder.getInstance();
-
+    /**
+     * This variable is the configuration.
+     */
     Config config = new Config();
 
+    /**
+     * Update the text of the action button.
+     *
+     * @param e The action event.
+     */
     @Override
     public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setText(isTracking ? "Stop Tracking" : "Start Tracking");
     }
 
+    /**
+     * This method is called when the action is performed. It will start/stop tracking.
+     *
+     * @param e The action event.
+     */
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         if (config.configExists()) {

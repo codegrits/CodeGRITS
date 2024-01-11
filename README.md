@@ -1,7 +1,8 @@
 # CodeGRITS
 
 [![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/)
-[![Paper PDF](https://img.shields.io/badge/Paper-PDF-blue)](https://codegrits.github.io/CodeGRITS/static/paper.pdf)
+[![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://your-javadoc-hosted-url.com)
+[![Paper PDF](https://img.shields.io/badge/Paper-PDF-olive)](https://codegrits.github.io/CodeGRITS/static/paper.pdf)
 [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI)
 [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:8d3350b8efc8e545689565fddf1d8af55371d758)
 [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
@@ -14,7 +15,7 @@ entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tra
 to track developers’ IDE interactions and eye gaze data.
 
 <p align="center">
-    <img src="docs/static/overview.png" width="600px" max-width="100%" alt="CodeGRITS Overview">
+    <img src="site/static/overview.png" width="600px" max-width="100%" alt="CodeGRITS Overview">
 </p>
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,

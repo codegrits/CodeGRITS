@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -198,7 +197,7 @@
       <workItem from="1704988439399" duration="3299000" />
       <workItem from="1704992329776" duration="6125000" />
       <workItem from="1705003998689" duration="8963000" />
-      <workItem from="1705074526806" duration="1006000" />
+      <workItem from="1705074526806" duration="1406000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

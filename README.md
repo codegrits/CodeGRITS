@@ -8,7 +8,7 @@
     <img src="site/static/overview.png" width="600px" max-width="100%" alt="CodeGRITS Overview">
 </p>
 
-The [website](https://codegrits.github.io/CodeGRITS/)'s source code is stored in the `./site` folder of this repository and deployed via GitHub Pages. The [JavaDoc](https://codegrits.github.io/CodeGRITS/docs/index.html) documentation is located in the `./site/docs` folder of this repository. They are archived together with the source code in the Software Heritage.
+The [website](https://codegrits.github.io/CodeGRITS/)'s source code is stored in the `./site` folder of this repository and deployed via GitHub Pages. The [JavaDoc](https://codegrits.github.io/CodeGRITS/docs/index.html) documentation is located in the `./site/docs` folder of this repository. They are archived together with the source code in the Software Heritage for long-term preservation.
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers, especially those related to eye gaze. CodeGRITS also provides a [real-time data API](developer.md) for future plugin developers and researchers to design context-aware programming support tools.
 

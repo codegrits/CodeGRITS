@@ -70,8 +70,8 @@ We provide the direct download link of the plugin zip file for the following Jet
 {.compact}
 | JetBrains IDEs | Version | Download Link |
 |:--------------:|:---------------:|:-------------:|
-| IntelliJ IDEA | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1Ineo7c6UEjJVMJD_cyk5YkpxnW3CjRRB/view?usp=drive_link)  |
-| PyCharm | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1IEkFM9S8YsN_Uo7No6mFYZ-DkCqnQRly/view?usp=drive_link)  |
+| IntelliJ IDEA | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing)  |
+| PyCharm | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link)  |
 
 #### Build from Source
 

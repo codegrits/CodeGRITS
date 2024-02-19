@@ -106,12 +106,18 @@ public class AvailabilityChecker {
         ProcessBuilder pb = new ProcessBuilder(pythonInterpreter, "-c", pythonScript);
         pb.redirectErrorStream(true);
         Process p;
-        p = pb.start();
+        String line = "";
+        try{
+            p = pb.start();
+            InputStream stdout = p.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
+            line = reader.readLine();
+            p.waitFor();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
-        InputStream stdout = p.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stdout));
-        String line = reader.readLine();
-        p.waitFor();
+
         return line;
     }
 }

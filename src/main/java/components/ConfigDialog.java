@@ -69,8 +69,7 @@ public class ConfigDialog extends DialogWrapper {
             pythonInterpreterTextField.setText(config.getPythonInterpreter());
         }
         if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
-
-            pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
+            pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder)?"python":getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
                 if (eyeTracker) { //eye tracker found, add mouse and eye tracker name, add eye tracker freq
@@ -105,9 +104,7 @@ public class ConfigDialog extends DialogWrapper {
                 freqCombo.addItem(120.0);
             }
         }
-        if (new File("config.json").exists()) {
-            loadConfig();
-        }
+        loadConfig();
     }
 
     /**

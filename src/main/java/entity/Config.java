@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import org.bytedeco.javacv.FrameFilter;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,6 +22,10 @@ public class Config implements Serializable {
     private String pythonInterpreter;
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
+    private static String os = System.getProperty("os.name");
+    //TODO: change mac path
+    private static final String macConfigPath = System.getProperty("user.home")+"/codegrits_config.json";
+    private static final String otherConfigPath = "codegrits_config.json";
 
     /**
      * The constructor of the Config class.
@@ -48,11 +53,18 @@ public class Config implements Serializable {
     }
 
     public boolean configExists() {
-        try (FileReader fileReader = new FileReader("config.json")) {
+        FileReader fileReader;
+        try{
+            if(os.startsWith("Mac")){
+                fileReader = new FileReader(macConfigPath);
+            } else{
+                fileReader = new FileReader(otherConfigPath);
+            }
             return true;
-        } catch (Exception e) {
+        } catch (Exception e){
             return false;
         }
+
     }
 
     /**
@@ -68,18 +80,31 @@ public class Config implements Serializable {
         jsonObject.addProperty("dataOutputPath", dataOutputPath);
         jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
 
-        try (FileWriter fileWriter = new FileWriter("config.json")) {
-            fileWriter.write(jsonObject.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if(os.startsWith("Mac")){
+            try (FileWriter fileWriter = new FileWriter(macConfigPath)){
+                fileWriter.write(jsonObject.toString());
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
         }
+        else {
+            try (FileWriter fileWriter = new FileWriter(otherConfigPath)) {
+                fileWriter.write(jsonObject.toString());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 
     /**
      * Load the configuration from the JSON file.
      */
     public void loadFromJson() {
-        try (FileReader fileReader = new FileReader("config.json")) {
+        try {
+            FileReader fileReader;
+            if(os.startsWith("Mac")) fileReader = new FileReader(macConfigPath);
+                else fileReader = new FileReader(otherConfigPath);
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();

@@ -87,6 +87,7 @@ public class Config implements Serializable {
                 if(!directory.exists()) directory.mkdir();
                 FileWriter fileWriter = new FileWriter(macConfigPath);
                 fileWriter.write(jsonObject.toString());
+                fileWriter.flush();
             } catch (Exception e) {
                 throw new RuntimeException();
             }

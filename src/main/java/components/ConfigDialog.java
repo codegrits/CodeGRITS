@@ -113,6 +113,7 @@ public class ConfigDialog extends DialogWrapper {
     private void loadConfig() {
         Config config = new Config();
         if (!config.configExists()) {
+            addLabelArea(true);
             return;
         }
         config.loadFromJson();

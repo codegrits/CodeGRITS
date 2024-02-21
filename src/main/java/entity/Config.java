@@ -6,7 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import org.bytedeco.javacv.FrameFilter;
+import utils.OSDetector;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Serializable;
@@ -22,9 +24,8 @@ public class Config implements Serializable {
     private String pythonInterpreter;
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
-    private static String os = System.getProperty("os.name");
     //TODO: change mac path
-    private static final String macConfigPath = System.getProperty("user.home")+"/codegrits_config.json";
+    private static final String macConfigPath = System.getProperty("user.home")+"/Library/CodeGRITS/codegrits_config.json";
     private static final String otherConfigPath = "codegrits_config.json";
 
     /**
@@ -55,7 +56,7 @@ public class Config implements Serializable {
     public boolean configExists() {
         FileReader fileReader;
         try{
-            if(os.startsWith("Mac")){
+            if(OSDetector.isMac()){
                 fileReader = new FileReader(macConfigPath);
             } else{
                 fileReader = new FileReader(otherConfigPath);
@@ -80,8 +81,11 @@ public class Config implements Serializable {
         jsonObject.addProperty("dataOutputPath", dataOutputPath);
         jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
 
-        if(os.startsWith("Mac")){
-            try (FileWriter fileWriter = new FileWriter(macConfigPath)){
+        if(OSDetector.isMac()){
+            try {
+                File directory = new File(System.getProperty("user.home")+"/Library/CodeGRITS/");
+                if(!directory.exists()) directory.mkdir();
+                FileWriter fileWriter = new FileWriter(macConfigPath);
                 fileWriter.write(jsonObject.toString());
             } catch (Exception e) {
                 throw new RuntimeException();
@@ -103,7 +107,7 @@ public class Config implements Serializable {
     public void loadFromJson() {
         try {
             FileReader fileReader;
-            if(os.startsWith("Mac")) fileReader = new FileReader(macConfigPath);
+            if(OSDetector.isMac()) fileReader = new FileReader(macConfigPath);
                 else fileReader = new FileReader(otherConfigPath);
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
@@ -113,7 +117,7 @@ public class Config implements Serializable {
             dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
             eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
             String labelsString = jsonObject.get("labels").getAsString().substring(1, jsonObject.get("labels").getAsString().length() - 1);
-            if (labelsString.equals("")) {
+            if (labelsString.isEmpty()) {
                 labels = List.of();
             } else labels = List.of(labelsString.split(", "));
             checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {

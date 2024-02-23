@@ -19,7 +19,6 @@ public class AvailabilityChecker {
      */
     public static boolean checkPythonEnvironment(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
-                import tobii_research as tr
                 from screeninfo import get_monitors
                 import pyautogui
                 import time

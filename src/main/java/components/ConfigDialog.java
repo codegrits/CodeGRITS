@@ -259,6 +259,7 @@ public class ConfigDialog extends DialogWrapper {
                     protected void textChanged(@NotNull DocumentEvent e) {
                         try {
                             //TODO: what if using mac/unix/anaconda
+                            System.out.println(getPythonInterpreter());
                             if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
                                 pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
                             } else {

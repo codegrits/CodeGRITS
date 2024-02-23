@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="fix filewriter not flushing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +51,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="KubernetesApiProvider">{
@@ -90,7 +92,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mac&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/junwenan/Projects/CodeGRITS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -239,7 +241,11 @@
       <workItem from="1708331888699" duration="152000" />
       <workItem from="1708332050810" duration="259000" />
       <workItem from="1708332318816" duration="1428000" />
-      <workItem from="1708334179166" duration="725000" />
+      <workItem from="1708334179166" duration="1376000" />
+      <workItem from="1708335566184" duration="2565000" />
+      <workItem from="1708496259631" duration="3956000" />
+      <workItem from="1708502116001" duration="3852000" />
+      <workItem from="1708570958726" duration="4747000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />
@@ -289,7 +295,31 @@
       <option name="project" value="LOCAL" />
       <updated>1698547994025</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changed config file name, save position according to os">
+      <option name="closed" value="true" />
+      <created>1708335239938</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708335239938</updated>
+    </task>
+    <task id="LOCAL-00008" summary="save config to /Library/CodeGRITS on mac, fix null label on config initialization">
+      <option name="closed" value="true" />
+      <created>1708504280014</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708504280014</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix filewriter not flushing">
+      <option name="closed" value="true" />
+      <created>1708506302664</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708506302664</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +347,9 @@
     <MESSAGE value="update retype yml" />
     <MESSAGE value="update action" />
     <MESSAGE value="refresh" />
-    <option name="LAST_COMMIT_MESSAGE" value="refresh" />
+    <MESSAGE value="changed config file name, save position according to os" />
+    <MESSAGE value="save config to /Library/CodeGRITS on mac, fix null label on config initialization" />
+    <MESSAGE value="fix filewriter not flushing" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix filewriter not flushing" />
   </component>
 </project>

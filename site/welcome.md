@@ -12,13 +12,6 @@ We would present CodeGRITS at
 Welcome to join us and discuss with us about it!
 !!!
 
-!!!warning 🚨 macOS Support 🚨
-CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS. 
-There may be some unnoticed bugs on macOS. We have created a 
-[`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues. 
-If you encounter additional issues on macOS, please feel free to report them to us.
-!!!
-
 CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem. It's a plugin developed by
 the [SaNDwich Lab](https://toby.li/) and is specially designed for empirical software engineering researchers.
 CodeGRITS is built on top
@@ -53,6 +46,13 @@ tailored assistance based on your specific OS and JetBrains IDE environment.
   PyCharm, WebStorm, etc.
 - [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple
   programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
+
+!!!warning 🚨 macOS Support 🚨
+CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS.
+There may be some unnoticed bugs on macOS. We have created a
+[`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues.
+If you encounter additional issues on macOS, please feel free to report them to us.
+!!!
 
 ## Key Features
 

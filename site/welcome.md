@@ -8,8 +8,15 @@ order: 100
 
 !!! :zap: NEWS! :zap:
 We would present CodeGRITS at
-[ICSE 2024 Demo Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations).
+[ICSE 2024 Demo Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations?#program).
 Welcome to join us and discuss with us about it!
+!!!
+
+!!!warning 🚨 macOS Support 🚨
+CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS. 
+There may be some unnoticed bugs on macOS. We have created a 
+[`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues. 
+If you encounter additional issues on macOS, please feel free to report them to us.
 !!!
 
 CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem. It's a plugin developed by

@@ -27,6 +27,8 @@ We provide an example project [DataStreamReceiver](https://github.com/codegrits/
 - [x] CodeGRITS provides cross-platform support for Windows, macOS, and Linux, and is expected to be compatible with the entire family of JetBrains IDEs, including IntelliJ IDEA, PyCharm, WebStorm, etc.
 - [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
 
+CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS. There may be some unnoticed bugs on macOS. We have created a [`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues. If you encounter additional issues on macOS, please feel free to report them to us.
+
 ## Usage Guide
 
 Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details. The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html).

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.762978242397">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.764995187358">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.762978242397" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.764995187358" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.762978242397" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.764995187358" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.762978242397" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.762978242397" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.764995187358" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.764995187358" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -331,7 +331,8 @@ screeninfo==0.8</code></pre>
 </doc-codeblock></div>
 <p>Refer to <a href="https://developer.tobiipro.com/tobiiprosdk/platform-and-language.html">Supported platforms and languages</a>,
 Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating systems, Tobii Pro SDK supports Windows
-10 and 11 (64-bit), macOS 10.15 and 12, and Ubuntu 20.04 LTS.</p>
+10 and 11 (64-bit), macOS 10.15 and 12, and Ubuntu 20.04 LTS. Note that unsupported operating systems may cause
+installation issues, especially the <code v-pre>tobii-research</code> package.</p>
 <doc-anchor-target id="installation">
     <h2>
         <doc-anchor-trigger class="header-anchor-trigger" to="#installation">#</doc-anchor-trigger>
@@ -356,6 +357,7 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
 <thead>
 <tr>
 <th style="text-align: center;">JetBrains IDEs</th>
+<th style="text-align: center;">Operating System</th>
 <th style="text-align: center;">Version</th>
 <th style="text-align: center;">Download Link</th>
 </tr>
@@ -363,17 +365,27 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
 <tbody>
 <tr>
 <td style="text-align: center;">IntelliJ IDEA</td>
+<td style="text-align: center;">Windows &amp; Linux</td>
 <td style="text-align: center;">2022.2 - 2023.3</td>
 <td style="text-align: center;"><a href="https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing">Download</a></td>
 </tr>
 <tr>
 <td style="text-align: center;">PyCharm</td>
+<td style="text-align: center;">Windows &amp; Linux</td>
 <td style="text-align: center;">2022.2 - 2023.3</td>
 <td style="text-align: center;"><a href="https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link">Download</a></td>
+</tr>
+<tr>
+<td style="text-align: center;">IntelliJ IDEA</td>
+<td style="text-align: center;">macOS</td>
+<td style="text-align: center;">2022.2 - 2023.3</td>
+<td style="text-align: center;"><a href="https://drive.google.com/file/d/1yQ04RCCeA1si6kgZnxKRtrQalHL2x2xh/view?usp=drive_link">Download</a></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Note that the macOS version of the plugin is not fully tested as Windows and Linux versions, and some minor issues may
+exist.</p>
 <doc-anchor-target id="build-from-source">
     <h4>
         <doc-anchor-trigger class="header-anchor-trigger" to="#build-from-source">#</doc-anchor-trigger>
@@ -382,7 +394,8 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
 </doc-anchor-target>
 <p>We also encourage you to build the plugin from the source code, especially for the IDEs that are not listed above.</p>
 <ol>
-<li>Clone the <a href="https://github.com/codegrits/CodeGRITS">repository</a> to your local machine.</li>
+<li>Clone the <a href="https://github.com/codegrits/CodeGRITS">repository</a> to your local machine. Note that the <code v-pre>main</code> branch
+is the stable version for Windows and Linux, and the <code v-pre>mac</code> branch is the unstable version for macOS.</li>
 <li>Set the IDE type and version in <code v-pre>build.gradle.kts</code> file. For example, if you want to build the plugin for IntelliJ
 Community Edition between 2022.2 and
 2023.3, you should set the following in <code v-pre>build.gradle.kts</code> file.

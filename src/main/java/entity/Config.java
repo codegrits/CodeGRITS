@@ -25,7 +25,7 @@ public class Config implements Serializable {
     private String dataOutputPath;
     private Integer eyeTrackerDevice;
     //TODO: change mac path
-    private static final String macConfigPath = System.getProperty("user.home")+"/Library/CodeGRITS/codegrits_config.json";
+    private static final String macConfigPath = System.getProperty("user.home") + "/Library/CodeGRITS/codegrits_config.json";
     private static final String otherConfigPath = "codegrits_config.json";
 
     /**
@@ -55,14 +55,14 @@ public class Config implements Serializable {
 
     public boolean configExists() {
         FileReader fileReader;
-        try{
-            if(OSDetector.isMac()){
+        try {
+            if (OSDetector.isMac()) {
                 fileReader = new FileReader(macConfigPath);
-            } else{
+            } else {
                 fileReader = new FileReader(otherConfigPath);
             }
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
@@ -81,18 +81,17 @@ public class Config implements Serializable {
         jsonObject.addProperty("dataOutputPath", dataOutputPath);
         jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
 
-        if(OSDetector.isMac()){
+        if (OSDetector.isMac()) {
             try {
-                File directory = new File(System.getProperty("user.home")+"/Library/CodeGRITS/");
-                if(!directory.exists()) directory.mkdir();
+                File directory = new File(System.getProperty("user.home") + "/Library/CodeGRITS/");
+                if (!directory.exists()) directory.mkdir();
                 FileWriter fileWriter = new FileWriter(macConfigPath);
                 fileWriter.write(jsonObject.toString());
                 fileWriter.flush();
             } catch (Exception e) {
                 throw new RuntimeException();
             }
-        }
-        else {
+        } else {
             try (FileWriter fileWriter = new FileWriter(otherConfigPath)) {
                 fileWriter.write(jsonObject.toString());
             } catch (Exception e) {
@@ -108,8 +107,8 @@ public class Config implements Serializable {
     public void loadFromJson() {
         try {
             FileReader fileReader;
-            if(OSDetector.isMac()) fileReader = new FileReader(macConfigPath);
-                else fileReader = new FileReader(otherConfigPath);
+            if (OSDetector.isMac()) fileReader = new FileReader(macConfigPath);
+            else fileReader = new FileReader(otherConfigPath);
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();

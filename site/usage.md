@@ -57,7 +57,8 @@ screeninfo==0.8
 
 Refer to [Supported platforms and languages](https://developer.tobiipro.com/tobiiprosdk/platform-and-language.html),
 Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating systems, Tobii Pro SDK supports Windows
-10 and 11 (64-bit), macOS 10.15 and 12, and Ubuntu 20.04 LTS.
+10 and 11 (64-bit), macOS 10.15 and 12, and Ubuntu 20.04 LTS. Note that unsupported operating systems may cause
+installation issues, especially the `tobii-research` package.
 
 ## Installation
 
@@ -68,16 +69,21 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
 We provide the direct download link of the plugin zip file for the following JetBrains IDEs for convenience.
 
 {.compact}
-| JetBrains IDEs | Version | Download Link |
-|:--------------:|:---------------:|:-------------:|
-| IntelliJ IDEA | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing)  |
-| PyCharm | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link)  |
+| JetBrains IDEs | Operating System | Version | Download Link |
+|:--------------:|:----------------:|:-------:|:-------------:|
+| IntelliJ IDEA | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing)  |
+| PyCharm | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link)  |
+| IntelliJ IDEA | macOS | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1yQ04RCCeA1si6kgZnxKRtrQalHL2x2xh/view?usp=drive_link)  |
+
+Note that the macOS version of the plugin is not fully tested as Windows and Linux versions, and some minor issues may
+exist.
 
 #### Build from Source
 
 We also encourage you to build the plugin from the source code, especially for the IDEs that are not listed above.
 
-1. Clone the [repository](https://github.com/codegrits/CodeGRITS) to your local machine.
+1. Clone the [repository](https://github.com/codegrits/CodeGRITS) to your local machine. Note that the `main` branch
+   is the stable version for Windows and Linux, and the `mac` branch is the unstable version for macOS.
 2. Set the IDE type and version in `build.gradle.kts` file. For example, if you want to build the plugin for IntelliJ
    Community Edition between 2022.2 and
    2023.3, you should set the following in `build.gradle.kts` file.

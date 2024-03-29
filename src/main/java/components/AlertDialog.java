@@ -38,6 +38,7 @@ public class AlertDialog extends DialogWrapper {
 
     /**
      * Create the OK button.
+     *
      * @return The OK button.
      */
     @Override
@@ -47,6 +48,7 @@ public class AlertDialog extends DialogWrapper {
 
     /**
      * Create the center panel of the dialog.
+     *
      * @return The center panel of the dialog.
      */
     @Override

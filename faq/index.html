@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/CodeGRITS">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.764995187358">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.767222795539">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,11 +32,11 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../favicon.png" rel="icon">
-    <link href="../resources/css/retype.css?v=3.5.0.764995187358" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.767222795539" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.764995187358" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.767222795539" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.764995187358" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.767222795539" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -307,6 +307,23 @@ only perform upward traversal of the AST of the first gaze and record the hierar
 as <code v-pre>same</code>. This approach significantly reduces storage space. In a previous debugging study, we set the eye-tracking
 device&#x27;s sample frequency to 60Hz, and during the 20-minute experiment, the eye-tracking data amounted to only about
 40MB.</p>
+<doc-anchor-target id="q7-which-eye-gazes-can-be-analyzed-and-can-gazes-on-the-ui-be-understood">
+    <h4>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#q7-which-eye-gazes-can-be-analyzed-and-can-gazes-on-the-ui-be-understood">#</doc-anchor-trigger>
+        <span>Q7. Which eye gazes can be analyzed, and can gazes on the UI be understood?</span>
+    </h4>
+</doc-anchor-target>
+<p>In CodeGRITS, we only analyze gazes within the code editor. For example, in the following figure, only gazes within the
+red rectangle are mapped to the source code tokens and performed the upward traversal of the AST. For gazes outside the
+code editor, such as those on the file explorer, menubar, tool window, console, etc., we only record their raw
+information and add a remark <code v-pre>Fail | Out of Text Editor</code>. CodeGRITS cannot understand the semantics of gazes on the UI.</p>
+<div style="text-align: center;">
+    <img src="../static/range.png" style="max-width: 100%; width:900px; height: auto;"><br><br>
+</div>
+<p>However, if certain UI elements within the editor are triggered, such as the list for auto-completion or the inline
+definition display, CodeGRITS mistakenly interprets the gaze as being directed at the code content below the UI (when it
+should actually be on the UI). We have not yet found an appropriate method to resolve this issue, which may lead to
+inaccuracies in some gaze analyses.</p>
 
                                 
                                 <!-- Required only on API pages -->

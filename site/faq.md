@@ -46,3 +46,19 @@ only perform upward traversal of the AST of the first gaze and record the hierar
 as `same`. This approach significantly reduces storage space. In a previous debugging study, we set the eye-tracking
 device's sample frequency to 60Hz, and during the 20-minute experiment, the eye-tracking data amounted to only about
 40MB.
+
+#### Q7. Which eye gazes can be analyzed, and can gazes on the UI be understood?
+
+In CodeGRITS, we only analyze gazes within the code editor. For example, in the following figure, only gazes within the
+red rectangle are mapped to the source code tokens and performed the upward traversal of the AST. For gazes outside the
+code editor, such as those on the file explorer, menubar, tool window, console, etc., we only record their raw
+information and add a remark `Fail | Out of Text Editor`. CodeGRITS cannot understand the semantics of gazes on the UI.
+
+<div style="text-align: center;">
+    <img src="../static/range.png" style="max-width: 100%; width:900px; height: auto;"><br><br>
+</div>
+
+However, if certain UI elements within the editor are triggered, such as the list for auto-completion or the inline
+definition display, CodeGRITS mistakenly interprets the gaze as being directed at the code content below the UI (when it
+should actually be on the UI). We have not yet found an appropriate method to resolve this issue, which may lead to
+inaccuracies in some gaze analyses.

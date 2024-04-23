@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change afterPath="$PROJECT_DIR$/site/static/range.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/usage.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/components/AlertDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/AlertDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/faq.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +106,7 @@
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.OSDetector">
+  <component name="RunManager" selected="Gradle.Run Plugin">
     <configuration name="OSDetector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="utils.OSDetector" />
       <module name="CodeVision.main" />
@@ -222,6 +223,14 @@
       <workItem from="1708501974062" duration="1403000" />
       <workItem from="1708530095278" duration="747000" />
       <workItem from="1709650711535" duration="3829000" />
+      <workItem from="1712860759899" duration="1728000" />
+      <workItem from="1713036600458" duration="630000" />
+      <workItem from="1713314696131" duration="186000" />
+      <workItem from="1713491206741" duration="861000" />
+      <workItem from="1713519883716" duration="306000" />
+      <workItem from="1713537987617" duration="49000" />
+      <workItem from="1713630985513" duration="506000" />
+      <workItem from="1713904380363" duration="3110000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

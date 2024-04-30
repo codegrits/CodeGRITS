@@ -10,7 +10,7 @@
 
 The [website](https://codegrits.github.io/CodeGRITS/)'s source code is stored in the `./site` folder of this repository and deployed via GitHub Pages. The [JavaDoc](https://codegrits.github.io/CodeGRITS/docs/index.html) documentation is located in the `./site/docs` folder of this repository. They are archived together with the source code in the Software Heritage for long-term preservation.
 
-The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers, especially those related to eye gaze. CodeGRITS also provides a [real-time data API](developer.md) for future plugin developers and researchers to design context-aware programming support tools.
+The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers, especially those related to eye gaze. CodeGRITS also provides a [real-time data API](site/developer.md) for future plugin developers and researchers to design context-aware programming support tools.
 
 We provide an example project [DataStreamReceiver](https://github.com/codegrits/DataStreamReceiver) that builds on top of the real-time data API. It is designed to receive the IDE and eye tracking data and directly visualize them in two separate windows.
 
@@ -20,7 +20,7 @@ We provide an example project [DataStreamReceiver](https://github.com/codegrits/
 - :eye: **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data from [Tobii eye-tracking devices](https://www.tobii.com/), and maps them to corresponding source code elements.
 - :computer: **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
 - 🔨 **Research Toolkit**: CodeGRITS provides a set of extra features for empirical SE researchers, including dynamic configuration, activity labeling, real-time data API, etc.
-- 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](data.md) for more details.
+- 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](site/data.md) for more details.
 
 ### Cross-platform and Multilingual Support
 

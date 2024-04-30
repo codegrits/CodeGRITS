@@ -27,15 +27,15 @@ for eye gaze. You could also uncheck the `Eye Tracking` option in the configurat
 
 CodeGRITS is expected to be compatible with the entire family of [JetBrains IDEs](https://www.jetbrains.com/), including
 IntelliJ IDEA, PyCharm, Clion, etc. Due to the limited time, we did not specifically test CodeGRITS thoroughly on all
-of them. We provide a list of JetBrains IDEs that we have tested CodeGRITS on.
+of them. We provide a list of JetBrains IDEs that we have tested CodeGRITS on. We also provide links to the download pages of older versions of the IDEs. The Version and Build Numbers are available on the right side of each page.
 
 {.compact}
-| JetBrains IDEs | Version |
-|:--------------:|:---------------:|
-| IntelliJ IDEA | 2022.2 - 2023.3 |
-| PyCharm | 2022.2 - 2023.3 |
-| Clion | 2022.2 - 2023.3 |
-| PhpStorm | 2022.2 - 2023.3 |
+| JetBrains IDEs | Version | Download Page |
+|:--------------:|:---------------:|:---------------:|
+| IntelliJ IDEA | 2022.2 - 2023.3 | [IntelliJ IDEA Versions](https://www.jetbrains.com/idea/download/other.html) |
+| PyCharm | 2022.2 - 2023.3 | [PyCharm Versions](https://www.jetbrains.com/pycharm/download/other.html) |
+| Clion | 2022.2 - 2023.3 | [Clion Versions](https://www.jetbrains.com/clion/download/other.html) |
+| PhpStorm | 2022.2 - 2023.3 | [PhpStorm Versions](https://www.jetbrains.com/phpstorm/download/other.html) |
 
 Since CodeGRITS is still in its early developmental stage, even though we believe it would work well, some minor
 issues may still exist. If you encounter any of them, please feel free to contact us or create
@@ -69,7 +69,7 @@ installation issues, especially the `tobii-research` package.
 We provide the direct download link of the plugin zip file for the following JetBrains IDEs for convenience.
 
 {.compact}
-| JetBrains IDEs | Operating System | Version | Download Link |
+| JetBrains IDEs | Operating System | Version | Download Page |
 |:--------------:|:----------------:|:-------:|:-------------:|
 | IntelliJ IDEA | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing)  |
 | PyCharm | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link)  |
@@ -102,13 +102,14 @@ We also encourage you to build the plugin from the source code, especially for t
    the [Gradle IntelliJ Plugin - Configuration](https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html#configuration)
    and [Plugins Targeting IntelliJ Platform-Based IDEs](https://plugins.jetbrains.com/docs/intellij/dev-alternate-products.html)
    for more details.
+   Refer to :gear: -> **About** to find the Build Number of an installed IDE.
 3. Open the command line and run `./gradlew build` in the root folder to build the plugin.
 4. Find the plugin zip file in the `build/distributions` folder.
 
 ### Install the Plugin
 
 1. Open the JetBrains IDE, click `File` - `Settings` - `Plugins` - `Install Plugin from Disk...` to install the plugin
-   zip file.
+   zip file. Select the zip file directly, **do not** unzip.
 2. Restart IntelliJ IDEA to enable the plugin, then all CodeGRITS features are available in the `Tools` dropdown menu,
    including `Start/Stop Tracking`, `Pause/Resume Tracking`, and `Configuration`.
 

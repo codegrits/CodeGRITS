@@ -105,9 +105,7 @@ public class ConfigDialog extends DialogWrapper {
                 freqCombo.addItem(120.0);
             }
         }
-        if (new File("config.json").exists()) {
-            loadConfig();
-        }
+        loadConfig();
     }
 
     /**

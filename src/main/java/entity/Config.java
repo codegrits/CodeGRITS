@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.intellij.openapi.application.PathManager;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -48,7 +49,7 @@ public class Config implements Serializable {
     }
 
     public boolean configExists() {
-        try (FileReader fileReader = new FileReader("config.json")) {
+        try (FileReader fileReader = new FileReader(PathManager.getPluginsPath() + "/config.json")) {
             return true;
         } catch (Exception e) {
             return false;
@@ -68,8 +69,10 @@ public class Config implements Serializable {
         jsonObject.addProperty("dataOutputPath", dataOutputPath);
         jsonObject.addProperty("eyeTrackerDevice", eyeTrackerDevice);
 
-        try (FileWriter fileWriter = new FileWriter("config.json")) {
-            fileWriter.write(jsonObject.toString());
+        Gson gson = new Gson();
+        try (FileWriter fileWriter = new FileWriter(PathManager.getPluginsPath() + "/config.json")) {
+            System.out.println(PathManager.getPluginsPath() + "/config.json");
+            fileWriter.write(gson.toJson(jsonObject));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -79,7 +82,7 @@ public class Config implements Serializable {
      * Load the configuration from the JSON file.
      */
     public void loadFromJson() {
-        try (FileReader fileReader = new FileReader("config.json")) {
+        try (FileReader fileReader = new FileReader(PathManager.getPluginsPath() + "/config.json")) {
             Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseReader(fileReader);
             JsonObject jsonObject = jsonElement.getAsJsonObject();

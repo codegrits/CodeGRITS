@@ -40,8 +40,4 @@ public class AddLabelAction extends AnAction {
         AddLabelAction.isEnabled = isEnabled;
     }
 
-    @Override
-    public @NotNull String getTemplateText() {
-        return description;
-    }
 }

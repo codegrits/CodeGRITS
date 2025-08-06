@@ -49,7 +49,7 @@ public class Config implements Serializable {
     }
 
     public boolean configExists() {
-        try (FileReader fileReader = new FileReader(PathManager.getPluginsPath() + "/config.json")) {
+        try (FileReader ignored = new FileReader(PathManager.getPluginsPath() + "/config.json")) {
             return true;
         } catch (Exception e) {
             return false;
@@ -91,7 +91,7 @@ public class Config implements Serializable {
             dataOutputPath = jsonObject.get("dataOutputPath").getAsString();
             eyeTrackerDevice = jsonObject.get("eyeTrackerDevice").getAsInt();
             String labelsString = jsonObject.get("labels").getAsString().substring(1, jsonObject.get("labels").getAsString().length() - 1);
-            if (labelsString.equals("")) {
+            if (labelsString.isEmpty()) {
                 labels = List.of();
             } else labels = List.of(labelsString.split(", "));
             checkBoxes = gson.fromJson(jsonObject.get("checkBoxes").getAsString(), new TypeToken<List<Boolean>>() {

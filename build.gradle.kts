@@ -4,8 +4,8 @@ plugins {
     id("org.jetbrains.intellij") version "1.13.3"
 }
 
-group = "com.nd"
-version = "0.2.0"
+group = "io.github.codegrits"
+version = "0.3.0"
 
 repositories {
     mavenCentral()
@@ -23,11 +23,18 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    version.set("2023.1.4")
+    localPath.set( // Example paths
+        if (System.getProperty("os.name").lowercase().contains("windows")) {
+            "D:/Program Files/JetBrains/IntelliJ IDEA 2024.3.4.1"
+        } else {
+            "/Applications/PyCharm.app/Contents"
+        }
+    )
+//    version.set("2023.1.4")
 
-    type.set("IC") // IntelliJ Community Edition
+//    type.set("IC") // IntelliJ Community Edition
 //    type.set("IU") // IntelliJ Ultimate Edition
-    plugins.set(listOf("com.intellij.java"))
+//    plugins.set(listOf("com.intellij.java"))
 
 //    type.set("PC") // PyCharm Community Edition
 //    type.set("PY") // PyCharm Professional Edition
@@ -36,10 +43,6 @@ intellij {
 //    type.set("CL") // CLion
 
 //    type.set("PS") // PhpStorm
-
-//    Fixme: Android Studio
-//    type.set("IC")
-//    plugins.set(listOf("android"))
 }
 
 tasks {
@@ -54,7 +57,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("222") // 2022.2 NOTE Java 17 is now required
-        untilBuild.set("233.*")
+        untilBuild.set("252.*")
     }
 
     signPlugin {

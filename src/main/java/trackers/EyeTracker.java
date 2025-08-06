@@ -430,8 +430,8 @@ public class EyeTracker implements Disposable {
                 import time
                 import sys
                 import math
-                            
-                            
+                
+                
                 def gaze_data_callback(gaze_data):
                     message = '{}; {}, {}, {}, {}, {}; {}, {}, {}, {}, {}'.format(
                         round(time.time() * 1000),
@@ -448,7 +448,7 @@ public class EyeTracker implements Disposable {
                     )
                     print(message)
                     sys.stdout.flush()
-                            
+                
                 found_eyetrackers = tr.find_all_eyetrackers()
                 my_eyetracker = found_eyetrackers[0]
                 my_eyetracker.set_gaze_output_frequency(freq)
@@ -469,11 +469,11 @@ public class EyeTracker implements Disposable {
                 import time
                 import sys
                 import math
-                            
+                
                 width, height = get_monitors()[0].width, get_monitors()[0].height
                 start_time = time.time()
                 last_time = start_time
-                            
+                
                 while time.time() - start_time <= math.inf:
                     current_time = time.time()
                     if current_time - last_time > 1 / freq:

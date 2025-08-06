@@ -35,8 +35,8 @@ public class ConfigDialog extends DialogWrapper {
     private final JPanel panel = new JPanel();
     private static List<JTextField> labelAreas = new ArrayList<>();
 
-    private static final TextFieldWithBrowseButton pythonInterpreterTextField = new TextFieldWithBrowseButton();
-    private static final TextFieldWithBrowseButton dataOutputTextField = new TextFieldWithBrowseButton();
+    private static TextFieldWithBrowseButton pythonInterpreterTextField;
+    private static TextFieldWithBrowseButton dataOutputTextField;
 
     private final JComboBox<Double> freqCombo = new ComboBox<>();
     private final JComboBox<String> deviceCombo = new ComboBox<>(new String[]{"Mouse"});
@@ -54,6 +54,9 @@ public class ConfigDialog extends DialogWrapper {
      */
     public ConfigDialog(Project project) throws IOException, InterruptedException {
         super(true);
+        pythonInterpreterTextField = new TextFieldWithBrowseButton();
+        dataOutputTextField = new TextFieldWithBrowseButton();
+
         init();
         setTitle("CodeGRITS Configuration");
         setSize(500, 500);
@@ -68,7 +71,7 @@ public class ConfigDialog extends DialogWrapper {
             }
             pythonInterpreterTextField.setText(config.getPythonInterpreter());
         }
-        if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
+        if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().isEmpty() || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
 
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
@@ -259,7 +262,7 @@ public class ConfigDialog extends DialogWrapper {
                     protected void textChanged(@NotNull DocumentEvent e) {
                         try {
                             //TODO: what if using mac/unix/anaconda
-                            if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().equals("") || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
+                            if (getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().isEmpty() || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
                                 pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
                             } else {
                                 pythonEnvironment = false;
@@ -412,7 +415,7 @@ public class ConfigDialog extends DialogWrapper {
             Matcher lettersMatcher = lettersPattern.matcher(textField.getText());
             Matcher punctuationMatcher = punctuationPattern.matcher(textField.getText());
             Set<String> invalidChars = new HashSet<>();
-            if (spaceMatcher.matches() || text.equals("")) {
+            if (spaceMatcher.matches() || text.isEmpty()) {
                 button.setEnabled(false);
                 return new ValidationInfo("Label cannot be empty", textField);
             } else {
@@ -423,8 +426,8 @@ public class ConfigDialog extends DialogWrapper {
                         button.setEnabled(false);
                     }
                 }
-                if (invalidChars.size() > 0) {
-                    return new ValidationInfo("Label cannot contain " + invalidChars.toString(), textField);
+                if (!invalidChars.isEmpty()) {
+                    return new ValidationInfo("Label cannot contain " + invalidChars, textField);
                 } else {
                     button.setEnabled(true);
                     return null;
@@ -521,7 +524,7 @@ public class ConfigDialog extends DialogWrapper {
         if (ProjectManager.getInstance().getOpenProjects().length == 0) {
             return "python";
         }
-        if (pythonInterpreterTextField.getText().equals("")
+        if (pythonInterpreterTextField.getText().isEmpty()
                 || pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)) {
             return "python";
         }

@@ -25,7 +25,7 @@ public class AvailabilityChecker {
                 import time
                 import sys
                 import math
-                                
+                
                 print('OK')
                 """;
 
@@ -42,7 +42,7 @@ public class AvailabilityChecker {
     public static boolean checkEyeTracker(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
                 import tobii_research as tr
-                                
+                
                 found_eyetrackers = tr.find_all_eyetrackers()
                 if found_eyetrackers == ():
                     print('Not Found')
@@ -63,7 +63,7 @@ public class AvailabilityChecker {
     public static String getEyeTrackerName(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
                 import tobii_research as tr
-                                
+                
                 found_eyetrackers = tr.find_all_eyetrackers()
                 if found_eyetrackers == ():
                     print('Not Found')
@@ -83,7 +83,7 @@ public class AvailabilityChecker {
     public static List<String> getFrequencies(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
                 import tobii_research as tr
-                                
+                
                 found_eyetrackers = tr.find_all_eyetrackers()
                 if found_eyetrackers == ():
                     print('Not Found')

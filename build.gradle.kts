@@ -23,26 +23,15 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    localPath.set( // Example paths
-        if (System.getProperty("os.name").lowercase().contains("windows")) {
-            "D:/Program Files/JetBrains/IntelliJ IDEA 2024.3.4.1"
-        } else {
-            "/Applications/PyCharm.app/Contents"
-        }
-    )
-//    version.set("2023.1.4")
-
-//    type.set("IC") // IntelliJ Community Edition
-//    type.set("IU") // IntelliJ Ultimate Edition
-//    plugins.set(listOf("com.intellij.java"))
-
-//    type.set("PC") // PyCharm Community Edition
-//    type.set("PY") // PyCharm Professional Edition
-//    plugins.set(listOf("PythonCore"))
-
-//    type.set("CL") // CLion
-
-//    type.set("PS") // PhpStorm
+    version.set("2022.2")
+    type.set("IC") // use IntelliJ Community base, it supports all IDEs
+//    localPath.set( // Example paths for local development
+//        if (System.getProperty("os.name").lowercase().contains("windows")) {
+//            "D:/Program Files/JetBrains/IntelliJ IDEA 2024.3.4.1"
+//        } else {
+//            "/Applications/PyCharm.app/Contents"
+//        }
+//    )
 }
 
 tasks {

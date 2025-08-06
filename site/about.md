@@ -17,6 +17,10 @@ The authors of CodeGRITS are [Ningzhi Tang](https://nztang.com/) (equal contribu
 and [Toby Jia-Jun Li](https://toby.li/). Technical support questions, bug reports, and feature requests are best started
 as a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
 
+CodeGRITS has won the **Artifact Available** and **Artifact Evaluated** badges at
+[ICSE 2024](https://conf.researchr.org/details/icse-2024/icse-2024-artifact-evaluation/49/CodeGRITS-A-Research-Toolkit-for-Developer-Behavior-and-Eye-Tracking-in-IDE)
+for its commitment to reproducibility! Please check its details in the [ICSE24-AE](https://github.com/codegrits/ICSE24-AE) repository.
+
 We prepared a video demonstration of CodeGRITS for ICSE 2024.
 
 [!embed](https://www.youtube.com/embed/d-YsJfW2NMI)

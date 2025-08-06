@@ -6,22 +6,22 @@ order: 100
 
 # Welcome to CodeGRITS
 
-!!! :zap: NEWS! :zap:
-We would present CodeGRITS at
-[ICSE 2024 Demo Track](https://conf.researchr.org/track/icse-2024/icse-2024-demonstrations?#program).
-Welcome to join us and discuss with us about it!
+!!! 🏆 ICSE 2024 Artifact Badges Awarded! 🔥
+CodeGRITS has received the **Artifact Available** and **Artifact Evaluated** badges for its commitment to reproducibility!
+
+💡 If you find CodeGRITS useful, please consider giving us a ⭐ on [GitHub](https://github.com/codegrits/CodeGRITS) — it helps others discover the project!
 !!!
 
 CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem. It's a plugin developed by
-the [SaNDwich Lab](https://toby.li/) and is specially designed for empirical software engineering researchers.
+the [SaNDwich Lab](https://toby.li/) and is specifically designed for empirical software engineering researchers.
 CodeGRITS is built on top
-of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with wide compatibility with the
+of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with broad compatibility with the
 entire family of JetBrains IDEs and [Tobii eye-tracking devices](https://www.tobii.com/),
 to track developers’ IDE interactions and eye gaze data. The source code is available
 on [GitHub](https://github.com/codegrits/CodeGRITS) with [Javadoc](docs/index.html) documentation.
 
 <div style="text-align: center;">
-    <img src="static/visualization.png" style="width: 100%; max-width: 900px; height: auto;"><br><br>
+    <img src="static/visualization-small.png" style="width: 100%; max-width: 900px; height: auto;"><br><br>
 </div>
 
 The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers,
@@ -30,13 +30,11 @@ for future plugin developers and researchers to design context-aware programming
 
 !!!
 CodeGRITS is still in its developmental stage as a research tool. Our goal is to make it mature enough and beneficial
-for the community, particularly for those involved in empirical software engineering and eye tracking research. We
-encourage the community to contribute through [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues) for any
-suggestions or issues, aiding in its improvement.
+for the community. We encourage you to contribute through [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues) for any
+suggestions or problems, aiding in its improvement.
 
-For any inquiries, please email us at ntang@nd.edu or jan2@nd.edu. If you're interested in
-using CodeGRITS in your research, don't hesitate to email us for setup support. We are delighted to provide
-tailored assistance based on your specific OS and JetBrains IDE environment.
+For any inquiries, please email us at ntang@nd.edu or ningzhitang2001@gmail.com. If you're interested in
+using CodeGRITS in your research, don't hesitate to email us for setup support.
 !!!
 
 ### Cross-platform and Multilingual Support

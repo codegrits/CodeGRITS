@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/actions/AddLabelAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/components/ConfigDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trackers/EyeTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AvailabilityChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/about.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/changelog.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/changelog.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/developer.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/developer.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/faq.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/static/paper.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/site/static/paper.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/usage.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/usage.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/welcome.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +62,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "TTangNingzhi"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/codegrits/CodeGRITS",
+    "accountId": "4bf15fbb-6e9c-4a0d-a654-3143e249ccba"
+  }
+}]]></component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -71,10 +87,10 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2WpFJNFsxQtu45epQgIBTfCcwl7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -88,12 +104,13 @@
     "JavaVariableFindUsagesOptions.isSearchForAccessors": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/IdeaProjects/CodeGRITS",
+    "last_opened_file_path": "/Users/ningzhi_tang/Documents/VSCodeProjects/CodeGRITS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -115,6 +132,7 @@
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/site/static" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs\imgs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\docs" />
       <recent name="C:\Users\Lenovo\IdeaProjects\CodeGRITS\imgs" />
@@ -294,6 +312,7 @@
       <workItem from="1738007359376" duration="768000" />
       <workItem from="1738288059563" duration="188000" />
       <workItem from="1754494814052" duration="3620000" />
+      <workItem from="1754502187721" duration="6780000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

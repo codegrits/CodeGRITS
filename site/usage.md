@@ -20,26 +20,13 @@ access to other eye-tracking devices. If you want to further develop CodeGRITS f
 please refer to the [Developer Guide](developer.md) for more details, and also feel free to contact us if you need
 further assistance.
 
-You could also use CodeGRITS without an eye-tracking device. Since CodeGRITS provides mouse simulation as a substitute
+You could also use CodeGRITS without an eye-tracking device. Since CodeGRITS provides **mouse simulation** as a substitute
 for eye gaze. You could also uncheck the `Eye Tracking` option in the configuration window to disable eye tracking.
 
 ### IDE Compatibility
 
-CodeGRITS is expected to be compatible with the entire family of [JetBrains IDEs](https://www.jetbrains.com/), including
-IntelliJ IDEA, PyCharm, Clion, etc. Due to the limited time, we did not specifically test CodeGRITS thoroughly on all
-of them. We provide a list of JetBrains IDEs that we have tested CodeGRITS on.
-
-{.compact}
-| JetBrains IDEs | Version |
-|:--------------:|:---------------:|
-| IntelliJ IDEA | 2022.2 - 2023.3 |
-| PyCharm | 2022.2 - 2023.3 |
-| Clion | 2022.2 - 2023.3 |
-| PhpStorm | 2022.2 - 2023.3 |
-
-Since CodeGRITS is still in its early developmental stage, even though we believe it would work well, some minor
-issues may still exist. If you encounter any of them, please feel free to contact us or create
-a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).
+CodeGRITS is expected to be compatible with the entire family of [JetBrains IDEs](https://www.jetbrains.com/) from 2022.2 to 2025.2, including
+IntelliJ IDEA, PyCharm, Clion, etc. Regarding the continuously updated IDE from JetBrains, CodeGRITS will also continue to release new versions.
 
 ### Python Environment
 
@@ -57,8 +44,8 @@ screeninfo==0.8
 
 Refer to [Supported platforms and languages](https://developer.tobiipro.com/tobiiprosdk/platform-and-language.html),
 Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating systems, Tobii Pro SDK supports Windows
-10 and 11 (64-bit), macOS 10.15 and 12, and Ubuntu 20.04 LTS. Note that unsupported operating systems may cause
-installation issues, especially the `tobii-research` package.
+10 and 11 (64-bit), macOS 13 and 14, and Ubuntu 22.04 LTS. Please ensure your OS version is supported by the Tobii Pro SDK to enable CodeGRITS.
+**Note that unsupported OS may cause installation issues, especially the `tobii-research` package**.
 
 ## Installation
 
@@ -66,27 +53,19 @@ installation issues, especially the `tobii-research` package.
 
 #### Direct Download
 
-We provide the direct download link of the plugin zip file for the following JetBrains IDEs for convenience.
+Please download the plugin zip file directly from this [Google Drive link](https://drive.google.com/file/d/1KF_yehApDJDUrTAU4qzfmt4MeJfsZWcv/view?usp=sharing).
 
-{.compact}
-| JetBrains IDEs | Operating System | Version | Download Link |
-|:--------------:|:----------------:|:-------:|:-------------:|
-| IntelliJ IDEA | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1slG1PVpUQEJWoGb17mcl_-JYlK7bbiQz/view?usp=sharing)  |
-| PyCharm | Windows & Linux | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1hLIT86SMCTAeRh5MKK-QItu8EogYwlHY/view?usp=drive_link)  |
-| IntelliJ IDEA | macOS | 2022.2 - 2023.3 | [Download](https://drive.google.com/file/d/1yQ04RCCeA1si6kgZnxKRtrQalHL2x2xh/view?usp=drive_link)  |
-
-Note that the macOS version of the plugin is not fully tested as Windows and Linux versions, and some minor issues may
-exist.
+Note that the macOS version of the plugin is not as fully tested as the Windows and Linux versions, and some minor issues may exist.
 
 #### Build from Source
 
-We also encourage you to build the plugin from the source code, especially for the IDEs that are not listed above.
+We also encourage you to build the plugin from the source code.
 
 1. Clone the [repository](https://github.com/codegrits/CodeGRITS) to your local machine. Note that the `main` branch
    is the stable version for Windows and Linux, and the `mac` branch is the unstable version for macOS.
 2. Set the IDE type and version in `build.gradle.kts` file. For example, if you want to build the plugin for IntelliJ
    Community Edition between 2022.2 and
-   2023.3, you should set the following in `build.gradle.kts` file.
+   2025.2, you should set the following in `build.gradle.kts` file.
    ```groovy #2,6-7
    intellij {
        type = "IC"
@@ -94,7 +73,7 @@ We also encourage you to build the plugin from the source code, especially for t
    tasks {
        patchPluginXml {
            sinceBuild.set("222")
-           untilBuild.set("233.*")
+           untilBuild.set("252.*")
        }
    }
    ```

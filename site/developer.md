@@ -6,17 +6,14 @@ order: 70
 
 # Developer Guide
 
-## Further Development
+We have provided a [Google Doc](https://docs.google.com/document/d/1_F2sq6U0riRSHU5WK0StQeAnJHSHCKZR9L_EZUeT6RE/edit?usp=sharing) outlining several directions worth exploring for the future development of CodeGRITS.
+We encourage the community to contribute to CodeGRITS by submitting GitHub issues and pull requests to develop new features.
+Please refer to the document for more details, and feel free to leave comments or suggestions.
 
-Please refer to [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html) for more details.
+For technical details, please refer to [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html).
 We also provide the [JavaDoc](docs/index.html) of the source code.
-Feel free to contact us if you need any help.
 
-### Accommodating New IDEs
-
-See [Build from Source](usage.md#build-from-source).
-
-### Accommodating New Eye Trackers
+## Supporting New Eye Trackers
 
 If you want to integrate other eye-tracking devices except for Tobii eye-tracking devices, you need to reimplement all
 Python scripts in the source code to get the right eye-tracking device information and eye gaze data using your eye
@@ -62,7 +59,7 @@ intellij {
 You also need to add the following to `./src/main/resources/META-INF/plugin.xml`.
 
 ```xml
-<depends>com.nd.codegrits</depends>
+<depends>io.github.codegrits</depends>
 ```
 
 ### Quick Start

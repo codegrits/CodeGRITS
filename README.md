@@ -1,8 +1,8 @@
 # CodeGRITS
 
-[![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/) [![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://codegrits.github.io/CodeGRITS/docs/index.html) [![Paper PDF](https://img.shields.io/badge/Paper-PDF-olive)](https://codegrits.github.io/CodeGRITS/static/paper.pdf) [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI) [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:32d91426f07dd0f4b36ba05bc708b5a25ad06dd3) [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
+[![Website](https://img.shields.io/badge/Website-Visit-brightgreen)](https://codegrits.github.io/CodeGRITS/) [![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://codegrits.github.io/CodeGRITS/docs/index.html) [![Paper PDF](https://img.shields.io/badge/Paper-PDF-olive)](https://codegrits.github.io/CodeGRITS/static/paper.pdf) [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI) [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:32d91426f07dd0f4b36ba05bc708b5a25ad06dd3) [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE) [![Star on GitHub](https://img.shields.io/github/stars/codegrits/CodeGRITS?style=social)](https://github.com/codegrits/CodeGRITS)
 
-[CodeGRITS](https://codegrits.github.io/CodeGRITS/) stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem. It's a plugin developed by the [SaNDwich Lab](https://toby.li/) and is specially designed for empirical software engineering researchers. CodeGRITS is built on top of [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html), with wide compatibility with the entire family of [JetBrains IDEs](https://www.jetbrains.com/) and [Tobii eye-tracking devices](https://www.tobii.com/), to track developers’ IDE interactions and eye gaze data.
+> Enjoying CodeGRITS? Give us a ⭐ to help more developers discover it and support future improvements.
 
 <p align="center">
     <img src="site/static/overview.png" width="600px" max-width="100%" alt="CodeGRITS Overview">
@@ -31,7 +31,7 @@ CodeGRITS has been primarily developed and tested on Windows and Linux, with onl
 
 ## Usage Guide
 
-Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details. The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html).
+Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details. The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html). Please refer to the [developer guide](https://codegrits.github.io/CodeGRITS/developer/) if you want to contribute to CodeGRITS.
 
 ## Citation
 
@@ -51,4 +51,4 @@ Please cite the following if you use CodeGRITS in your research.
 
 ## Contact us
 
-Please feel free to contact Ningzhi Tang at ntang@nd.edu or Junwen An at jan2@nd.edu/feasiblechart@gmail.com if you have any questions or suggestions.
+Please feel free to contact Ningzhi Tang at ntang@nd.edu/ningzhitang2001@gmail.com or Junwen An at feasiblechart@gmail.com if you have any questions or suggestions.

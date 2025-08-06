@@ -39,4 +39,4 @@ bin/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+**/.DS_Store

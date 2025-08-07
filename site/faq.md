@@ -22,7 +22,7 @@ in the configuration window to disable the eye tracker to only use the IDE track
 
 #### Q3. How to integrate other eye-tracking devices with CodeGRITS?
 
-See [Accommodating New Eye Trackers](developer.md#accommodating-new-eye-trackers).
+See [Supporting New Eye Trackers](developer.md#supporting-new-eye-trackers).
 
 #### Q4. What IDEs can CodeGRITS be used for?
 

@@ -49,6 +49,5 @@ CodeGRITS is licensed under the MIT License. See the [LICENSE](license.md) for d
 
 Please feel free to contact us anytime if you have any questions or suggestions.
 
-- Email the developers [Ningzhi Tang](https://nztang.com/) at ntang@nd.edu
-  or [Junwen An](https://wanteatfruit.github.io/) at jan2@nd.edu.
+- Email the developers [Ningzhi Tang](https://www.nztang.com/) at ntang@nd.edu / ningzhitang2001@gmail.com or [Junwen An](https://wanteatfruit.github.io/) at feasiblechart@gmail.com.
 - Start a [GitHub Issue](https://github.com/codegrits/CodeGRITS/issues).

@@ -522,11 +522,11 @@ public class ConfigDialog extends DialogWrapper {
      */
     public static String getPythonInterpreter() {
         if (ProjectManager.getInstance().getOpenProjects().length == 0) {
-            return "python";
+            return "python3";
         }
         if (pythonInterpreterTextField.getText().isEmpty()
                 || pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)) {
-            return "python";
+            return "python3";
         }
         return pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)
                 ? selectPythonInterpreterPlaceHolder : pythonInterpreterTextField.getText();

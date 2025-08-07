@@ -51,7 +51,7 @@
                 text="Pause Tracking">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeGRITS.StartStopTracking"/>
         </action>
-        <action id="CodeGRITS.Config" class="actions.ConfigAction" text="CodeGRITS Configuration"
+        <action id="CodeGRITS.Config" class="actions.ConfigAction" text="CodeGRITS Config"
                 description="Configure tracking options">
             <add-to-group group-id="ToolsMenu" anchor="after" relative-to-action="CodeGRITS.PauseResumeTracking"/>
         </action>

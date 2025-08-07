@@ -5,7 +5,7 @@ url: https://codegrits.github.io/CodeGRITS/
 branding:
   title: CodeGRITS
   logo: static/logo.png
-  label: v0.3.0
+  label: v0.3.1
 
 meta:
   title: " | CodeGRITS - JetBrains IDE and Eye Tracking"

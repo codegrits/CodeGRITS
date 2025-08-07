@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.codegrits"
-version = "0.3.0"
+version = "0.3.1"
 
 repositories {
     mavenCentral()
@@ -23,15 +23,15 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-//    version.set("2022.2")
-//    type.set("IC") // use IntelliJ Community base, it supports all IDEs
-    localPath.set( // Example paths for local development
-        if (System.getProperty("os.name").lowercase().contains("windows")) {
-            "D:/Program Files/JetBrains/IntelliJ IDEA 2024.3.4.1"
-        } else {
-            "/Applications/PyCharm.app/Contents"
-        }
-    )
+    version.set("2022.2")
+    type.set("IC") // use IntelliJ Community base, it supports all IDEs
+//    localPath.set( // Example paths for local development
+//        if (System.getProperty("os.name").lowercase().contains("windows")) {
+//            "D:/Program Files/JetBrains/IntelliJ IDEA 2024.3.4.1"
+//        } else {
+//            "/Applications/PyCharm.app/Contents"
+//        }
+//    )
 }
 
 tasks {

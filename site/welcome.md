@@ -8,10 +8,15 @@ meta:
 
 # Welcome to CodeGRITS
 
-!!! 🏆 ICSE 2024 Artifact Badges Awarded! 🔥
-CodeGRITS has received the **Artifact Available** and **Artifact Evaluated** badges for its commitment to reproducibility!
+!!! 🚀 Install CodeGRITS from JetBrains Marketplace!
+
+You can now install **CodeGRITS** directly from the [JetBrains Plugin Marketplace](https://plugins.jetbrains.com/plugin/28118-codegrits) — fully integrated with any IntelliJ-based IDEs!
 
 💡 If you find CodeGRITS useful, please consider giving us a ⭐ on [GitHub](https://github.com/codegrits/CodeGRITS) — it helps others discover the project!
+!!!
+
+!!! 🏆 ICSE 2024 Artifact Badges Awarded! 🔥
+CodeGRITS has received the **Artifact Available** and **Artifact Evaluated** badges for its commitment to reproducibility!
 !!!
 
 CodeGRITS stands for **G**aze **R**ecording & **I**DE **T**racking **S**ystem. It's a plugin developed by
@@ -46,13 +51,6 @@ using CodeGRITS in your research, don't hesitate to email us for setup support.
   PyCharm, WebStorm, etc.
 - [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple
   programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
-
-!!!warning 🚨 macOS Support 🚨
-CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS.
-There may be some unnoticed bugs on macOS. We have created a
-[`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues.
-If you encounter additional issues on macOS, please feel free to report them to us.
-!!!
 
 ## Key Features
 

@@ -6,6 +6,10 @@ order: 90
 
 # Usage Guide
 
+**Install CodeGRITS directly from the JetBrains Plugin Marketplace!**
+
+<iframe width="384px" height="319px" src="https://plugins.jetbrains.com/embeddable/card/28118"></iframe>
+
 ## Environment Requirements
 
 ### Eye-tracking Device
@@ -49,15 +53,14 @@ Tobii Pro SDK only supports Python 3.8 and Python 3.10. Regarding operating syst
 
 ## Installation
 
-### Get the Plugin
+### Install from Marketplace
 
-#### Direct Download
+Open any JetBrains IDE, click `Settings` - `Plugins` and search for `CodeGRITS`. Click the `Install` button to install the
+plugin. The plugin homepage is available [here](https://plugins.jetbrains.com/plugin/28118-codegrits).
 
-Please download the plugin zip file directly from this [Google Drive link](https://drive.google.com/file/d/1KF_yehApDJDUrTAU4qzfmt4MeJfsZWcv/view?usp=sharing).
+### Build from Source
 
-Note that the macOS version of the plugin is not as fully tested as the Windows and Linux versions, and some minor issues may exist.
-
-#### Build from Source
+#### Get the Plugin
 
 We also encourage you to build the plugin from the source code.
 
@@ -84,7 +87,7 @@ We also encourage you to build the plugin from the source code.
 3. Open the command line and run `./gradlew build` in the root folder to build the plugin.
 4. Find the plugin zip file in the `build/distributions` folder.
 
-### Install the Plugin
+#### Install the Plugin
 
 1. Open the JetBrains IDE, click `File` - `Settings` - `Plugins` - `Install Plugin from Disk...` to install the plugin
    zip file.

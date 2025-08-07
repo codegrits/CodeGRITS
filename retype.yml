@@ -28,8 +28,8 @@ links:
     link: https://github.com/codegrits/CodeGRITS/issues
     icon: comment-discussion
     target: blank
-  - text: Download
-    link: https://drive.google.com/file/d/1KF_yehApDJDUrTAU4qzfmt4MeJfsZWcv/view?usp=sharing
+  - text: Install Plugin
+    link: https://plugins.jetbrains.com/plugin/28118-codegrits
     icon: download
     target: blank
 

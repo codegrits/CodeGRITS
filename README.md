@@ -1,4 +1,4 @@
-# CodeGRITS · [🌐 Visit Website](https://codegrits.github.io/CodeGRITS/)
+# CodeGRITS · [🌐 Visit Website](https://codegrits.github.io/CodeGRITS/) · [🚀 Install Plugin](https://plugins.jetbrains.com/plugin/28118-codegrits)
 
 [![Star on GitHub](https://img.shields.io/github/stars/codegrits/CodeGRITS?style=social)](https://github.com/codegrits/CodeGRITS) [![Paper ACM DL](https://img.shields.io/badge/Paper-ACM%20DL-olive)](https://dl.acm.org/doi/10.1145/3639478.3640037) [![Demo Video](https://img.shields.io/badge/Demo-Video-orange)](https://www.youtube.com/watch?v=d-YsJfW2NMI) [![Javadoc](https://img.shields.io/badge/Javadoc-Docs-blue)](https://codegrits.github.io/CodeGRITS/docs/index.html) [![Archived](https://img.shields.io/badge/Archived-SWH-blueviolet)](https://archive.softwareheritage.org/swh:1:dir:32d91426f07dd0f4b36ba05bc708b5a25ad06dd3) [![MIT License](https://img.shields.io/badge/License-MIT-green)](https://github.com/codegrits/CodeGRITS/blob/main/LICENSE)
 
@@ -33,6 +33,8 @@ The [website](https://codegrits.github.io/CodeGRITS/)'s source code is stored in
 CodeGRITS has been primarily developed and tested on Windows and Linux, with only partial testing on macOS. There may be some unnoticed bugs on macOS. We have created a [`mac` branch](https://github.com/codegrits/CodeGRITS/tree/mac) for this and have fixed some known issues. If you encounter additional issues on macOS, please feel free to report them to us.
 
 ## Usage Guide
+
+You can now [install CodeGRITS from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/28118-codegrits) to use it directly in supported IDEs.
 
 Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details. The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html). Please refer to the [developer guide](https://codegrits.github.io/CodeGRITS/developer/) if you want to contribute to CodeGRITS.
 

@@ -46,11 +46,8 @@ using CodeGRITS in your research, don't hesitate to email us for setup support.
 
 ### Cross-platform and Multilingual Support
 
-- [x] CodeGRITS provides cross-platform support for Windows, macOS,
-  and Linux, and is expected to be compatible with the entire family of JetBrains IDEs, including IntelliJ IDEA,
-  PyCharm, WebStorm, etc.
-- [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple
-  programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
+- [x] CodeGRITS provides cross-platform support for Windows, macOS, and Linux, and is expected to be compatible with the entire family of JetBrains IDEs, including IntelliJ IDEA, PyCharm, WebStorm, etc.
+- [x] CodeGRITS could extract the abstract syntax tree (AST) structure of eye gazes on multiple programming languages, as long as the IDE supports them, including Java, Python, C/C++, JavaScript, etc.
 
 ## Key Features
 

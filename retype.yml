@@ -7,6 +7,10 @@ branding:
   logo: static/logo.png
   label: v0.3.0
 
+meta:
+  title: " | CodeGRITS - JetBrains IDE and Eye Tracking"
+  description: "CodeGRITS is an open-source plugin for conducting eye-tracking studies in JetBrains IDEs (IntelliJ, PyCharm, etc.), built for empirical software engineering research."
+
 links:
   - text: GitHub
     link: https://github.com/codegrits/CodeGRITS

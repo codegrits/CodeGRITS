@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14bb91d1-ebd0-4f11-b77e-711543adf329" name="Changes" comment="refresh">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/retype-action.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/retype-action.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/retype.yml" beforeDir="false" afterPath="$PROJECT_DIR$/retype.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/site/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/about.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/faq.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site/welcome.md" beforeDir="false" afterPath="$PROJECT_DIR$/site/welcome.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +307,8 @@
       <workItem from="1738288059563" duration="188000" />
       <workItem from="1754494814052" duration="3620000" />
       <workItem from="1754502187721" duration="9391000" />
-      <workItem from="1754526514309" duration="195000" />
+      <workItem from="1754526514309" duration="976000" />
+      <workItem from="1754581854246" duration="1943000" />
     </task>
     <task id="LOCAL-00001" summary="fix api bug">
       <option name="closed" value="true" />

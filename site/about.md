@@ -10,7 +10,7 @@ HCI and SE researchers from [SaNDwich Lab](https://toby.li/) at the [University 
 and [Vanderbilt University](https://www.vanderbilt.edu/).
 We are committed to keeping CodeGRITS open source and making it beneficial for the community.
 
-The authors of CodeGRITS are [Ningzhi Tang](https://nztang.com/) (equal contribution),
+The authors of CodeGRITS are [Ningzhi Tang](https://www.nztang.com/) (equal contribution),
 [Junwen An](https://wanteatfruit.github.io/) (equal contribution),
 [Meng Chen](https://casardo-chen.github.io/), [Aakash Bansal](https://aakashba.github.io/),
 [Yu Huang](https://yuhuang-lab.github.io/), [Collin McMillan](https://sdf.org/~cmc/),

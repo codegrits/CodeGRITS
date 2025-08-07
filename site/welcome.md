@@ -2,6 +2,8 @@
 label: Welcome
 icon: home
 order: 100
+meta:
+  title: "CodeGRITS - JetBrains IDE and Eye Tracking"
 ---
 
 # Welcome to CodeGRITS

@@ -90,9 +90,9 @@ public class EyeTracker implements Disposable {
                 editor = source.getSelectedTextEditor();
                 if (editor != null) {
                     editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                    visibleArea = editor.getScrollingModel().getVisibleArea();
                 }
                 filePath = file.getPath();
-                visibleArea = editor.getScrollingModel().getVisibleArea();
             }
 
             @Override
@@ -101,9 +101,9 @@ public class EyeTracker implements Disposable {
                 if (event.getNewFile() != null) {
                     if (editor != null) {
                         editor.getScrollingModel().addVisibleAreaListener(visibleAreaListener);
+                        visibleArea = editor.getScrollingModel().getVisibleArea();
                     }
                     filePath = event.getNewFile().getPath();
-                    visibleArea = editor.getScrollingModel().getVisibleArea();
                 }
             }
         });

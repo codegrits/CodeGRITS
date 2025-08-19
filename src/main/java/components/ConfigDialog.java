@@ -14,6 +14,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.JBUI;
 import entity.Config;
+import utils.OSDetector;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -72,7 +73,6 @@ public class ConfigDialog extends DialogWrapper {
             pythonInterpreterTextField.setText(config.getPythonInterpreter());
         }
         if (getPythonInterpreter().equals(selectPythonInterpreterPlaceHolder) || getPythonInterpreter().equals("python") || getPythonInterpreter().equals("python3") || getPythonInterpreter().isEmpty() || getPythonInterpreter().endsWith("python") || getPythonInterpreter().endsWith("python3") || getPythonInterpreter().endsWith("python.exe") || getPythonInterpreter().endsWith("python3.exe")) {
-
             pythonEnvironment = AvailabilityChecker.checkPythonEnvironment(getPythonInterpreter());
             if (pythonEnvironment && checkBoxes.get(1).isSelected()) {
                 eyeTracker = AvailabilityChecker.checkEyeTracker(getPythonInterpreter());
@@ -522,11 +522,11 @@ public class ConfigDialog extends DialogWrapper {
      */
     public static String getPythonInterpreter() {
         if (ProjectManager.getInstance().getOpenProjects().length == 0) {
-            return "python3";
+            return OSDetector.isWindows() ? "python" : "python3";
         }
         if (pythonInterpreterTextField.getText().isEmpty()
                 || pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)) {
-            return "python3";
+            return OSDetector.isWindows() ? "python" : "python3";
         }
         return pythonInterpreterTextField.getText().equals(selectPythonInterpreterPlaceHolder)
                 ? selectPythonInterpreterPlaceHolder : pythonInterpreterTextField.getText();

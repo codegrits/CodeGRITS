@@ -224,7 +224,7 @@ public class EyeTracker implements Disposable {
             editorX = editor.getContentComponent().getLocationOnScreen().x;
             editorY = editor.getContentComponent().getLocationOnScreen().y;
         } catch (IllegalComponentStateException e) {
-            gaze.setAttribute("remark", "Fail | No Editor");
+            gaze.setAttribute("remark", "Fail | IllegalComponentStateException in Editor");
             return;
         }
         int relativeX = eyeX - editorX;

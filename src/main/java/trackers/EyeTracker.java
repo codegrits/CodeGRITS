@@ -61,6 +61,12 @@ public class EyeTracker implements Disposable {
     String pythonScriptTobii;
     String pythonScriptMouse;
     int deviceIndex = 0;
+    /**
+     * This variable indicates whether the gaze coordinates are normalized to the screen size,
+     * that is returned as values between (0, 0) for the upper left corner and (1, 1) for the lower right corner.
+     * See, for example, <a href="https://developer.tobiipro.com/commonconcepts/coordinatesystems.html">'Coordinate system' page in Tobii Pro SDK documentation</a>
+     */
+    boolean isGazeNormalized = true;
 
     /**
      * This variable indicates whether the real-time data is transmitting.
@@ -216,8 +222,14 @@ public class EyeTracker implements Disposable {
             return;
         }
 
-        int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
-        int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+        int eyeX, eyeY;
+        if (isGazeNormalized) {
+            eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
+            eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+        } else {
+            eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2);
+            eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2);
+        }
 
         int editorX, editorY;
         try {

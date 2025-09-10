@@ -16,6 +16,7 @@ import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import utils.AvailabilityChecker;
 import utils.RelativePathGetter;
 import utils.XMLWriter;
 
@@ -163,6 +164,14 @@ public class EyeTracker implements Disposable {
             setting.setAttribute("eye_tracker", "Mouse");
         } else {
             setting.setAttribute("eye_tracker", "Tobii Pro Fusion");
+            try {
+                String trackerName = AvailabilityChecker.getEyeTrackerName(pythonInterpreter);
+                if (trackerName != null && !trackerName.equals("Not Found")) {
+                    setting.setAttribute("tracker_name", trackerName);
+                }
+            } catch (InterruptedException | IOException e) {
+                // just don't add the "tracker_name" attribute
+            }
         }
         setting.setAttribute("sample_frequency", String.valueOf(sampleFrequency));
         track();

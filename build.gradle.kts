@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
-    implementation("com.opencsv:opencsv:5.7.1")
+    implementation("com.opencsv:opencsv:5.12.0")
     // implementation("org.bytedeco:javacv-platform:1.5.9") // NOTE: This is too large
     implementation("org.bytedeco:javacv:1.5.9")
     implementation("org.bytedeco:ffmpeg:6.0-1.5.9")

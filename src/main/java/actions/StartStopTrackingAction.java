@@ -73,7 +73,13 @@ public class StartStopTrackingAction extends AnAction {
             if (!isTracking) {
                 if (config.getCheckBoxes().get(1)) {
                     if (!AvailabilityChecker.checkPythonEnvironment(config.getPythonInterpreter())) {
-                        JOptionPane.showMessageDialog(null, "Python interpreter not found. Please configure the plugin first.");
+                        JOptionPane.showMessageDialog(
+                           null,
+                           "Python interpreter not found, "+
+                           "or Python environment lacks required packages: "+
+                           "tobii_research, screeninfo, pyautogui.\n"+
+                           "Please configure the plugin first, and set up the Python environment."
+                        );
                         return;
                     }
                     if (config.getEyeTrackerDevice() != 0 && !AvailabilityChecker.checkEyeTracker(config.getPythonInterpreter())) {

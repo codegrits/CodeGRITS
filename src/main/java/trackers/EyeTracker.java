@@ -9,6 +9,7 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -250,7 +251,9 @@ public class EyeTracker implements Disposable {
                 location.setAttribute("column", String.valueOf(logicalPosition.column));
                 location.setAttribute("path", RelativePathGetter.getRelativePath(filePath, projectPath));
                 gaze.appendChild(location);
-                Element aSTStructure = getASTStructureElement(psiElement);
+                Element aSTStructure = ApplicationManager.getApplication().runReadAction(
+                        (Computable<Element>) () -> getASTStructureElement(psiElement)
+                );
                 gaze.appendChild(aSTStructure);
                 lastElement = psiElement;
 //                System.out.println(gaze.getAttribute("timestamp") + " " + System.currentTimeMillis());

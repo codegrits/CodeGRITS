@@ -17,6 +17,7 @@ import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import utils.AvailabilityChecker;
 import utils.RelativePathGetter;
 import utils.XMLWriter;
 
@@ -62,6 +63,12 @@ public class EyeTracker implements Disposable {
     String pythonScriptTobii;
     String pythonScriptMouse;
     int deviceIndex = 0;
+    /**
+     * This variable indicates whether the gaze coordinates are normalized to the screen size,
+     * that is returned as values between (0, 0) for the upper left corner and (1, 1) for the lower right corner.
+     * See, for example, <a href="https://developer.tobiipro.com/commonconcepts/coordinatesystems.html">'Coordinate system' page in Tobii Pro SDK documentation</a>
+     */
+    boolean isGazeNormalized = true;
 
     /**
      * This variable indicates whether the real-time data is transmitting.
@@ -158,6 +165,14 @@ public class EyeTracker implements Disposable {
             setting.setAttribute("eye_tracker", "Mouse");
         } else {
             setting.setAttribute("eye_tracker", "Tobii Pro Fusion");
+            try {
+                String trackerName = AvailabilityChecker.getEyeTrackerName(pythonInterpreter);
+                if (trackerName != null && !trackerName.equals("Not Found")) {
+                    setting.setAttribute("tracker_name", trackerName);
+                }
+            } catch (InterruptedException | IOException e) {
+                // just don't add the "tracker_name" attribute
+            }
         }
         setting.setAttribute("sample_frequency", String.valueOf(sampleFrequency));
         track();
@@ -217,15 +232,21 @@ public class EyeTracker implements Disposable {
             return;
         }
 
-        int eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
-        int eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+        int eyeX, eyeY;
+        if (isGazeNormalized) {
+            eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2 * screenWidth);
+            eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2 * screenHeight);
+        } else {
+            eyeX = (int) ((Double.parseDouble(leftGazePointX) + Double.parseDouble(rightGazePointX)) / 2);
+            eyeY = (int) ((Double.parseDouble(leftGazePointY) + Double.parseDouble(rightGazePointY)) / 2);
+        }
 
         int editorX, editorY;
         try {
             editorX = editor.getContentComponent().getLocationOnScreen().x;
             editorY = editor.getContentComponent().getLocationOnScreen().y;
         } catch (IllegalComponentStateException e) {
-            gaze.setAttribute("remark", "Fail | No Editor");
+            gaze.setAttribute("remark", "Fail | IllegalComponentStateException in Editor");
             return;
         }
         int relativeX = eyeX - editorX;

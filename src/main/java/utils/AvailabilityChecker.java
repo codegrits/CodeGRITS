@@ -19,7 +19,6 @@ public class AvailabilityChecker {
      */
     public static boolean checkPythonEnvironment(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
-                import tobii_research as tr
                 from screeninfo import get_monitors
                 import pyautogui
                 import time
@@ -41,13 +40,17 @@ public class AvailabilityChecker {
      */
     public static boolean checkEyeTracker(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
-                import tobii_research as tr
+                try:
+                    import tobii_research as tr
                 
-                found_eyetrackers = tr.find_all_eyetrackers()
-                if found_eyetrackers == ():
+                    found_eyetrackers = tr.find_all_eyetrackers()
+                    if found_eyetrackers == ():
+                        print('Not Found')
+                    else:
+                        print('Found')
+                
+                except ImportError:
                     print('Not Found')
-                else:
-                    print('Found')
                 """;
 
         String line = runPythonScript(pythonInterpreter, pythonScript);
@@ -62,13 +65,17 @@ public class AvailabilityChecker {
      */
     public static String getEyeTrackerName(String pythonInterpreter) throws IOException, InterruptedException {
         String pythonScript = """
-                import tobii_research as tr
+                try:
+                    import tobii_research as tr
                 
-                found_eyetrackers = tr.find_all_eyetrackers()
-                if found_eyetrackers == ():
+                    found_eyetrackers = tr.find_all_eyetrackers()
+                    if found_eyetrackers == ():
+                        print('Not Found')
+                    else:
+                        print(found_eyetrackers[0].device_name)
+                
+                except ImportError:
                     print('Not Found')
-                else:
-                    print(found_eyetrackers[0].device_name)
                 """;
 
         return runPythonScript(pythonInterpreter, pythonScript);

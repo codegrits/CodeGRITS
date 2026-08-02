@@ -23,7 +23,7 @@ The [website](https://codegrits.github.io/CodeGRITS/)'s source code is stored in
 - :eye: **Eye Tracking**: CodeGRITS tracks developers’ eye gaze data from [Tobii eye-tracking devices](https://www.tobii.com/), and maps them to corresponding source code elements.
 - :computer: **Screen Recording**: CodeGRITS simultaneously records developers’ screen for visualizing their behaviors.
 - 🔨 **Research Toolkit**: CodeGRITS provides a set of extra features for empirical SE researchers, including dynamic configuration, activity labeling, real-time data API, etc.
-- 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](data.md) for more details.
+- 🗃️ **Data Export**: CodeGRITS exports data in XML format for further data analysis. See [Data Format](https://codegrits.github.io/CodeGRITS/data-format/) for more details.
 
 ### Cross-platform and Multilingual Support
 
@@ -36,7 +36,7 @@ You can now [install CodeGRITS from JetBrains Marketplace](https://plugins.jetbr
 
 Please see the [CodeGRITS website](https://codegrits.github.io/CodeGRITS/) for more details. The Javadoc documentation is available [here](https://codegrits.github.io/CodeGRITS/docs/index.html). Please refer to the [developer guide](https://codegrits.github.io/CodeGRITS/developer/) if you want to contribute to CodeGRITS.
 
-The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers, especially those related to eye gaze. CodeGRITS also provides a [real-time data API](developer.md) for future plugin developers and researchers to design context-aware programming support tools.
+The data collected by CodeGRITS can be used by empirical SE researchers to understand the behaviors of developers, especially those related to eye gaze. CodeGRITS also provides a [real-time data API](https://codegrits.github.io/CodeGRITS/developer/#real-time-data-api) for future plugin developers and researchers to design context-aware programming support tools.
 
 We provide an example project [DataStreamReceiver](https://github.com/codegrits/DataStreamReceiver) that builds on top of the real-time data API. It is designed to receive the IDE and eye tracking data and directly visualize them in two separate windows.
 
@@ -55,6 +55,16 @@ Please cite the following if you use CodeGRITS in your research.
   organization={ACM}
 }
 ```
+
+## Papers Using CodeGRITS
+
+The following papers use CodeGRITS for data collection.If your work uses CodeGRITS, feel free to open a PR or contact us to be listed here.
+
+1. **CHASE 2026** · Creative Minds at the Keyboard: Eye-Tracking Insights into How Developers Think and Code. [[ACM DL]](https://dl.acm.org/doi/10.1145/3794860.3794891)
+1. **arXiv 2026** · Same Scrutiny, More Time: Eye Tracking Insights into Reviewing LLM-Labelled Code. [[arXiv]](https://arxiv.org/abs/2606.26505)
+1. **arXiv 2026** · GazePrinter: Visualizing Expert Gaze to Guide Novices in a New Codebase. [[arXiv]](https://arxiv.org/abs/2603.19855)
+1. **arXiv 2025** · GazeCopilot: Evaluating Novel Gaze-Informed Prompting for AI-Supported Code Comprehension and Readability. [[arXiv]](https://arxiv.org/abs/2511.08177)
+1. **VL/HCC 2024** · Developer Behaviors in Validating and Repairing LLM-Generated Code Using IDE and Eye Tracking. [[IEEE Xplore]](https://ieeexplore.ieee.org/document/10714560/)
 
 ## Contact us
 

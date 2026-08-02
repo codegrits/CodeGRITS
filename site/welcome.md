@@ -80,3 +80,6 @@ Please cite the following if you use CodeGRITS in your research.
   organization={ACM}
 }
 ```
+
+CodeGRITS has been used for data collection in a growing number of studies.
+See [Papers Using CodeGRITS](publications.md) for the full list.

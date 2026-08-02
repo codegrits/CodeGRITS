@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.codegrits"
-version = "0.3.2"
+version = "0.3.3"
 
 repositories {
     mavenCentral()
@@ -46,7 +46,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("222") // 2022.2 NOTE Java 17 is now required
-        untilBuild.set("252.*")
+        untilBuild.set(provider { null })
     }
 
     signPlugin {

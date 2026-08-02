@@ -1,0 +1,13 @@
+﻿#  | CodeGRITS - JetBrains IDE and Eye Tracking
+
+> CodeGRITS is an open-source plugin for conducting eye-tracking studies in JetBrains IDEs (IntelliJ, PyCharm, etc.), built for empirical software engineering research.
+
+- [Welcome to CodeGRITS](https://codegrits.github.io/CodeGRITS/welcome.md): Welcome to CodeGRITS
+- [About](https://codegrits.github.io/CodeGRITS/about.md): CodeGRITS is professionally built and supported by a small dedicated team of HCI and SE researchers from SaNDwich Lab at the University of Notre Dame and Vanderbilt University.
+- [Papers Using CodeGRITS](https://codegrits.github.io/CodeGRITS/publications.md): A list of research papers that use CodeGRITS to collect developer behavior and eye-tracking data.
+- [Usage Guide](https://codegrits.github.io/CodeGRITS/usage.md): Install CodeGRITS directly from the JetBrains Plugin Marketplace!
+- [Data Format](https://codegrits.github.io/CodeGRITS/data.md): Comment:
+- [Developer Guide](https://codegrits.github.io/CodeGRITS/developer.md): We have provided a Google Doc outlining several directions worth exploring for the future development of CodeGRITS. We encourage the community to contribute to CodeGRITS by submitting GitHub issues and pull requests to develop new features.
+- [Changelog](https://codegrits.github.io/CodeGRITS/changelog.md): Encountered a bug or have a suggestion? Please create a GitHub Issue.
+- [Frequently Asked Questions (FAQ)](https://codegrits.github.io/CodeGRITS/faq.md): iTrace is a similar tool to CodeGRITS for collecting developers' eye gaze data in several IDEs, including Eclipse, Visual Studio, and Atom. However, CodeGRITS is built for JetBrains IDEs, which have increased popularity in the industry and academia.
+- [License](https://codegrits.github.io/CodeGRITS/license.md): MIT License

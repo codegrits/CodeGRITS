@@ -353,7 +353,11 @@ public class ConfigDialog extends DialogWrapper {
         eyeTracking.addActionListener(actionEvent -> {
             if (!pythonEnvironment) {
                 eyeTracking.setSelected(false);
-                new AlertDialog("Python environment not configured.", AllIcons.General.BalloonWarning).show();
+                new AlertDialog(
+                        "Python environment not configured, or not set up properly.\n"+
+                        "Required packages to be installed are: tobii_research, screeninfo, pyautogui.",
+                        AllIcons.General.BalloonWarning
+                ).show();
                 return;
             }
             if (!eyeTracking.isSelected()) {
